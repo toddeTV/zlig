@@ -5,7 +5,6 @@
   "private": true,
   "description": "",
   "author": "Thorsten Seyschab <business@todde.tv> (https://todde.tv/)",
-  "license": "PRIVATE",
   "contributors": [
     {
       "name": "Thorsten Seyschab",
@@ -17,6 +16,7 @@
       "url": "https://github.com/saknarf"
     }
   ],
+  "license": "PRIVATE",
   "homepage": "https://todde.tv/",
   "repository": {
     "type": "git",
@@ -43,6 +43,7 @@
     "vue-router": "4.3.3"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "2.21.2",
     "@rushstack/eslint-patch": "1.8.0",
     "@tresjs/cientos": "3.9.0",
     "@tresjs/core": "4.0.2",
@@ -54,6 +55,7 @@
     "@vue/tsconfig": "0.5.1",
     "autoprefixer": "10.4.19",
     "eslint": "8.57.0",
+    "eslint-plugin-format": "0.1.2",
     "eslint-plugin-vue": "9.23.0",
     "npm-run-all2": "6.2.0",
     "postcss": "8.4.38",
@@ -62,7 +64,6 @@
     "typescript": "~5.4.0",
     "vite": "5.3.1",
     "vite-plugin-vue-devtools": "7.3.1",
-    "vue-tsc": "2.0.21",
-    "@antfu/eslint-config": "2.21.2"
+    "vue-tsc": "2.0.21"
   }
 }
