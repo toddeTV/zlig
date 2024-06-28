@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   @apply flex flex-col h-screen overflow-y-visible;
 }
 
-#app{
+#app {
   @apply flex flex-col h-full;
 }
