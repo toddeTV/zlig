@@ -39,6 +39,10 @@ The following softwares are required for development:<br>
 | npx      | `npx -v`                                  | v10.2.4                |                      |
 | pnpm     | `pnpm -v`                                 | v9.0.1                 |                      |
 
+In the browser install:
+
+- [VueJS Devtools](https://devtools.vuejs.org/guide/installation.html)
+
 #### project setup
 
 1. execute a `git pull`
@@ -57,9 +61,8 @@ The following softwares are required for development:<br>
    bottom right to timeout (ca. 5 minutes) and then on the upcoming popup question<br>
    `You have not yet finished authorizing [...] Would you like to try a different way? (local server)` click `Yes`
    and use this alternative login mechanic.
-6. Rename `.env.example` to `.env` and set the environment variables.
-7. Install dependencies: `pnpm i`
-8. Happy coding <3
+6. Install dependencies: `pnpm i`
+7. Happy coding <3
 
 ### lint and prettier
 
@@ -163,6 +166,7 @@ directionalLightShadow.bias = 0.002
   - [iconify](https://icon-sets.iconify.design/ph/) (not recommended, but really good)
   - [icones](https://icones.js.org/collection/ph) (recommended, but not so good)
 - [TailwindCSS cheat sheet](https://nerdcave.com/tailwind-cheat-sheet)
+- [TresJS docs](https://docs.tresjs.org/guide/)
 
 ## prod
 
@@ -177,6 +181,10 @@ Head of project:
 Honorable mentions to people and projects that helped this project:
 
 - [Franka Schlösser](https://github.com/saknarf) helped with the project. Thank you <3
+
+Used services, dependencies and materials - besides the ones in `./package.json`:
+
+- [Low Poly Japanese Restaurant props & environment pack](https://www.artstation.com/marketplace/p/yB0RG/low-poly-japanese-restaurant-props-environment-pack)
 
 ## License
 
