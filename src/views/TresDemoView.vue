@@ -28,6 +28,7 @@ const gl: TresCanvasProps = {
 
     <!-- lights -->
     <TresDirectionalLight :position="[0, 2, 4]" :intensity="1.2" cast-shadow />
+    <TresAmbientLight :intensity="0.3" />
 
     <!-- objects -->
     <Suspense>
