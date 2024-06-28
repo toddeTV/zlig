@@ -2,7 +2,6 @@
   "recommendations": [
     "antfu.goto-alias",
     "antfu.iconify",
-    "bradlc.vscode-tailwindcss",
     "dbaeumer.vscode-eslint",
     "eamodio.gitlens",
     "GitHub.copilot",

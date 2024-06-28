@@ -145,7 +145,6 @@ directionalLightShadow.bias = 0.002
 - icon browser
   - [iconify](https://icon-sets.iconify.design/ph/) (not recommended, but really good)
   - [icones](https://icones.js.org/collection/ph) (recommended, but not so good)
-- [TailwindCSS cheat sheet](https://nerdcave.com/tailwind-cheat-sheet)
 
 ## prod
 

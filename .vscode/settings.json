@@ -14,9 +14,6 @@
     "**/.output": true
   },
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
   "typescript.tsdk": "node_modules/typescript/lib",
   "volar.completion.preferredTagNameCase": "pascal",
   "volar.autoCompleteRefs": true,
