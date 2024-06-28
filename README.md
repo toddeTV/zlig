@@ -63,7 +63,24 @@ The following softwares are required for development:<br>
 
 ### lint and prettier
 
-<!-- TODO -->
+This project uses [antfu/eslint-config](https://github.com/antfu/eslint-config) for eslint most of the files.
+The following extend it:
+
+- [antfu/eslint-plugin-format](https://github.com/antfu/eslint-plugin-format) for using external formatters like
+  e.g. `prettier` for the file types that eslint cannot handle.
+- [azat-io/eslint-plugin-perfectionist](https://github.com/azat-io/eslint-plugin-perfectionist) for
+  sorting object keys, imports, etc. - with auto-fix.
+
+Keep in mind that the plugin names are renamed, see
+[Plugins Rename](https://github.com/antfu/eslint-config?tab=readme-ov-file#plugins-renaming), e.g.:
+
+```diff
+-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
++// eslint-disable-next-line ts/consistent-type-definitions
+type foo = { bar: 2 }
+```
+
+[Why I don't use Prettier for every file type](https://antfu.me/posts/why-not-prettier)
 
 ### Design
 
@@ -99,11 +116,11 @@ import type * as THREE from 'three'
 
 ```vue
 <script setup lang="ts">
-import { ... } from '@tresjs/cientos'
-import { ... } from '@tresjs/core'
-import { ... } from '@tresjs/nuxt'
-import { ... } from '@tresjs/post-processing'
-import { ... } from 'three/src/[...].js'
+import { something } from '@tresjs/cientos'
+import { something } from '@tresjs/core'
+import { something } from '@tresjs/nuxt'
+import { something } from '@tresjs/post-processing'
+import { something } from 'three/src/[...].js'
 </script>
 ```
 

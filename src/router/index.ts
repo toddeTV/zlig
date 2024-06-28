@@ -5,9 +5,9 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      component: HomeView,
       name: 'home',
-      component: HomeView
+      path: '/',
     },
     // {
     //   path: '/about',
@@ -15,11 +15,11 @@ const router = createRouter({
     //   component: () => import('../views/AboutView.vue')
     // }
     {
-      path: '/tresjs-demo',
+      component: async () => import('../views/TresDemoView.vue'),
       name: 'TresJS Demo',
-      component: () => import('../views/TresDemoView.vue')
-    }
-  ]
+      path: '/tresjs-demo',
+    },
+  ],
 })
 
 export default router
