@@ -1,0 +1,58 @@
+{
+  "files.autoSave": "onFocusChange",
+  "npm.packageManager": "pnpm",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "editor.rulers": [120],
+  "editor.fontSize": 15,
+  "window.zoomLevel": 0.05,
+  "search.useIgnoreFiles": false,
+  "search.exclude": {
+    "**/.pnp.*": true,
+    "**/dist": true,
+    "node_modules": true,
+    "pnpm-lock.yaml": true,
+    "**/.output": true
+  },
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "volar.completion.preferredTagNameCase": "pascal",
+  "volar.autoCompleteRefs": true,
+  "eslint.experimental.useFlatConfig": true,
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+  "eslint.rules.customizations": [
+    { "rule": "style/*", "severity": "off" },
+    { "rule": "format/*", "severity": "off" },
+    { "rule": "*-indent", "severity": "off" },
+    { "rule": "*-spacing", "severity": "off" },
+    { "rule": "*-spaces", "severity": "off" },
+    { "rule": "*-order", "severity": "off" },
+    { "rule": "*-dangle", "severity": "off" },
+    { "rule": "*-newline", "severity": "off" },
+    { "rule": "*quotes", "severity": "off" },
+    { "rule": "*semi", "severity": "off" }
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml",
+    "toml"
+  ],
+  "editor.linkedEditing": true,
+  "javascript.preferences.renameMatchingJsxTags": true,
+  "typescript.preferences.renameMatchingJsxTags": true,
+}
