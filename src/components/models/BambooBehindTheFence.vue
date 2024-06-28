@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useGLTF } from '@tresjs/cientos'
 
-const { scene } = await useGLTF('/models/japaneseSmallAssets/SM_BambooBehindTheFence_01/SM_BambooBehindTheFence_01.gltf', {
+const { scene } = await useGLTF('/models/japaneseSmallAssets/BambooBehindTheFence/BambooBehindTheFence.gltf', {
   draco: true,
 })
 </script>

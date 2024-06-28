@@ -15,7 +15,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"SM_BambooBehindTheFence_01"
+			"name":"BambooBehindTheFence"
 		}
 	],
 	"materials":[
@@ -57,7 +57,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"M_JR_01.tga",
-			"uri":"../_material/M_JR_01_tga.png"
+			"uri":"../_material/colorMaterialFile.png"
 		}
 	],
 	"accessors":[
@@ -131,7 +131,7 @@
 	"buffers":[
 		{
 			"byteLength":77564,
-			"uri":"SM_BambooBehindTheFence_01.bin"
+			"uri":"BambooBehindTheFence.bin"
 		}
 	]
 }

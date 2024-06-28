@@ -3,8 +3,8 @@ import { BasicShadowMap, NoToneMapping, SRGBColorSpace } from 'three'
 import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
-import SM_Bridge_01 from '@/components/models/SM_Bridge_01.vue'
-import SM_BambooBehindTheFence_01 from '@/components/models/SM_BambooBehindTheFence_01.vue'
+import Bridge from '@/components/models/Bridge.vue'
+import BambooBehindTheFence from '@/components/models/BambooBehindTheFence.vue'
 
 const gl: TresCanvasProps = {
   alpha: false,
@@ -31,10 +31,10 @@ const gl: TresCanvasProps = {
 
     <!-- objects -->
     <Suspense>
-      <SM_Bridge_01 :position="[0, 0, 0]" />
+      <Bridge :position="[0, 0, 0]" />
     </Suspense>
     <Suspense>
-      <SM_BambooBehindTheFence_01 :position="[4, 0, 0]" />
+      <BambooBehindTheFence :position="[4, 0, 0]" />
     </Suspense>
 
     <!-- TODO currently needed so that the scene can be rotated - FIX! -->

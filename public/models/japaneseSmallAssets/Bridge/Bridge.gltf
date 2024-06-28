@@ -15,7 +15,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"SM_Bridge_01"
+			"name":"Bridge"
 		}
 	],
 	"materials":[
@@ -57,7 +57,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"M_JR_01.tga",
-			"uri":"../_material/M_JR_01_tga.png"
+			"uri":"../_material/colorMaterialFile.png"
 		}
 	],
 	"accessors":[
@@ -131,7 +131,7 @@
 	"buffers":[
 		{
 			"byteLength":86696,
-			"uri":"SM_Bridge_01.bin"
+			"uri":"Bridge.bin"
 		}
 	]
 }
