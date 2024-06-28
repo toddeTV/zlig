@@ -1,0 +1,32 @@
+name: ci
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+  workflow_dispatch: {}
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: corepack enable
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: 📦 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🧪 Test lint
+        run: pnpm lint
