@@ -5,3 +5,7 @@
 body{
   @apply flex flex-col h-screen overflow-y-visible;
 }
+
+#app{
+  @apply flex flex-col h-full;
+}
