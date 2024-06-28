@@ -56,6 +56,7 @@
     "autoprefixer": "10.4.19",
     "eslint": "8.57.0",
     "eslint-plugin-format": "0.1.2",
+    "eslint-plugin-perfectionist": "2.11.0",
     "eslint-plugin-vue": "9.23.0",
     "npm-run-all2": "6.2.0",
     "postcss": "8.4.38",

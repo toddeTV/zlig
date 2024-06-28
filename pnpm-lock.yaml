@@ -57,6 +57,9 @@ importers:
       eslint-plugin-format:
         specifier: 0.1.2
         version: 0.1.2(eslint@8.57.0)
+      eslint-plugin-perfectionist:
+        specifier: 2.11.0
+        version: 2.11.0(eslint@8.57.0)(typescript@5.4.5)(vue-eslint-parser@9.4.3(eslint@8.57.0))
       eslint-plugin-vue:
         specifier: 9.23.0
         version: 9.23.0(eslint@8.57.0)
