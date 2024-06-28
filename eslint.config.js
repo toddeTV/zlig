@@ -32,9 +32,7 @@ export default antfu({
     quotes: 'single',
   },
 
-  typescript: {
-    tsconfigPath: 'tsconfig.json',
-  },
+  typescript: true,
 
   vue: true,
 
