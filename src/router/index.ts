@@ -14,6 +14,11 @@ const router = createRouter({
     //   name: 'about',
     //   component: () => import('../views/AboutView.vue')
     // }
+    {
+      path: '/tresjs-demo',
+      name: 'TresJS Demo',
+      component: () => import('../views/TresDemoView.vue')
+    }
   ]
 })
 
