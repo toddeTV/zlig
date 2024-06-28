@@ -1,0 +1,60 @@
+{
+  "name": "toddetv_zlig",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "author": "Thorsten Seyschab <business@todde.tv> (https://todde.tv/)",
+  "license": "PRIVATE",
+  "contributors": [
+    {
+      "name": "Thorsten Seyschab",
+      "email": "business@todde.tv",
+      "url": "https://todde.tv/"
+    },
+    {
+      "name": "Franka Schlösser",
+      "url": "https://github.com/saknarf"
+    }
+  ],
+  "homepage": "https://todde.tv/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toddeTV/zlig"
+  },
+  "bugs": {
+    "url": "https://github.com/toddeTV/zlig/issues"
+  },
+  "engines": {
+    "node": "20",
+    "pnpm": "8 || 9"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "pinia": "2.1.7",
+    "vue": "3.4.29",
+    "vue-router": "4.3.3"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "1.8.0",
+    "@tsconfig/node20": "20.1.4",
+    "@types/node": "20.14.5",
+    "@vitejs/plugin-vue": "5.0.5",
+    "@vue/eslint-config-typescript": "13.0.0",
+    "@vue/tsconfig": "0.5.1",
+    "eslint": "8.57.0",
+    "eslint-plugin-vue": "9.23.0",
+    "npm-run-all2": "6.2.0",
+    "typescript": "~5.4.0",
+    "vite": "5.3.1",
+    "vite-plugin-vue-devtools": "7.3.1",
+    "vue-tsc": "2.0.21"
+  }
+}
