@@ -97,6 +97,23 @@ Tipp: Favorite them and use the search over all item collections at once: https:
 | `Material Design Icons` | `mdi`     | Apache 2.0 (commercial use is allowed, no attribution required) |                |
 | `Material Line Icons`   | `line-md` | MIT                                                             | animated icons |
 
+### Blender
+
+Models are created using [Blender](https://www.blender.org/).
+
+#### glTF export with draco compression
+
+Use (draco compression)[https://github.com/google/draco] in [Blender](https://www.blender.org/) on
+(glTF 2)[https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/README.md] files:
+
+1. Create the model in blender
+2. Go to `File` -> `Export` -> `glTF 2.0 (.glb/.gltf)`
+3. In the right side panel
+   1. set `Format` to `glTF Seperate (.gltf + .bin + textures)`
+   2. under `Data` set `Compression` to `true`
+   3. under `Compression` set the compression level between 0-6 (0=less compression; 6=strongest compression)<br>
+      I am using `6` most of the time - only when morphing between models, this should be set to `0`.
+
 ### TresJS & ThreeJS
 
 #### possible import locations
