@@ -10,8 +10,8 @@ const gl: TresCanvasProps = {
   alpha: false,
   clearColor: '#82DBC5',
   outputColorSpace: SRGBColorSpace,
-  renderMode: 'on-demand', // TODO use or not?
-  shadowMapType: BasicShadowMap,
+  renderMode: 'always',
+  shadowMapType: BasicShadowMap, // TODO use another shadow type?
   shadows: true,
   toneMapping: NoToneMapping,
   useLegacyLights: false, // TODO use or not?
@@ -27,21 +27,22 @@ const gl: TresCanvasProps = {
     <OrbitControls />
 
     <!-- lights -->
-    <TresDirectionalLight :position="[0, 2, 4]" :intensity="1.2" cast-shadow />
+    <TresDirectionalLight
+      cast-shadow
+      :intensity="1.2"
+      :position="[0, 2, 4]"
+    />
     <TresAmbientLight :intensity="0.3" />
 
     <!-- objects -->
-    <Suspense>
-      <Bridge :position="[0, 0, 0]" />
-    </Suspense>
-    <Suspense>
-      <BambooBehindFence :position="[4, 0, 0]" />
-    </Suspense>
-
-    <!-- TODO currently needed so that the scene can be rotated - FIX! -->
-    <TresMesh :position="[-2, 2, 0]" :rotation="[0, Math.PI, 0]">
-      <TresConeGeometry :args="[0, 1, 1]" />
-    </TresMesh>
+    <TresGroup>
+      <Suspense>
+        <Bridge :position="[0, 0, 0]" />
+      </Suspense>
+      <Suspense>
+        <BambooBehindFence :position="[4, 0, 0]" />
+      </Suspense>
+    </TresGroup>
   </TresCanvas>
 </template>
 
