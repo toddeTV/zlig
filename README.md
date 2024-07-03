@@ -151,7 +151,12 @@ directionalLightShadow.bias = 0.002
   <Suspense>
     <TresCanvas shadows>
       <!-- ... -->
-      <TresDirectionalLight :position="[4, 8, 4]" :intensity="3.0" cast-shadow :shadow="directionalLightShadow" />
+      <TresDirectionalLight
+        cast-shadow
+        :intensity="3.0"
+        :position="[4, 8, 4]"
+        :shadow="directionalLightShadow"
+      />
       <TresAmbientLight :intensity="0.3" />
       <!-- ... -->
     </TresCanvas>
