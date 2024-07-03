@@ -25,6 +25,19 @@ export default antfu({
         type: 'natural',
       },
     ],
+    'vue/attributes-order': [
+      'error',
+      {
+        alphabetical: true,
+      },
+    ],
+    'vue/max-attributes-per-line': [
+      'error',
+      {
+        multiline: 1,
+        singleline: 3,
+      },
+    ],
   },
 
   stylistic: {
