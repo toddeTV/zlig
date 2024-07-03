@@ -63,5 +63,8 @@
   ],
   "editor.linkedEditing": true,
   "javascript.preferences.renameMatchingJsxTags": true,
-  "typescript.preferences.renameMatchingJsxTags": true
+  "typescript.preferences.renameMatchingJsxTags": true,
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  }
 }
