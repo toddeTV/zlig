@@ -110,8 +110,9 @@ Use (draco compression)[https://github.com/google/draco] in [Blender](https://ww
 2. Go to `File` -> `Export` -> `glTF 2.0 (.glb/.gltf)`
 3. In the right side panel
    1. set `Format` to `glTF Seperate (.gltf + .bin + textures)`
-   2. under `Data` set `Compression` to `true`
-   3. under `Compression` set the compression level between 0-6 (0=less compression; 6=strongest compression)<br>
+   2. set `Remember Export Settings` to `true`
+   3. under `Data` set `Compression` to `true`
+   4. under `Compression` set the compression level between 0-6 (0=less compression; 6=strongest compression)<br>
       I am using `6` most of the time - only when morphing between models, this should be set to `0`.
 
 ### TresJS & ThreeJS
