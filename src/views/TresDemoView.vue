@@ -4,7 +4,7 @@ import { TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 import Bridge from '@/components/models/Bridge.vue'
-import BambooBehindTheFence from '@/components/models/BambooBehindTheFence.vue'
+import BambooBehindFence from '@/components/models/BambooBehindFence.vue'
 
 const gl: TresCanvasProps = {
   alpha: false,
@@ -35,7 +35,7 @@ const gl: TresCanvasProps = {
       <Bridge :position="[0, 0, 0]" />
     </Suspense>
     <Suspense>
-      <BambooBehindTheFence :position="[4, 0, 0]" />
+      <BambooBehindFence :position="[4, 0, 0]" />
     </Suspense>
 
     <!-- TODO currently needed so that the scene can be rotated - FIX! -->

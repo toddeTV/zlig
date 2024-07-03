@@ -3,6 +3,12 @@
 		"generator":"Khronos glTF Blender I/O v4.1.63",
 		"version":"2.0"
 	},
+	"extensionsUsed":[
+		"KHR_draco_mesh_compression"
+	],
+	"extensionsRequired":[
+		"KHR_draco_mesh_compression"
+	],
 	"scene":0,
 	"scenes":[
 		{
@@ -41,8 +47,19 @@
 						"NORMAL":1,
 						"TEXCOORD_0":2
 					},
+					"extensions":{
+						"KHR_draco_mesh_compression":{
+							"bufferView":0,
+							"attributes":{
+								"POSITION":0,
+								"NORMAL":1,
+								"TEXCOORD_0":2
+							}
+						}
+					},
 					"indices":3,
-					"material":0
+					"material":0,
+					"mode":4
 				}
 			]
 		}
@@ -56,13 +73,12 @@
 	"images":[
 		{
 			"mimeType":"image/png",
-			"name":"M_JR_01.tga",
+			"name":"M_JR_01",
 			"uri":"../_material/colorMaterialFile.png"
 		}
 	],
 	"accessors":[
 		{
-			"bufferView":0,
 			"componentType":5126,
 			"count":2308,
 			"max":[
@@ -78,19 +94,16 @@
 			"type":"VEC3"
 		},
 		{
-			"bufferView":1,
 			"componentType":5126,
 			"count":2308,
 			"type":"VEC3"
 		},
 		{
-			"bufferView":2,
 			"componentType":5126,
 			"count":2308,
 			"type":"VEC2"
 		},
 		{
-			"bufferView":3,
 			"componentType":5123,
 			"count":6420,
 			"type":"SCALAR"
@@ -99,27 +112,8 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":27696,
-			"byteOffset":0,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":27696,
-			"byteOffset":27696,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":18464,
-			"byteOffset":55392,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":12840,
-			"byteOffset":73856,
-			"target":34963
+			"byteLength":13865,
+			"byteOffset":0
 		}
 	],
 	"samplers":[
@@ -130,7 +124,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":86696,
+			"byteLength":13868,
 			"uri":"Bridge.bin"
 		}
 	]
