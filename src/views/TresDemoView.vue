@@ -21,7 +21,7 @@ const gl = {
       <TresConeGeometry :args="[1, 1.5, 3]" />
       <TresMeshToonMaterial color="#82DBC5" />
     </TresMesh>
-    <TresMesh :position="[0, 0, 0]" cast-shadow>
+    <TresMesh cast-shadow :position="[0, 0, 0]">
       <TresBoxGeometry :args="[1.5, 1.5, 1.5]" />
       <TresMeshToonMaterial color="#4F4F4F" />
     </TresMesh>
@@ -29,7 +29,7 @@ const gl = {
       <TresSphereGeometry />
       <TresMeshToonMaterial color="#FBB03B" />
     </TresMesh>
-    <TresDirectionalLight :position="[0, 2, 4]" :intensity="1.2" cast-shadow />
+    <TresDirectionalLight cast-shadow :intensity="1.2" :position="[0, 2, 4]" />
   </TresCanvas>
 </template>
 
