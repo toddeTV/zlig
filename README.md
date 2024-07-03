@@ -20,7 +20,7 @@ Current deployment on: (NONE)
 
 #### VM ID
 
-Development VM ID from Thorsten Seyschab for this project: `0Z1`<br>
+Development VM ID from Thorsten Seyschab for this project: `014`<br>
 (Only interesting to him.)
 
 #### system requirements for developing
@@ -30,14 +30,14 @@ The following softwares are required for development:<br>
 
 | software | command for version output                | my version at last use | information          |
 | -------- | ----------------------------------------- | ---------------------- | -------------------- |
-| Ubuntu   | `lsb_release -a` or `cat /etc/os-release` | v24.04 LTS             | OS                   |
-| Linux    | `uname -r`                                | 6.8.0-35-generic       | Linux Kernel         |
+| Ubuntu   | `lsb_release -a` or `cat /etc/os-release` | 22.04.4 LTS            | OS                   |
+| Linux    | `uname -r`                                | 5.15.0-113-generic     | Linux Kernel         |
 | VSCode   | `code -v`                                 | 1.90.2                 | IDE                  |
 | nvm      | `nvm -v`                                  | v0.39.7                | Node Version Manager |
-| Node     | `node -v` (old `nodejs --version`)        | v20.11.1               | NodeJS/ Node.js      |
-| npm      | `npm -v`                                  | v10.2.4                |                      |
-| npx      | `npx -v`                                  | v10.2.4                |                      |
-| pnpm     | `pnpm -v`                                 | v9.0.1                 |                      |
+| Node     | `node -v` (old `nodejs --version`)        | v20.15.0               | NodeJS/ Node.js      |
+| npm      | `npm -v`                                  | v10.7.0                |                      |
+| npx      | `npx -v`                                  | v10.7.0                |                      |
+| pnpm     | `pnpm -v`                                 | v9.4.0                 |                      |
 
 In the browser install:
 
@@ -57,10 +57,9 @@ In the browser install:
    - see file `.vscode/extensions.json` for configuring some of the extensions
    - Restart or reload VSCode.
 5. In VSCode on the bottom left click your profile image and log in all services (GitHub due to VSCode extensions, ...)<br>
-   If the browser to VSCode callback fails (e.g. due to remote working on a VM), wait for the login popup on the
-   bottom right to timeout (ca. 5 minutes) and then on the upcoming popup question<br>
-   `You have not yet finished authorizing [...] Would you like to try a different way? (local server)` click `Yes`
-   and use this alternative login mechanic.
+   If the browser to VSCode callback fails, wait for the login popup on the bottom right to timeout (ca. 5 minutes) and
+   then on the upcoming popup question `You have not yet finished authorizing [...] Would you like to try a different way? (local server)` click `Yes` and use this alternative login mechanic.<br>
+   (When you do not want to wait for the timeout to happen, you can also click the `Cancel` to trigger the dialog faster.)
 6. Install dependencies: `pnpm i`
 7. Happy coding <3
 
