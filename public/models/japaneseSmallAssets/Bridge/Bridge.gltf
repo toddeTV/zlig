@@ -27,7 +27,7 @@
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"M_JR_01.005",
+			"name":"colorMaterialFile",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0
@@ -73,7 +73,7 @@
 	"images":[
 		{
 			"mimeType":"image/png",
-			"name":"M_JR_01",
+			"name":"colorMaterialFile",
 			"uri":"../_material/colorMaterialFile.png"
 		}
 	],
