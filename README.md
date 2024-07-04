@@ -103,8 +103,8 @@ Models are created using [Blender](https://www.blender.org/).
 
 #### glTF export with draco compression
 
-Use (draco compression)[https://github.com/google/draco] in [Blender](https://www.blender.org/) on
-(glTF 2)[https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/README.md] files:
+Use [draco compression](https://github.com/google/draco) in [Blender](https://www.blender.org/) on
+[glTF 2](https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/README.md) files:
 
 1. Create the model in blender
 2. Go to `File` -> `Export` -> `glTF 2.0 (.glb/.gltf)`
