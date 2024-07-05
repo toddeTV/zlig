@@ -1,32 +1,15 @@
 {
-  "files.autoSave": "onFocusChange",
-  "npm.packageManager": "pnpm",
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "editor.rulers": [120],
-  "editor.fontSize": 15,
-  "window.zoomLevel": 0.05,
-  "search.useIgnoreFiles": false,
-  "search.exclude": {
-    "**/.pnp.*": true,
-    "**/dist": true,
-    "node_modules": true,
-    "pnpm-lock.yaml": true,
-    "**/.output": true
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
   },
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "volar.completion.preferredTagNameCase": "pascal",
-  "volar.autoCompleteRefs": true,
-  "eslint.experimental.useFlatConfig": true,
-  "prettier.enable": false,
-  "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
+  "editor.fontSize": 15,
+  "editor.formatOnSave": false,
+  "editor.linkedEditing": true,
+  "editor.rulers": [120],
   "eslint.rules.customizations": [
     { "rule": "style/*", "severity": "off" },
     { "rule": "format/*", "severity": "off" },
@@ -39,6 +22,7 @@
     { "rule": "*quotes", "severity": "off" },
     { "rule": "*semi", "severity": "off" }
   ],
+  "eslint.useFlatConfig": true,
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -61,10 +45,26 @@
     "pcss",
     "postcss"
   ],
-  "editor.linkedEditing": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "files.autoSave": "onFocusChange",
   "javascript.preferences.renameMatchingJsxTags": true,
+  "npm.packageManager": "pnpm",
+  "prettier.enable": false,
+  "search.exclude": {
+    "**/.output": true,
+    "**/.pnp.*": true,
+    "**/dist": true,
+    "node_modules": true,
+    "pnpm-lock.yaml": true
+  },
+  "search.useIgnoreFiles": false,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.renameMatchingJsxTags": true,
-  "[vue]": {
-    "editor.defaultFormatter": "Vue.volar"
-  }
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "volar.autoCompleteRefs": true,
+  "volar.completion.preferredTagNameCase": "pascal",
+  "window.zoomLevel": 0.05
 }
