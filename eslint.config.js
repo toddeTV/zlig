@@ -18,6 +18,9 @@ export default antfu({
   },
 
   rules: {
+    'jsonc/sort-keys': [
+      'error',
+    ],
     'perfectionist/sort-objects': [
       'error',
       {
