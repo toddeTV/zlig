@@ -18,11 +18,27 @@ export default antfu({
   },
 
   rules: {
+    'jsonc/sort-keys': [
+      'error',
+    ],
     'perfectionist/sort-objects': [
       'error',
       {
         order: 'asc',
         type: 'natural',
+      },
+    ],
+    'vue/attributes-order': [
+      'error',
+      {
+        alphabetical: true,
+      },
+    ],
+    'vue/max-attributes-per-line': [
+      'error',
+      {
+        multiline: 1,
+        singleline: 3,
       },
     ],
   },
