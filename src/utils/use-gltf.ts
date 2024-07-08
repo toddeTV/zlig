@@ -3,7 +3,7 @@ import type { AnimationClip, Material, Scene } from 'three'
 import { DRACOLoader, type GLTF, GLTFLoader } from 'three-stdlib'
 
 const dracoLoader = new DRACOLoader()
-  .setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
+  .setDecoderPath(`https://www.gstatic.com/draco/versioned/decoders/${import.meta.env.VITE_DRACO_VERSION}/`)
   .preload()
 
 const gltfLoader = new GLTFLoader().setDRACOLoader(dracoLoader)
