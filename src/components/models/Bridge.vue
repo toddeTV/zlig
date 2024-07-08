@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useGLTF } from '@tresjs/cientos'
+import { useGLTF } from '@/utils/use-gltf'
 
 const { nodes } = await useGLTF('/models/japaneseSmallAssets/Bridge/Bridge.gltf', {
   draco: true,
