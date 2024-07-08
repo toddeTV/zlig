@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { useGLTF } from '@/utils/use-gltf'
 
-const { nodes } = await useGLTF('/models/japaneseSmallAssets/BambooBehindFence/BambooBehindFence.gltf', {
-  draco: true,
-})
+const { nodes } = await useGLTF('/models/japaneseSmallAssets/BambooBehindFence/BambooBehindFence.gltf')
 </script>
 
 <template>

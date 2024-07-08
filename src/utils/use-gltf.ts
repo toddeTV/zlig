@@ -1,6 +1,12 @@
-import { type TresObject3D, useLoader } from '@tresjs/core'
+import { type TresObject3D, trasverseObjects, useLogger } from '@tresjs/core'
 import type { AnimationClip, Material, Scene } from 'three'
-import { DRACOLoader, GLTFLoader } from 'three-stdlib'
+import { DRACOLoader, type GLTF, GLTFLoader } from 'three-stdlib'
+
+const dracoLoader = new DRACOLoader()
+  .setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
+  .preload()
+
+const gltfLoader = new GLTFLoader().setDRACOLoader(dracoLoader)
 
 export interface GLTFLoaderOptions {
   /**
@@ -19,36 +25,25 @@ export interface GLTFLoaderOptions {
   decoderPath?: string
 }
 
-export interface GLTFResult {
+export interface GLTFResult extends GLTF {
   animations: Array<AnimationClip>
   nodes: Record<string, TresObject3D>
   materials: Record<string, Material>
-  scene: Scene
+  scene: Scene & GLTF['scene']
 }
 
-export async function useGLTF<T extends string | string[]>(
-  path: T,
-  options: GLTFLoaderOptions = { draco: false },
-  extendLoader?: (loader: GLTFLoader) => void,
-): Promise<T extends string[] ? GLTFResult[] : GLTFResult> {
-  const dracoLoader = options.draco
-    ? new DRACOLoader().setDecoderPath(options.decoderPath || 'https://www.gstatic.com/draco/versioned/decoders/1.4.3/')
-    : null
+export async function useGLTF(
+  path: string,
+): Promise<GLTFResult> {
+  const { logError } = useLogger()
 
-  const gltfModel = (await useLoader(
-    // @ts-expect-error I don't know why this does not error in the original @tresjs/core code...
-    GLTFLoader,
-    path,
-    (loader: GLTFLoader) => {
-      extendLoader?.(loader)
-
-      if (dracoLoader) {
-        loader.setDRACOLoader(dracoLoader)
+  return new Promise<GLTFResult>((resolve, reject) => {
+    gltfLoader.load(path, (model) => {
+      if (model.scene) {
+        Object.assign(model, trasverseObjects(model.scene))
       }
-    },
-  ))
 
-  dracoLoader?.dispose()
-
-  return gltfModel
+      resolve(model as GLTFResult)
+    }, undefined, event => reject(logError('[useGLTF] - Failed to load resource', event)))
+  })
 }
