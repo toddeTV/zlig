@@ -8,23 +8,6 @@ const dracoLoader = new DRACOLoader()
 
 const gltfLoader = new GLTFLoader().setDRACOLoader(dracoLoader)
 
-export interface GLTFLoaderOptions {
-  /**
-   * Whether to use Draco compression.
-   *
-   * @type {boolean}
-   * @memberof GLTFLoaderOptions
-   */
-  draco?: boolean
-  /**
-   * The path to the Draco decoder.
-   *
-   * @type {string}
-   * @memberof GLTFLoaderOptions
-   */
-  decoderPath?: string
-}
-
 export interface GLTFResult extends GLTF {
   animations: Array<AnimationClip>
   nodes: Record<string, TresObject3D>
