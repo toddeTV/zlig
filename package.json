@@ -31,7 +31,8 @@
     "pnpm": "8 || 9"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3000",
+    "dev:network": "vite --port 3000 --host",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -40,9 +41,7 @@
     "lint:printCurrentConfig": "mkdir -p ./dist/_eslintConfig && eslint --print-config file.json > ./dist/_eslintConfig/json.json && eslint --print-config file.vue > ./dist/_eslintConfig/vue.json && eslint --print-config file.js > ./dist/_eslintConfig/js.json && eslint --print-config file.ts > ./dist/_eslintConfig/ts.json && eslint --print-config file.md > ./dist/_eslintConfig/md.json && eslint --print-config file.html > ./dist/_eslintConfig/html.json && eslint --print-config file.yaml > ./dist/_eslintConfig/yaml.json && eslint --print-config file.xml > ./dist/_eslintConfig/xml.json && eslint --print-config file.toml > ./dist/_eslintConfig/toml.json && eslint --print-config file.gql > ./dist/_eslintConfig/gql.json && eslint --print-config file.css > ./dist/_eslintConfig/css.json && eslint --print-config file.astro > ./dist/_eslintConfig/astro.json && eslint --print-config file.svelte > ./dist/_eslintConfig/svelte.json && eslint --print-config file.less > ./dist/_eslintConfig/less.json && eslint --print-config file.scss > ./dist/_eslintConfig/scss.json && eslint --print-config file.pcss > ./dist/_eslintConfig/pcss.json"
   },
   "dependencies": {
-    "pinia": "2.1.7",
-    "vue": "3.4.29",
-    "vue-router": "4.3.3"
+    "vue": "3.4.29"
   },
   "devDependencies": {
     "@antfu/eslint-config": "2.21.2",
@@ -61,12 +60,14 @@
     "eslint-plugin-perfectionist": "2.11.0",
     "eslint-plugin-vue": "9.23.0",
     "npm-run-all2": "6.2.0",
+    "pinia": "2.1.7",
     "postcss": "8.4.38",
     "tailwindcss": "3.4.4",
     "three": "0.166.0",
-    "typescript": "~5.4.0",
+    "typescript": "5.5.3",
     "vite": "5.3.1",
     "vite-plugin-vue-devtools": "7.3.1",
+    "vue-router": "4.3.3",
     "vue-tsc": "2.0.21"
   }
 }
