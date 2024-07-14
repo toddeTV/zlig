@@ -6,7 +6,14 @@ This project represents a japanese style idle game.
 
 Short project name: `zlig` (stands for `zen-landscape-idle-game`)
 
-Current deployment on: (NONE)
+Current deployment on:
+
+- production
+  - branch `main`: [https://zlig.net/](https://zlig.net/)<br>
+    (This is a custom domain for [https://zlig.vercel.app/](https://zlig.vercel.app/))
+- development
+  - branch `dev`: [https://zlig-git-dev-toddetv-projects.vercel.app/](https://zlig-git-dev-toddetv-projects.vercel.app/)
+  - each PR will get a individual custom URL automatically
 
 ## dev
 
@@ -192,7 +199,8 @@ directionalLightShadow.bias = 0.002
 
 ## prod
 
-<!-- TODO -->
+Will use the build command out of `/package.json`.<br>
+Building, deploying and hosting is done via [Vercel](https://vercel.com/toddetv-projects/zlig).
 
 ## Attribution
 
