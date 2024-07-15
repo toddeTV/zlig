@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useGLTF } from '@tresjs/cientos'
 
-const { nodes } = await useGLTF('/models/japaneseSmallAssets/Bridge/Bridge.gltf', {
+const { nodes } = await (useGLTF('/models/japaneseSmallAssets/Bridge/Bridge.gltf', {
   draco: true,
-})
+}) as typeof import('models/japaneseSmallAssets/Bridge/Bridge.gltf').default)
 </script>
 
 <template>
