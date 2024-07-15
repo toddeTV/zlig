@@ -143,8 +143,8 @@ import type * as THREE from 'three'
 
 ```vue
 <script setup lang="ts">
-import { something } from '@tresjs/core'
 import { something } from '@tresjs/cientos'
+import { something } from '@tresjs/core'
 // import { something } from '@tresjs/nuxt'
 // import { something } from '@tresjs/post-processing'
 import { something } from 'three'
