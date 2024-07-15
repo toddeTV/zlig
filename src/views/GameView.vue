@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { BasicShadowMap, NoToneMapping, SRGBColorSpace } from 'three'
-import { TresCanvas } from '@tresjs/core'
+import { type Intersection, TresCanvas } from '@tresjs/core'
+// import type { Intersection } from 'three/src/core/Raycaster.js'
 import { OrbitControls } from '@tresjs/cientos'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
+import useClickedModelNodeStore from '@/composables/useClickedModelNodeStore'
 import Bridge from '@/components/models/Bridge.vue'
 import BambooBehindFence from '@/components/models/BambooBehindFence.vue'
 
@@ -15,6 +17,27 @@ const gl: TresCanvasProps = {
   shadows: true,
   toneMapping: NoToneMapping,
   useLegacyLights: false, // TODO use or not?
+}
+
+const clickedModelNodeStore = useClickedModelNodeStore()
+
+function onNodeClick(
+  // intersection: Intersection,
+  // pointerEvent: PointerEvent,
+  event: any, // TODO @fehnomenal: do you have a clue what type this is? See: https://docs.tresjs.org/api/events
+) {
+  // the click was on the model and the raycaster hit a node, so we do not send the raycast any further
+  event.stopPropagation()
+
+  // This is all present and should not throw type errors:
+  console.dir(event.ALT_MASK)
+  console.dir(event.clientX)
+  console.dir(event.delta)
+  console.dir(event.faceIndex)
+  console.dir(event.eventObject.uuid)
+
+  // store the clicked model node's uuid
+  clickedModelNodeStore.activeUuid = event.eventObject.uuid
 }
 </script>
 
@@ -37,13 +60,24 @@ const gl: TresCanvasProps = {
     <!-- objects -->
     <TresGroup>
       <Suspense>
-        <Bridge :position="[0, 0, 0]" />
+        <Bridge
+          :position="[0, 0, 0]"
+          @click="(event) => onNodeClick(event)"
+        />
       </Suspense>
       <Suspense>
-        <BambooBehindFence :position="[4, 0, 0]" />
+        <BambooBehindFence
+          :position="[4, 0, 0]"
+          @click="(event) => onNodeClick(event)"
+        />
       </Suspense>
     </TresGroup>
   </TresCanvas>
+
+  <!-- TODO remove when feature branch is ready, this is only for debugging while developing -->
+  <div class="absolute bg-red-200 z-10 p-2">
+    {{ clickedModelNodeStore.activeUuid ?? '[none]' }}
+  </div>
 </template>
 
 <style scoped>
