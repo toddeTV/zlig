@@ -41,7 +41,7 @@ export interface GLTFResult extends GLTF {
   scene: Scene & GLTF['scene']
 }
 
-export async function useGLTF(
+export default async function (
   path: string,
 ): Promise<GLTFResult> {
   const { logError } = useLogger()

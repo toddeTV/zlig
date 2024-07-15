@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useGLTF } from '@/utils/use-gltf'
+import useGLTF from '@/composables/useGLTF'
 
 const { nodes } = await useGLTF('/models/japaneseSmallAssets/BambooBehindFence/BambooBehindFence.gltf')
 </script>
