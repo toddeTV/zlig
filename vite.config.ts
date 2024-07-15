@@ -1,8 +1,10 @@
 import { URL, fileURLToPath } from 'node:url'
+import type { Plugin } from 'vite'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { templateCompilerOptions } from '@tresjs/core'
+import { generateAllModelTypes } from './scripts/generate-model-types'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +13,7 @@ export default defineConfig({
       ...templateCompilerOptions,
     }),
     vueDevTools(),
+    gltfModels(),
   ],
   resolve: {
     alias: {
@@ -18,3 +21,13 @@ export default defineConfig({
     },
   },
 })
+
+function gltfModels(): Plugin {
+  return {
+    buildStart() {
+      generateAllModelTypes()
+    },
+
+    name: 'gltf-models',
+  }
+}

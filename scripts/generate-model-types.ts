@@ -15,14 +15,18 @@ const DEFAULT_SCAN_FOLDER = () => resolve('public')
 
 // Allow running this as a script.
 if (fileURLToPath(import.meta.url) === argv[1]) {
-  mkdirSync(DEFAULT_OUTPUT_DIRECTORY(), { recursive: true })
+  generateAllModelTypes()
+}
 
-  const models = getAllModels()
+export function generateAllModelTypes(outputDirectory = DEFAULT_OUTPUT_DIRECTORY(), scanFolder = DEFAULT_SCAN_FOLDER(), modelFileExtensions = DEFAULT_MODEL_FILE_EXTENSIONS) {
+  mkdirSync(outputDirectory, { recursive: true })
+
+  const models = getAllModels(scanFolder, modelFileExtensions)
 
   for (const model of models) {
-    const outputFilePath = resolve(DEFAULT_OUTPUT_DIRECTORY(), `${model.name}.d.ts`)
+    const outputFilePath = resolve(outputDirectory, `${model.name}.d.ts`)
 
-    const content = getAmbientModuleCode(model)
+    const content = getAmbientModuleCode(model, scanFolder)
 
     writeFileSync(outputFilePath, content, { encoding: 'utf-8' })
   }
