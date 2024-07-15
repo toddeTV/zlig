@@ -1,6 +1,7 @@
 import { type TresObject3D, trasverseObjects, useLogger } from '@tresjs/core'
 import type { AnimationClip, Material, Scene } from 'three'
-import { DRACOLoader, type GLTF, GLTFLoader } from 'three-stdlib'
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
+import { type GLTF, GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 
 const dracoLoader = new DRACOLoader()
   .setDecoderPath(`https://www.gstatic.com/draco/versioned/decoders/${import.meta.env.VITE_DRACO_VERSION}/`)

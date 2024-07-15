@@ -75,9 +75,6 @@ importers:
       three:
         specifier: 0.166.0
         version: 0.166.0
-      three-stdlib:
-        specifier: 2.30.4
-        version: 2.30.4(three@0.166.0)
       typescript:
         specifier: ~5.4.0
         version: 5.4.5
@@ -2414,8 +2411,8 @@ packages:
       react:
         optional: true
 
-  three-stdlib@2.30.4:
-    resolution: {integrity: sha512-E7sN8UkaorSq2uRZU14AE7wXkdCBa2oFwPkPt92zaecuzrgd98BXkTt+2tFQVF1tPJRvfs7aMZV5dSOq4/vNVg==}
+  three-stdlib@2.30.3:
+    resolution: {integrity: sha512-rYr8PqMljMza+Ct8kQk90Y7y+YcWoPu1thfYv5YGCp0hytNRbxSQWXY4GpdTGymCj3bDggEBpxso53C3pPwhIw==}
     peerDependencies:
       three: '>=0.128.0'
 
@@ -3272,7 +3269,7 @@ snapshots:
       stats.js: 0.17.0
       three: 0.166.0
       three-custom-shader-material: 5.4.0(three@0.166.0)
-      three-stdlib: 2.30.4(three@0.166.0)
+      three-stdlib: 2.30.3(three@0.166.0)
       tweakpane: 4.0.3
       vue: 3.4.29(typescript@5.4.5)
     transitivePeerDependencies:
@@ -5136,7 +5133,7 @@ snapshots:
       object-hash: 3.0.0
       three: 0.166.0
 
-  three-stdlib@2.30.4(three@0.166.0):
+  three-stdlib@2.30.3(three@0.166.0):
     dependencies:
       '@types/draco3d': 1.4.10
       '@types/offscreencanvas': 2019.7.3
