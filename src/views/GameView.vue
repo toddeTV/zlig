@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { BasicShadowMap, NoToneMapping, SRGBColorSpace } from 'three'
-import { type Intersection, TresCanvas } from '@tresjs/core'
-// import type { Intersection } from 'three/src/core/Raycaster.js'
+import { type DomEvent, type ThreeEvent, TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 import useClickedModelNodeStore from '@/composables/useClickedModelNodeStore'
@@ -22,9 +21,7 @@ const gl: TresCanvasProps = {
 const clickedModelNodeStore = useClickedModelNodeStore()
 
 function onNodeClick(
-  // intersection: Intersection,
-  // pointerEvent: PointerEvent,
-  event: any, // TODO @fehnomenal: do you have a clue what type this is? See: https://docs.tresjs.org/api/events
+  event: ThreeEvent<DomEvent>&Event,
 ) {
   // the click was on the model and the raycaster hit a node, so we do not send the raycast any further
   event.stopPropagation()
