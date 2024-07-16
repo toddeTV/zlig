@@ -15,9 +15,9 @@ const router = createRouter({
     //   component: () => import('../views/AboutView.vue')
     // }
     {
-      component: async () => import('../views/TresDemoView.vue'),
-      name: 'TresJS Demo',
-      path: '/tresjs-demo',
+      component: async () => import('../views/GameView.vue'),
+      name: 'Game',
+      path: '/game',
     },
   ],
 })
