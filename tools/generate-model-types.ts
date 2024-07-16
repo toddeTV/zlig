@@ -42,10 +42,14 @@ export function getAllModels() {
   const models: Model[] = []
 
   for (const file of allFiles) {
-    if (!file.isFile()) { continue }
+    if (!file.isFile()) {
+      continue
+    }
 
     const ext = modelFileExtensions.find(ext => file.name.endsWith(ext))
-    if (!ext) { continue }
+    if (!ext) {
+      continue
+    }
 
     const fullPath = resolve(file.parentPath, file.name)
     const projectRelativePath = join(modelScanDirectory, relative(modelScanDirectory, fullPath))
@@ -74,7 +78,9 @@ function getGeneratedTypeLines(model: Model) {
   const modelJson = JSON.parse(readFileSync(model.filePath, { encoding: 'utf-8' }))
   const topLevelKeysWithNamedArray = Object.entries(modelJson)
     .filter((entry): entry is [string, { name: string }[]] => {
-      if (!Array.isArray(entry[1])) { return false }
+      if (!Array.isArray(entry[1])) {
+        return false
+      }
 
       return entry[1].every(item => typeof item === 'object' && 'name' in item && typeof item.name === 'string')
     })
