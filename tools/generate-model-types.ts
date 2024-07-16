@@ -3,26 +3,26 @@ import { basename, dirname, join, relative, resolve } from 'node:path'
 import { argv } from 'node:process'
 import { fileURLToPath } from 'node:url'
 
-// Some sane defaults.
-const DEFAULT_TOP_LEVEL_KEY_TYPES = {
+const modelFileExtensions = ['.gltf']
+const modelScanDirectory = join('src', 'assets')
+const typeOutputDirectory = resolve('node_modules', '.tmp', 'model-types')
+
+const topLevelKeyTypes: Partial<Record<string, string>> = {
   meshes: `import('three').Mesh`,
   nodes: `import('three').Object3D`,
   scenes: `import('three').Scene`,
 }
-const DEFAULT_MODEL_FILE_EXTENSIONS = ['.gltf']
-const DEFAULT_OUTPUT_DIRECTORY = () => resolve('node_modules', '.tmp', 'model-types')
-const DEFAULT_SCAN_FOLDER = () => join('src', 'assets')
 
 // Allow running this as a script.
 if (fileURLToPath(import.meta.url) === argv[1]) {
   generateAllModelTypes()
 }
 
-export function generateAllModelTypes(outputDirectory = DEFAULT_OUTPUT_DIRECTORY(), scanFolder = DEFAULT_SCAN_FOLDER(), modelFileExtensions = DEFAULT_MODEL_FILE_EXTENSIONS) {
-  const models = getAllModels(scanFolder, modelFileExtensions)
+export function generateAllModelTypes() {
+  const models = getAllModels()
 
   for (const model of models) {
-    const outputDir = resolve(outputDirectory, dirname(model.filePath))
+    const outputDir = resolve(typeOutputDirectory, dirname(model.filePath))
     const outputFilePath = resolve(outputDir, `${basename(model.filePath)}.d.ts`)
 
     const content = getAmbientModuleCode(model)
@@ -37,8 +37,8 @@ interface Model {
   name: string
 }
 
-export function getAllModels(scanFolder = DEFAULT_SCAN_FOLDER(), modelFileExtensions = DEFAULT_MODEL_FILE_EXTENSIONS) {
-  const allFiles = readdirSync(scanFolder, { encoding: 'utf-8', recursive: true, withFileTypes: true })
+export function getAllModels() {
+  const allFiles = readdirSync(modelScanDirectory, { encoding: 'utf-8', recursive: true, withFileTypes: true })
   const models: Model[] = []
 
   for (const file of allFiles) {
@@ -48,7 +48,7 @@ export function getAllModels(scanFolder = DEFAULT_SCAN_FOLDER(), modelFileExtens
     if (!ext) { continue }
 
     const fullPath = resolve(file.parentPath, file.name)
-    const projectRelativePath = join(scanFolder, relative(scanFolder, fullPath))
+    const projectRelativePath = join(modelScanDirectory, relative(modelScanDirectory, fullPath))
 
     models.push({
       filePath: projectRelativePath,
@@ -61,7 +61,7 @@ export function getAllModels(scanFolder = DEFAULT_SCAN_FOLDER(), modelFileExtens
 
 function getAmbientModuleCode(model: Model) {
   const content = [
-    ...getGeneratedTypeLines(model.name, model.filePath, DEFAULT_TOP_LEVEL_KEY_TYPES),
+    ...getGeneratedTypeLines(model),
     '',
     `declare const modelLoader: PromiseLike<${model.name}>`,
     `export default modelLoader`,
@@ -70,8 +70,8 @@ function getAmbientModuleCode(model: Model) {
   return content
 }
 
-function getGeneratedTypeLines(modelName: string, modelFilePath: string, topLevelKeyTypes: Partial<Record<string, string>>) {
-  const modelJson = JSON.parse(readFileSync(modelFilePath, { encoding: 'utf-8' }))
+function getGeneratedTypeLines(model: Model) {
+  const modelJson = JSON.parse(readFileSync(model.filePath, { encoding: 'utf-8' }))
   const topLevelKeysWithNamedArray = Object.entries(modelJson)
     .filter((entry): entry is [string, { name: string }[]] => {
       if (!Array.isArray(entry[1])) { return false }
@@ -81,7 +81,7 @@ function getGeneratedTypeLines(modelName: string, modelFilePath: string, topLeve
 
   const generatedType: string[] = []
 
-  generatedType.push(`export interface ${modelName} {`)
+  generatedType.push(`export interface ${model.name} {`)
 
   for (const [key, items] of topLevelKeysWithNamedArray) {
     const type = topLevelKeyTypes[key] ?? 'any'
