@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useGLTF } from '@tresjs/cientos'
+import type { BambooBehindFence } from '@/assets/models/japaneseSmallAssets/BambooBehindFence/BambooBehindFence.gltf'
 
-const { nodes } = await (useGLTF('/models/japaneseSmallAssets/BambooBehindFence/BambooBehindFence.gltf', {
+const { nodes } = await useGLTF('/models/japaneseSmallAssets/BambooBehindFence/BambooBehindFence.gltf', {
   draco: true,
-}) as typeof import('models/japaneseSmallAssets/BambooBehindFence/BambooBehindFence.gltf').default)
+}) as unknown as BambooBehindFence
 </script>
 
 <template>
