@@ -9,7 +9,6 @@ import { computed, ref } from 'vue'
 import useClickedModelNodeStore from '@/composables/useClickedModelNodeStore'
 import Bridge from '@/components/models/Bridge.vue'
 import BambooBehindFence from '@/components/models/BambooBehindFence.vue'
-import Untitled from '@/components/models/Untitled.vue'
 
 const gl: TresCanvasProps = {
   alpha: false,
