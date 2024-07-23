@@ -26,7 +26,13 @@ function onNodeClick(
   // the click was on the model and the raycaster hit a node, so we do not send the raycast any further
   event.stopPropagation()
 
-  // store the clicked model node
+  // remove current selection if it currently is selected
+  if (clickedModelNodeStore.activeIds.includes(event.eventObject.id)) {
+    clickedModelNodeStore.activeIds = clickedModelNodeStore.activeIds.filter(id => id !== event.eventObject.id)
+    return
+  }
+
+  // add the clicked model node to the selected nodes
   clickedModelNodeStore.activeIds = [event.eventObject.id]
 }
 </script>
