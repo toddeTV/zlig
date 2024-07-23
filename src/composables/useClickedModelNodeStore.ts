@@ -3,11 +3,11 @@ import { defineStore } from 'pinia'
 import { computed, readonly, ref } from 'vue'
 
 export default defineStore('clickedModelNodeStore', () => {
-  const activeObject = ref<TresObject | undefined>(undefined)
-  const activeUuid = computed<string | undefined>(() => activeObject.value?.uuid)
+  const activeObjects = ref<TresObject[]>([])
+  const activeUuids = computed<string[]>(() => activeObject.value.map(o => o.uuid))
 
   return {
-    activeObject,
-    activeUuid: readonly(activeUuid),
+    activeObjects,
+    activeUuids: readonly(activeUuids),
   }
 })

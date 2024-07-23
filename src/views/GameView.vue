@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { BasicShadowMap, NoToneMapping, SRGBColorSpace } from 'three'
-import { type DomEvent, type ThreeEvent, TresCanvas, type TresObject } from '@tresjs/core'
+import { type DomEvent, type ThreeEvent, TresCanvas } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 import { EffectComposer, Outline } from '@tresjs/post-processing'
-import { BlendFunction, BloomEffect, KernelSize } from 'postprocessing'
-import { computed, ref } from 'vue'
+import { BlendFunction, KernelSize } from 'postprocessing'
 import useClickedModelNodeStore from '@/composables/useClickedModelNodeStore'
 import Bridge from '@/components/models/Bridge.vue'
 import BambooBehindFence from '@/components/models/BambooBehindFence.vue'
@@ -30,14 +29,8 @@ function onNodeClick(
   event.stopPropagation()
 
   // store the clicked model node
-  clickedModelNodeStore.activeUuid = event.eventObject.uuid
-  clickedModelNodeStore.activeObject = event.eventObject
+  clickedModelNodeStore.activeObjects = [event.eventObject]
 }
-
-const outlinedObjects = computed(() => {
-  const uuid = clickedModelNodeStore.activeObject
-  return uuid ? [uuid] : []
-})
 </script>
 
 <template>
@@ -82,8 +75,7 @@ const outlinedObjects = computed(() => {
       </Suspense>
     </TresGroup>
 
-    <!-- --------------------- -->
-
+    <!-- effects -->
     <Suspense>
       <EffectComposer :multisampling="8">
         <Outline
@@ -92,7 +84,7 @@ const outlinedObjects = computed(() => {
           :edge-strength="2000"
           hidden-edge-color="#000000"
           :kernel-size="KernelSize.VERY_SMALL"
-          :outlined-objects="outlinedObjects"
+          :outlined-objects="clickedModelNodeStore.activeObjects"
           :pulse-speed="0"
           visible-edge-color="#000000"
         />
@@ -102,7 +94,7 @@ const outlinedObjects = computed(() => {
 
   <!-- TODO remove when feature branch is ready, this is only for debugging while developing -->
   <div class="absolute bg-red-200 z-10 p-2">
-    <pre>{{ outlinedObjects.map(e => e.uuid) }}</pre>
+    <pre>{{ clickedModelNodeStore.activeObjects.map(e => e.uuid) }}</pre>
   </div>
 </template>
 
