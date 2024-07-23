@@ -1,30 +1,27 @@
 <script setup lang="ts">
-import { BasicShadowMap, NoToneMapping, SRGBColorSpace } from 'three'
-import { type DomEvent, type ThreeEvent, TresCanvas, useTresContext, useTresContextProvider } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
-import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
-import { EffectComposer, Outline } from '@tresjs/post-processing'
-import { BlendFunction, KernelSize } from 'postprocessing'
-import { computed } from 'vue'
+// import { EffectComposer, Outline } from '@tresjs/post-processing'
+// import { BlendFunction } from 'postprocessing'
+// import { computed } from 'vue'
 import useClickedModelNodeStore from '@/composables/useClickedModelNodeStore'
+import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
 import Bridge from '@/components/models/Bridge.vue'
 import BambooBehindFence from '@/components/models/BambooBehindFence.vue'
-import Untitled from '@/components/models/Untitled.vue'
 
 const clickedModelNodeStore = useClickedModelNodeStore()
 
-const { scene } = useTresContext()
+// const { scene } = useTresContext()
 
-const activeObjects = computed(() => {
-  const selectedObjects = clickedModelNodeStore.activeIds.map(id => scene.value.getObjectById(id))
-  const nonUndefinedSelectedObjects = selectedObjects.filter((element) => {
-    return element !== undefined
-  })
-  return nonUndefinedSelectedObjects
-})
+// const activeObjects = computed(() => {
+//   const selectedObjects = clickedModelNodeStore.activeIds.map(id => scene.value.getObjectById(id))
+//   const nonUndefinedSelectedObjects = selectedObjects.filter((element) => {
+//     return element !== undefined
+//   })
+//   return nonUndefinedSelectedObjects
+// })
 
 function onNodeClick(
-  event: ThreeEvent<DomEvent> & Event,
+  event: TresJsClickEvent,
 ) {
   // the click was on the model and the raycaster hit a node, so we do not send the raycast any further
   event.stopPropagation()
@@ -36,8 +33,8 @@ function onNodeClick(
 
 <template>
   <!-- visual helper -->
-  <!-- <TresAxesHelper /> -->
-  <!-- <TresGridHelper /> -->
+  <TresAxesHelper />
+  <TresGridHelper />
 
   <!-- camera -->
   <TresPerspectiveCamera :position="[9, 9, 9]" />
@@ -54,54 +51,42 @@ function onNodeClick(
   <TresAmbientLight :intensity="0.3" />
 
   <!-- objects -->
-  <!-- <TresGroup>
+  <TresGroup>
     <Suspense>
       <Bridge
         :position="[0, 0, 0]"
-        @click="(event) => onNodeClick(event)"
+        @click="(event: TresJsClickEvent) => onNodeClick(event)"
       />
     </Suspense>
     <Suspense>
       <BambooBehindFence
         :position="[4, 0, 0]"
-        @click="(event) => onNodeClick(event)"
+        @click="(event: TresJsClickEvent) => onNodeClick(event)"
       />
     </Suspense>
     <Suspense>
       <BambooBehindFence
         :position="[4, 0, 2]"
-        @click="(event) => onNodeClick(event)"
+        @click="(event: TresJsClickEvent) => onNodeClick(event)"
       />
     </Suspense>
-  </TresGroup> -->
-
-  <Suspense>
-    <Untitled
-      :position="[0, 0, -2]"
-      @click="(event) => onNodeClick(event)"
-    />
-  </Suspense>
-  <Suspense>
-    <Untitled
-      :position="[0, 0, 2]"
-      @click="(event) => onNodeClick(event)"
-    />
-  </Suspense>
+  </TresGroup>
 
   <!-- effects -->
-  <Suspense>
-    <EffectComposer :multisampling="8">
+  <!-- <Suspense>
+    <EffectComposer>
       <Outline
         :blend-function="BlendFunction.ALPHA"
         :blur="false"
         :edge-strength="5"
-        hidden-edge-color="#000000"
+        hidden-edge-color="#32a852"
+        :multisampling="8"
         :outlined-objects="activeObjects"
-        :pulse-speed="0"
-        visible-edge-color="#000000"
+        :pulse-speed="2"
+        visible-edge-color="#bd3758"
       />
     </EffectComposer>
-  </Suspense>
+  </Suspense> -->
 </template>
 
 <style scoped>
