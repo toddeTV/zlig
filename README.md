@@ -153,6 +153,42 @@ import { something } from 'three-stdlib'
 </script>
 ```
 
+#### import and bundle model files
+
+All `*.gltf` models, along with their corresponding `*.bin` and texture files, are located in
+`./src/assets/models/`. To generate helper wrappers and type definitions, run:
+
+```sh
+pnpm run generate:gltf-models
+```
+
+This script scans all model files in the source folder, deconstructs the GLTF JSON representation, and places the
+generated types in `./node_modules/.tmp/model-types/`. The script runs automatically on each build and after
+`pnpm i`, ensuring only imported models are included in the final product.
+
+To use a model, import it in your Vue component as shown:
+
+```vue
+<script setup lang="ts">
+import modelLoader from '@/assets/models/someSubfolder/someModel.gltf'
+
+const { nodes } = await modelLoader
+</script>
+
+<template>
+  <primitive :object="nodes.oneNamedNodeToUse" />
+</template>
+
+<style scoped>
+</style>
+```
+
+This approach ensures:
+
+- ✅ Type safety for `scenes`, `nodes`, `materials`, `meshes` and `images` from each GLTF file.
+- ✅ Only the used models are bundled in the final product.
+- ✅ Importing models is type-safe, and builds will fail if a model is missing.
+
 #### real time shadows
 
 Example shadow configuration below.
