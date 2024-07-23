@@ -2,8 +2,10 @@
 </script>
 
 <template>
-  <main>
-    Hi :)
+  <main class="flex flex-col">
+    <RouterLink to="/game">
+      Play Game
+    </RouterLink>
   </main>
 </template>
 
