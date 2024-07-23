@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { useGLTF } from '@tresjs/cientos'
+import useGLTF from '@/composables/useGLTF'
 
-const { nodes } = await useGLTF('/models/japaneseSmallAssets/BambooBehindFence/BambooBehindFence.gltf', {
-  draco: true,
-})
+const { nodes } = await useGLTF('/models/japaneseSmallAssets/BambooBehindFence/BambooBehindFence.gltf')
 </script>
 
 <template>
