@@ -6,9 +6,19 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*", "./node_modules/.tmp/model-types/src/*"]
+      "@/*": [
+        "./src/*",
+        "./node_modules/.tmp/model-types/src/*"
+      ]
     }
   },
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "node_modules/.tmp/model-types/**/*.d.ts"],
-  "exclude": ["src/**/__tests__/*"]
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "node_modules/.tmp/model-types/**/*.d.ts"
+  ],
+  "exclude": [
+    "src/**/__tests__/*"
+  ]
 }
