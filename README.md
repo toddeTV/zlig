@@ -178,9 +178,6 @@ const { nodes } = await modelLoader
 <template>
   <primitive :object="nodes.oneNamedNodeToUse" />
 </template>
-
-<style scoped>
-</style>
 ```
 
 This approach ensures:
