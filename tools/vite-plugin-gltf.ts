@@ -17,8 +17,8 @@ export function gltf(): Plugin {
     },
 
     generateBundle(_options, bundle) {
-      // This hook is only called during building not during dev. Here we have to replace the file placeholders with the
-      // actual file names. We need to do this manually as rollup only handles them in JS code automatically.
+      // This hook is only called during building not during dev. Here we have to replace the file placeholders with
+      // the actual file names. We need to do this manually as rollup only handles them in JS code automatically.
 
       for (const [file, output] of Object.entries(bundle)) {
         // Only do this for our emitted glTF assets.
