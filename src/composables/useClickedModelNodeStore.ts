@@ -1,10 +1,13 @@
+import type { TresObject } from '@tresjs/core'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, readonly, ref } from 'vue'
 
 export default defineStore('clickedModelNodeStore', () => {
-  const activeUuid = ref<string | undefined>(undefined)
+  const activeObject = ref<TresObject | undefined>(undefined)
+  const activeUuid = computed<string | undefined>(() => activeObject.value?.uuid)
 
   return {
-    activeUuid,
+    activeObject,
+    activeUuid: readonly(activeUuid),
   }
 })

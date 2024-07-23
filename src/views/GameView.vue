@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { BasicShadowMap, NoToneMapping, SRGBColorSpace } from 'three'
-import { type Intersection, TresCanvas } from '@tresjs/core'
-// import type { Intersection } from 'three/src/core/Raycaster.js'
+import { type DomEvent, type ThreeEvent, TresCanvas, type TresObject } from '@tresjs/core'
 import { OrbitControls } from '@tresjs/cientos'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
+import { EffectComposer, Outline } from '@tresjs/post-processing'
+import { BlendFunction, BloomEffect, KernelSize } from 'postprocessing'
+import { computed, ref } from 'vue'
 import useClickedModelNodeStore from '@/composables/useClickedModelNodeStore'
 import Bridge from '@/components/models/Bridge.vue'
 import BambooBehindFence from '@/components/models/BambooBehindFence.vue'
+import Untitled from '@/components/models/Untitled.vue'
 
 const gl: TresCanvasProps = {
   alpha: false,
@@ -22,27 +25,28 @@ const gl: TresCanvasProps = {
 const clickedModelNodeStore = useClickedModelNodeStore()
 
 function onNodeClick(
-  // intersection: Intersection,
-  // pointerEvent: PointerEvent,
-  event: any, // TODO @fehnomenal: do you have a clue what type this is? See: https://docs.tresjs.org/api/events
+  event: ThreeEvent<DomEvent> & Event,
 ) {
   // the click was on the model and the raycaster hit a node, so we do not send the raycast any further
   event.stopPropagation()
 
-  // This is all present and should not throw type errors:
-  console.dir(event.ALT_MASK)
-  console.dir(event.clientX)
-  console.dir(event.delta)
-  console.dir(event.faceIndex)
-  console.dir(event.eventObject.uuid)
-
-  // store the clicked model node's uuid
+  // store the clicked model node
   clickedModelNodeStore.activeUuid = event.eventObject.uuid
+  clickedModelNodeStore.activeObject = event.eventObject
 }
+
+const outlinedObjects = computed(() => {
+  const uuid = clickedModelNodeStore.activeObject
+  return uuid ? [uuid] : []
+})
 </script>
 
 <template>
   <TresCanvas v-bind="gl">
+    <!-- visual helper -->
+    <TresAxesHelper />
+    <TresGridHelper />
+
     <!-- camera -->
     <TresPerspectiveCamera :position="[9, 9, 9]" />
 
@@ -71,12 +75,35 @@ function onNodeClick(
           @click="(event) => onNodeClick(event)"
         />
       </Suspense>
+      <Suspense>
+        <BambooBehindFence
+          :position="[4, 0, 2]"
+          @click="(event) => onNodeClick(event)"
+        />
+      </Suspense>
     </TresGroup>
+
+    <!-- --------------------- -->
+
+    <Suspense>
+      <EffectComposer :multisampling="8">
+        <Outline
+          :blend-function="BlendFunction.ALPHA"
+          :blur="false"
+          :edge-strength="2000"
+          hidden-edge-color="#000000"
+          :kernel-size="KernelSize.VERY_SMALL"
+          :outlined-objects="outlinedObjects"
+          :pulse-speed="0"
+          visible-edge-color="#000000"
+        />
+      </EffectComposer>
+    </Suspense>
   </TresCanvas>
 
   <!-- TODO remove when feature branch is ready, this is only for debugging while developing -->
   <div class="absolute bg-red-200 z-10 p-2">
-    {{ clickedModelNodeStore.activeUuid ?? '[none]' }}
+    <pre>{{ outlinedObjects.map(e => e.uuid) }}</pre>
   </div>
 </template>
 
