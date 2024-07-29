@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import { basename, dirname, join, relative, resolve } from 'node:path'
 import { argv } from 'node:process'
 import { fileURLToPath } from 'node:url'
@@ -15,20 +15,30 @@ const topLevelKeyTypes: Partial<Record<string, string>> = {
 
 // Also allow running this as a script besides allowing to import this module.
 if (fileURLToPath(import.meta.url) === argv[1]) {
-  generateAllModelTypes()
+  await generateAllModelTypes()
 }
 
-export function generateAllModelTypes() {
-  const models = getAllModels()
+export async function generateAllModelTypes() {
+  const models = await getAllModels()
 
-  for (const model of models) {
-    const outputDir = resolve(typeOutputDirectory, dirname(model.filePath))
-    const outputFilePath = resolve(outputDir, `${basename(model.filePath)}.d.ts`)
+  if (models.length === 0) { return }
 
-    const content = getAmbientModuleCode(model)
+  try {
+    await Promise.all(models.map(async (model) => {
+      const outputDir = resolve(typeOutputDirectory, dirname(model.filePath))
+      const outputFilePath = resolve(outputDir, `${basename(model.filePath)}.d.ts`)
 
-    mkdirSync(outputDir, { recursive: true })
-    writeFileSync(outputFilePath, content, { encoding: 'utf-8' })
+      const content = await getAmbientModuleCode(model)
+
+      await mkdir(outputDir, { recursive: true })
+      await writeFile(outputFilePath, content, { encoding: 'utf-8' })
+    }))
+
+    // eslint-disable-next-line no-console
+    console.log(`Generated types for ${models.length} model${models.length > 1 ? 's' : ''}.`)
+  }
+  catch (error) {
+    console.error('Error generating model types:', error)
   }
 }
 
@@ -37,8 +47,8 @@ interface Model {
   name: string
 }
 
-export function getAllModels() {
-  const allFiles = readdirSync(modelScanDirectory, { encoding: 'utf-8', recursive: true, withFileTypes: true })
+async function getAllModels() {
+  const allFiles = await readdir(modelScanDirectory, { encoding: 'utf-8', recursive: true, withFileTypes: true })
   const models: Model[] = []
 
   for (const file of allFiles) {
@@ -63,9 +73,9 @@ export function getAllModels() {
   return models
 }
 
-function getAmbientModuleCode(model: Model) {
+async function getAmbientModuleCode(model: Model) {
   const content = [
-    ...getGeneratedTypeLines(model),
+    ...(await getGeneratedTypeLines(model)),
     '',
     `declare const modelLoader: PromiseLike<${model.name}>`,
     `export default modelLoader`,
@@ -74,8 +84,8 @@ function getAmbientModuleCode(model: Model) {
   return content
 }
 
-function getGeneratedTypeLines(model: Model) {
-  const modelJson = JSON.parse(readFileSync(model.filePath, { encoding: 'utf-8' }))
+async function getGeneratedTypeLines(model: Model) {
+  const modelJson = JSON.parse(await readFile(model.filePath, { encoding: 'utf-8' }))
   const topLevelKeysWithNamedArray = Object.entries(modelJson)
     .filter((entry): entry is [string, { name: string }[]] => {
       if (!Array.isArray(entry[1])) {

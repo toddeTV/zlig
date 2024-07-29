@@ -10,8 +10,8 @@ export function gltf(): Plugin {
   let isBuild: boolean
 
   return {
-    buildStart() {
-      generateAllModelTypes()
+    async  buildStart() {
+      await generateAllModelTypes()
     },
 
     configResolved(config) {
@@ -107,9 +107,9 @@ export function gltf(): Plugin {
       return gltfLoaderCode(`import.meta.ROLLUP_FILE_URL_${ref}`)
     },
 
-    watchChange(id) {
+    async watchChange(id) {
       if (id.endsWith(FILE_EXTENSION)) {
-        generateAllModelTypes()
+        await generateAllModelTypes()
       }
     },
   }
