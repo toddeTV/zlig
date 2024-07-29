@@ -167,7 +167,7 @@ generated types in `./node_modules/.tmp/model-types/`, ensuring only imported mo
 
 The script runs automatically:
 
-- before a dev run
+- before a dev run and always a `.gltf` file changes
 - before a build
 - after `pnpm i`
 

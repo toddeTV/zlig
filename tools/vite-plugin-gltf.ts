@@ -4,6 +4,8 @@ import { Buffer } from 'node:buffer'
 import type { Plugin } from 'vite'
 import { generateAllModelTypes } from './generate-model-types'
 
+const FILE_EXTENSION = '.gltf'
+
 export function gltf(): Plugin {
   let isBuild: boolean
 
@@ -22,7 +24,7 @@ export function gltf(): Plugin {
 
       for (const [file, output] of Object.entries(bundle)) {
         // Only do this for our emitted glTF assets.
-        if (output.type === 'asset' && file.endsWith('.gltf')) {
+        if (output.type === 'asset' && file.endsWith(FILE_EXTENSION)) {
           // Convert source to a string.
           const source = typeof output.source === 'string' ? output.source : Buffer.from(output.source).toString()
 
@@ -38,7 +40,7 @@ export function gltf(): Plugin {
     name: 'gltf',
 
     async transform(code, id) {
-      if (!id.endsWith('.gltf')) {
+      if (!id.endsWith(FILE_EXTENSION)) {
         return
       }
 
@@ -103,6 +105,12 @@ export function gltf(): Plugin {
 
       // ... and pass the path to the file. In this case rollup replaces the placeholder for us.
       return gltfLoaderCode(`import.meta.ROLLUP_FILE_URL_${ref}`)
+    },
+
+    watchChange(id) {
+      if (id.endsWith(FILE_EXTENSION)) {
+        generateAllModelTypes()
+      }
     },
   }
 }
