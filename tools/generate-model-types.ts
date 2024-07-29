@@ -13,7 +13,7 @@ const topLevelKeyTypes: Partial<Record<string, string>> = {
   scenes: `import('three').Scene`,
 }
 
-// Allow running this as a script.
+// Also allow running this as a script besides allowing to import this module.
 if (fileURLToPath(import.meta.url) === argv[1]) {
   generateAllModelTypes()
 }
