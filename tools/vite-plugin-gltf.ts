@@ -122,8 +122,8 @@ function replaceFilePlaceholders(input: string, replacer: (withoutQuotes: string
 
 function gltfLoaderCode(input: string) {
   return `
-    import { useGLTF } from '@tresjs/cientos'
+    import useGLTF from '@/composables/useGLTF'
 
-    export default useGLTF(${input}, { draco: true })
+    export default useGLTF(${input})
   `
 }
