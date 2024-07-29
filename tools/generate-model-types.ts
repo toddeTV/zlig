@@ -21,7 +21,9 @@ if (fileURLToPath(import.meta.url) === argv[1]) {
 export async function generateAllModelTypes() {
   const models = await getAllModels()
 
-  if (models.length === 0) { return }
+  if (models.length === 0) {
+    return
+  }
 
   try {
     await Promise.all(models.map(async (model) => {
