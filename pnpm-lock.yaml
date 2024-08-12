@@ -24,9 +24,6 @@ importers:
       '@tresjs/core':
         specifier: 4.2.0
         version: 4.2.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3))
-      '@tresjs/post-processing':
-        specifier: 0.7.1
-        version: 0.7.1(three@0.166.0)(vue@3.4.29(typescript@5.5.3))
       '@tsconfig/node20':
         specifier: 20.1.4
         version: 20.1.4
@@ -69,9 +66,6 @@ importers:
       postcss:
         specifier: 8.4.38
         version: 8.4.38
-      postprocessing:
-        specifier: 6.35.6
-        version: 6.35.6(three@0.166.0)
       tailwindcss:
         specifier: 3.4.4
         version: 3.4.4
@@ -698,23 +692,11 @@ packages:
       tweakpane: '>=3.0.0'
       vue: '>=3.3'
 
-  '@tresjs/core@3.9.0':
-    resolution: {integrity: sha512-6el70oXSduTvSA3XCI8/rQV2GzcgCLceZKA443CTU/MBPmRDULJ12q/UYl18Ij4CJ68rTqgVi0Da+WNMrs784A==}
-    peerDependencies:
-      three: '>=0.133'
-      vue: '>=3.3'
-
   '@tresjs/core@4.2.0':
     resolution: {integrity: sha512-aXKCUPeoE+O2+Oadd5gDA/OGVrXWm7nJpGfYJ3xJIUqW5UjIamZDZticNJe2qU+BpZwQlh8HgjxIQsjFWCftyw==}
     peerDependencies:
       three: '>=0.133'
       vue: '>=3.4'
-
-  '@tresjs/post-processing@0.7.1':
-    resolution: {integrity: sha512-MLrjxR4rJ55MOYFKMEZ8aqh5no2/sOG1fdYk2B49Ntx2p2etyuVpI6e9BBAvrc4M/wktRHkQ2JNDbgMaCiJoMg==}
-    peerDependencies:
-      three: '>=0.133'
-      vue: '>=3.3'
 
   '@tsconfig/node20@20.1.4':
     resolution: {integrity: sha512-sqgsT69YFeLWf5NtJ4Xq/xAF8p4ZQHlmGW74Nu2tD4+g5fAsposc4ZfaaPixVu4y01BEiDCWLRDCvDM5JOsRxg==}
@@ -824,9 +806,6 @@ packages:
 
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
-
-  '@unocss/core@0.58.9':
-    resolution: {integrity: sha512-wYpPIPPsOIbIoMIDuH8ihehJk5pAZmyFKXIYO/Kro98GEOFhz6lJoLsy6/PZuitlgp2/TSlubUuWGjHWvp5osw==}
 
   '@vitejs/plugin-vue@5.0.5':
     resolution: {integrity: sha512-LOjm7XeIimLBZyzinBQ6OSm3UBCNVCpLkxGC0oWmm2YPzVZoxMsdvNVimLTBzpAnR9hl/yn1SHGuRfe6/Td9rQ==}
@@ -2162,12 +2141,6 @@ packages:
     resolution: {integrity: sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postprocessing@6.35.6:
-    resolution: {integrity: sha512-df0K1zofbBCYcHDFmJtAw9TgyPJu6eITBG0iJeUBcNLagi0EwLBVl1tib+ypYYjChojhiNaib16mRwvu9ZoJIA==}
-    engines: {node: '>= 0.13.2'}
-    peerDependencies:
-      three: '>= 0.152.0 < 0.167.0'
-
   potpack@1.0.2:
     resolution: {integrity: sha512-choctRBIV9EMT9WGAZHn3V7t0Z2pMQyl0EZE6pFc/6ml3ssw7Dlf/oAOvFwjm1HVsqfQN8GfeFyJ+d8tRzqueQ==}
 
@@ -3312,34 +3285,12 @@ snapshots:
       - '@vue/composition-api'
       - react
 
-  '@tresjs/core@3.9.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3))':
-    dependencies:
-      '@alvarosabu/utils': 3.2.0
-      '@vue/devtools-api': 6.6.3
-      '@vueuse/core': 10.11.0(vue@3.4.29(typescript@5.5.3))
-      three: 0.166.0
-      vue: 3.4.29(typescript@5.5.3)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-
   '@tresjs/core@4.2.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3))':
     dependencies:
       '@alvarosabu/utils': 3.2.0
       '@vue/devtools-api': 6.6.3
       '@vueuse/core': 10.11.0(vue@3.4.29(typescript@5.5.3))
       three: 0.166.0
-      vue: 3.4.29(typescript@5.5.3)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-
-  '@tresjs/post-processing@0.7.1(three@0.166.0)(vue@3.4.29(typescript@5.5.3))':
-    dependencies:
-      '@tresjs/core': 3.9.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3))
-      '@unocss/core': 0.58.9
-      '@vueuse/core': 10.11.0(vue@3.4.29(typescript@5.5.3))
-      postprocessing: 6.35.6(three@0.166.0)
-      three: 0.166.0
-      three-stdlib: 2.30.3(three@0.166.0)
       vue: 3.4.29(typescript@5.5.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -3477,8 +3428,6 @@ snapshots:
       eslint-visitor-keys: 3.4.3
 
   '@ungap/structured-clone@1.2.0': {}
-
-  '@unocss/core@0.58.9': {}
 
   '@vitejs/plugin-vue@5.0.5(vite@5.3.1(@types/node@20.14.5))(vue@3.4.29(typescript@5.5.3))':
     dependencies:
@@ -4904,10 +4853,6 @@ snapshots:
       nanoid: 3.3.7
       picocolors: 1.0.1
       source-map-js: 1.2.0
-
-  postprocessing@6.35.6(three@0.166.0):
-    dependencies:
-      three: 0.166.0
 
   potpack@1.0.2: {}
 
