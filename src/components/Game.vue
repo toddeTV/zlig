@@ -13,7 +13,7 @@ const clickedModelNodeStore = useClickedModelNodeStore()
 // const { scene } = useTresContext()
 
 // const activeObjects = computed(() => {
-//   const selectedObjects = clickedModelNodeStore.activeIds.map(id => scene.value.getObjectById(id))
+//   const selectedObjects = clickedModelNodeStore.selectedIds.map(id => scene.value.getObjectById(id))
 //   const nonUndefinedSelectedObjects = selectedObjects.filter((element) => {
 //     return element !== undefined
 //   })
@@ -23,17 +23,8 @@ const clickedModelNodeStore = useClickedModelNodeStore()
 function onNodeClick(
   event: TresJsClickEvent,
 ) {
-  // the click was on the model and the raycaster hit a node, so we do not send the raycast any further
-  event.stopPropagation()
-
-  // remove current selection if it currently is selected
-  if (clickedModelNodeStore.activeIds.delete(event.object.id)) {
-    // id was present in the set and deleted
-    return
-  }
-
-  // add the clicked model node to the selected nodes
-  clickedModelNodeStore.activeIds.add(event.object.id)
+  event.stopPropagation() // the raycaster hit a node/ model, so we do not send the raycast any further down
+  clickedModelNodeStore.toggle(event.object)
 }
 </script>
 
@@ -57,23 +48,27 @@ function onNodeClick(
   <TresAmbientLight :intensity="0.3" />
 
   <!-- objects -->
-  <TresGroup>
+  <TresGroup
+    @click="(e) => onNodeClick(e)"
+  >
     <Suspense>
       <Bridge
         :position="[0, 0, 0]"
-        @click="(event: TresJsClickEvent) => onNodeClick(event)"
+      />
+    </Suspense>
+    <Suspense>
+      <Bridge
+        :position="[0, 0, -2]"
       />
     </Suspense>
     <Suspense>
       <BambooBehindFence
         :position="[4, 0, 0]"
-        @click="(event: TresJsClickEvent) => onNodeClick(event)"
       />
     </Suspense>
     <Suspense>
       <BambooBehindFence
         :position="[4, 0, 2]"
-        @click="(event: TresJsClickEvent) => onNodeClick(event)"
       />
     </Suspense>
   </TresGroup>
