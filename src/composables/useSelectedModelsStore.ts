@@ -6,27 +6,23 @@ import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForS
 export default defineStore('selectedModelsStore', () => {
   const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
+  // we use `reactive` instead of `ref` bc it is deeper reactive into the object. But bc a reactive can't be
+  // set again, we must wrap the one object we want to store in a data structure like an Array, Set, ...
   const selected = reactive(new Set<Object3D>())
 
-  function getSelected(id: number): Object3D | undefined {
-    return Array.from(selected).find(obj => obj.id === id)
-  }
-
-  function getSelectedAll(): Object3D[] {
-    return Array.from(selected)
+  function getSelected(): Object3D | undefined {
+    return Array.from(selected)[0]
   }
 
   function isSelected(obj: Object3D): boolean {
-    return selected.has(obj)
+    return getSelected()?.id === obj.id
   }
 
   function select(obj: Object3D): boolean {
-    if (isSelected(obj)) {
-      return false
-    }
     if (!registeredForSelectingModelStore.isRegistered(obj)) {
       return false
     }
+    unselectAll()
     selected.add(obj)
     return true
   }
@@ -53,7 +49,6 @@ export default defineStore('selectedModelsStore', () => {
 
   return {
     getSelected,
-    getSelectedAll,
     isSelected,
     select,
     toggle,
