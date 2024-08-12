@@ -7,8 +7,10 @@ import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
 import Bridge from '@/components/models/Bridge.vue'
 import BambooBehindFence from '@/components/models/BambooBehindFence.vue'
+import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
 
 const clickedModelNodeStore = useClickedModelNodeStore()
+const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
 // const { scene } = useTresContext()
 
@@ -23,8 +25,17 @@ const clickedModelNodeStore = useClickedModelNodeStore()
 function onNodeClick(
   event: TresJsClickEvent,
 ) {
-  event.stopPropagation() // the raycaster hit a node/ model, so we do not send the raycast any further down
-  clickedModelNodeStore.toggle(event.object)
+  // the raycaster hit a node/ model, so we do not send the raycast any further down
+  event.stopPropagation()
+
+  // toggle the model selection if the model is registered to be selectable
+  if (registeredForSelectingModelStore.isRegistered(event.object)) {
+    clickedModelNodeStore.toggle(event.object)
+    return
+  }
+
+  // unselect all models if the raycaster hits a model that is not registered to be selectable
+  clickedModelNodeStore.unselectAll()
 }
 </script>
 

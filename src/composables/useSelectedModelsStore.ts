@@ -1,8 +1,11 @@
 import { defineStore } from 'pinia'
 import type { Object3D } from 'three'
 import { reactive } from 'vue'
+import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
 
 export default defineStore('selectedModelsStore', () => {
+  const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
+
   const selected = reactive(new Set<Object3D>())
 
   function getSelected(id: number): Object3D | undefined {
@@ -21,6 +24,9 @@ export default defineStore('selectedModelsStore', () => {
     if (isSelected(obj)) {
       return false
     }
+    if (!registeredForSelectingModelStore.isRegistered(obj)) {
+      return false
+    }
     selected.add(obj)
     return true
   }
@@ -33,17 +39,16 @@ export default defineStore('selectedModelsStore', () => {
     return true
   }
 
-  function unselectAll() {
+  function unselectAll(): boolean {
     selected.clear()
+    return true
   }
 
-  function toggle(obj: Object3D) {
+  function toggle(obj: Object3D): boolean {
     if (isSelected(obj)) {
-      unselect(obj)
+      return unselect(obj)
     }
-    else {
-      select(obj)
-    }
+    return select(obj)
   }
 
   return {
