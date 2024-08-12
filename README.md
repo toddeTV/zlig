@@ -163,8 +163,14 @@ pnpm run generate:gltf-models
 ```
 
 This script scans all model files in the source folder, deconstructs the GLTF JSON representation, and places the
-generated types in `./node_modules/.tmp/model-types/`. The script runs automatically on each build and after
-`pnpm i`, ensuring only imported models are included in the final product.
+generated types in `./node_modules/.tmp/model-types/`, ensuring only imported models are included in the final product.
+
+The script runs automatically:
+
+- always a `.gltf` file changes
+- before a dev run
+- before a build
+- after `pnpm i`
 
 To use a model, import it in your Vue component as shown:
 
