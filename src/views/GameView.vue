@@ -39,6 +39,19 @@ const gl: TresCanvasProps = {
       selected:
       <pre>{{ clickedModelNodeStore.getSelected()?.id ?? '-' }}</pre>
     </div>
+    <div class="bg-red-200 p-2">
+      move selected:<br>
+      <button
+        class="bg-blue-200 py-1 px-2 rounded-md"
+        @click="() => {
+          if (clickedModelNodeStore.hasSelected()){
+            clickedModelNodeStore.getSelected()!.position.x += 0.1
+          }
+        }"
+      >
+        move
+      </button>
+    </div>
   </div>
 </template>
 
