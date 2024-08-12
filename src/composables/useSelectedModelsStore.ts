@@ -6,7 +6,10 @@ import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForS
 export default defineStore('selectedModelsStore', () => {
   const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
-  // we use `reactive` instead of `ref` bc it is deeper reactive into the object. But bc a reactive can't be
+  // Store the real `Object3D` object for faster access without converting e.g. a stored `id: number` first
+  // back to the real object. Also, we would need the scene's `useContext()` to get the real object
+  // via `<context>.getObjectById(id: number): Object3D | undefined`.
+  // We use `reactive` instead of `ref` bc it is deeper reactive into the object. But bc a reactive can't be
   // set again, we must wrap the one object we want to store in a data structure like an Array, Set, ...
   const selected = reactive(new Set<Object3D>())
 
@@ -16,6 +19,10 @@ export default defineStore('selectedModelsStore', () => {
 
   function isSelected(obj: Object3D): boolean {
     return getSelected()?.id === obj.id
+  }
+
+  function hasSelected(): boolean {
+    return selected.size > 0
   }
 
   function select(obj: Object3D): boolean {
@@ -49,6 +56,7 @@ export default defineStore('selectedModelsStore', () => {
 
   return {
     getSelected,
+    hasSelected,
     isSelected,
     select,
     toggle,
