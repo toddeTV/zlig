@@ -3,25 +3,22 @@ import type { Object3D } from 'three'
 import { reactive } from 'vue'
 
 export default defineStore('registeredForSelectingModelStore', () => {
-  const registered = reactive(new Set<Object3D>())
+  // store only the `id` of the `Object3D` object for performance reasons
+  const registered = reactive(new Set<number>())
 
-  function getRegistered(id: number): Object3D | undefined {
-    return Array.from(registered).find(obj => obj.id === id)
-  }
-
-  function getRegisteredAll(): Object3D[] {
+  function getRegisteredAll(): number[] {
     return Array.from(registered)
   }
 
   function isRegistered(obj: Object3D): boolean {
-    return registered.has(obj)
+    return registered.has(getObject3DId(obj))
   }
 
   function register(obj: Object3D): boolean {
     if (isRegistered(obj)) {
       return false
     }
-    registered.add(obj)
+    registered.add(getObject3DId(obj))
     return true
   }
 
@@ -29,7 +26,7 @@ export default defineStore('registeredForSelectingModelStore', () => {
     if (!isRegistered(obj)) {
       return false
     }
-    registered.delete(obj)
+    registered.delete(getObject3DId(obj))
     return true
   }
 
@@ -37,21 +34,14 @@ export default defineStore('registeredForSelectingModelStore', () => {
     registered.clear()
   }
 
-  function toggle(obj: Object3D) {
-    if (isRegistered(obj)) {
-      unregister(obj)
-    }
-    else {
-      register(obj)
-    }
+  function getObject3DId(obj: Object3D): number {
+    return obj.id
   }
 
   return {
-    getRegistered,
     getRegisteredAll,
     isRegistered,
     register,
-    toggle,
     unregister,
     unregisterAll,
   }
