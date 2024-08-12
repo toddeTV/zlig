@@ -234,7 +234,8 @@ directionalLightShadow.bias = 0.002
 
 Normally, you could use the packages `@tresjs/post-processing` and `postprocessing` in combination for postprocessing
 TresJS/ ThreeJS. Unfortunately, they are currently not compatible with TresJS core >v4, see
-[comment on issue #16](https://github.com/toddeTV/zlig/issues/16#issuecomment-2246317999).
+[comment on issue #16](https://github.com/toddeTV/zlig/issues/16#issuecomment-2246317999) and
+[issue #32](https://github.com/toddeTV/zlig/issues/32).
 
 ### Docs and helper websites
 
