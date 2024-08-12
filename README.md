@@ -258,7 +258,6 @@ Head of project:
 
 Honorable mentions to people and projects that helped this project:
 
-- [Franka Schlösser](https://github.com/saknarf) helped with the project. Thank you <3
 - [Andreas Fehn](https://github.com/fehnomenal) helped with the project. Thank you <3
 
 Used services, dependencies and materials - besides the ones in `./package.json`:
