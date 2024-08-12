@@ -3,9 +3,11 @@ import { BasicShadowMap, NoToneMapping, SRGBColorSpace } from 'three'
 import { TresCanvas } from '@tresjs/core'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 import Game from '@/components/Game.vue'
+import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 
 const clickedModelNodeStore = useClickedModelNodeStore()
+const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
 const gl: TresCanvasProps = {
   alpha: false,
@@ -29,6 +31,9 @@ const gl: TresCanvasProps = {
   </TresCanvas>
 
   <div class="absolute top-0 left-0 bg-red-200 z-20 p-4">
+    registered:
+    <pre>{{ registeredForSelectingModelStore.getRegisteredAll().map(e => `ID ${e.id}`) }}</pre>
+    selected:
     <pre>{{ clickedModelNodeStore.getSelectedAll().map(e => `ID ${e.id}`) }}</pre>
   </div>
 </template>
