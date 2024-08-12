@@ -20,10 +20,10 @@ importers:
         version: 1.8.0
       '@tresjs/cientos':
         specifier: 3.9.0
-        version: 3.9.0(@tresjs/core@4.2.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3)))(three@0.166.0)(tweakpane@4.0.3)(vue@3.4.29(typescript@5.5.3))
+        version: 3.9.0(@tresjs/core@4.1.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3)))(three@0.166.0)(tweakpane@4.0.3)(vue@3.4.29(typescript@5.5.3))
       '@tresjs/core':
-        specifier: 4.2.0
-        version: 4.2.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3))
+        specifier: 4.1.0
+        version: 4.1.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3))
       '@tsconfig/node20':
         specifier: 20.1.4
         version: 20.1.4
@@ -692,8 +692,8 @@ packages:
       tweakpane: '>=3.0.0'
       vue: '>=3.3'
 
-  '@tresjs/core@4.2.0':
-    resolution: {integrity: sha512-aXKCUPeoE+O2+Oadd5gDA/OGVrXWm7nJpGfYJ3xJIUqW5UjIamZDZticNJe2qU+BpZwQlh8HgjxIQsjFWCftyw==}
+  '@tresjs/core@4.1.0':
+    resolution: {integrity: sha512-gqISOYpjerG4Us7qAVHxkhaQwl+ZhmnfEs4ON6UC/aEuq0+q6qyUJQkcU5kZ32XuxpDdnk8FbSpnqQ3o5V5cHQ==}
     peerDependencies:
       three: '>=0.133'
       vue: '>=3.4'
@@ -3268,9 +3268,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@tresjs/cientos@3.9.0(@tresjs/core@4.2.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3)))(three@0.166.0)(tweakpane@4.0.3)(vue@3.4.29(typescript@5.5.3))':
+  '@tresjs/cientos@3.9.0(@tresjs/core@4.1.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3)))(three@0.166.0)(tweakpane@4.0.3)(vue@3.4.29(typescript@5.5.3))':
     dependencies:
-      '@tresjs/core': 4.2.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3))
+      '@tresjs/core': 4.1.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3))
       '@vueuse/core': 10.11.0(vue@3.4.29(typescript@5.5.3))
       camera-controls: 2.8.5(three@0.166.0)
       stats-gl: 2.2.8
@@ -3285,7 +3285,7 @@ snapshots:
       - '@vue/composition-api'
       - react
 
-  '@tresjs/core@4.2.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3))':
+  '@tresjs/core@4.1.0(three@0.166.0)(vue@3.4.29(typescript@5.5.3))':
     dependencies:
       '@alvarosabu/utils': 3.2.0
       '@vue/devtools-api': 6.6.3
