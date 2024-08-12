@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
-// import { EffectComposer, Outline } from '@tresjs/post-processing'
-// import { BlendFunction } from 'postprocessing'
-// import { computed } from 'vue'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
 import Bridge from '@/components/models/Bridge.vue'
@@ -11,16 +8,6 @@ import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForS
 
 const clickedModelNodeStore = useClickedModelNodeStore()
 const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
-
-// const { scene } = useTresContext()
-
-// const activeObjects = computed(() => {
-//   const selectedObjects = clickedModelNodeStore.selectedIds.map(id => scene.value.getObjectById(id))
-//   const nonUndefinedSelectedObjects = selectedObjects.filter((element) => {
-//     return element !== undefined
-//   })
-//   return nonUndefinedSelectedObjects
-// })
 
 function onNodeClick(
   event: TresJsClickEvent,
@@ -83,22 +70,6 @@ function onNodeClick(
       />
     </Suspense>
   </TresGroup>
-
-  <!-- effects -->
-  <!-- <Suspense>
-    <EffectComposer>
-      <Outline
-        :blend-function="BlendFunction.ALPHA"
-        :blur="false"
-        :edge-strength="5"
-        hidden-edge-color="#32a852"
-        :multisampling="8"
-        :outlined-objects="activeObjects"
-        :pulse-speed="2"
-        visible-edge-color="#bd3758"
-      />
-    </EffectComposer>
-  </Suspense> -->
 </template>
 
 <style scoped>
