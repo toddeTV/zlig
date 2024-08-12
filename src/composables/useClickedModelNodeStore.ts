@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { reactive } from 'vue'
 
 export default defineStore('clickedModelNodeStore', () => {
-  const activeIds = ref<number[]>([])
+  const activeIds = reactive(new Set<number>())
 
   return {
     activeIds,

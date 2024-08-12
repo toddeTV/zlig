@@ -27,13 +27,13 @@ function onNodeClick(
   event.stopPropagation()
 
   // remove current selection if it currently is selected
-  if (clickedModelNodeStore.activeIds.includes(event.eventObject.id)) {
-    clickedModelNodeStore.activeIds = clickedModelNodeStore.activeIds.filter(id => id !== event.eventObject.id)
+  if (clickedModelNodeStore.activeIds.delete(event.object.id)) {
+    // id was present in the set and deleted
     return
   }
 
   // add the clicked model node to the selected nodes
-  clickedModelNodeStore.activeIds = [event.eventObject.id]
+  clickedModelNodeStore.activeIds.add(event.object.id)
 }
 </script>
 
