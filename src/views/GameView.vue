@@ -3,7 +3,7 @@ import { BasicShadowMap, NoToneMapping, SRGBColorSpace } from 'three'
 import { TresCanvas } from '@tresjs/core'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 import Game from '@/components/Game.vue'
-import useClickedModelNodeStore from '@/composables/useClickedModelNodeStore'
+import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 
 const clickedModelNodeStore = useClickedModelNodeStore()
 
