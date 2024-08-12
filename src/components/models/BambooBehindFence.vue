@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import useGLTF from '@/composables/useGLTF'
+import modelLoader from '@/assets/models/japaneseSmallAssets/BambooBehindFence/BambooBehindFence.gltf'
 
-const { nodes } = await useGLTF('/models/japaneseSmallAssets/BambooBehindFence/BambooBehindFence.gltf')
+const { nodes } = await modelLoader
 </script>
 
 <template>
