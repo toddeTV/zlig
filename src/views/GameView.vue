@@ -30,11 +30,15 @@ const gl: TresCanvasProps = {
     <Game />
   </TresCanvas>
 
-  <div class="absolute top-0 left-0 bg-red-200 z-20 p-4">
-    registered:
-    <pre>{{ registeredForSelectingModelStore.getRegisteredAll().map(e => `ID ${e.id}`) }}</pre>
-    selected:
-    <pre>{{ clickedModelNodeStore.getSelectedAll().map(e => `ID ${e.id}`) }}</pre>
+  <div class="absolute top-0 left-0 z-20 flex flex-col gap-4">
+    <div class="bg-red-200 p-2">
+      registered:
+      <pre>{{ registeredForSelectingModelStore.getRegisteredAll().map(e => `ID ${e.id}`) }}</pre>
+    </div>
+    <div class="bg-red-200 p-2">
+      selected:
+      <pre>{{ clickedModelNodeStore.getSelected()?.id ?? '-' }}</pre>
+    </div>
   </div>
 </template>
 
