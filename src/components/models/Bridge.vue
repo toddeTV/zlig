@@ -5,7 +5,7 @@ const { nodes } = await modelLoader
 </script>
 
 <template>
-  <primitive :object="nodes.Bridge" />
+  <primitive :object="nodes.Bridge.clone()" />
 </template>
 
 <style scoped>

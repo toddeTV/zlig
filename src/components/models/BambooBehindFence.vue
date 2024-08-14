@@ -5,7 +5,7 @@ const { nodes } = await modelLoader
 </script>
 
 <template>
-  <primitive :object="nodes.BambooBehindFence" />
+  <primitive :object="nodes.BambooBehindFence.clone()" />
 </template>
 
 <style scoped>
