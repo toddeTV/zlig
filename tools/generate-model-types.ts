@@ -7,8 +7,7 @@ const modelFileExtensions = ['.gltf']
 const modelScanDirectory = join('src', 'assets')
 const typeOutputDirectory = resolve('node_modules', '.tmp', 'model-types')
 
-const topLevelKeyTypes: Partial<Record<string, string>> = {
-  meshes: `import('three').Mesh`,
+const topLevelKeyTypes = {
   nodes: `import('three').Object3D`,
   scenes: `import('three').Scene`,
 }
@@ -88,29 +87,45 @@ async function getAmbientModuleCode(model: Model) {
 
 async function getGeneratedTypeLines(model: Model) {
   const modelJson = JSON.parse(await readFile(model.filePath, { encoding: 'utf-8' }))
-  const topLevelKeysWithNamedArray = Object.entries(modelJson)
-    .filter((entry): entry is [string, { name: string }[]] => {
-      if (!Array.isArray(entry[1])) {
-        return false
-      }
 
-      return entry[1].every(item => typeof item === 'object' && 'name' in item && typeof item.name === 'string')
-    })
+  type NamedItems = { name: string }[]
 
   const generatedType: string[] = []
 
   generatedType.push(`export interface ${model.name} {`)
 
-  for (const [key, items] of topLevelKeysWithNamedArray) {
-    const type = topLevelKeyTypes[key] ?? 'any'
+  if ('scene' in modelJson) {
+    generatedType.push(`  scene: ${topLevelKeyTypes.scenes ?? 'any'}`)
+  }
 
-    generatedType.push(`  ${key}: {`)
+  if ('scenes' in modelJson) {
+    generatedType.push(
+      `  scenes: {`,
+      ...(modelJson.scenes as NamedItems).map((_, idx) => `    ${idx}: ${topLevelKeyTypes.scenes}`),
+      `  }`,
+    )
+  }
 
-    for (const item of items) {
-      generatedType.push(`    '${item.name}': ${type}`)
+  if ('nodes' in modelJson) {
+    generatedType.push(
+      `  nodes: {`,
+      ...(modelJson.nodes as NamedItems).map(node => `    '${node.name}': ${topLevelKeyTypes.nodes}`),
+      // Scenes get also added under nodes...
+      ...((modelJson.scenes ?? []) as NamedItems).map(scene => `    '${scene.name}': ${topLevelKeyTypes.scenes}`),
+      `  }`,
+    )
+  }
+
+  for (const [key, type] of Object.entries({
+    materials: 'any',
+  })) {
+    if (key in modelJson) {
+      generatedType.push(
+        `  ${key}: {`,
+        ...(modelJson[key] as NamedItems).map(item => `    '${item.name}': ${type}`),
+        `  }`,
+      )
     }
-
-    generatedType.push(`  }`)
   }
 
   generatedType.push(`}`)
