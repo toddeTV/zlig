@@ -13,8 +13,8 @@
       "url": "https://todde.tv/"
     },
     {
-      "name": "Franka Schlösser",
-      "url": "https://github.com/saknarf"
+      "name": "Andreas Fehn",
+      "url": "https://github.com/fehnomenal"
     }
   ],
   "license": "PRIVATE",
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "dev": "vite --port 3000",
-    "dev:network": "vite --port 3000 --host",
+    "dev:network": "$npm_execpath dev --host",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -40,7 +40,7 @@
     "postinstall": "$npm_execpath generate:gltf-models",
     "generate:gltf-models": "tsx tools/generate-model-types.ts",
     "lint": "eslint .",
-    "lint:printCurrentConfig": "mkdir -p ./dist/_eslintConfig && eslint --print-config file.json > ./dist/_eslintConfig/json.json && eslint --print-config file.vue > ./dist/_eslintConfig/vue.json && eslint --print-config file.js > ./dist/_eslintConfig/js.json && eslint --print-config file.ts > ./dist/_eslintConfig/ts.json && eslint --print-config file.md > ./dist/_eslintConfig/md.json && eslint --print-config file.html > ./dist/_eslintConfig/html.json && eslint --print-config file.yaml > ./dist/_eslintConfig/yaml.json && eslint --print-config file.xml > ./dist/_eslintConfig/xml.json && eslint --print-config file.toml > ./dist/_eslintConfig/toml.json && eslint --print-config file.gql > ./dist/_eslintConfig/gql.json && eslint --print-config file.css > ./dist/_eslintConfig/css.json && eslint --print-config file.astro > ./dist/_eslintConfig/astro.json && eslint --print-config file.svelte > ./dist/_eslintConfig/svelte.json && eslint --print-config file.less > ./dist/_eslintConfig/less.json && eslint --print-config file.scss > ./dist/_eslintConfig/scss.json && eslint --print-config file.pcss > ./dist/_eslintConfig/pcss.json"
+    "lint:print-current-config": "mkdir -p ./dist/_eslintConfig && eslint --print-config file.json > ./dist/_eslintConfig/json.json && eslint --print-config file.vue > ./dist/_eslintConfig/vue.json && eslint --print-config file.js > ./dist/_eslintConfig/js.json && eslint --print-config file.ts > ./dist/_eslintConfig/ts.json && eslint --print-config file.md > ./dist/_eslintConfig/md.json && eslint --print-config file.html > ./dist/_eslintConfig/html.json && eslint --print-config file.yaml > ./dist/_eslintConfig/yaml.json && eslint --print-config file.xml > ./dist/_eslintConfig/xml.json && eslint --print-config file.toml > ./dist/_eslintConfig/toml.json && eslint --print-config file.gql > ./dist/_eslintConfig/gql.json && eslint --print-config file.css > ./dist/_eslintConfig/css.json && eslint --print-config file.astro > ./dist/_eslintConfig/astro.json && eslint --print-config file.svelte > ./dist/_eslintConfig/svelte.json && eslint --print-config file.less > ./dist/_eslintConfig/less.json && eslint --print-config file.scss > ./dist/_eslintConfig/scss.json && eslint --print-config file.pcss > ./dist/_eslintConfig/pcss.json"
   },
   "dependencies": {
     "vue": "3.4.29"
