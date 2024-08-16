@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { BasicShadowMap, NoToneMapping, SRGBColorSpace } from 'three'
 import { TresCanvas } from '@tresjs/core'
-import { OrbitControls } from '@tresjs/cientos'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
-import Bridge from '@/components/models/Bridge.vue'
-import BambooBehindFence from '@/components/models/BambooBehindFence.vue'
+import Game from '@/components/Game.vue'
+import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
+import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
+
+const clickedModelNodeStore = useClickedModelNodeStore()
+const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
 const gl: TresCanvasProps = {
   alpha: false,
   clearColor: '#82DBC5',
+  disableRender: true, // Disable render on requestAnimationFrame, useful for PostProcessing // TODO use or not?
   outputColorSpace: SRGBColorSpace,
   renderMode: 'always',
   shadowMapType: BasicShadowMap, // TODO use another shadow type?
@@ -19,31 +23,36 @@ const gl: TresCanvasProps = {
 </script>
 
 <template>
-  <TresCanvas v-bind="gl">
-    <!-- camera -->
-    <TresPerspectiveCamera :position="[9, 9, 9]" />
-
-    <!-- controls -->
-    <OrbitControls />
-
-    <!-- lights -->
-    <TresDirectionalLight
-      cast-shadow
-      :intensity="1.2"
-      :position="[0, 2, 4]"
-    />
-    <TresAmbientLight :intensity="0.3" />
-
-    <!-- objects -->
-    <TresGroup>
-      <Suspense>
-        <Bridge :position="[0, 0, 0]" />
-      </Suspense>
-      <Suspense>
-        <BambooBehindFence :position="[4, 0, 0]" />
-      </Suspense>
-    </TresGroup>
+  <TresCanvas
+    v-bind="gl"
+    @pointer-missed="() => clickedModelNodeStore.unselectAll()"
+  >
+    <Game />
   </TresCanvas>
+
+  <div class="absolute top-0 left-0 z-20 flex flex-col gap-4">
+    <div class="bg-red-200 p-2">
+      registered:
+      <pre>{{ registeredForSelectingModelStore.getRegisteredAll().map(e => `ID ${e}`) }}</pre>
+    </div>
+    <div class="bg-red-200 p-2">
+      selected:
+      <pre>{{ clickedModelNodeStore.getSelected()?.id ?? '-' }}</pre>
+    </div>
+    <div class="bg-red-200 p-2">
+      move selected:<br>
+      <button
+        class="bg-blue-200 py-1 px-2 rounded-md"
+        @click="() => {
+          if (clickedModelNodeStore.hasSelected()){
+            clickedModelNodeStore.getSelected()!.position.x += 0.1
+          }
+        }"
+      >
+        move
+      </button>
+    </div>
+  </div>
 </template>
 
 <style scoped>
