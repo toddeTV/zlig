@@ -6,13 +6,13 @@ const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
 const { nodes } = await modelLoader
 
-const model = nodes.Bridge
+const model = nodes.Bridge.clone()
 
 registeredForSelectingModelStore.register(model)
 </script>
 
 <template>
-  <primitive :object="nodes.Bridge.clone()" />
+  <primitive :object="model" />
 </template>
 
 <style scoped>
