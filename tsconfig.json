@@ -7,5 +7,6 @@
       "path": "./tsconfig.app.json"
     }
   ],
-  "files": []
+  "files": [
+  ]
 }

@@ -230,6 +230,13 @@ directionalLightShadow.bias = 0.002
 </template>
 ```
 
+#### postprocessing
+
+Normally, you could use the packages `@tresjs/post-processing` and `postprocessing` in combination for postprocessing
+TresJS/ ThreeJS. Unfortunately, they are currently not compatible with TresJS core >v4, see
+[comment on issue #16](https://github.com/toddeTV/zlig/issues/16#issuecomment-2246317999) and
+[issue #32](https://github.com/toddeTV/zlig/issues/32).
+
 ### Docs and helper websites
 
 - icon browser
@@ -243,7 +250,7 @@ directionalLightShadow.bias = 0.002
 Will use the build command out of `/package.json`.<br>
 Building, deploying and hosting is done via [Vercel](https://vercel.com/toddetv-projects/zlig).
 
-## Attribution
+## Attribution/ Contribution
 
 Head of project:
 
@@ -251,7 +258,7 @@ Head of project:
 
 Honorable mentions to people and projects that helped this project:
 
-- [Franka Schlösser](https://github.com/saknarf) helped with the project. Thank you <3
+- [Andreas Fehn](https://github.com/fehnomenal) helped with the project. Thank you <3
 
 Used services, dependencies and materials - besides the ones in `./package.json`:
 
