@@ -6,7 +6,7 @@ const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
 const { nodes } = await modelLoader
 
-const model = nodes.BambooBehindFence
+const model = nodes.BambooBehindFence.clone()
 
 registeredForSelectingModelStore.register(model)
 </script>
