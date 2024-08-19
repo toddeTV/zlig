@@ -31,7 +31,7 @@ function onNodeClick(
   <TresGridHelper />
 
   <!-- camera -->
-  <TresPerspectiveCamera :position="[9, 9, 9]" />
+  <TresPerspectiveCamera :position="[35, 35, 35]" />
 
   <!-- controls -->
   <OrbitControls />
