@@ -213,7 +213,7 @@ function getTypeForKey_scenes(gltfJson: gltfJsonType) {
     generatedType.push(
         `    "${escapeKeyString(scene.name)}": {`,
         `      name: string`,
-        `      Scene: import('three').Group`,
+        `      scene: import('three').Group`,
         ...getTypeForKey_scenes_Object(gltfJson, scene),
         ...getTypeForKey_scenes_Material(gltfJson, scene),
         ...getTypeForKey_scenes_Light(gltfJson, scene),
@@ -228,7 +228,7 @@ function getTypeForKey_scenes(gltfJson: gltfJsonType) {
 
 function getTypeForKey_scenes_Object(gltfJson: gltfJsonType, scene: NonNullable<gltfJsonType['scenes']>[number]) {
   return [
-    `      Object: {`,
+    `      objects: {`,
     ...(gltfJson.nodes ?? []).filter(
       node => scene.nodes.includes(gltfJson.nodes!.indexOf(node)) && node.mesh !== undefined, // Meshes and Groups
     ).map((meshAndGroup) => {
@@ -245,7 +245,7 @@ function getTypeForKey_scenes_Object(gltfJson: gltfJsonType, scene: NonNullable<
 function getTypeForKey_scenes_Material(gltfJson: gltfJsonType, scene: NonNullable<gltfJsonType['scenes']>[number]) {
   const generatedType: string[] = []
   generatedType.push(
-    `      Material: {`,
+    `      materials: {`,
   )
   const meshAndGroups = (gltfJson.nodes ?? []).filter(
     node => scene.nodes.includes(gltfJson.nodes!.indexOf(node)) && node.mesh !== undefined, // Meshes and Groups
@@ -268,13 +268,13 @@ function getTypeForKey_scenes_Light(_gltfJson: gltfJsonType, _scene: NonNullable
   return [
     // TODO add the correct typed lights, currently this is too much work for the scope of the project, and
     // also the fallback at the end will catch this -> so it works, it only is not typed
-    `      Light: Record<String, import('three').Light>`,
+    `      lights: Record<String, import('three').Light>`,
   ]
 }
 
 function getTypeForKey_scenes_Camera(gltfJson: gltfJsonType, scene: NonNullable<gltfJsonType['scenes']>[number]) {
   return [
-    `      Camera: {`,
+    `      cameras: {`,
     ...(gltfJson.nodes ?? []).filter(
       node => scene.nodes.includes(gltfJson.nodes!.indexOf(node)) && node.camera !== undefined,
     ).map(camera => `        "${escapeKeyString(camera.name)}": import('three').Camera`),

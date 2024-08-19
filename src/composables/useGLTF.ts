@@ -66,11 +66,11 @@ export interface GLTFResult {
     // redundant bc already present in `Scene.children`, but needed for later typing bc `children` is an array
     // and no object with named keys
     name: string
-    Scene: Group
-    Object: Record<string, Object3D>
-    Material: Record<string, Material>
-    Light: Record<string, Light>
-    Camera: Record<string, Camera>
+    scene: Group
+    objects: Record<string, Object3D>
+    materials: Record<string, Material>
+    light: Record<string, Light>
+    cameras: Record<string, Camera>
   }>
   userData: Record<string, any>
 }
