@@ -153,44 +153,87 @@ import { something } from 'three-stdlib'
 </script>
 ```
 
-#### import and bundle model files
+#### import and use `*.gltf` model files
 
-All `*.gltf` models, along with their corresponding `*.bin` and texture files, are located in
-`./src/assets/models/`. To generate helper wrappers and type definitions, run:
+_Method 1: With direct useGLTF_
 
-```sh
-pnpm run generate:gltf-models
+```vue
+<script setup lang="ts">
+import useGLTF from '@/composables/useGLTF'
+
+const { scenes } = await useGLTF('/Bridge/Bridge.gltf')
+</script>
+
+<template>
+  <primitive :object="scenes.someScene" />
+</template>
 ```
 
-This script scans all model files in the source folder, deconstructs the GLTF JSON representation, and places the
-generated types in `./node_modules/.tmp/model-types/`, ensuring only imported models are included in the final product.
+- All `*.gltf` models, along with their corresponding `*.bin` and texture files, are located in `/public/`.
+  The `useGLTF` fetches it over HTTP
+- Bc of gltf-files present in the public folder, all gltf files are always bundled in the final app on build,
+  regardless whether they are used or not.
+- no types
+- Direct call of `useGLTF`, no extra layers or wrappers
 
-The script runs automatically:
+---
 
-- always a `.gltf` file changes
-- before a dev run
-- before a build
-- after `pnpm i`
-
-To use a model, import it in your Vue component as shown:
+_Method 2: With generated helper wrappers and type definitions_
 
 ```vue
 <script setup lang="ts">
 import modelLoader from '@/assets/models/someSubfolder/someModel.gltf'
 
-const { nodes } = await modelLoader
+const { scenes } = await modelLoader
 </script>
 
 <template>
-  <primitive :object="nodes.oneNamedNodeToUse" />
+  <primitive :object="scenes.someScene" />
 </template>
 ```
 
-This approach ensures:
+- All `*.gltf` models, along with their corresponding `*.bin` and texture files, are located in `/src/assets/models/`.
+- To generate helper wrappers and type definitions, run:
 
-- ✅ Type safety for `scenes`, `nodes`, `materials`, `meshes` and `images` from each GLTF file.
-- ✅ Only the used models are bundled in the final product.
-- ✅ Importing models is type-safe, and builds will fail if a model is missing.
+  ```sh
+  pnpm run generate:gltf-models
+  ```
+
+  This script scans all model files in the source folder, deconstructs the GLTF JSON representation, and places
+  the generated types in `./node_modules/.tmp/model-types/`, ensuring only imported models are included in the
+  final product.
+
+  The script runs automatically:
+
+  - always a `.gltf` file changes
+  - before a dev run
+  - before a build
+  - after `pnpm i`
+
+- Nearly type safe GLTF file representations.<br>
+  Importing models is type-safe, and builds will fail if a model is missing.
+- Only the used models are bundled in the final product.
+- On runtime: Runs `useGLTF` under the hood. So 100% correct objects and usage, no extra layer.<br>
+  In dev: Scans the `*.gltf` file on its own, so the generated typing has redundant code and could be different
+  from what is present on runtime. So be careful when using and test/ double check it!
+
+#### Multiple instances of the same model
+
+For already loaded and parsed models the GLTF loader returns a cached version. So `primitive` uses then the same
+model which means the single instance is unmounted and mounted again with other coordinates.
+
+Solution: clone it
+
+```vue
+<script setup lang="ts">
+// ...
+const model = scenes.someScene.Object.someObject.clone()
+</script>
+
+<template>
+  <primitive :object="model" />
+</template>
+```
 
 #### real time shadows
 
