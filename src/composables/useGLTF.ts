@@ -1,5 +1,5 @@
-import { type TresObject3D, trasverseObjects, useLogger } from '@tresjs/core'
-import type { AnimationClip, Camera, Group, Light, Material, Object3D, Scene } from 'three'
+import { trasverseObjects, useLogger } from '@tresjs/core'
+import type { AnimationClip, Camera, Group, Light, Material, Object3D } from 'three'
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
 import type { GLTFParser } from 'three/addons/loaders/GLTFLoader.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
