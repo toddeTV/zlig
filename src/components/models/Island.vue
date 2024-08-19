@@ -6,9 +6,9 @@ const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
 const { scenes } = await modelLoader
 
-const model = scenes.Scene
+const scene = scenes.Scene
 
-Object.entries(model.traversed.Object).forEach(([key, value]) => {
+Object.entries(scene.Object).forEach(([key, value]) => {
   if (key.startsWith('buildArea')) {
     registeredForSelectingModelStore.register(value)
   }
@@ -16,7 +16,7 @@ Object.entries(model.traversed.Object).forEach(([key, value]) => {
 </script>
 
 <template>
-  <primitive :object="model" />
+  <primitive :object="scene.Scene" />
 </template>
 
 <style scoped>
