@@ -211,14 +211,13 @@ function getTypeForKey_scenes(gltfJson: gltfJsonType) {
   generatedType.push(`  scenes: {`)
   for (const scene of gltfJson.scenes ?? []) {
     generatedType.push(
-        `    "${escapeKeyString(scene.name)}": import('three').Group & {`,
-        `      traversed: {`,
+        `    "${escapeKeyString(scene.name)}": {`,
+        `      name: string`,
+        `      Scene: import('three').Group`,
         ...getTypeForKey_scenes_Object(gltfJson, scene),
         ...getTypeForKey_scenes_Material(gltfJson, scene),
         ...getTypeForKey_scenes_Light(gltfJson, scene),
         ...getTypeForKey_scenes_Camera(gltfJson, scene),
-        `        [key: string]: Record<string, any>`, // fallback for everything else that can be contained
-        `      }`,
         `    }`,
     )
   }
@@ -229,7 +228,7 @@ function getTypeForKey_scenes(gltfJson: gltfJsonType) {
 
 function getTypeForKey_scenes_Object(gltfJson: gltfJsonType, scene: NonNullable<gltfJsonType['scenes']>[number]) {
   return [
-    `        Object: {`,
+    `      Object: {`,
     ...(gltfJson.nodes ?? []).filter(
       node => scene.nodes.includes(gltfJson.nodes!.indexOf(node)) && node.mesh !== undefined, // Meshes and Groups
     ).map((meshAndGroup) => {
@@ -237,16 +236,16 @@ function getTypeForKey_scenes_Object(gltfJson: gltfJsonType, scene: NonNullable<
       const importString = meshAndGroupMeshes.primitives.length <= 1
         ? `import('three').Mesh`
         : `import('three').Group`
-      return `          "${escapeKeyString(meshAndGroup.name)}": ${importString}`
+      return `        "${escapeKeyString(meshAndGroup.name)}": ${importString}`
     }),
-    `        }`,
+    `      }`,
   ]
 }
 
 function getTypeForKey_scenes_Material(gltfJson: gltfJsonType, scene: NonNullable<gltfJsonType['scenes']>[number]) {
   const generatedType: string[] = []
   generatedType.push(
-    `        Material: {`,
+    `      Material: {`,
   )
   const meshAndGroups = (gltfJson.nodes ?? []).filter(
     node => scene.nodes.includes(gltfJson.nodes!.indexOf(node)) && node.mesh !== undefined, // Meshes and Groups
@@ -259,8 +258,8 @@ function getTypeForKey_scenes_Material(gltfJson: gltfJsonType, scene: NonNullabl
   }
   generatedType.push(
     ...gltfJson.materials!.filter((material, index) => materials.has(index))
-      .map(mat => `          "${escapeKeyString(mat.name)}": import('three').Material`),
-    `        }`,
+      .map(mat => `        "${escapeKeyString(mat.name)}": import('three').Material`),
+    `      }`,
   )
   return generatedType
 }
@@ -269,17 +268,17 @@ function getTypeForKey_scenes_Light(_gltfJson: gltfJsonType, _scene: NonNullable
   return [
     // TODO add the correct typed lights, currently this is too much work for the scope of the project, and
     // also the fallback at the end will catch this -> so it works, it only is not typed
-    `        Light: Record<String, import('three').Light>`,
+    `      Light: Record<String, import('three').Light>`,
   ]
 }
 
 function getTypeForKey_scenes_Camera(gltfJson: gltfJsonType, scene: NonNullable<gltfJsonType['scenes']>[number]) {
   return [
-    `        Camera: {`,
+    `      Camera: {`,
     ...(gltfJson.nodes ?? []).filter(
       node => scene.nodes.includes(gltfJson.nodes!.indexOf(node)) && node.camera !== undefined,
-    ).map(camera => `          "${escapeKeyString(camera.name)}": import('three').Camera`),
-    `        }`,
+    ).map(camera => `        "${escapeKeyString(camera.name)}": import('three').Camera`),
+    `      }`,
   ]
 }
 
