@@ -215,7 +215,10 @@ const { scenes } = await modelLoader
 - Only the used models are bundled in the final product.
 - On runtime: Runs `useGLTF` under the hood. So 100% correct objects and usage, no extra layer.<br>
   In dev: Scans the `*.gltf` file on its own, so the generated typing has redundant code and could be different
-  from what is present on runtime. So be careful when using and test/ double check it!
+  from what is present on runtime. So be careful when using and test/ double check it!<br>
+  Example: In `gltfModel.scenes.someScene.traversed.Object` the typing only hints real objects and not each
+  primitive that is used to build up the objects. But in runtime these primitives are also present in the
+  `traversed.Object` - but funnily enough not all ... that is the reason I left away all primitives, just to be sure.
 
 #### Multiple instances of the same model
 
