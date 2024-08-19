@@ -35,6 +35,7 @@ export async function generateAllModelTypes() {
   }
   catch (error) {
     console.error('Error generating model types:', error)
+    throw error
   }
 }
 
@@ -87,135 +88,51 @@ function escapeKeyString(key: string) {
   return key.replaceAll('"', '\\"').replaceAll('.', '')
 }
 
-async function getGeneratedTypeLines(model: Model) {
-  const modelJson = JSON.parse(await readFile(model.filePath, { encoding: 'utf-8' })) as {
-    animations?: {
-      name: string
-    }[]
-    asset: {
-      copyright?: string | undefined
-      generator?: string | undefined
-      version?: string | undefined
-      minVersion?: string | undefined
-      extensions?: any
-      extras?: any
-    }
-    nodes?: {
-      name: string
-      mesh?: number
-      camera?: number
-    }[]
-    scenes?: {
-      name: string
-      nodes: number[]
-    }[]
-    meshes?: {
-      name: string
-      primitives: {
-        material: number
-      }[]
-    }[]
-    materials?: any[]
-    cameras?: any[]
+interface gltfJsonType {
+  animations?: {
+    name: string
+  }[]
+  asset: {
+    copyright?: string | undefined
+    generator?: string | undefined
+    version?: string | undefined
+    minVersion?: string | undefined
+    extensions?: any
+    extras?: any
   }
+  nodes?: {
+    name: string
+    mesh?: number
+    camera?: number
+  }[]
+  scenes?: {
+    name: string
+    nodes: number[]
+  }[]
+  meshes?: {
+    name: string
+    primitives: {
+      material: number
+    }[]
+  }[]
+  materials?: any[]
+  cameras?: any[]
+}
+
+async function getGeneratedTypeLines(model: Model) {
+  const gltfJson = JSON.parse(await readFile(model.filePath, { encoding: 'utf-8' })) as gltfJsonType
 
   const generatedType: string[] = []
 
+  // meta interface export for the model
   generatedType.push(`export interface ${model.name} {`)
 
-  // `animations`
-  generatedType.push(`  animations: {`)
-  if (modelJson.animations !== undefined) {
-    generatedType.push(
-      ...(modelJson.animations).map(
-        animation => `    "${escapeKeyString(animation.name)}": import('three').AnimationClip`,
-      ),
-    )
-  }
-  generatedType.push(`  }`)
-
-  // `asset`
-  generatedType.push( // hardcoded, could check what keys are really present //TODO
-    `  asset: {`,
-    `    copyright?: string | undefined`,
-    `    generator?: string | undefined`,
-    `    version?: string | undefined`,
-    `    minVersion?: string | undefined`,
-    `    extensions?: any`,
-    `    extras?: any`,
-    `  }`,
-  )
-
-  // `parser`
-  generatedType.push(`  parser: import('three').GLTFParser`)
-
-  // `scenes`
-  generatedType.push(`  scenes: {`)
-  if (modelJson.scenes !== undefined) {
-    for (const scene of modelJson.scenes) {
-      generatedType.push(
-        `    "${escapeKeyString(scene.name)}": import('three').Group & {`,
-        `      traversed: {`,
-        `        Object: {`,
-      )
-      if (modelJson.nodes !== undefined && modelJson.meshes !== undefined) {
-        generatedType.push(
-          ...modelJson.nodes.filter(
-            node => scene.nodes.includes(modelJson.nodes!.indexOf(node)) && node.mesh !== undefined,
-          ).map((meshAndGroup) => {
-            const meshAndGroupMeshes = modelJson.meshes![meshAndGroup.mesh!]
-            const importString = meshAndGroupMeshes.primitives.length <= 1
-              ? `import('three').Mesh`
-              : `import('three').Group`
-            return `          "${escapeKeyString(meshAndGroup.name)}": ${importString}`
-          }),
-        )
-      }
-      generatedType.push(
-        `        }`,
-        `        Material: {`,
-      )
-      if (modelJson.nodes !== undefined && modelJson.meshes !== undefined) {
-        const meshAndGroups = modelJson.nodes.filter(
-          node => scene.nodes.includes(modelJson.nodes!.indexOf(node)) && node.mesh !== undefined,
-        )
-        const materials = new Set<number>()
-        for (const meshAndGroup of meshAndGroups) {
-          const meshAndGroupMeshes = modelJson.meshes![meshAndGroup.mesh!]
-          const flattenedMaterials = meshAndGroupMeshes.primitives.map(primitive => primitive.material)
-          flattenedMaterials.forEach(material => materials.add(material))
-        }
-        generatedType.push(
-          ...modelJson.materials!.filter((material, index) => materials.has(index))
-            .map(mat => `          "${escapeKeyString(mat.name)}": import('three').Material`),
-        )
-      }
-      generatedType.push(
-        `        }`,
-        // TODO add the correct typd lights, currently this is too much work for the scope of the project, and also
-        // the fallback at the end will catch this -> so it works, it only is not typed
-        `        Light: Record<String, import('three').Light>`,
-        `        Camera: {`,
-      )
-      if (modelJson.nodes !== undefined && modelJson.cameras !== undefined) {
-        generatedType.push(
-          ...modelJson.nodes.filter(
-            node => scene.nodes.includes(modelJson.nodes!.indexOf(node)) && node.camera !== undefined,
-          ).map(meshAndGroup => `          "${escapeKeyString(meshAndGroup.name)}": import('three').Camera`),
-        )
-      }
-      generatedType.push(
-        `        }`,
-        `        [key: string]: Record<string, any>`,
-        `      }`,
-        `    }`,
-      )
-    }
-  }
-  generatedType.push(`  }`)
-
-  // `userData`
-  generatedType.push(`  userData: Record<string, any>`)
+  // populate all keys
+  generatedType.push(...getTypeForKey(gltfJson, 'animations'))
+  generatedType.push(...getTypeForKey(gltfJson, 'asset'))
+  generatedType.push(...getTypeForKey(gltfJson, 'parser'))
+  generatedType.push(...getTypeForKey(gltfJson, 'scenes'))
+  generatedType.push(...getTypeForKey(gltfJson, 'userData'))
 
   // for (const [key, type] of Object.entries({
   //   materials: 'any',
@@ -229,7 +146,145 @@ async function getGeneratedTypeLines(model: Model) {
   //   }
   // }
 
+  // end the interface export
   generatedType.push(`}`)
 
   return generatedType
+}
+
+function getTypeForKey(
+  gltfJson: gltfJsonType,
+  key: 'animations' | 'asset' | 'parser' | 'scenes' | 'userData',
+) {
+  switch (key) {
+    case 'animations':
+      return getTypeForKey_animations(gltfJson)
+    case 'asset':
+      return getTypeForKey_asset(gltfJson)
+    case 'parser':
+      return getTypeForKey_parser(gltfJson)
+    case 'scenes':
+      return getTypeForKey_scenes(gltfJson)
+    case 'userData':
+      return getTypeForKey_userData(gltfJson)
+    default:
+      // TODO fix
+      // eslint-disable-next-line no-case-declarations
+      const errMsg = `Error generating model types: ${key}`
+      console.error(errMsg)
+      throw new Error(errMsg)
+  }
+}
+
+function getTypeForKey_animations(gltfJson: gltfJsonType) {
+  return [
+    `  animations: {`,
+    ...(gltfJson.animations ?? []).map(
+      animation => `    "${escapeKeyString(animation.name)}": import('three').AnimationClip`,
+    ),
+    `  }`,
+  ]
+}
+
+function getTypeForKey_asset(gltfJson: gltfJsonType) {
+  return [
+    `  asset: {`,
+    ...(gltfJson.asset?.copyright ? [`    copyright: string`] : []),
+    ...(gltfJson.asset?.generator ? [`    generator: string`] : []),
+    ...(gltfJson.asset?.version ? [`    version: string`] : []),
+    ...(gltfJson.asset?.minVersion ? [`    minVersion: string`] : []),
+    ...(gltfJson.asset?.extensions ? [`    extensions: any`] : []),
+    ...(gltfJson.asset?.extras ? [`    extras: any`] : []),
+    `  }`,
+  ]
+}
+
+function getTypeForKey_parser(_gltfJson: gltfJsonType) {
+  return [
+    `  parser: import('three').GLTFParser`,
+  ]
+}
+
+function getTypeForKey_scenes(gltfJson: gltfJsonType) {
+  const generatedType: string[] = []
+
+  generatedType.push(`  scenes: {`)
+  for (const scene of gltfJson.scenes ?? []) {
+    generatedType.push(
+        `    "${escapeKeyString(scene.name)}": import('three').Group & {`,
+        `      traversed: {`,
+        ...getTypeForKey_scenes_Object(gltfJson, scene),
+        ...getTypeForKey_scenes_Material(gltfJson, scene),
+        ...getTypeForKey_scenes_Light(gltfJson, scene),
+        ...getTypeForKey_scenes_Camera(gltfJson, scene),
+        `        [key: string]: Record<string, any>`, // fallback for everything else that can be contained
+        `      }`,
+        `    }`,
+    )
+  }
+  generatedType.push(`  }`)
+
+  return generatedType
+}
+
+function getTypeForKey_scenes_Object(gltfJson: gltfJsonType, scene: NonNullable<gltfJsonType['scenes']>[number]) {
+  return [
+    `        Object: {`,
+    ...(gltfJson.nodes ?? []).filter(
+      node => scene.nodes.includes(gltfJson.nodes!.indexOf(node)) && node.mesh !== undefined, // Meshes and Groups
+    ).map((meshAndGroup) => {
+      const meshAndGroupMeshes = gltfJson.meshes![meshAndGroup.mesh!]
+      const importString = meshAndGroupMeshes.primitives.length <= 1
+        ? `import('three').Mesh`
+        : `import('three').Group`
+      return `          "${escapeKeyString(meshAndGroup.name)}": ${importString}`
+    }),
+    `        }`,
+  ]
+}
+
+function getTypeForKey_scenes_Material(gltfJson: gltfJsonType, scene: NonNullable<gltfJsonType['scenes']>[number]) {
+  const generatedType: string[] = []
+  generatedType.push(
+    `        Material: {`,
+  )
+  const meshAndGroups = (gltfJson.nodes ?? []).filter(
+    node => scene.nodes.includes(gltfJson.nodes!.indexOf(node)) && node.mesh !== undefined, // Meshes and Groups
+  )
+  const materials = new Set<number>()
+  for (const meshAndGroup of meshAndGroups) {
+    const meshAndGroupMeshes = gltfJson.meshes![meshAndGroup.mesh!]
+    const flattenedMaterials = meshAndGroupMeshes.primitives.map(primitive => primitive.material)
+    flattenedMaterials.forEach(material => materials.add(material))
+  }
+  generatedType.push(
+    ...gltfJson.materials!.filter((material, index) => materials.has(index))
+      .map(mat => `          "${escapeKeyString(mat.name)}": import('three').Material`),
+    `        }`,
+  )
+  return generatedType
+}
+
+function getTypeForKey_scenes_Light(_gltfJson: gltfJsonType, _scene: NonNullable<gltfJsonType['scenes']>[number]) {
+  return [
+    // TODO add the correct typed lights, currently this is too much work for the scope of the project, and
+    // also the fallback at the end will catch this -> so it works, it only is not typed
+    `        Light: Record<String, import('three').Light>`,
+  ]
+}
+
+function getTypeForKey_scenes_Camera(gltfJson: gltfJsonType, scene: NonNullable<gltfJsonType['scenes']>[number]) {
+  return [
+    `        Camera: {`,
+    ...(gltfJson.nodes ?? []).filter(
+      node => scene.nodes.includes(gltfJson.nodes!.indexOf(node)) && node.camera !== undefined,
+    ).map(camera => `          "${escapeKeyString(camera.name)}": import('three').Camera`),
+    `        }`,
+  ]
+}
+
+function getTypeForKey_userData(_gltfJson: gltfJsonType) {
+  return [
+    `  userData: Record<string, any>`,
+  ]
 }
