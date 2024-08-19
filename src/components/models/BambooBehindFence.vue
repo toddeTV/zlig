@@ -4,9 +4,9 @@ import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForS
 
 const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
-const { nodes } = await modelLoader
+const { scenes } = await modelLoader
 
-const model = nodes.BambooBehindFence.clone()
+const model = scenes.Scene.Object.BambooBehindFence.clone()
 
 registeredForSelectingModelStore.register(model)
 </script>
