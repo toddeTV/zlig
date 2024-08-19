@@ -62,16 +62,16 @@ export interface GLTFResult {
   // cameras: Camera[]
   parser: GLTFParser
   // scene: Group
-  scenes: Record<string, Group & {
-    // redundant bc already present in `children`, but needed for later typing bc `children` is an array and no
-    // object with named keys
-    traversed: {
-      Object: Record<string, Object3D>
-      Material: Record<string, Material>
-      Light: Record<string, Light>
-      Camera: Record<string, Camera>
-      [key: string]: Record<string, any>
-    }
+  scenes: Record<string, {
+    // redundant bc already present in `Scene.children`, but needed for later typing bc `children` is an array
+    // and no object with named keys
+    name: string
+    Scene: Group
+    Object: Record<string, Object3D>
+    Material: Record<string, Material>
+    Light: Record<string, Light>
+    Camera: Record<string, Camera>
+    [key: string]: Record<string, any> // fallback for everything else that can be contained and was not yet typed explicitly
   }>
   userData: Record<string, any>
 }
@@ -99,15 +99,18 @@ export default async function (
       // remodel some arrays to objects with the names as keys
       const animations: GLTFResult['animations'] = convertArrayToObject(model.animations)
 
-      // modify `scenes` = (() => {
+      // modify `scenes`
       const modifiedScenes = model.scenes.map((scene) => {
-        const traversed = trasverseObjects(scene) // could contain `materials`, `nodes`, ...
-        const collected = {}
-        if (traversed.materials) {
-          collected.Material = traversed.materials
+        const sceneTraversed = trasverseObjects(scene) // could contain `materials`, `nodes`, ...
+        const sceneObj = {
+          Scene: scene,
+          name: scene.name,
         }
-        if (traversed.nodes) {
-          for (const [nodeKey, nodeValue] of Object.entries(traversed.nodes)) {
+        if (sceneTraversed.materials) {
+          sceneObj.Material = sceneTraversed.materials
+        }
+        if (sceneTraversed.nodes) {
+          for (const [nodeKey, nodeValue] of Object.entries(sceneTraversed.nodes)) {
             // do not add the scene itself
             if (nodeValue.uuid === scene.uuid) {
               continue
@@ -137,16 +140,15 @@ export default async function (
             }
 
             // ensure that the key exists
-            if (!collected[key]) {
-              collected[key] = {}
+            if (!sceneObj[key]) {
+              sceneObj[key] = {}
             }
 
             // add the data
-            collected[key][nodeKey] = nodeValue
+            sceneObj[key][nodeKey] = nodeValue
           }
         }
-        scene.traversed = collected
-        return scene
+        return sceneObj
       })
       const scenes: GLTFResult['scenes'] = convertArrayToObject(modifiedScenes)
 
