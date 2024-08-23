@@ -9,6 +9,10 @@ export type BuildingClass = Readonly<{
    * Determines the available building levels with costs and benefits.
    */
   levelProgression: LevelProgression
+  /**
+   * Determines the maximum allowed buildings to place of this class.
+   */
+  maxInstances: number | undefined
 
   // TODO: Maybe restrict the available building places by some criteria?
   // available_building_places: 'shore'

@@ -22,5 +22,6 @@ export const windmill: BuildingClass = {
       model: null, // TODO: provide real model
     },
   ]),
+  maxInstances: undefined,
   name: 'Windmill',
 }

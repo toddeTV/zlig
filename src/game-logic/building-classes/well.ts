@@ -18,5 +18,6 @@ export const well: BuildingClass = {
       initial: new CurrencyRecord({ gold: 1.3 }),
     },
   }),
+  maxInstances: 3,
   name: 'Very deep well',
 }
