@@ -52,6 +52,14 @@ export class CurrencyRecord {
     return this.calc(new CurrencyRecord(divisorOrDivisors), (a, b) => a / b)
   }
 
+  /**
+   * @returns A record with only integer values.
+   */
+  round() {
+    // Another shortcut: Pretend to calculate but only use the value of this record.
+    return this.calc(new CurrencyRecord(), a => Math.floor(a))
+  }
+
   private calc(other: CurrencyRecord, op: (a: number, b: number) => number) {
     // This does not return functions.
     const currencies = Object.assign({}, this as PlainCurrencies)
