@@ -1,15 +1,99 @@
 import type { CurrencyRecord } from '@/game-logic/currencies.js'
 
-export type LevelProgression = FixedLevelProgression | CalculatedLevelProgression
+export abstract class LevelProgression {
+  constructor(
+    /**
+     * Limits the maximum level of the building. `undefined` means the building can be upgraded endlessly.
+     */
+    readonly maxLevel: number | undefined,
+  ) {}
+
+  /**
+   * @returns The costs to build/upgrade the building without taking into account any modifiers.
+   */
+  getBaseCostsForLevel(level: number) {
+    this.validateLevel(level)
+
+    return this.doGetBaseCostsForLevel(level)
+  }
+
+  /**
+   * @returns The number of seconds it takes to build/upgrade the building without taking into account any modifiers.
+   */
+  getBaseBuildingSecondsForLevel(level: number) {
+    this.validateLevel(level)
+
+    return this.doGetBaseBuildingSecondsForLevel(level)
+  }
+
+  /**
+   * @returns The currency the player receives each second without taking into account any modifiers.
+   */
+  getBaseIncomeForLevel(level: number) {
+    this.validateLevel(level)
+
+    return this.doGetBaseIncomeForLevel(level)
+  }
+
+  /**
+   * Defines the appearance of the building on this level.
+   */
+  getModelForLevel(level: number) {
+    this.validateLevel(level)
+
+    return this.doGetModelForLevel(level)
+  }
+
+  protected abstract doGetBaseCostsForLevel(level: number): CurrencyRecord
+  protected abstract doGetBaseBuildingSecondsForLevel(level: number): number
+  protected abstract doGetBaseIncomeForLevel(level: number): CurrencyRecord
+  protected abstract doGetModelForLevel(level: number): any // TODO: Actually provide a real type here.
+
+  private validateLevel(level: number) {
+    if (level < 1) {
+      throw new Error('Each building needs at least one level')
+    }
+    else if (this.maxLevel && level > this.maxLevel) {
+      throw new Error('This building does not have that much levels')
+    }
+  }
+}
 
 /**
  * This type of building level progression has fixed values defined for each level. Only those defined levels are
  * available in the game.
  */
-export type FixedLevelProgression = Readonly<{
-  type: 'fixed'
-  levels: [FirstLevelFixedProgression, ...LaterLevelsFixedProgression[]]
-}>
+export class FixedLevelProgression extends LevelProgression {
+  constructor(private levels: [FirstLevelFixedProgression, ...LaterLevelsFixedProgression[]]) {
+    // The first entry with index 0 is for level 1.
+    super(levels.length)
+  }
+
+  protected doGetBaseCostsForLevel(level: number) {
+    return this.levels[level - 1].baseCosts
+  }
+
+  protected doGetBaseBuildingSecondsForLevel(level: number) {
+    return this.levels[level - 1].baseBuildingSeconds
+  }
+
+  protected doGetBaseIncomeForLevel(level: number) {
+    return this.levels[level - 1].baseIncomePerSecond
+  }
+
+  protected doGetModelForLevel(level: number) {
+    // Try to find a model from the requested level downwards.
+    for (;level > 1; level--) {
+      const model = this.levels[level]?.model
+      if (model !== undefined) {
+        return model
+      }
+    }
+
+    // As a fallback use the base model
+    return this.levels[0].model
+  }
+}
 
 type BaseLevelFixedProgression = Readonly<{
   /**
@@ -42,68 +126,11 @@ type LaterLevelsFixedProgression = BaseLevelFixedProgression & Readonly<{
   model?: any // TODO: Actually provide a real type here.
 }>
 
-export abstract class CalculatedLevelProgression {
-  readonly type = 'calculated'
-  /**
-   * Limits the maximum level of the building. `undefined` means the building can be upgraded endlessly.
-   */
-  readonly maxLevel: number | undefined
-
-  // TODO: What about the model?
-
-  constructor(maxLevel?: number) {
-    this.maxLevel = maxLevel
-  }
-
-  /**
-   * @returns The costs to build/upgrade the building without taking into account any modifiers.
-   */
-  getBaseCostsForLevel(level: number) {
-    this.validateLevel(level)
-
-    return this.calculateBaseCostsForLevel(level)
-  }
-
-  /**
-   * @returns The number of seconds it takes to build/upgrade the building without taking into account any modifiers.
-   */
-  getBaseBuildingSecondsForLevel(level: number) {
-    this.validateLevel(level)
-
-    return this.calculateBaseBuildingSecondsForLevel(level)
-  }
-
-  /**
-   * @returns The currency the player receives each second without taking into account any modifiers.
-   */
-  getBaseIncomeForLevel(level: number) {
-    this.validateLevel(level)
-
-    return this.calculateBaseIncomeForLevel(level)
-  }
-
-  /**
-   * Defines the appearance of the building on this level.
-   */
-  getModelForLevel(level: number) {
-    this.validateLevel(level)
-
-    return this.actuallyGetModelForLevel(level)
-  }
-
-  protected abstract calculateBaseCostsForLevel(level: number): CurrencyRecord
-  protected abstract calculateBaseBuildingSecondsForLevel(level: number): number
-  protected abstract calculateBaseIncomeForLevel(level: number): CurrencyRecord
-  protected abstract actuallyGetModelForLevel(level: number): any // TODO: Actually provide a real type here.
-
-  private validateLevel(level: number) {
-    if (this.maxLevel && level > this.maxLevel) {
-      throw new Error('This building does not have that much levels')
-    }
-  }
-}
-
-export class LinearLevelProgression extends CalculatedLevelProgression {
+/**
+ * This type of building level progression calculates all values based on an initial value and additional values per
+ * level.
+ */
+export class LinearLevelProgression extends LevelProgression {
   private costs: {
     initial: CurrencyRecord
     additionalPerLevel: CurrencyRecord
@@ -140,22 +167,22 @@ export class LinearLevelProgression extends CalculatedLevelProgression {
     this.costs = costs
     this.buildingSeconds = buildingSeconds
     this.income = income
-    this.actuallyGetModelForLevel = getModel
+    this.doGetModelForLevel = getModel
   }
 
-  protected calculateBaseCostsForLevel(level: number): CurrencyRecord {
+  protected doGetBaseCostsForLevel(level: number): CurrencyRecord {
     return this.costs.initial.plus(this.costs.additionalPerLevel.times(level))
   }
 
-  protected calculateBaseBuildingSecondsForLevel(level: number): number {
+  protected doGetBaseBuildingSecondsForLevel(level: number): number {
     return this.buildingSeconds.initial + this.buildingSeconds.additionalPerLevel * level
   }
 
-  protected calculateBaseIncomeForLevel(level: number): CurrencyRecord {
+  protected doGetBaseIncomeForLevel(level: number): CurrencyRecord {
     return this.income.initial.plus(this.income.additionalPerLevel.times(level))
   }
 
-  protected actuallyGetModelForLevel(_level: number) {
-    // This is replaced in the constructor
+  protected doGetModelForLevel(_level: number) {
+    throw new Error('This function should be replaced in the constructor')
   }
 }
