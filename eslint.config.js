@@ -2,6 +2,18 @@ import antfu from '@antfu/eslint-config'
 import perfectionist from 'eslint-plugin-perfectionist'
 
 export default antfu({
+  files: [
+    '**/*.html',
+    '**/*.js',
+    '**/*.json',
+    '**/*.md',
+    '**/*.toml',
+    '**/*.ts',
+    '**/*.vue',
+    '**/*.xml',
+    '**/*.yaml',
+  ],
+
   formatters: {
     css: 'prettier',
     html: 'prettier',
