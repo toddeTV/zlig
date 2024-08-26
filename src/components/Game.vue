@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
+import Island from './models/Island.vue'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
-import Bridge from '@/components/models/Bridge.vue'
-import BambooBehindFence from '@/components/models/BambooBehindFence.vue'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
 
 const clickedModelNodeStore = useClickedModelNodeStore()
@@ -32,7 +31,7 @@ function onNodeClick(
   <TresGridHelper />
 
   <!-- camera -->
-  <TresPerspectiveCamera :position="[9, 9, 9]" />
+  <TresPerspectiveCamera :position="[35, 35, 35]" />
 
   <!-- controls -->
   <OrbitControls />
@@ -50,23 +49,8 @@ function onNodeClick(
     @click="(e) => onNodeClick(e)"
   >
     <Suspense>
-      <Bridge
+      <Island
         :position="[0, 0, 0]"
-      />
-    </Suspense>
-    <Suspense>
-      <Bridge
-        :position="[0, 0, -2]"
-      />
-    </Suspense>
-    <Suspense>
-      <BambooBehindFence
-        :position="[4, 0, 0]"
-      />
-    </Suspense>
-    <Suspense>
-      <BambooBehindFence
-        :position="[4, 0, 2]"
       />
     </Suspense>
   </TresGroup>
