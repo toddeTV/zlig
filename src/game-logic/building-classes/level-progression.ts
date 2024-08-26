@@ -1,4 +1,4 @@
-import type { CurrencyRecord } from '@/game-logic/currencies.js'
+import type { ResourceRecord } from '@/game-logic/resources.js'
 
 export abstract class LevelProgression {
   constructor(
@@ -44,9 +44,9 @@ export abstract class LevelProgression {
     return this.doGetModelForLevel(level)
   }
 
-  protected abstract doGetBaseCostsForLevel(level: number): CurrencyRecord
+  protected abstract doGetBaseCostsForLevel(level: number): ResourceRecord
   protected abstract doGetBaseBuildingSecondsForLevel(level: number): number
-  protected abstract doGetBaseIncomeForLevel(level: number): CurrencyRecord
+  protected abstract doGetBaseIncomeForLevel(level: number): ResourceRecord
   protected abstract doGetModelForLevel(level: number): any // TODO: Actually provide a real type here.
 
   private validateLevel(level: number) {
@@ -99,7 +99,7 @@ type BaseLevelFixedProgression = Readonly<{
   /**
    * The costs to build/upgrade the building without taking into account any modifiers.
    */
-  baseCosts: CurrencyRecord
+  baseCosts: ResourceRecord
   /**
    * The number of seconds it takes to build/upgrade the building without taking into account any modifiers.
    */
@@ -107,7 +107,7 @@ type BaseLevelFixedProgression = Readonly<{
   /**
    * The currency the player receives each second without taking into account any modifiers.
    */
-  baseIncomePerSecond: CurrencyRecord
+  baseIncomePerSecond: ResourceRecord
 }>
 
 type FirstLevelFixedProgression = BaseLevelFixedProgression & Readonly<{
@@ -132,8 +132,8 @@ type LaterLevelsFixedProgression = BaseLevelFixedProgression & Readonly<{
  */
 export class LinearLevelProgression extends LevelProgression {
   private costs: {
-    initial: CurrencyRecord
-    additionalPerLevel: CurrencyRecord
+    initial: ResourceRecord
+    additionalPerLevel: ResourceRecord
   }
 
   private buildingSeconds: {
@@ -142,22 +142,22 @@ export class LinearLevelProgression extends LevelProgression {
   }
 
   private income: {
-    initial: CurrencyRecord
-    additionalPerLevel: CurrencyRecord
+    initial: ResourceRecord
+    additionalPerLevel: ResourceRecord
   }
 
   constructor({ buildingSeconds, costs, getModel, income, maxLevel }: {
     costs: {
-      initial: CurrencyRecord
-      additionalPerLevel: CurrencyRecord
+      initial: ResourceRecord
+      additionalPerLevel: ResourceRecord
     }
     buildingSeconds: {
       initial: number
       additionalPerLevel: number
     }
     income: {
-      initial: CurrencyRecord
-      additionalPerLevel: CurrencyRecord
+      initial: ResourceRecord
+      additionalPerLevel: ResourceRecord
     }
     getModel: (level: number) => any // TODO: Actually provide a real type here.
     maxLevel?: number
@@ -170,7 +170,7 @@ export class LinearLevelProgression extends LevelProgression {
     this.doGetModelForLevel = getModel
   }
 
-  protected doGetBaseCostsForLevel(level: number): CurrencyRecord {
+  protected doGetBaseCostsForLevel(level: number): ResourceRecord {
     return this.costs.initial.plus(this.costs.additionalPerLevel.times(level))
   }
 
@@ -178,7 +178,7 @@ export class LinearLevelProgression extends LevelProgression {
     return this.buildingSeconds.initial + this.buildingSeconds.additionalPerLevel * level
   }
 
-  protected doGetBaseIncomeForLevel(level: number): CurrencyRecord {
+  protected doGetBaseIncomeForLevel(level: number): ResourceRecord {
     return this.income.initial.plus(this.income.additionalPerLevel.times(level))
   }
 

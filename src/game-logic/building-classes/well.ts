@@ -1,6 +1,6 @@
 import { LinearLevelProgression } from '@/game-logic/building-classes/level-progression.js'
 import type { BuildingClass } from '@/game-logic/building-classes/types.js'
-import { CurrencyRecord } from '@/game-logic/currencies.js'
+import { ResourceRecord } from '@/game-logic/resources.js'
 
 export const well: BuildingClass = {
   levelProgression: new LinearLevelProgression({
@@ -9,13 +9,13 @@ export const well: BuildingClass = {
       initial: 4,
     },
     costs: {
-      additionalPerLevel: new CurrencyRecord({ gold: 2.5 }),
-      initial: new CurrencyRecord({ gold: 7 }),
+      additionalPerLevel: new ResourceRecord({ gold: 2.5 }),
+      initial: new ResourceRecord({ gold: 7 }),
     },
     getModel: () => null, // TODO: provide real model
     income: {
-      additionalPerLevel: new CurrencyRecord({ gold: 0.7 }),
-      initial: new CurrencyRecord({ gold: 1.3 }),
+      additionalPerLevel: new ResourceRecord({ gold: 0.7 }),
+      initial: new ResourceRecord({ gold: 1.3 }),
     },
   }),
   maxInstances: 3,
