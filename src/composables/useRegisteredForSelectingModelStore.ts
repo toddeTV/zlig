@@ -1,19 +1,15 @@
 import { defineStore } from 'pinia'
 import type { Object3D } from 'three'
-import { reactive } from 'vue'
+import { computed, reactive } from 'vue'
 
 export default defineStore('registeredForSelectingModelStore', () => {
   // Store only the `id` of the `Object3D` object for performance reasons
   const registered = reactive(new Set<number>())
 
   /**
-   * Retrieves all registered Object3D IDs.
-   *
-   * @returns {number[]} - An array of registered Object3D IDs.
+   * Computed property to get all registered Object3D instances.
    */
-  function getRegisteredAll(): number[] {
-    return Array.from(registered)
-  }
+  const getRegisteredAll = computed(() => registered)
 
   /**
    * Checks if the given Object3D instance is registered.
@@ -61,6 +57,7 @@ export default defineStore('registeredForSelectingModelStore', () => {
   }
 
   /**
+   * Internal helper function.
    * Retrieves the ID of the given Object3D instance.
    *
    * @param {Object3D} obj - The Object3D instance to get the ID from.
