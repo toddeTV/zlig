@@ -2,14 +2,14 @@
 import { CameraControls } from '@tresjs/cientos'
 import type { CameraControlsProps } from '@tresjs/cientos/dist/core/controls/CameraControls.vue.js'
 
-const rotationSpeed = 0.3
+const rotateSpeed = 0.3
 
 /* eslint-disable perfectionist/sort-objects */
 const cameraControlsProps: CameraControlsProps = {
   makeDefault: true,
 
-  azimuthRotateSpeed: rotationSpeed,
-  polarRotateSpeed: rotationSpeed,
+  azimuthRotateSpeed: rotateSpeed,
+  polarRotateSpeed: rotateSpeed,
 
   minDistance: 50,
   maxDistance: 100,
