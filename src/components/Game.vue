@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { OrbitControls } from '@tresjs/cientos'
 import Island from './models/Island.vue'
+import VisualHelper from './VisualHelper.vue'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
@@ -26,9 +27,7 @@ function onNodeClick(
 </script>
 
 <template>
-  <!-- visual helper -->
-  <TresAxesHelper />
-  <TresGridHelper />
+  <VisualHelper />
 
   <!-- camera -->
   <TresPerspectiveCamera :position="[35, 35, 35]" />
