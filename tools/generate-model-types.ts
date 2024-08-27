@@ -211,15 +211,15 @@ function getTypeForKey_scenes(gltfJson: gltfJsonType) {
   generatedType.push(`  scenes: {`)
   for (const scene of gltfJson.scenes ?? []) {
     generatedType.push(
-        `    "${escapeKeyString(scene.name)}": {`,
-        `      name: string`,
-        `      Scene: import('three').Group`,
-        ...getTypeForKey_scenes_Object(gltfJson, scene),
-        ...getTypeForKey_scenes_Material(gltfJson, scene),
-        ...getTypeForKey_scenes_Light(gltfJson, scene),
-        ...getTypeForKey_scenes_Camera(gltfJson, scene),
-        `      [key: string]: Record<string, any>`, // fallback for everything else that can be contained and was not yet typed explicitly
-        `    }`,
+      `    "${escapeKeyString(scene.name)}": {`,
+      `      name: string`,
+      `      Scene: import('three').Group`,
+      ...getTypeForKey_scenes_Object(gltfJson, scene),
+      ...getTypeForKey_scenes_Material(gltfJson, scene),
+      ...getTypeForKey_scenes_Light(gltfJson, scene),
+      ...getTypeForKey_scenes_Camera(gltfJson, scene),
+      `      [key: string]: Record<string, any>`, // fallback for everything else that can be contained and was not yet typed explicitly
+      `    }`,
     )
   }
   generatedType.push(`  }`)

@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import { OrbitControls } from '@tresjs/cientos'
 import Island from './models/Island.vue'
+import VisualHelper from './VisualHelper.vue'
+import CameraAndControls from './CameraAndControls.vue'
+import Lights from './Lights.vue'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
 
 const clickedModelNodeStore = useClickedModelNodeStore()
 const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
+
+// import { useTresContext } from '@tresjs/core'
+
+// const { scene } = useTresContext()
 
 function onNodeClick(
   event: TresJsClickEvent,
@@ -26,25 +32,10 @@ function onNodeClick(
 </script>
 
 <template>
-  <!-- visual helper -->
-  <TresAxesHelper />
-  <TresGridHelper />
+  <VisualHelper />
+  <CameraAndControls />
+  <Lights />
 
-  <!-- camera -->
-  <TresPerspectiveCamera :position="[35, 35, 35]" />
-
-  <!-- controls -->
-  <OrbitControls />
-
-  <!-- lights -->
-  <TresDirectionalLight
-    cast-shadow
-    :intensity="1.2"
-    :position="[0, 2, 4]"
-  />
-  <TresAmbientLight :intensity="0.3" />
-
-  <!-- objects -->
   <TresGroup
     @click="(e) => onNodeClick(e)"
   >

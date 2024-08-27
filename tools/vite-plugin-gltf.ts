@@ -29,10 +29,10 @@ export function gltf(): Plugin {
           const source = typeof output.source === 'string' ? output.source : Buffer.from(output.source).toString()
 
           output.source = replaceFilePlaceholders(source, (_, ref) =>
-              // We need this leading slash as the glTF loader resolves the file name relative to the glTF file's path
-              // and takes absolute paths into account. Rollup gives us a root relative path but without the leading
-              // slash so we need to add it ourselves.
-              `"/${this.getFileName(ref)}"`)
+            // We need this leading slash as the glTF loader resolves the file name relative to the glTF file's path
+            // and takes absolute paths into account. Rollup gives us a root relative path but without the leading
+            // slash so we need to add it ourselves.
+            `"/${this.getFileName(ref)}"`)
         }
       }
     },
