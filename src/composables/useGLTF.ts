@@ -65,7 +65,7 @@ export interface GLTFResult {
   scenes: Record<string, {
     // redundant bc already present in `Scene.children`, but needed for later typing bc `children` is an array
     // and no object with named keys
-    name: string
+    name: string // TODO fix typing
     Scene: Group
     Object: Record<string, Object3D>
     Material: Record<string, Material>
@@ -81,7 +81,7 @@ export interface GLTFResult {
  * The path must be in the `public` folder and so be accessible directly from the browser.
  * The model must be in the GLTF format.
  *
- * example use: `const { animations, asset, [...] } = await useGLTF('/Bridge/Bridge.gltf')`
+ * example use: `const { animations, asset, [...] } = await useGLTF('/MyModel/MyModel.gltf')`
  *
  * It is not recommended to use this function directly, but better use the auto generated types, see `README.md`.
  *
