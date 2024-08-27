@@ -2,6 +2,7 @@
 import Island from './models/Island.vue'
 import VisualHelper from './VisualHelper.vue'
 import CameraAndControls from './CameraAndControls.vue'
+import Lights from './Lights.vue'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
@@ -29,14 +30,7 @@ function onNodeClick(
 <template>
   <VisualHelper />
   <CameraAndControls />
-
-  <!-- lights -->
-  <TresDirectionalLight
-    cast-shadow
-    :intensity="1.2"
-    :position="[0, 2, 4]"
-  />
-  <TresAmbientLight :intensity="0.3" />
+  <Lights />
 
   <!-- objects -->
   <TresGroup
