@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { OrbitControls } from '@tresjs/cientos'
 import Island from './models/Island.vue'
 import VisualHelper from './VisualHelper.vue'
 import CameraAndControls from './CameraAndControls.vue'
