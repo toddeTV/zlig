@@ -10,6 +10,10 @@ import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForS
 const clickedModelNodeStore = useClickedModelNodeStore()
 const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
+// import { useTresContext } from '@tresjs/core'
+
+// const { scene } = useTresContext()
+
 function onNodeClick(
   event: TresJsClickEvent,
 ) {
@@ -32,7 +36,6 @@ function onNodeClick(
   <CameraAndControls />
   <Lights />
 
-  <!-- objects -->
   <TresGroup
     @click="(e) => onNodeClick(e)"
   >
