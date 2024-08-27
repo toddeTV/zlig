@@ -21,7 +21,7 @@ function onNodeClick(
   }
 
   // unselect all models if the raycaster hits a model that is not registered to be selectable
-  clickedModelNodeStore.unselectAll()
+  clickedModelNodeStore.unselect()
 }
 </script>
 
