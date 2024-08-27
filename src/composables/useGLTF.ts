@@ -103,8 +103,8 @@ export default async function (
       const modifiedScenes = model.scenes.map((scene) => {
         const sceneTraversed = trasverseObjects(scene) // could contain `materials`, `nodes`, ...
         const sceneObj = {
-          Scene: scene,
           name: scene.name,
+          Scene: scene,
         }
         if (sceneTraversed.materials) {
           sceneObj.Material = sceneTraversed.materials
