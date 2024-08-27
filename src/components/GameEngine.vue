@@ -3,6 +3,7 @@ import Island from './models/Island.vue'
 import VisualHelper from './VisualHelper.vue'
 import CameraAndControls from './CameraAndControls.vue'
 import Lights from './Lights.vue'
+import DistanceFog from './DistanceFog.vue'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
@@ -35,6 +36,7 @@ function onNodeClick(
   <VisualHelper />
   <CameraAndControls />
   <Lights />
+  <DistanceFog />
 
   <TresGroup
     @click="(e) => onNodeClick(e)"
