@@ -1,28 +1,22 @@
 import { defineStore } from 'pinia'
 import type { Object3D } from 'three'
-import { reactive } from 'vue'
+import { computed, shallowRef } from 'vue'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
 
 export default defineStore('selectedModelsStore', () => {
   const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
-  /*
-  Store the real `Object3D` object for faster access without converting e.g. a stored `id: number` first
-  back to the real object. Also, we would need the scene's `useTresContext()` to get the real object
-  via `<context>.getObjectById(id: number): Object3D | undefined`.
-  We use `reactive` instead of `ref` bc it is deeper reactive into the object. But bc a reactive can't be
-  set again, we must wrap the one object we want to store in a data structure like an Array, Set, ...
-  */
-  const selected = reactive(new Set<Object3D>())
+  /**
+   * Store the real `Object3D` object for faster access without converting e.g. a stored `id: number` (or `uuid`)
+   * first back to the real object. Also, we would need the scene's `useTresContext()` to get the real object
+   * via `<context>.getObjectById(id: number): Object3D | undefined`.
+   */
+  const selected = shallowRef<Object3D | undefined>(undefined)
 
   /**
-   * Function to get the selected Object3D instance.
-   *
-   * @returns {Object3D | undefined} - The selected Object3D instance or undefined if none is selected.
+   * Computed property to get the selected Object3D instance.
    */
-  function getSelected(): Object3D | undefined {
-    return Array.from(selected)[0]
-  }
+  const getSelected = computed(() => selected.value)
 
   /**
    * Checks if the given Object3D instance is the currently selected one.
@@ -31,7 +25,7 @@ export default defineStore('selectedModelsStore', () => {
    * @returns {boolean} - Returns true if the given Object3D instance is selected, otherwise false.
    */
   function isSelected(obj: Object3D): boolean {
-    return getSelected()?.id === obj.id
+    return getSelected.value?.id === obj.id
   }
 
   /**
@@ -40,7 +34,7 @@ export default defineStore('selectedModelsStore', () => {
    * @returns {boolean} - Returns true if there is at least one Object3D instance selected, otherwise false.
    */
   function hasSelected(): boolean {
-    return selected.size > 0
+    return getSelected.value !== undefined
   }
 
   /**
@@ -53,8 +47,17 @@ export default defineStore('selectedModelsStore', () => {
     if (!registeredForSelectingModelStore.isRegistered(obj)) {
       return false
     }
-    unselectAll()
-    selected.add(obj)
+    selected.value = obj
+    return true
+  }
+
+  /**
+   * Unselects all currently selected Object3D instances.
+   *
+   * @returns {boolean} - Returns true if all objects were successfully unselected.
+   */
+  function unselect(): boolean {
+    selected.value = undefined
     return true
   }
 
@@ -64,21 +67,11 @@ export default defineStore('selectedModelsStore', () => {
    * @param {Object3D} obj - The Object3D instance to unselect.
    * @returns {boolean} - Returns true if the object was successfully unselected, otherwise false.
    */
-  function unselect(obj: Object3D): boolean {
+  function unselectObj(obj: Object3D): boolean {
     if (!isSelected(obj)) {
       return false
     }
-    selected.delete(obj)
-    return true
-  }
-
-  /**
-   * Unselects all currently selected Object3D instances.
-   *
-   * @returns {boolean} - Returns true if all objects were successfully unselected.
-   */
-  function unselectAll(): boolean {
-    selected.clear()
+    selected.value = undefined
     return true
   }
 
@@ -92,7 +85,7 @@ export default defineStore('selectedModelsStore', () => {
    */
   function toggle(obj: Object3D): boolean {
     if (isSelected(obj)) {
-      return unselect(obj)
+      return unselectObj(obj)
     }
     return select(obj)
   }
@@ -104,6 +97,6 @@ export default defineStore('selectedModelsStore', () => {
     select,
     toggle,
     unselect,
-    unselectAll,
+    unselectObj,
   }
 })
