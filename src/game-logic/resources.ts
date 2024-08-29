@@ -27,6 +27,13 @@ export class ResourceRecord {
     }
   }
 
+  /**
+   * Returns the plain resources object.
+   */
+  asPlain() {
+    return Object.fromEntries(getPlainResources(this)) as PlainResources
+  }
+
   plus(other: ResourceRecord) {
     return this.calc(other, (a, b) => a.plus(b))
   }
@@ -59,6 +66,22 @@ export class ResourceRecord {
     return this.calc(new ResourceRecord(divisorOrDivisors), (a, b) => a.div(b))
   }
 
+  gt(other: ResourceRecord): boolean {
+    return this.cmp(other, (a, b) => a.gt(b))
+  }
+
+  gte(other: ResourceRecord): boolean {
+    return this.cmp(other, (a, b) => a.gte(b))
+  }
+
+  lt(other: ResourceRecord): boolean {
+    return this.cmp(other, (a, b) => a.lt(b))
+  }
+
+  lte(other: ResourceRecord): boolean {
+    return this.cmp(other, (a, b) => a.lte(b))
+  }
+
   /**
    * @returns A record with only integer values.
    */
@@ -72,17 +95,35 @@ export class ResourceRecord {
    * new resource record.
    */
   private calc(other: ResourceRecord, op: (a: Big, b: Big) => Big) {
-    // This does not return functions.
-    const resources = Object.assign({}, this as PlainResources)
+    const resourcesThis = this.asPlain()
+    const resourcesOther = getPlainResources(other)
 
-    for (const [resource, amount] of getPlainResources(other)) {
-      resources[resource] = op(resources[resource], amount)
+    for (const [resource, amountOther] of resourcesOther) {
+      const amountThis = resourcesThis[resource]
+
+      resourcesThis[resource] = op(amountThis, amountOther)
     }
 
-    return new ResourceRecord(resources)
+    return new ResourceRecord(resourcesThis)
+  }
+
+  private cmp(other: ResourceRecord, cmp: (a: Big, b: Big) => boolean) {
+    const resourcesThis = this.asPlain()
+    const resourcesOther = getPlainResources(other)
+
+    for (const [resource, amountOther] of resourcesOther) {
+      const amountThis = resourcesThis[resource]
+
+      if (!cmp(amountThis, amountOther)) {
+        return false
+      }
+    }
+
+    return true
   }
 }
 
 function getPlainResources(input: Partial<PlainResources>) {
+  // This does not return functions.
   return Object.entries(input) as [Resource, Big][]
 }
