@@ -1,9 +1,9 @@
 import Big from 'big.js'
-import { FixedLevelProgression } from '@/game-logic/building-classes/level-progression.js'
-import type { BuildingClass } from '@/game-logic/building-classes/types.js'
+import { FixedLevelProgression } from '@/game-logic/buildings/level-progression.js'
+import type { BuildingType } from '@/game-logic/buildings/types.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 
-export const windmill: BuildingClass = {
+export const windmill: BuildingType = {
   levelProgression: new FixedLevelProgression([
     {
       baseBuildingSeconds: 5.5,

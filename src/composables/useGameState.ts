@@ -1,18 +1,27 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import Big from 'big.js'
+import type { BuildingInstance, BuildingLotId } from '@/game-logic/buildings/types.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 
 export default defineStore('gameState', () => {
   return {
-    resources: availableResources(new ResourceRecord({
-      gold: new Big('25'),
-    })),
+    buildings: buildingsState(),
+    resources: availableResources(),
   }
 })
 
-function availableResources(initial: ResourceRecord) {
-  const availableResourceRecord = ref(initial)
+function buildingsState() {
+  const buildings = ref<Record<BuildingLotId, BuildingInstance | undefined >>({
+    // TODO: Load from the saved state.
+  })
+
+  return buildings
+}
+
+function availableResources() {
+  const availableResourceRecord = ref(new ResourceRecord({
+    // TODO: Load from the saved state.
+  }))
 
   const available = computed(() => availableResourceRecord.value.round().asPlain())
 

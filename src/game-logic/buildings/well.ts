@@ -1,9 +1,9 @@
 import Big from 'big.js'
-import { LinearLevelProgression } from '@/game-logic/building-classes/level-progression.js'
-import type { BuildingClass } from '@/game-logic/building-classes/types.js'
+import { LinearLevelProgression } from '@/game-logic/buildings/level-progression.js'
+import type { BuildingType } from '@/game-logic/buildings/types.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 
-export const well: BuildingClass = {
+export const well: BuildingType = {
   levelProgression: new LinearLevelProgression({
     buildingSeconds: {
       additionalPerLevel: 2.25,
