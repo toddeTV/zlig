@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import { OrbitControls } from '@tresjs/cientos'
+import Island from './models/Island.vue'
+import VisualHelper from './VisualHelper.vue'
+import CameraAndControls from './CameraAndControls.vue'
+import Lights from './Lights.vue'
+import DistanceFog from './DistanceFog.vue'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
-import Bridge from '@/components/models/Bridge.vue'
-import BambooBehindFence from '@/components/models/BambooBehindFence.vue'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
 
 const clickedModelNodeStore = useClickedModelNodeStore()
 const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
+
+// import { useTresContext } from '@tresjs/core'
+
+// const { scene } = useTresContext()
 
 function onNodeClick(
   event: TresJsClickEvent,
@@ -22,51 +28,22 @@ function onNodeClick(
   }
 
   // unselect all models if the raycaster hits a model that is not registered to be selectable
-  clickedModelNodeStore.unselectAll()
+  clickedModelNodeStore.unselect()
 }
 </script>
 
 <template>
-  <!-- visual helper -->
-  <TresAxesHelper />
-  <TresGridHelper />
+  <VisualHelper />
+  <CameraAndControls />
+  <Lights />
+  <DistanceFog />
 
-  <!-- camera -->
-  <TresPerspectiveCamera :position="[9, 9, 9]" />
-
-  <!-- controls -->
-  <OrbitControls />
-
-  <!-- lights -->
-  <TresDirectionalLight
-    cast-shadow
-    :intensity="1.2"
-    :position="[0, 2, 4]"
-  />
-  <TresAmbientLight :intensity="0.3" />
-
-  <!-- objects -->
   <TresGroup
     @click="(e) => onNodeClick(e)"
   >
     <Suspense>
-      <Bridge
+      <Island
         :position="[0, 0, 0]"
-      />
-    </Suspense>
-    <Suspense>
-      <Bridge
-        :position="[0, 0, -2]"
-      />
-    </Suspense>
-    <Suspense>
-      <BambooBehindFence
-        :position="[4, 0, 0]"
-      />
-    </Suspense>
-    <Suspense>
-      <BambooBehindFence
-        :position="[4, 0, 2]"
       />
     </Suspense>
   </TresGroup>

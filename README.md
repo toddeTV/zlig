@@ -161,7 +161,7 @@ _Method 1: With direct useGLTF_
 <script setup lang="ts">
 import useGLTF from '@/composables/useGLTF'
 
-const { scenes } = await useGLTF('/Bridge/Bridge.gltf')
+const { scenes } = await useGLTF('/MyModel/MyModel.gltf')
 </script>
 
 <template>

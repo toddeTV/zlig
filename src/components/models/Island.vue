@@ -1,18 +1,22 @@
 <script setup lang="ts">
-import modelLoader from '@/assets/models/japaneseSmallAssets/Bridge/Bridge.gltf'
+import modelLoader from '@/assets/models/Island/Island.gltf'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
 
 const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
 const { scenes } = await modelLoader
 
-const model = scenes.Scene.Object.Bridge.clone()
+const scene = scenes.Scene
 
-registeredForSelectingModelStore.register(model)
+Object.entries(scene.Object).forEach(([key, value]) => {
+  if (key.startsWith('buildArea')) {
+    registeredForSelectingModelStore.register(value)
+  }
+})
 </script>
 
 <template>
-  <primitive :object="model" />
+  <primitive :object="scene.Scene" />
 </template>
 
 <style scoped>
