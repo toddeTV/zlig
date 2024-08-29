@@ -10,6 +10,9 @@ type PlainResources = Record<Resource, number>
 
 /**
  * A simple holder of all resources.
+ *
+ * A new resource can easily be added by adding a new field to this class. It will be automatically available on all
+ * places. It is only important to give it an initial value of zero.
  */
 export class ResourceRecord {
   readonly gold: number = 0
