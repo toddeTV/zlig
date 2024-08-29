@@ -64,9 +64,13 @@ export class ResourceRecord {
    */
   round() {
     // Another shortcut: Pretend to calculate but only use the value of this record.
-    return this.calc(new ResourceRecord(), a => a.round(0, 0))
+    return this.calc(new ResourceRecord(), a => a.round(0, Big.roundDown))
   }
 
+  /**
+   * This helper method applies the op to each pair of resources from this and the other and collects the result in a
+   * new resource record.
+   */
   private calc(other: ResourceRecord, op: (a: Big, b: Big) => Big) {
     // This does not return functions.
     const resources = Object.assign({}, this as PlainResources)
