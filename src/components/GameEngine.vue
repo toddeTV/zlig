@@ -1,15 +1,22 @@
 <script setup lang="ts">
+import { watch } from 'vue'
+import { Vector3 } from 'three'
 import Island from './models/Island.vue'
 import VisualHelper from './VisualHelper.vue'
 import CameraAndControls from './CameraAndControls.vue'
 import Lights from './Lights.vue'
 import DistanceFog from './DistanceFog.vue'
+import BuildingLot from './buildings/BuildingLot.vue'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
+import useBuildingLots from '@/composables/useBuildingLots.js'
 
 const clickedModelNodeStore = useClickedModelNodeStore()
 const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
+
+const buildingLots = useBuildingLots()
+buildingLots.init()
 
 // import { useTresContext } from '@tresjs/core'
 
@@ -46,6 +53,13 @@ function onNodeClick(
         :position="[0, 0, 0]"
       />
     </Suspense>
+
+    <BuildingLot
+      v-for="lot in buildingLots.lots"
+      :id="lot.id"
+      :key="lot.id"
+      :position="lot.position"
+    />
   </TresGroup>
 </template>
 
