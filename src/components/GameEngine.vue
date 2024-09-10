@@ -1,41 +1,23 @@
 <script setup lang="ts">
-import { watch } from 'vue'
-import { Vector3 } from 'three'
+import BuildingLot from './buildings/BuildingLot.vue'
+import CameraAndControls from './CameraAndControls.vue'
+import DistanceFog from './DistanceFog.vue'
+import Lights from './Lights.vue'
 import Island from './models/Island.vue'
 import VisualHelper from './VisualHelper.vue'
-import CameraAndControls from './CameraAndControls.vue'
-import Lights from './Lights.vue'
-import DistanceFog from './DistanceFog.vue'
-import BuildingLot from './buildings/BuildingLot.vue'
-import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
-import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
+import useSelectedBuildingLot from '@/composables/useSelectedBuildingLot.js'
 import useBuildingLots from '@/composables/useBuildingLots.js'
-
-const clickedModelNodeStore = useClickedModelNodeStore()
-const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
 const buildingLots = useBuildingLots()
 buildingLots.init()
 
-// import { useTresContext } from '@tresjs/core'
+const selectedBuildingLot = useSelectedBuildingLot()
 
-// const { scene } = useTresContext()
-
-function onNodeClick(
-  event: TresJsClickEvent,
-) {
-  // the raycaster hit a node/ model, so we do not send the raycast any further down
+function onNodeClick(event: TresJsClickEvent) {
   event.stopPropagation()
 
-  // toggle the model selection if the model is registered to be selectable
-  if (registeredForSelectingModelStore.isRegistered(event.object)) {
-    clickedModelNodeStore.toggle(event.object)
-    return
-  }
-
-  // unselect all models if the raycaster hits a model that is not registered to be selectable
-  clickedModelNodeStore.unselect()
+  selectedBuildingLot.id = null
 }
 </script>
 
@@ -45,9 +27,7 @@ function onNodeClick(
   <Lights />
   <DistanceFog />
 
-  <TresGroup
-    @click="(e) => onNodeClick(e)"
-  >
+  <TresGroup @click="onNodeClick">
     <Suspense>
       <Island
         :position="[0, 0, 0]"
