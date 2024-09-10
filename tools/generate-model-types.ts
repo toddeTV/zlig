@@ -258,7 +258,7 @@ function getTypeForKey_scenes_Material(gltfJson: gltfJsonType, scene: NonNullabl
     flattenedMaterials.forEach(material => materials.add(material))
   }
   generatedType.push(
-    ...gltfJson.materials!.filter((material, index) => materials.has(index))
+    ...(gltfJson.materials ?? []).filter((material, index) => materials.has(index))
       .map(mat => `        "${escapeKeyString(mat.name)}": import('three').Material`),
     `      }`,
   )
