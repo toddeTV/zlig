@@ -54,12 +54,14 @@ function onNodeClick(
       />
     </Suspense>
 
-    <BuildingLot
-      v-for="lot in buildingLots.lots"
-      :id="lot.id"
-      :key="lot.id"
-      :position="lot.position"
-    />
+    <Suspense>
+      <BuildingLot
+        v-for="lot in buildingLots.lots"
+        :id="lot.id"
+        :key="lot.id"
+        :position="lot.position"
+      />
+    </Suspense>
   </TresGroup>
 </template>
 

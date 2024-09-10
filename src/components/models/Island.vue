@@ -1,22 +1,17 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Island/Island.gltf'
-import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
 
-const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
-
-const { scenes } = await modelLoader
-
-const scene = scenes.Scene
-
-Object.entries(scene.Object).forEach(([key, value]) => {
-  if (key.startsWith('buildArea')) {
-    registeredForSelectingModelStore.register(value)
-  }
-})
+const { scenes: { Scene } } = await modelLoader
 </script>
 
 <template>
-  <primitive :object="scene.Scene" />
+  <primitive :object="Scene.Object.beach" />
+  <primitive :object="Scene.Object.lvl0" />
+  <primitive :object="Scene.Object.lvl1" />
+  <primitive :object="Scene.Object.lvl2" />
+  <primitive :object="Scene.Object.mountain" />
+  <primitive :object="Scene.Object.underWaterOutline" />
+  <primitive :object="Scene.Object.water" />
 </template>
 
 <style scoped>
