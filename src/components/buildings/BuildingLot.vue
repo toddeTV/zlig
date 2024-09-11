@@ -2,6 +2,7 @@
 import { Html } from '@tresjs/cientos'
 import { Vector3 } from 'three'
 import { computed } from 'vue'
+import ConstructionSite from '../models/buildings/ConstructionSite.vue'
 import BuildingPopupEmpty from './popup/BuildingPopupEmpty.vue'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
 import type { BuildingLotId } from '@/game-logic/buildings/types.js'
@@ -33,11 +34,18 @@ function onClick(e: TresJsClickEvent) {
   <TresGroup @click="onClick">
     <component
       :is="buildingInstance.type.levelProgression.getModelForLevel(buildingInstance.level)"
-      v-if="buildingInstance"
+      v-if="buildingInstance && buildingInstance.state !== 'in-construction'"
       :building-instance
       :position="props.position"
     />
-    <primitive v-else :object="Scene.Object[props.id as keyof typeof Scene.Object]" />
+    <ConstructionSite
+      v-else-if="buildingInstance?.state === 'in-construction'"
+      :position="props.position"
+    />
+    <primitive
+      v-else
+      :object="Scene.Object[props.id as keyof typeof Scene.Object]"
+    />
 
     <Html
       v-if="isSelected"
