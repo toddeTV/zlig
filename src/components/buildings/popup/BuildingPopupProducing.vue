@@ -12,11 +12,60 @@ const props = defineProps<{
 
 const gameState = useGameState()
 
-function getIncome() {
+function getCurrentIncome() {
   // TODO: Factor in modifiers.
   const income = props.buildingType.levelProgression.getBaseIncomeForLevel(props.state.level)
 
   return income
+}
+
+function getUpgradeCosts() {
+  // TODO: Factor in modifiers.
+  const costs = props.buildingType.levelProgression.getBaseCostsForLevel(props.state.level + 1)
+
+  return costs
+}
+
+function getUpgradeBuildingSeconds() {
+  // TODO: Factor in modifiers.
+  const seconds = props.buildingType.levelProgression.getBaseBuildingSecondsForLevel(props.state.level + 1)
+
+  return seconds
+}
+
+function getUpgradedIncome() {
+  // TODO: Factor in modifiers.
+  const income = props.buildingType.levelProgression.getBaseIncomeForLevel(props.state.level + 1)
+
+  return income
+}
+
+function canUpgrade(): true | 'max-level' | 'no-resources' {
+  if (props.buildingType.levelProgression.maxLevel && props.state.level >= props.buildingType.levelProgression.maxLevel) {
+    return 'max-level'
+  }
+
+  if (!gameState.resources.hasAvailable(getUpgradeCosts())) {
+    return 'no-resources'
+  }
+
+  return true
+}
+
+function upgrade() {
+  if (canUpgrade() !== true) {
+    // TODO: Display warning here? Actually, this is only a safety measure here as the click should not be possible.
+    return
+  }
+
+  gameState.resources.remove(getUpgradeCosts().round())
+
+  gameState.buildings[props.lotId] = {
+    level: props.state.level,
+    secondsRemaining: getUpgradeBuildingSeconds(),
+    state: 'upgrading',
+    type: props.buildingType,
+  }
 }
 
 function destroy() {
@@ -25,18 +74,55 @@ function destroy() {
 </script>
 
 <template>
-  <BasePopupWrapper :title="props.buildingType.name">
-    <div class="flex flex-col gap-1 ml-4">
-      <p class="font-semibold text-sm -ml-4">
-        Produces per second
-      </p>
-      <Resources :resources="getIncome()" :round="false" />
-    </div>
+  <BasePopupWrapper :title="`${props.buildingType.name} (level ${props.state.level})`">
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-1 ml-4">
+        <p class="font-semibold text-sm -ml-4">
+          Produces per second
+        </p>
+        <Resources :resources="getCurrentIncome()" :round="false" />
+      </div>
 
-    <p>
-      <button class="border p-1 rounded" @click="destroy">
-        destroy
-      </button>
-    </p>
+      <fragment v-if="canUpgrade() !== 'max-level'">
+        <div class="flex flex-col gap-1 ml-4">
+          <p class="font-semibold text-sm -ml-4">
+            Costs to upgrade
+          </p>
+          <Resources :resources="getUpgradeCosts()" round />
+          <p>Takes {{ getUpgradeBuildingSeconds().round(1).toNumber().toLocaleString() }} seconds</p>
+        </div>
+
+        <div class="flex flex-col gap-1 ml-4">
+          <p class="font-semibold text-sm -ml-4">
+            Upgraded produces per second
+          </p>
+          <Resources :resources="getUpgradedIncome()" :round="false" />
+        </div>
+      </fragment>
+
+      <p class="flex items-center justify-between">
+        <button
+          v-if="canUpgrade() === true"
+          class="border p-1 rounded"
+          @click="() => upgrade()"
+        >
+          upgrade
+        </button>
+
+        <span
+          v-else-if="canUpgrade() === 'no-resources'"
+          class="border p-1 rounded bg-gray-200 text-red-400 cursor-not-allowed"
+        >
+          not enough resources
+        </span>
+
+        <button
+          class="border p-1 rounded"
+          @click="() => destroy()"
+        >
+          destroy
+        </button>
+      </p>
+    </div>
   </BasePopupWrapper>
 </template>

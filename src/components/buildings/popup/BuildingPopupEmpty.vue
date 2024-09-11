@@ -73,10 +73,10 @@ const availableBuildings = [buildingTypes.a, buildingTypes.b]
 
         <div class="flex flex-col gap-1 ml-4">
           <p class="font-semibold text-sm -ml-4">
-            Costs
+            Costs to build
           </p>
           <Resources :resources="getCosts(type)" round />
-          <p>Takes {{ getBuildingSeconds(type).round(1).toNumber().toLocaleString() }} seconds to build</p>
+          <p>Takes {{ getBuildingSeconds(type).round(1).toNumber().toLocaleString() }} seconds</p>
         </div>
 
         <div class="flex flex-col gap-1 ml-4">
@@ -87,11 +87,18 @@ const availableBuildings = [buildingTypes.a, buildingTypes.b]
         </div>
 
         <p>
-          <button v-if="canBuild(type) === true" class="border p-1 rounded" @click="() => build(type)">
+          <button
+            v-if="canBuild(type) === true"
+            class="border p-1 rounded"
+            @click="() => build(type)"
+          >
             build
           </button>
 
-          <span v-else class="border p-1 rounded bg-gray-200 text-red-400 cursor-not-allowed">
+          <span
+            v-else
+            class="border p-1 rounded bg-gray-200 text-red-400 cursor-not-allowed"
+          >
             <template v-if="canBuild(type) === 'max-instances'">max number reached</template>
             <template v-else-if="canBuild(type) === 'no-resources'">not enough resources</template>
           </span>
