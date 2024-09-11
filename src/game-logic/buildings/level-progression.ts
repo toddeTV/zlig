@@ -1,3 +1,4 @@
+import type { BuildingModel } from '@/game-logic/buildings/types.js'
 import type { ResourceRecord } from '@/game-logic/resources.js'
 
 export abstract class LevelProgression {
@@ -47,10 +48,10 @@ export abstract class LevelProgression {
   protected abstract doGetBaseCostsForLevel(level: number): ResourceRecord
   protected abstract doGetBaseBuildingSecondsForLevel(level: number): number
   protected abstract doGetBaseIncomeForLevel(level: number): ResourceRecord
-  protected abstract doGetModelForLevel(level: number): any // TODO: Actually provide a real type here.
+  protected abstract doGetModelForLevel(level: number): BuildingModel
 
   private validateLevel(level: number) {
-    if (level < 1) {
+    if (level < 0) {
       throw new Error('Each building needs at least one level')
     }
     else if (this.maxLevel && level > this.maxLevel) {
@@ -115,7 +116,7 @@ type FirstLevelFixedProgression = BaseLevelFixedProgression & Readonly<{
   /**
    * Defines the appearance of the building on the first level.
    */
-  model: any // TODO: Actually provide a real type here.
+  model: BuildingModel
 }>
 
 type LaterLevelsFixedProgression = BaseLevelFixedProgression & Readonly<{
@@ -123,7 +124,7 @@ type LaterLevelsFixedProgression = BaseLevelFixedProgression & Readonly<{
    * Defines the appearance of the building on this level. If not given defaults to the appearance of the previous
    * level.
    */
-  model?: any // TODO: Actually provide a real type here.
+  model?: BuildingModel
 }>
 
 /**
@@ -159,7 +160,7 @@ export class LinearLevelProgression extends LevelProgression {
       initial: ResourceRecord
       additionalPerLevel: ResourceRecord
     }
-    getModel: (level: number) => any // TODO: Actually provide a real type here.
+    getModel: (level: number) => BuildingModel
     maxLevel?: number
   }) {
     super(maxLevel)
@@ -182,7 +183,7 @@ export class LinearLevelProgression extends LevelProgression {
     return this.income.initial.plus(this.income.additionalPerLevel.times(level))
   }
 
-  protected doGetModelForLevel(_level: number) {
+  protected doGetModelForLevel(_level: number): BuildingModel {
     throw new Error('This function should be replaced in the constructor')
   }
 }

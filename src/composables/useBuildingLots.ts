@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
 import type { Vector3 } from 'three'
 import { readonly, ref } from 'vue'
+import type { BuildingLotId } from '@/game-logic/buildings/types.js'
 import modelLoader from '@/assets/models/Island/Island.gltf'
 
 export default defineStore('buildingLots', () => {
-  const buildingLots = ref<{ id: string, position: Vector3 }[]>([])
+  const buildingLots = ref<{ id: BuildingLotId, position: Vector3 }[]>([])
 
   return {
     async init() {

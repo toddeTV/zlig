@@ -1,3 +1,4 @@
+import type { Component } from 'vue'
 import type { LevelProgression } from '@/game-logic/buildings/level-progression.js'
 import type { ResourceRecord } from '@/game-logic/resources.js'
 
@@ -38,6 +39,7 @@ export type BuildingState = BuildingStateInConstruction | BuildingStateUpgrading
  */
 export type BuildingStateInConstruction = Readonly<{
   state: 'in-construction'
+  level: 0
   /**
    * The seconds left when the building will be finished and reach level 1.
    */
@@ -54,7 +56,7 @@ export type BuildingStateUpgrading = Readonly<{
   /**
    * The level of the building before upgrading started.
    */
-  currentLevel: number
+  level: number
   /**
    * The seconds left when the building will reach the next level.
    */
@@ -74,4 +76,8 @@ export type BuildingStateProducing = Readonly<{
    * The internal buffer to handle fractional produced resources.
    */
   internalBuffer: ResourceRecord
+}>
+
+export type BuildingModel = Component<{
+  buildingInstance: BuildingInstance
 }>
