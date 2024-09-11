@@ -8,6 +8,6 @@ const { scenes: { Scene } } = await modelLoader
 
 <template>
   <primitive
-    :object="Scene.Object.buildArea00"
+    :object="Scene.Object.buildArea00.clone()"
   />
 </template>
