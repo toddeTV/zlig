@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { Html } from '@tresjs/cientos'
-import Big from 'big.js'
 import { Vector3 } from 'three'
 import { computed } from 'vue'
-import modelLoader from '@/assets/models/Island/Island.gltf'
-import useGameState from '@/composables/useGameState.js'
-import useSelectedBuildingLot from '@/composables/useSelectedBuildingLot.js'
-import { buildingTypes } from '@/game-logic/buildings/index.js'
-import type { BuildingLotId } from '@/game-logic/buildings/types.js'
+import BuildingPopupEmpty from './popup/BuildingPopupEmpty.vue'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
+import type { BuildingLotId } from '@/game-logic/buildings/types.js'
+import useSelectedBuildingLot from '@/composables/useSelectedBuildingLot.js'
+import useGameState from '@/composables/useGameState.js'
+import modelLoader from '@/assets/models/Island/Island.gltf'
 
 const props = defineProps<{
   id: BuildingLotId
@@ -43,11 +42,15 @@ function onClick(e: TresJsClickEvent) {
     <Html
       v-if="isSelected"
       center
-      :position="new Vector3(0, 3, 0).add(props.position)"
+      :position="new Vector3(0,
+                             // TODO: Somehow calculate this offset to display the popup ABOVE the object on the screen.
+                             // Right now this is hardcoded so that it looks OK.
+                             7.5,
+                             0).add(props.position)"
     >
-      <h1 class="bg-white dark:bg-dark p-1 rounded w-[100px]" @click="console.log">
-        I'm a Box 📦
-      </h1>
+      <BuildingPopupEmpty
+        :lot-id="props.id"
+      />
     </Html>
   </TresGroup>
 </template>

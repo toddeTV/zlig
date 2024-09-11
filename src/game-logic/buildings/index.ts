@@ -9,7 +9,7 @@ import { ResourceRecord } from '@/game-logic/resources.js'
 
 const a: BuildingType = {
   levelProgression: new LinearLevelProgression({
-    buildingSeconds: { additionalPerLevel: 20, initial: 3 },
+    buildingSeconds: { additionalPerLevel: new Big('20'), initial: new Big('3') },
     costs: { additionalPerLevel: new ResourceRecord(), initial: new ResourceRecord({ gold: new Big('10') }) },
     getModel: () => BuildingA,
     income: { additionalPerLevel: new ResourceRecord({ gold: new Big('0.05') }), initial: new ResourceRecord({ gold: new Big('0.1') }) },
@@ -21,18 +21,18 @@ const a: BuildingType = {
 const b: BuildingType = {
   levelProgression: new FixedLevelProgression([
     {
-      baseBuildingSeconds: 7,
+      baseBuildingSeconds: new Big('7'),
       baseCosts: new ResourceRecord({ gold: new Big('15') }),
       baseIncomePerSecond: new ResourceRecord({ gold: new Big('3') }),
       model: BuildingB,
     },
     {
-      baseBuildingSeconds: 10,
+      baseBuildingSeconds: new Big('10'),
       baseCosts: new ResourceRecord({ gold: new Big('20') }),
       baseIncomePerSecond: new ResourceRecord({ gold: new Big('5') }),
     },
     {
-      baseBuildingSeconds: 27,
+      baseBuildingSeconds: new Big('27'),
       baseCosts: new ResourceRecord({ gold: new Big('45') }),
       baseIncomePerSecond: new ResourceRecord({ gold: new Big('12') }),
     },

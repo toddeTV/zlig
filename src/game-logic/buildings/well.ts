@@ -6,8 +6,8 @@ import { ResourceRecord } from '@/game-logic/resources.js'
 export const well: BuildingType = {
   levelProgression: new LinearLevelProgression({
     buildingSeconds: {
-      additionalPerLevel: 2.25,
-      initial: 4,
+      additionalPerLevel: new Big('2.25'),
+      initial: new Big('4'),
     },
     costs: {
       additionalPerLevel: new ResourceRecord({ gold: new Big('2.5') }),

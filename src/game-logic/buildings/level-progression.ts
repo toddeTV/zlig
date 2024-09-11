@@ -1,3 +1,4 @@
+import type Big from 'big.js'
 import type { BuildingModel } from '@/game-logic/buildings/types.js'
 import type { ResourceRecord } from '@/game-logic/resources.js'
 
@@ -46,12 +47,12 @@ export abstract class LevelProgression {
   }
 
   protected abstract doGetBaseCostsForLevel(level: number): ResourceRecord
-  protected abstract doGetBaseBuildingSecondsForLevel(level: number): number
+  protected abstract doGetBaseBuildingSecondsForLevel(level: number): Big
   protected abstract doGetBaseIncomeForLevel(level: number): ResourceRecord
   protected abstract doGetModelForLevel(level: number): BuildingModel
 
   private validateLevel(level: number) {
-    if (level < 0) {
+    if (level < 1) {
       throw new Error('Each building needs at least one level')
     }
     else if (this.maxLevel && level > this.maxLevel) {
@@ -104,7 +105,7 @@ type BaseLevelFixedProgression = Readonly<{
   /**
    * The number of seconds it takes to build/upgrade the building without taking into account any modifiers.
    */
-  baseBuildingSeconds: number
+  baseBuildingSeconds: Big
   /**
    * The currency the player receives each second without taking into account any modifiers.
    */
@@ -138,8 +139,8 @@ export class LinearLevelProgression extends LevelProgression {
   }
 
   private buildingSeconds: {
-    initial: number
-    additionalPerLevel: number
+    initial: Big
+    additionalPerLevel: Big
   }
 
   private income: {
@@ -153,8 +154,8 @@ export class LinearLevelProgression extends LevelProgression {
       additionalPerLevel: ResourceRecord
     }
     buildingSeconds: {
-      initial: number
-      additionalPerLevel: number
+      initial: Big
+      additionalPerLevel: Big
     }
     income: {
       initial: ResourceRecord
@@ -175,8 +176,8 @@ export class LinearLevelProgression extends LevelProgression {
     return this.costs.initial.plus(this.costs.additionalPerLevel.times(level))
   }
 
-  protected doGetBaseBuildingSecondsForLevel(level: number): number {
-    return this.buildingSeconds.initial + this.buildingSeconds.additionalPerLevel * level
+  protected doGetBaseBuildingSecondsForLevel(level: number): Big {
+    return this.buildingSeconds.initial.plus(this.buildingSeconds.additionalPerLevel.times(level))
   }
 
   protected doGetBaseIncomeForLevel(level: number): ResourceRecord {
