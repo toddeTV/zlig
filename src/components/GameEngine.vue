@@ -32,9 +32,7 @@ const cameraMoved = ref(false)
     @pointer-down="() => cameraMoved = false"
   >
     <Suspense>
-      <Island
-        :position="[0, 0, 0]"
-      />
+      <Island />
     </Suspense>
 
     <Suspense>

@@ -1,4 +1,5 @@
 import Big from 'big.js'
+import { markRaw } from 'vue'
 import BuildingA from '@/components/models/buildings/BuildingA.vue'
 import BuildingB from '@/components/models/buildings/BuildingB.vue'
 import { FixedLevelProgression, LinearLevelProgression } from '@/game-logic/buildings/level-progression.js'
@@ -12,7 +13,7 @@ const a: BuildingType = {
   levelProgression: new LinearLevelProgression({
     buildingSeconds: { additionalPerLevel: new Big('20'), initial: new Big('3') },
     costs: { additionalPerLevel: new ResourceRecord(), initial: new ResourceRecord({ gold: new Big('10') }) },
-    getModel: () => BuildingA,
+    getModel: () => markRaw(BuildingA),
     income: { additionalPerLevel: new ResourceRecord({ gold: new Big('0.05') }), initial: new ResourceRecord({ gold: new Big('0.1') }) },
   }),
   maxInstances: 3,
@@ -26,7 +27,7 @@ const b: BuildingType = {
       baseBuildingSeconds: new Big('7'),
       baseCosts: new ResourceRecord({ gold: new Big('15') }),
       baseIncomePerSecond: new ResourceRecord({ gold: new Big('3') }),
-      model: BuildingB,
+      model: markRaw(BuildingB),
     },
     {
       baseBuildingSeconds: new Big('10'),

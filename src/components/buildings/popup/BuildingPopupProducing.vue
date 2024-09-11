@@ -83,22 +83,20 @@ function destroy() {
         <Resources :resources="getCurrentIncome()" :round="false" />
       </div>
 
-      <fragment v-if="canUpgrade() !== 'max-level'">
-        <div class="flex flex-col gap-1 ml-4">
-          <p class="font-semibold text-sm -ml-4">
-            Costs to upgrade
-          </p>
-          <Resources :resources="getUpgradeCosts()" round />
-          <p>Takes {{ getUpgradeBuildingSeconds().round(1).toNumber().toLocaleString() }} seconds</p>
-        </div>
+      <div v-if="canUpgrade() !== 'max-level'" class="flex flex-col gap-1 ml-4">
+        <p class="font-semibold text-sm -ml-4">
+          Costs to upgrade
+        </p>
+        <Resources :resources="getUpgradeCosts()" round />
+        <p>Takes {{ getUpgradeBuildingSeconds().round(1).toNumber().toLocaleString() }} seconds</p>
+      </div>
 
-        <div class="flex flex-col gap-1 ml-4">
-          <p class="font-semibold text-sm -ml-4">
-            Upgraded produces per second
-          </p>
-          <Resources :resources="getUpgradedIncome()" :round="false" />
-        </div>
-      </fragment>
+      <div v-if="canUpgrade() !== 'max-level'" class="flex flex-col gap-1 ml-4">
+        <p class="font-semibold text-sm -ml-4">
+          Upgraded produces per second
+        </p>
+        <Resources :resources="getUpgradedIncome()" :round="false" />
+      </div>
 
       <p class="flex items-center justify-between">
         <button
