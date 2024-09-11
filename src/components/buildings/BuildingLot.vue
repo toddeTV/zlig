@@ -77,14 +77,14 @@ function getPopupHeightOffset() {
   />
 
   <TresGroup @click="onClick">
-    <component
-      :is="buildingInstance.type.levelProgression.getModelForLevel(buildingInstance.level)"
-      v-if="buildingInstance && buildingInstance.state !== 'in-construction'"
-      :building-instance
+    <ConstructionSite
+      v-if="buildingInstance?.state === 'in-construction'"
       :position="props.position"
     />
-    <ConstructionSite
-      v-else-if="buildingInstance?.state === 'in-construction'"
+    <component
+      :is="buildingInstance.type.levelProgression.getModelForLevel(buildingInstance.level)"
+      v-else-if="buildingInstance"
+      :building-instance
       :position="props.position"
     />
     <primitive
