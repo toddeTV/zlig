@@ -35,7 +35,7 @@ function canBuild(type: BuildingType): true | 'max-instances' | 'no-resources' {
     return 'no-resources'
   }
 
-  const instancesExisting = Object.values(gameState.buildings).filter(b => b?.type === type).length
+  const instancesExisting = Object.values(gameState.buildings).filter(b => b?.type.id === type.id).length
   if (type.maxInstances !== undefined && instancesExisting >= type.maxInstances) {
     return 'max-instances'
   }

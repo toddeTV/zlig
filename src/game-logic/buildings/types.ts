@@ -4,6 +4,10 @@ import type { ResourceRecord } from '@/game-logic/resources.js'
 
 export type BuildingType = Readonly<{
   /**
+   * An internal identifier.
+   */
+  id: string
+  /**
    * The display name of the building type.
    */
   name: string

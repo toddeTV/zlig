@@ -4,6 +4,7 @@ import type { BuildingType } from '@/game-logic/buildings/types.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 
 export const windmill: BuildingType = {
+  id: 'windmill',
   levelProgression: new FixedLevelProgression([
     {
       baseBuildingSeconds: new Big('5.5'),

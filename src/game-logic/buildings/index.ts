@@ -8,6 +8,7 @@ import { windmill } from '@/game-logic/buildings/windmill.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 
 const a: BuildingType = {
+  id: 'a',
   levelProgression: new LinearLevelProgression({
     buildingSeconds: { additionalPerLevel: new Big('20'), initial: new Big('3') },
     costs: { additionalPerLevel: new ResourceRecord(), initial: new ResourceRecord({ gold: new Big('10') }) },
@@ -19,6 +20,7 @@ const a: BuildingType = {
 }
 
 const b: BuildingType = {
+  id: 'b',
   levelProgression: new FixedLevelProgression([
     {
       baseBuildingSeconds: new Big('7'),

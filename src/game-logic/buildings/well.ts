@@ -4,6 +4,7 @@ import type { BuildingType } from '@/game-logic/buildings/types.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 
 export const well: BuildingType = {
+  id: 'well',
   levelProgression: new LinearLevelProgression({
     buildingSeconds: {
       additionalPerLevel: new Big('2.25'),
