@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { CameraControls } from '@tresjs/cientos'
 import type { CameraControlsProps } from '@tresjs/cientos/dist/core/controls/CameraControls.vue.js'
+import { ref } from 'vue'
+
+const emit = defineEmits(['cameraMoved'])
+
+const cameraIsActive = ref(false)
 
 const rotateSpeed = 0.3
 
@@ -36,6 +41,15 @@ const cameraControlsProps: CameraControlsProps = {
   <!-- controls -->
   <CameraControls
     v-bind="cameraControlsProps"
+    @change="() => {
+      if (cameraIsActive){
+        emit('cameraMoved')
+        // Reset the value here ahead of the end event to only trigger the event once.
+        cameraIsActive = false
+      }
+    }"
+    @end="() => cameraIsActive = false"
+    @start="() => cameraIsActive = true"
   />
 </template>
 

@@ -3,10 +3,7 @@ import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
 import { TresCanvas } from '@tresjs/core'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 import GameEngine from '@/components/GameEngine.vue'
-import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import ClickedModelDebugUI from '@/components/ClickedModelDebugUI.vue'
-
-const clickedModelNodeStore = useClickedModelNodeStore()
 
 const gl: TresCanvasProps = {
   alpha: false,
@@ -24,7 +21,6 @@ const gl: TresCanvasProps = {
 <template>
   <TresCanvas
     v-bind="gl"
-    @pointer-missed="() => clickedModelNodeStore.unselect()"
   >
     <GameEngine />
   </TresCanvas>

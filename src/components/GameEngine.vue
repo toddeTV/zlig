@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import BuildingLot from './buildings/BuildingLot.vue'
 import CameraAndControls from './CameraAndControls.vue'
 import DistanceFog from './DistanceFog.vue'
 import Lights from './Lights.vue'
 import Island from './models/Island.vue'
 import VisualHelper from './VisualHelper.vue'
-import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
 import useSelectedBuildingLot from '@/composables/useSelectedBuildingLot.js'
 import useBuildingLots from '@/composables/useBuildingLots.js'
 
@@ -14,20 +14,23 @@ buildingLots.init()
 
 const selectedBuildingLot = useSelectedBuildingLot()
 
-function onNodeClick(event: TresJsClickEvent) {
-  event.stopPropagation()
-
-  selectedBuildingLot.id = null
-}
+const cameraMoved = ref(false)
 </script>
 
 <template>
   <VisualHelper />
-  <CameraAndControls />
+  <CameraAndControls @camera-moved="() => cameraMoved = true" />
   <Lights />
   <DistanceFog />
 
-  <TresGroup @click="onNodeClick">
+  <TresGroup
+    @click="() => {
+      if (!cameraMoved) {
+        selectedBuildingLot.id = null
+      }
+    }"
+    @pointer-down="() => cameraMoved = false"
+  >
     <Suspense>
       <Island
         :position="[0, 0, 0]"
