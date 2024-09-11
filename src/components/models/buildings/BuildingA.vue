@@ -23,5 +23,5 @@ const scale = computed(() => {
 </script>
 
 <template>
-  <primitive :object="Scene.Scene" :scale />
+  <primitive :object="Scene.Scene.clone()" :scale />
 </template>

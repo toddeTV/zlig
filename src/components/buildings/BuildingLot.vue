@@ -3,6 +3,8 @@ import { Html } from '@tresjs/cientos'
 import { Vector3 } from 'three'
 import { computed } from 'vue'
 import ConstructionSite from '../models/buildings/ConstructionSite.vue'
+import ConstructingBehavior from './behaviors/ConstructingBehavior.vue'
+import BuildingPopupConstruction from './popup/BuildingPopupConstruction.vue'
 import BuildingPopupEmpty from './popup/BuildingPopupEmpty.vue'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
 import type { BuildingLotId } from '@/game-logic/buildings/types.js'
@@ -28,9 +30,27 @@ function onClick(e: TresJsClickEvent) {
 
   selectedBuildingLot.id = props.id
 }
+
+function getPopupHeightOffset() {
+  // TODO: Somehow calculate this offset to display the popup ABOVE the object on the screen.
+  // Right now this is hardcoded so that it looks OK.
+
+  if (buildingInstance.value?.state === 'in-construction') {
+    return 3.5
+  }
+
+  return 7.5
+}
 </script>
 
 <template>
+  <ConstructingBehavior
+    v-if="buildingInstance?.state === 'in-construction'"
+    :building-type="buildingInstance.type"
+    :lot-id="props.id"
+    :state="buildingInstance"
+  />
+
   <TresGroup @click="onClick">
     <component
       :is="buildingInstance.type.levelProgression.getModelForLevel(buildingInstance.level)"
@@ -50,13 +70,16 @@ function onClick(e: TresJsClickEvent) {
     <Html
       v-if="isSelected"
       center
-      :position="new Vector3(0,
-                             // TODO: Somehow calculate this offset to display the popup ABOVE the object on the screen.
-                             // Right now this is hardcoded so that it looks OK.
-                             7.5,
-                             0).add(props.position)"
+      :position="new Vector3(0, getPopupHeightOffset(), 0).add(props.position)"
     >
+      <BuildingPopupConstruction
+        v-if="buildingInstance?.state === 'in-construction'"
+        :building-type="buildingInstance.type"
+        :lot-id="props.id"
+        :state="buildingInstance"
+      />
       <BuildingPopupEmpty
+        v-else
         :lot-id="props.id"
       />
     </Html>
