@@ -81,7 +81,7 @@ const availableBuildings = [buildingTypes.a, buildingTypes.b]
 
         <div class="flex flex-col gap-1 ml-4">
           <p class="font-semibold text-sm -ml-4">
-            Gives per second
+            Produces per second
           </p>
           <Resources :resources="getIncome(type)" :round="false" />
         </div>

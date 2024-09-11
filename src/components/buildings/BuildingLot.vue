@@ -5,8 +5,10 @@ import { computed } from 'vue'
 import ConstructionSite from '../models/buildings/ConstructionSite.vue'
 import ProgressBar from '../ui/ProgressBar.vue'
 import ConstructingBehavior from './behaviors/ConstructingBehavior.vue'
+import ProducingBehavior from './behaviors/ProducingBehavior.vue'
 import BuildingPopupConstruction from './popup/BuildingPopupConstruction.vue'
 import BuildingPopupEmpty from './popup/BuildingPopupEmpty.vue'
+import BuildingPopupProducing from './popup/BuildingPopupProducing.vue'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
 import type { BuildingLotId } from '@/game-logic/buildings/types.js'
 import useSelectedBuildingLot from '@/composables/useSelectedBuildingLot.js'
@@ -51,6 +53,12 @@ function getPopupHeightOffset() {
     :lot-id="props.id"
     :state="buildingInstance"
   />
+  <ProducingBehavior
+    v-else-if="buildingInstance?.state === 'producing'"
+    :building-type="buildingInstance.type"
+    :lot-id="props.id"
+    :state="buildingInstance"
+  />
 
   <TresGroup @click="onClick">
     <component
@@ -75,6 +83,12 @@ function getPopupHeightOffset() {
     >
       <BuildingPopupConstruction
         v-if="buildingInstance?.state === 'in-construction'"
+        :building-type="buildingInstance.type"
+        :lot-id="props.id"
+        :state="buildingInstance"
+      />
+      <BuildingPopupProducing
+        v-else-if="buildingInstance?.state === 'producing'"
         :building-type="buildingInstance.type"
         :lot-id="props.id"
         :state="buildingInstance"
