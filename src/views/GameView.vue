@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
 import { TresCanvas } from '@tresjs/core'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
-import GameEngine from '@/components/GameEngine.vue'
+import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
 import ClickedModelDebugUI from '@/components/ClickedModelDebugUI.vue'
+import GameEngine from '@/components/GameEngine.vue'
+import HUD from '@/components/ui/HUD.vue'
 
 const gl: TresCanvasProps = {
   alpha: false,
@@ -24,6 +25,8 @@ const gl: TresCanvasProps = {
   >
     <GameEngine />
   </TresCanvas>
+
+  <HUD />
 
   <ClickedModelDebugUI />
 </template>

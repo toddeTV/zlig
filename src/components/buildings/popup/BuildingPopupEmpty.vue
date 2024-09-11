@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Big from 'big.js'
 import BasePopupWrapper from './BasePopupWrapper.vue'
+import Resources from '@/components/ui/Resources.vue'
 import useGameState from '@/composables/useGameState.js'
 import { buildingTypes } from '@/game-logic/buildings/index.js'
 import type { BuildingLotId, BuildingType } from '@/game-logic/buildings/types.js'
@@ -67,10 +67,25 @@ const availableBuildings = [buildingTypes.a, buildingTypes.b]
   <BasePopupWrapper title="Empty building lot">
     <div class="flex flex-wrap gap-4">
       <div v-for="type of availableBuildings" :key="type.name" class="border rounded p-2 flex flex-col gap-2">
-        <p>{{ type.name }}</p>
-        <p>Costs {{ getCosts(type).round().gold }} gold</p>
-        <p>Takes {{ getBuildingSeconds(type).round(1) }} seconds to build</p>
-        <p>Gives {{ getIncome(type).gold }} gold/second</p>
+        <p class="font-bold">
+          {{ type.name }}
+        </p>
+
+        <div class="flex flex-col gap-1 ml-4">
+          <p class="font-semibold text-sm -ml-4">
+            Costs
+          </p>
+          <Resources :resources="getCosts(type)" round />
+          <p>Takes {{ getBuildingSeconds(type).round(1).toNumber().toLocaleString() }} seconds to build</p>
+        </div>
+
+        <div class="flex flex-col gap-1 ml-4">
+          <p class="font-semibold text-sm -ml-4">
+            Gives per second
+          </p>
+          <Resources :resources="getIncome(type)" :round="false" />
+        </div>
+
         <p>
           <button v-if="canBuild(type) === true" class="border p-1 rounded" @click="() => build(type)">
             build

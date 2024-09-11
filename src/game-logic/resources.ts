@@ -8,7 +8,7 @@ export type Resource = keyof {
   [K in keyof ResourceRecord as [ResourceRecord[K]] extends [Big] ? K : never]: 0
 }
 
-type PlainResources = Record<Resource, Big>
+export type PlainResources = Record<Resource, Big>
 
 const ZERO = new Big('0')
 
