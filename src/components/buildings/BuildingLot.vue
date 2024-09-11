@@ -3,6 +3,7 @@ import { Html } from '@tresjs/cientos'
 import { Vector3 } from 'three'
 import { computed } from 'vue'
 import ConstructionSite from '../models/buildings/ConstructionSite.vue'
+import ProgressBar from '../ui/ProgressBar.vue'
 import ConstructingBehavior from './behaviors/ConstructingBehavior.vue'
 import BuildingPopupConstruction from './popup/BuildingPopupConstruction.vue'
 import BuildingPopupEmpty from './popup/BuildingPopupEmpty.vue'
@@ -82,6 +83,23 @@ function getPopupHeightOffset() {
         v-else
         :lot-id="props.id"
       />
+    </Html>
+
+    <Html
+      v-else-if="buildingInstance?.state === 'in-construction' || buildingInstance?.state === 'upgrading'"
+      center
+      :position="props.position"
+    >
+      <div class="text-[30%]">
+        <ProgressBar
+          :max="
+            // TODO: Factor in modifiers.
+            buildingInstance.type.levelProgression.getBaseBuildingSecondsForLevel(buildingInstance.level + 1).toNumber()
+          "
+          :min="0"
+          :value="buildingInstance.secondsRemaining.toNumber()"
+        />
+      </div>
     </Html>
   </TresGroup>
 </template>

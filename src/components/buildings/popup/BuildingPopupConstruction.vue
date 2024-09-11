@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BasePopupWrapper from './BasePopupWrapper.vue'
+import ProgressBar from '@/components/ui/ProgressBar.vue'
 import useGameState from '@/composables/useGameState.js'
 import type { BuildingLotId, BuildingStateInConstruction, BuildingType } from '@/game-logic/buildings/types.js'
 
@@ -24,9 +25,9 @@ function cancelBuild() {
     <p class="flex items-center gap-2">
       <span>Remaining:</span>
 
-      <progress
+      <ProgressBar
         :max="totalBuildingSeconds.toNumber()"
-        min="0"
+        :min="0"
         :value="props.state.secondsRemaining.toNumber()"
       />
 
