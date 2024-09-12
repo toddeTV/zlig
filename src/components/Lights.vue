@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import useDebugStore from '@/composables/useDebugStore'
-import useVirtualTimeStore, { type TimeColorTransition } from '@/composables/useVirtualTimeStore'
+import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
-import { AmbientLight, CameraHelper, Color, DirectionalLight, Vector3 } from 'three'
-import { onMounted, watch } from 'vue'
+import { AmbientLight, CameraHelper, DirectionalLight, Vector3 } from 'three'
+import { watch } from 'vue'
 
 const { scene } = useTresContext()
 const { showLightHelper } = storeToRefs(useDebugStore())
-const { calculateSunIntensity, calculateSunPosition, getColorByTime } = useVirtualTimeStore()
+const { calculateSunIntensity, calculateSunPosition } = useVirtualTimeStore()
 const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
 
 // -------- AmbientLight

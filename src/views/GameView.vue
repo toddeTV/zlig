@@ -2,7 +2,7 @@
 import DebugOverlay from '@/components/DebugOverlay.vue'
 import GameEngine from '@/components/GameEngine.vue'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
-import useVirtualTimeStore, { type TimeColorTransition } from '@/composables/useVirtualTimeStore'
+import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { TresCanvas } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
