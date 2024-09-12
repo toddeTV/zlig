@@ -76,7 +76,7 @@ function getPopupHeightOffset() {
     :state="buildingInstance"
   />
 
-  <TresGroup @click="onClick">
+  <TresGroup @click="(e: TresJsClickEvent) => onClick(e)">
     <ConstructionSite
       v-if="buildingInstance?.state === 'in-construction'"
       :position="props.position"
