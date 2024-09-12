@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import DebugOverlay from '@/components/DebugOverlay.vue'
 import GameEngine from '@/components/GameEngine.vue'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import { TresCanvas } from '@tresjs/core'
@@ -22,12 +23,16 @@ const gl: TresCanvasProps = {
 </script>
 
 <template>
-  <TresCanvas
-    v-bind="gl"
-    @pointer-missed="() => clickedModelNodeStore.unselect()"
-  >
-    <GameEngine />
-  </TresCanvas>
+  <div class="h-full overflow-hidden relative">
+    <TresCanvas
+      v-bind="gl"
+      @pointer-missed="() => clickedModelNodeStore.unselect()"
+    >
+      <GameEngine />
+    </TresCanvas>
+
+    <DebugOverlay />
+  </div>
 </template>
 
 <style scoped>
