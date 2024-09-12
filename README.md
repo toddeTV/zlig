@@ -41,10 +41,10 @@ The following softwares are required for development:<br>
 | Linux    | `uname -r`                                | 5.15.0-119-generic     | Linux Kernel         |
 | VSCode   | `code -v`                                 | 1.93.2                 | IDE                  |
 | nvm      | `nvm -v`                                  | v0.39.7                | Node Version Manager |
-| Node     | `node -v` (old `nodejs --version`)        | v20.15.0               | NodeJS/ Node.js      |
-| npm      | `npm -v`                                  | v10.7.0                |                      |
-| npx      | `npx -v`                                  | v10.7.0                |                      |
-| pnpm     | `pnpm -v`                                 | v9.4.0                 |                      |
+| Node     | `node -v` (old `nodejs --version`)        | v20.16.0               | NodeJS/ Node.js      |
+| npm      | `npm -v`                                  | v10.8.1                |                      |
+| npx      | `npx -v`                                  | v10.8.1                |                      |
+| pnpm     | `pnpm -v`                                 | v9.10.0                |                      |
 
 In the browser install:
 
