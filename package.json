@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@9.4.0",
+  "packageManager": "pnpm@9.10.0",
   "description": "",
   "author": "Thorsten Seyschab <business@todde.tv> (https://todde.tv/)",
   "contributors": [
@@ -28,7 +28,7 @@
   },
   "engines": {
     "node": "20",
-    "pnpm": "8 || 9"
+    "pnpm": "9"
   },
   "scripts": {
     "dev": "vite --port 3000",
@@ -44,36 +44,36 @@
     "lint:print-current-config": "mkdir -p ./dist/_eslintConfig && eslint --print-config file.json > ./dist/_eslintConfig/json.json && eslint --print-config file.vue > ./dist/_eslintConfig/vue.json && eslint --print-config file.js > ./dist/_eslintConfig/js.json && eslint --print-config file.ts > ./dist/_eslintConfig/ts.json && eslint --print-config file.md > ./dist/_eslintConfig/md.json && eslint --print-config file.html > ./dist/_eslintConfig/html.json && eslint --print-config file.yaml > ./dist/_eslintConfig/yaml.json && eslint --print-config file.xml > ./dist/_eslintConfig/xml.json && eslint --print-config file.toml > ./dist/_eslintConfig/toml.json && eslint --print-config file.gql > ./dist/_eslintConfig/gql.json && eslint --print-config file.css > ./dist/_eslintConfig/css.json && eslint --print-config file.astro > ./dist/_eslintConfig/astro.json && eslint --print-config file.svelte > ./dist/_eslintConfig/svelte.json && eslint --print-config file.less > ./dist/_eslintConfig/less.json && eslint --print-config file.scss > ./dist/_eslintConfig/scss.json && eslint --print-config file.pcss > ./dist/_eslintConfig/pcss.json"
   },
   "dependencies": {
-    "vue": "3.4.38"
+    "vue": "3.5.4"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "2.27.3",
+    "@antfu/eslint-config": "3.5.1",
     "@rushstack/eslint-patch": "1.10.4",
-    "@tresjs/cientos": "4.0.0",
-    "@tresjs/core": "4.2.7",
+    "@tresjs/cientos": "4.0.2",
+    "@tresjs/core": "4.2.10",
     "@tsconfig/node20": "20.1.4",
     "@types/big.js": "6.2.2",
-    "@types/node": "22.5.0",
-    "@types/three": "0.167.2",
-    "@vitejs/plugin-vue": "5.1.2",
+    "@types/node": "20.16.5",
+    "@types/three": "0.168.0",
+    "@vitejs/plugin-vue": "5.1.3",
     "@vue/eslint-config-typescript": "13.0.0",
     "@vue/tsconfig": "0.5.1",
     "autoprefixer": "10.4.20",
     "big.js": "6.2.1",
-    "eslint": "9.9.1",
+    "eslint": "9.10.0",
     "eslint-plugin-format": "0.1.2",
-    "eslint-plugin-perfectionist": "3.2.0",
-    "eslint-plugin-vue": "9.27.0",
+    "eslint-plugin-perfectionist": "3.5.0",
+    "eslint-plugin-vue": "9.28.0",
     "npm-run-all2": "6.2.2",
     "pinia": "2.2.2",
-    "postcss": "8.4.41",
-    "tailwindcss": "3.4.10",
-    "three": "0.167.1",
-    "tsx": "4.19.0",
+    "postcss": "8.4.45",
+    "tailwindcss": "3.4.11",
+    "three": "0.168.0",
+    "tsx": "4.19.1",
     "typescript": "5.5.4",
-    "vite": "5.4.2",
-    "vite-plugin-vue-devtools": "7.3.9",
-    "vue-router": "4.4.3",
-    "vue-tsc": "2.0.29"
+    "vite": "5.4.4",
+    "vite-plugin-vue-devtools": "7.4.5",
+    "vue-router": "4.4.4",
+    "vue-tsc": "2.1.6"
   }
 }

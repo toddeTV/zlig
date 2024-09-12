@@ -1,34 +1,48 @@
 <script setup lang="ts">
-import { TresCanvas } from '@tresjs/core'
-import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
-import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
-import ClickedModelDebugUI from '@/components/ClickedModelDebugUI.vue'
+import DebugOverlay from '@/components/DebugOverlay.vue'
 import GameEngine from '@/components/GameEngine.vue'
-import HUD from '@/components/ui/HUD.vue'
+import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
+import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
+import { TresCanvas } from '@tresjs/core'
+import { storeToRefs } from 'pinia'
+import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
+import { ref, watch } from 'vue'
+import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 
-const gl: TresCanvasProps = {
+const clickedModelNodeStore = useClickedModelNodeStore()
+const { getColorByTime, rgbToHex, skyTimeColorTransitionPreset } = useVirtualTimeStore()
+const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
+
+const gl = ref<TresCanvasProps>({
   alpha: false,
   clearColor: '#82DBC5',
   disableRender: true, // Disable render on requestAnimationFrame, useful for PostProcessing // TODO use or not?
   outputColorSpace: SRGBColorSpace,
   renderMode: 'always',
-  shadowMapType: VSMShadowMap, // TODO use another shadow type? BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | VSMShadowMap
+  // `VSMShadowMap` better shadows, but more performance heavy; `BasicShadowMap` is faster but has less quality
+  shadowMapType: VSMShadowMap, // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | VSMShadowMap
   shadows: true,
   toneMapping: NoToneMapping,
-  useLegacyLights: false, // TODO use or not?
-}
+  useLegacyLights: false,
+})
+
+// watch the current virtual time
+watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
+  // set the sky color
+  gl.value.clearColor = rgbToHex(getColorByTime(newValue, skyTimeColorTransitionPreset))
+})
 </script>
 
 <template>
-  <TresCanvas
-    v-bind="gl"
-  >
-    <GameEngine />
-  </TresCanvas>
+  <div class="h-full overflow-hidden relative">
+    <TresCanvas
+      v-bind="gl"
+    >
+      <GameEngine />
+    </TresCanvas>
 
-  <HUD />
-
-  <ClickedModelDebugUI />
+    <DebugOverlay />
+  </div>
 </template>
 
 <style scoped>

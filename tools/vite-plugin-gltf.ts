@@ -1,6 +1,6 @@
+import { Buffer } from 'node:buffer'
 import { existsSync, readFileSync } from 'node:fs'
 import { basename, dirname, relative, resolve } from 'node:path'
-import { Buffer } from 'node:buffer'
 import type { Plugin } from 'vite'
 import { generateAllModelTypes } from './generate-model-types'
 

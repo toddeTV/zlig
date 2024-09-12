@@ -1,17 +1,29 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Island/Island.gltf'
+import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
+import useThreeHelper from '@/composables/useThreeHelper'
+import { useTresContext } from '@tresjs/core'
 
-const { scenes: { Scene } } = await modelLoader
+const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
+
+const { scene } = useTresContext()
+const { addShadowAndAddToGroup } = useThreeHelper()
+const { scenes } = await modelLoader
+
+const islandScene = scenes.Island.Scene
+
+addShadowAndAddToGroup(scene.value, islandScene)
+
+// find all build areas & register them
+// const buildAreas = islandScene.getObjectsByProperty('is_building_place', true)
+const buildAreas = islandScene.children.filter(child => child.name.startsWith('buildArea'))
+buildAreas.forEach((buildArea) => {
+  registeredForSelectingModelStore.register(buildArea)
+})
 </script>
 
+<!-- eslint-disable-next-line vue/valid-template-root -->
 <template>
-  <primitive :object="Scene.Object.beach" />
-  <primitive :object="Scene.Object.lvl0" />
-  <primitive :object="Scene.Object.lvl1" />
-  <primitive :object="Scene.Object.lvl2" />
-  <primitive :object="Scene.Object.mountain" />
-  <primitive :object="Scene.Object.underWaterOutline" />
-  <primitive :object="Scene.Object.water" />
 </template>
 
 <style scoped>
