@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import useDebugStore from '@/composables/useDebugStore'
+import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { storeToRefs } from 'pinia'
 
 const { showCameraHelper, showFog, showLightHelper } = storeToRefs(useDebugStore())
+const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
+
+function formatTime(date: Date) {
+  return date.toISOString().slice(11, 19)
+}
 </script>
 
 <template>
@@ -10,6 +16,11 @@ const { showCameraHelper, showFog, showLightHelper } = storeToRefs(useDebugStore
     <h2 class="font-semibold">
       Debug
     </h2>
+
+    <div class="group">
+      <span>Virtual Time:</span>
+      <span class="ml-2">{{ formatTime(currentVirtualTime) }}</span>
+    </div>
 
     <div class="group">
       <input
