@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { CameraControls } from '@tresjs/cientos'
-import type { CameraControlsProps } from '@tresjs/cientos/dist/core/controls/CameraControls.vue.js'
 import { useTresContext } from '@tresjs/core'
 import { PerspectiveCamera } from 'three'
+import type { CameraControlsProps } from '@tresjs/cientos/dist/core/controls/CameraControls.vue.js'
 
 const { setCameraActive } = useTresContext()
 

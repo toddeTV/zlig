@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { AmbientLight, DirectionalLight } from 'three'
 import { useTresContext } from '@tresjs/core'
+import { AmbientLight, DirectionalLight } from 'three'
 
 const { scene } = useTresContext()
 
