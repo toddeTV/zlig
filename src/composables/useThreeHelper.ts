@@ -1,4 +1,3 @@
-import type { TresScene } from '@tresjs/core'
 import type { Group, Object3D, Scene } from 'three'
 
 export default function () {

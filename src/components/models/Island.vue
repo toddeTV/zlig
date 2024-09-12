@@ -3,7 +3,6 @@ import modelLoader from '@/assets/models/Island/Island.gltf'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
 import useThreeHelper from '@/composables/useThreeHelper'
 import { useTresContext } from '@tresjs/core'
-import type { Scene } from 'three'
 
 const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
