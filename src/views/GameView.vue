@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import DebugOverlay from '@/components/DebugOverlay.vue'
 import GameEngine from '@/components/GameEngine.vue'
-import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
+import HUD from '@/components/ui/HUD.vue'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { TresCanvas } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
@@ -9,7 +9,6 @@ import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
 import { ref, watch } from 'vue'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 
-const clickedModelNodeStore = useClickedModelNodeStore()
 const { getColorByTime, rgbToHex, skyTimeColorTransitionPreset } = useVirtualTimeStore()
 const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
 
@@ -40,6 +39,8 @@ watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
     >
       <GameEngine />
     </TresCanvas>
+
+    <HUD />
 
     <DebugOverlay />
   </div>
