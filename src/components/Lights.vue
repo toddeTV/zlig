@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import useDebugStore from '@/composables/useDebugStore'
 import { useTresContext } from '@tresjs/core'
-import { AmbientLight, DirectionalLight } from 'three'
+import { storeToRefs } from 'pinia'
+import { AmbientLight, CameraHelper, DirectionalLight } from 'three'
+import { watch } from 'vue'
 
 const { scene } = useTresContext()
+const { isDebugLights } = storeToRefs(useDebugStore())
 
 const ambientLight = new AmbientLight(0xFFFFFF, 0.6)
 scene.value.add(ambientLight)
@@ -29,8 +33,12 @@ directionalLight.shadow.camera.bottom = -15
 
 scene.value.add(directionalLight)
 
-// const helper = new CameraHelper(directionalLight.shadow.camera)
-// scene.value.add(helper)
+const helper = new CameraHelper(directionalLight.shadow.camera)
+watch(() => isDebugLights.value, (newValue, _oldValue) => {
+  scene.value.remove(helper)
+  if (newValue === true)
+    scene.value.add(helper)
+})
 </script>
 
 <!-- eslint-disable-next-line vue/valid-template-root -->
