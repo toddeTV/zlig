@@ -6,8 +6,10 @@ const { showCameraHelper, showFog, showLightHelper } = storeToRefs(useDebugStore
 </script>
 
 <template>
-  <div class="absolute -top-1 -right-1 z-20 flex flex-col gap-0.5 bg-white py-1 px-2 border border-black">
-    <h2>Debug Overlay</h2>
+  <div class="absolute -top-1 -right-1 z-20 flex flex-col gap-0.5 bg-white py-1.5 pl-2.5 pr-3.5 border border-black">
+    <h2 class="font-semibold">
+      Debug
+    </h2>
 
     <div class="group">
       <input
