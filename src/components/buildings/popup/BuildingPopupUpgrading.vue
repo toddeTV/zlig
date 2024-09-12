@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import BasePopupWrapper from './BasePopupWrapper.vue'
 import ProgressBar from '@/components/ui/ProgressBar.vue'
 import useGameState from '@/composables/useGameState.js'
-import type { BuildingLotId, BuildingStateUpgrading, BuildingType } from '@/game-logic/buildings/types.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
+import type { BuildingLotId, BuildingStateUpgrading, BuildingType } from '@/game-logic/buildings/types.js'
+import BasePopupWrapper from './BasePopupWrapper.vue'
 
 const props = defineProps<{
   lotId: BuildingLotId

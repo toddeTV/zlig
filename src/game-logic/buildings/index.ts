@@ -1,12 +1,12 @@
-import Big from 'big.js'
-import { markRaw } from 'vue'
 import BuildingA from '@/components/models/buildings/BuildingA.vue'
 import BuildingB from '@/components/models/buildings/BuildingB.vue'
 import { FixedLevelProgression, LinearLevelProgression } from '@/game-logic/buildings/level-progression.js'
-import type { BuildingType } from '@/game-logic/buildings/types.js'
 import { well } from '@/game-logic/buildings/well.js'
 import { windmill } from '@/game-logic/buildings/windmill.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
+import Big from 'big.js'
+import { markRaw } from 'vue'
+import type { BuildingType } from '@/game-logic/buildings/types.js'
 
 const a: BuildingType = {
   id: 'a',

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import useBuildingLots from '@/composables/useBuildingLots.js'
+import useSelectedBuildingLot from '@/composables/useSelectedBuildingLot.js'
 import { ref } from 'vue'
 import BuildingLot from './buildings/BuildingLot.vue'
 import CameraAndControls from './CameraAndControls.vue'
@@ -6,8 +8,6 @@ import DistanceFog from './DistanceFog.vue'
 import Lights from './Lights.vue'
 import Island from './models/Island.vue'
 import VisualHelper from './VisualHelper.vue'
-import useSelectedBuildingLot from '@/composables/useSelectedBuildingLot.js'
-import useBuildingLots from '@/composables/useBuildingLots.js'
 
 const buildingLots = useBuildingLots()
 buildingLots.init()

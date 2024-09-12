@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Resources from './Resources.vue'
 import useGameState from '@/composables/useGameState.js'
+import Resources from './Resources.vue'
 
 const gameState = useGameState()
 </script>

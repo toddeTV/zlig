@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import modelLoader from '@/assets/models/buildings/a.gltf'
+import { computed } from 'vue'
 import type { BuildingInstance } from '@/game-logic/buildings/types.js'
 
 const props = defineProps<{ buildingInstance: BuildingInstance }>()

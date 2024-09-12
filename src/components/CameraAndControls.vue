@@ -5,8 +5,8 @@ import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { Box3, Box3Helper, CameraHelper, PerspectiveCamera, Vector3 } from 'three'
 import { onMounted, ref, watch } from 'vue'
+
 import type { CameraControlsProps } from '@tresjs/cientos/dist/core/controls/CameraControls.vue.js'
-import { ref } from 'vue'
 
 const emit = defineEmits(['cameraMoved'])
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { type PlainResources, ResourceRecord } from '@/game-logic/resources.js'
+import { computed } from 'vue'
 
 const props = defineProps<{
   resources: ResourceRecord

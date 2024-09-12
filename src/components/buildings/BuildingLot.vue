@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import modelLoader from '@/assets/models/Island/Island.gltf'
+import useGameState from '@/composables/useGameState.js'
+import useSelectedBuildingLot from '@/composables/useSelectedBuildingLot.js'
 import { Html } from '@tresjs/cientos'
 import { Vector3 } from 'three'
 import { computed } from 'vue'
+import type { BuildingLotId } from '@/game-logic/buildings/types.js'
+import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
 import ConstructionSite from '../models/buildings/ConstructionSite.vue'
 import ProgressBar from '../ui/ProgressBar.vue'
 import ConstructingBehavior from './behaviors/ConstructingBehavior.vue'
@@ -11,11 +16,6 @@ import BuildingPopupConstruction from './popup/BuildingPopupConstruction.vue'
 import BuildingPopupEmpty from './popup/BuildingPopupEmpty.vue'
 import BuildingPopupProducing from './popup/BuildingPopupProducing.vue'
 import BuildingPopupUpgrading from './popup/BuildingPopupUpgrading.vue'
-import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
-import type { BuildingLotId } from '@/game-logic/buildings/types.js'
-import useSelectedBuildingLot from '@/composables/useSelectedBuildingLot.js'
-import useGameState from '@/composables/useGameState.js'
-import modelLoader from '@/assets/models/Island/Island.gltf'
 
 const props = defineProps<{
   id: BuildingLotId

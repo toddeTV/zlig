@@ -1,7 +1,7 @@
-import Big from 'big.js'
 import { FixedLevelProgression } from '@/game-logic/buildings/level-progression.js'
-import type { BuildingType } from '@/game-logic/buildings/types.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
+import Big from 'big.js'
+import type { BuildingType } from '@/game-logic/buildings/types.js'
 
 export const windmill: BuildingType = {
   id: 'windmill',
