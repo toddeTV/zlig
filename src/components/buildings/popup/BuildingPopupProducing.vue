@@ -69,6 +69,7 @@ function upgrade() {
 }
 
 function destroy() {
+  // TODO remove building model
   gameState.buildings[props.lotId] = undefined
 }
 </script>

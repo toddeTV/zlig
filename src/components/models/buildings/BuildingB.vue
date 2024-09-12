@@ -9,6 +9,7 @@ import type { Object3D, Object3DEventMap, Vector3 } from 'three'
 const props = defineProps<{
   buildingInstance: BuildingInstance
   position: Vector3
+  buildingLotId: number
 }>()
 
 const { scene } = useTresContext()
@@ -16,7 +17,7 @@ const { addShadowAndAddToGroup } = useThreeHelper()
 
 const { scenes: { Scene } } = await modelLoader
 
-const sceneGroup = scene.value.getObjectByName('sceneGroup') ?? scene.value
+const sceneGroup = scene.value.getObjectByName(`building-lot-${props.buildingLotId}`) ?? scene.value
 
 const building = Scene.Scene.clone()
 building.position.copy(props.position)
