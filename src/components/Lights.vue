@@ -23,8 +23,8 @@ directionalLight.shadow.bias = -0.01 // fine tune to reduce shadow artifacts (ne
 directionalLight.shadow.camera.near = 10
 directionalLight.shadow.camera.far = 60
 directionalLight.shadow.camera.left = -35
-directionalLight.shadow.camera.right = 20
-directionalLight.shadow.camera.top = 25
+directionalLight.shadow.camera.right = 25
+directionalLight.shadow.camera.top = 30
 directionalLight.shadow.camera.bottom = -15
 
 // directionalLight.shadow.camera.updateProjectionMatrix()
