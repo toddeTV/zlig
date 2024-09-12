@@ -2,13 +2,18 @@
 import DebugOverlay from '@/components/DebugOverlay.vue'
 import GameEngine from '@/components/GameEngine.vue'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
+import useVirtualTimeStore, { type TimeColorTransition } from '@/composables/useVirtualTimeStore'
 import { TresCanvas } from '@tresjs/core'
+import { storeToRefs } from 'pinia'
 import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
+import { ref, watch } from 'vue'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 
 const clickedModelNodeStore = useClickedModelNodeStore()
+const { getColorByTime, rgbToHex, skyTimeColorTransitionPreset } = useVirtualTimeStore()
+const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
 
-const gl: TresCanvasProps = {
+const gl = ref<TresCanvasProps>({
   alpha: false,
   clearColor: '#82DBC5',
   disableRender: true, // Disable render on requestAnimationFrame, useful for PostProcessing // TODO use or not?
@@ -19,7 +24,13 @@ const gl: TresCanvasProps = {
   shadows: true,
   toneMapping: NoToneMapping,
   useLegacyLights: false,
-}
+})
+
+// watch the current virtual time
+watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
+  // set the sky color
+  gl.value.clearColor = rgbToHex(getColorByTime(newValue, skyTimeColorTransitionPreset))
+})
 </script>
 
 <template>

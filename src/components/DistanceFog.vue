@@ -1,17 +1,28 @@
 <script setup lang="ts">
 import useDebugStore from '@/composables/useDebugStore'
+import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
-import { Fog } from 'three'
+import { Color, Fog } from 'three'
 import { watch } from 'vue'
 
 const { scene } = useTresContext()
 const { showFog } = storeToRefs(useDebugStore())
+const { getColorByTime, rgbToHex, skyTimeColorTransitionPreset } = useVirtualTimeStore()
+const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
 
-// TODO set min and max distance correctly regarding the model size after the new model was added
-// TODO set the distances correct for zoom/ dolly the camera controller nearer and further from the model
 const fog = new Fog(0x82DBC5, 140, 160)
 
+// watch the current virtual time
+watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
+  // set the sky color
+  const colorRGB = getColorByTime(newValue, skyTimeColorTransitionPreset)
+  const color = new Color()
+  color.set(rgbToHex(colorRGB))
+  fog.color = color
+})
+
+// watch the fog visibility
 watch(() => showFog.value, (newValue, _oldValue) => {
   updateHelperVisibility(newValue)
 })
