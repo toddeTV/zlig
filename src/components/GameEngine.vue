@@ -19,7 +19,9 @@ const cameraMoved = ref(false)
 
 <template>
   <VisualHelper />
-  <CameraAndControls @camera-moved="() => cameraMoved = true" />
+  <CameraAndControls
+    @camera-moved="() => cameraMoved = true"
+  />
   <Lights />
   <DistanceFog />
 

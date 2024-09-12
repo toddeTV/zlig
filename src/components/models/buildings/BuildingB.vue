@@ -9,7 +9,7 @@ const { scenes: { Scene } } = await modelLoader
 
 const scale = computed(() => {
   // Building B has limited levels so just scale it linearly.
-  return 1.75 * props.buildingInstance.level
+  return 2 * props.buildingInstance.level
 })
 </script>
 

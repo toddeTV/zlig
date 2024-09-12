@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.2.57",
+		"generator":"Khronos glTF Blender I/O v4.1.63",
 		"version":"2.0"
 	},
 	"extensionsUsed":[
@@ -350,9 +350,6 @@
 			]
 		},
 		{
-			"extras":{
-				"is_building_lot":true
-			},
 			"mesh":19,
 			"name":"waterfall_lvl1",
 			"rotation":[

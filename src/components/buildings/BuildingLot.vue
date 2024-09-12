@@ -22,7 +22,7 @@ const props = defineProps<{
   position: Vector3
 }>()
 
-const { scenes: { Scene } } = await modelLoader
+const { scenes: { Island } } = await modelLoader
 
 const gameState = useGameState()
 const selectedBuildingLot = useSelectedBuildingLot()
@@ -89,7 +89,7 @@ function getPopupHeightOffset() {
     />
     <primitive
       v-else
-      :object="Scene.Object[props.id as keyof typeof Scene.Object]"
+      :object="Island.Object[props.id as keyof typeof Island.Object]"
     />
 
     <Html

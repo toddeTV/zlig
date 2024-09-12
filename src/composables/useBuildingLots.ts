@@ -9,10 +9,10 @@ export default defineStore('buildingLots', () => {
 
   return {
     async init() {
-      const { scenes: { Scene } } = await modelLoader
+      const { scenes: { Island } } = await modelLoader
 
-      Scene.Scene.traverse((obj) => {
-        if (obj.userData.is_building_lot && obj.name) {
+      Island.Scene.traverse((obj) => {
+        if (obj.userData.is_building_place && obj.name) {
           buildingLots.value.push({ id: obj.name, position: obj.position })
         }
       })
