@@ -2,7 +2,7 @@
 import useDebugStore from '@/composables/useDebugStore'
 import { storeToRefs } from 'pinia'
 
-const { isDebugFog, isDebugLights } = storeToRefs(useDebugStore())
+const { isDebugCamera, isDebugFog, isDebugLights } = storeToRefs(useDebugStore())
 </script>
 
 <template>
@@ -20,6 +20,19 @@ const { isDebugFog, isDebugLights } = storeToRefs(useDebugStore())
         class="cursor-pointer group-hover:text-blue-400 select-none ml-1"
         for="debugLights"
       >show Lights Helper</label>
+    </div>
+
+    <div class="group">
+      <input
+        id="debugCamera"
+        v-model="isDebugCamera"
+        class="cursor-pointer"
+        type="checkbox"
+      >
+      <label
+        class="cursor-pointer group-hover:text-blue-400 select-none ml-1"
+        for="debugCamera"
+      >show Camera Helper</label>
     </div>
 
     <div class="group">
