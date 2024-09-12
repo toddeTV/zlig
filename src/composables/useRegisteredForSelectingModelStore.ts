@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import type { Object3D } from 'three'
 import { computed, reactive } from 'vue'
+import type { Object3D } from 'three'
 
 export default defineStore('registeredForSelectingModelStore', () => {
   // Store only the `id` of the `Object3D` object for performance reasons

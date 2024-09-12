@@ -1,7 +1,7 @@
-import { defineStore } from 'pinia'
-import type { Object3D } from 'three'
-import { computed, shallowRef } from 'vue'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
+import { defineStore } from 'pinia'
+import { computed, shallowRef } from 'vue'
+import type { Object3D } from 'three'
 
 export default defineStore('selectedModelsStore', () => {
   const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()

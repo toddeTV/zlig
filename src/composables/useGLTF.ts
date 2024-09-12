@@ -1,11 +1,11 @@
 import { trasverseObjects, useLogger } from '@tresjs/core'
-import type { AnimationClip, Camera, Group, Light, Material, Object3D } from 'three'
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
-import type { GLTFParser } from 'three/addons/loaders/GLTFLoader.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import decoderUrl from 'three/examples/jsm/libs/draco/draco_decoder.js?url'
 import wasmUrl from 'three/examples/jsm/libs/draco/draco_decoder.wasm?url'
 import wasmWrapperUrl from 'three/examples/jsm/libs/draco/draco_wasm_wrapper.js?url'
+import type { AnimationClip, Camera, Group, Light, Material, Object3D } from 'three'
+import type { GLTFParser } from 'three/addons/loaders/GLTFLoader.js'
 
 /*
 The DRACOLoader uses extra files for decoding the model files. These files are loaded at runtime based on some
