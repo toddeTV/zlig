@@ -13,10 +13,11 @@ const gl: TresCanvasProps = {
   disableRender: true, // Disable render on requestAnimationFrame, useful for PostProcessing // TODO use or not?
   outputColorSpace: SRGBColorSpace,
   renderMode: 'always',
-  shadowMapType: VSMShadowMap, // TODO use another shadow type? BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | VSMShadowMap
+  // `VSMShadowMap` better shadows, but more performance heavy; `BasicShadowMap` is faster but has less quality
+  shadowMapType: VSMShadowMap, // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | VSMShadowMap
   shadows: true,
   toneMapping: NoToneMapping,
-  useLegacyLights: false, // TODO use or not?
+  useLegacyLights: false,
 }
 </script>
 
