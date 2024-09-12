@@ -6,7 +6,7 @@ const registeredForSelectingModelStore = useRegisteredForSelectingModelStore()
 
 const { scenes } = await modelLoader
 
-const scene = scenes.Scene
+const scene = scenes.Island
 
 Object.entries(scene.Object).forEach(([key, value]) => {
   if (key.startsWith('buildArea')) {

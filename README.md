@@ -305,6 +305,7 @@ Head of project:
 Honorable mentions to people and projects that helped this project:
 
 - [Andreas Fehn](https://github.com/fehnomenal) helped with the project. Thank you <3
+- [Moritz Starke](https://github.com/Myzios) helped with general 3D and Blender questions. Thanks mate <3
 
 Used services, dependencies and materials - besides the ones in `./package.json`:
 
