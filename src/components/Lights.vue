@@ -35,10 +35,14 @@ scene.value.add(directionalLight)
 
 const helper = new CameraHelper(directionalLight.shadow.camera)
 watch(() => isDebugLights.value, (newValue, _oldValue) => {
-  scene.value.remove(helper)
-  if (newValue === true)
-    scene.value.add(helper)
+  updateHelperVisibility(newValue)
 })
+function updateHelperVisibility(isVisible: boolean) {
+  scene.value.remove(helper)
+  if (isVisible === true)
+    scene.value.add(helper)
+}
+updateHelperVisibility(isDebugLights.value)
 </script>
 
 <!-- eslint-disable-next-line vue/valid-template-root -->
