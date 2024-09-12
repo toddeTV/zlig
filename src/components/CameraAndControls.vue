@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import useDebugStore from '@/composables/useDebugStore'
-import { BaseCameraControls, CameraControls } from '@tresjs/cientos'
+import { CameraControls } from '@tresjs/cientos'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
-import THREE, { Box3, Box3Helper, CameraHelper, PerspectiveCamera, Sphere, Vector3 } from 'three'
+import { Box3, Box3Helper, CameraHelper, PerspectiveCamera, Vector3 } from 'three'
 import { onMounted, ref, watch } from 'vue'
 import type { CameraControlsProps } from '@tresjs/cientos/dist/core/controls/CameraControls.vue.js'
 
