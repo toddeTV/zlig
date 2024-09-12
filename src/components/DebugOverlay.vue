@@ -2,11 +2,11 @@
 import useDebugStore from '@/composables/useDebugStore'
 import { storeToRefs } from 'pinia'
 
-const { isDebugLights } = storeToRefs(useDebugStore())
+const { isDebugFog, isDebugLights } = storeToRefs(useDebugStore())
 </script>
 
 <template>
-  <div class="absolute -top-1 -right-1 z-20 flex flex-col gap-4 bg-white py-1 px-2 border border-black">
+  <div class="absolute -top-1 -right-1 z-20 flex flex-col gap-0.5 bg-white py-1 px-2 border border-black">
     <h2>Debug Overlay</h2>
 
     <div class="group">
@@ -19,7 +19,20 @@ const { isDebugLights } = storeToRefs(useDebugStore())
       <label
         class="cursor-pointer group-hover:text-blue-400 select-none ml-1"
         for="debugLights"
-      >Debug Lights</label>
+      >show Lights Helper</label>
+    </div>
+
+    <div class="group">
+      <input
+        id="debugFog"
+        v-model="isDebugFog"
+        class="cursor-pointer"
+        type="checkbox"
+      >
+      <label
+        class="cursor-pointer group-hover:text-blue-400 select-none ml-1"
+        for="debugFog"
+      >show fog</label>
     </div>
   </div>
 </template>
