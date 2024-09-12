@@ -38,8 +38,8 @@ The following softwares are required for development:<br>
 | software | command for version output                | my version at last use | information          |
 | -------- | ----------------------------------------- | ---------------------- | -------------------- |
 | Ubuntu   | `lsb_release -a` or `cat /etc/os-release` | 22.04.4 LTS            | OS                   |
-| Linux    | `uname -r`                                | 5.15.0-113-generic     | Linux Kernel         |
-| VSCode   | `code -v`                                 | 1.90.2                 | IDE                  |
+| Linux    | `uname -r`                                | 5.15.0-119-generic     | Linux Kernel         |
+| VSCode   | `code -v`                                 | 1.93.2                 | IDE                  |
 | nvm      | `nvm -v`                                  | v0.39.7                | Node Version Manager |
 | Node     | `node -v` (old `nodejs --version`)        | v20.15.0               | NodeJS/ Node.js      |
 | npm      | `npm -v`                                  | v10.7.0                |                      |
@@ -310,6 +310,7 @@ Honorable mentions to people and projects that helped this project:
 Used services, dependencies and materials - besides the ones in `./package.json`:
 
 - [Low Poly Japanese Restaurant props & environment pack](https://www.artstation.com/marketplace/p/yB0RG/low-poly-japanese-restaurant-props-environment-pack)
+- [GitHub Copilot](https://github.com/features/copilot) was used in private mode for programming questions.
 
 ## License
 
