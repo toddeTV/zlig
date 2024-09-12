@@ -32,6 +32,7 @@ watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
 })
 </script>
 
+<!-- @pointer-missed="() => firePointerMissedEvent()" -->
 <template>
   <div class="h-full overflow-hidden relative">
     <TresCanvas

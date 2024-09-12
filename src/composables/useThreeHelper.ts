@@ -13,7 +13,7 @@ export default function () {
   }
 
   function addShadowAndAddToGroup(
-    group: Scene | Group,
+    group: Scene | Group | Object3D,
     object: Object3D,
   ) {
     addShadow(object)

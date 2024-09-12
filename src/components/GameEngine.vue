@@ -26,6 +26,7 @@ const cameraMoved = ref(false)
   <DistanceFog />
 
   <TresGroup
+    name="sceneGroup"
     @click="() => {
       if (!cameraMoved) {
         selectedBuildingLot.id = null
