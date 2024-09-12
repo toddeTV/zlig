@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply flex flex-col h-screen overflow-y-scroll;
+  @apply flex flex-col h-screen overflow-y-visible;
 }
 
 #app {
