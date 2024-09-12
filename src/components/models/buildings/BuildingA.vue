@@ -1,13 +1,29 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/buildings/a.gltf'
-import { computed } from 'vue'
+import useThreeHelper from '@/composables/useThreeHelper'
+import { useTresContext } from '@tresjs/core'
+import { computed, watch } from 'vue'
 import type { BuildingInstance } from '@/game-logic/buildings/types.js'
+import type { Object3D, Object3DEventMap, Vector3 } from 'three'
 
-const props = defineProps<{ buildingInstance: BuildingInstance }>()
+const props = defineProps<{
+  buildingInstance: BuildingInstance
+  position: Vector3
+}>()
+
+const { scene } = useTresContext()
+const { addShadowAndAddToGroup } = useThreeHelper()
 
 const { scenes: { Scene } } = await modelLoader
 
-const scale = computed(() => {
+const sceneGroup = scene.value.getObjectByName('sceneGroup') ?? scene.value
+
+const building = Scene.Scene.clone()
+building.position.copy(props.position)
+
+addShadowAndAddToGroup(sceneGroup, building)
+
+watch(() => props.buildingInstance.level, (newValue, _oldValue) => {
   // Building A has no level limit but we cannot simply scale it forever. Clamp the scale between 1.75 and 5 (for
   // level 100).
 
@@ -16,12 +32,12 @@ const scale = computed(() => {
 
   const minLevel = 0
   const maxLevel = 100
-  const levelProgress = Math.min(maxLevel, props.buildingInstance.level) / (maxLevel - minLevel)
+  const levelProgress = Math.min(maxLevel, newValue) / (maxLevel - minLevel)
 
-  return min + (max - min) * levelProgress
+  building.scale.setScalar(min + (max - min) * levelProgress)
 })
 </script>
 
+<!-- eslint-disable-next-line vue/valid-template-root -->
 <template>
-  <primitive :object="Scene.Scene.clone()" :scale />
 </template>
