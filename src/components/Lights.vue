@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useDebugStore from '@/composables/useDebugStore'
-import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
+import useVirtualTimeStore, { type TimeColorTransition } from '@/composables/useVirtualTimeStore'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { AmbientLight, CameraHelper, Color, DirectionalLight, Vector3 } from 'three'
@@ -8,7 +8,7 @@ import { onMounted, watch } from 'vue'
 
 const { scene } = useTresContext()
 const { showLightHelper } = storeToRefs(useDebugStore())
-const { calculateSunIntensity, calculateSunPosition } = useVirtualTimeStore()
+const { calculateSunIntensity, calculateSunPosition, getColorByTime } = useVirtualTimeStore()
 const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
 
 // -------- AmbientLight
@@ -52,10 +52,14 @@ watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
   // set ambient light intensity
   ambientLight.intensity = calculateSunIntensity(directionalLight.position, 0.1, 0.5)
 
-  // TODO
-  // // Adjust the light color based on the height of the "sun"
+  // TODO add light color adjustment based on the virtual time
+  // Adjust the light color based on the height of the "sun"
+  // const lightTransitions: TimeColorTransition[] = [
+  //   //...
+  // ]
+  // const colorRGB = getColorByTime(newValue, lightTransitions)
   // const color = new Color()
-  // color.setHSL(mapRange(normalizedYDirectional, 0, 1, 0.05, 0.15), 1, 0.5) // More red in the morning/evening, yellow at noon
+  // color.set(rgbToHex(colorRGB))
   // directionalLight.color.set(color)
 })
 
