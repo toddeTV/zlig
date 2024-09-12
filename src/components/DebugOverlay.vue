@@ -3,7 +3,7 @@ import useDebugStore from '@/composables/useDebugStore'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { storeToRefs } from 'pinia'
 
-const { showCameraHelper, showLightHelper } = storeToRefs(useDebugStore())
+const { showCameraHelper, showFog, showLightHelper } = storeToRefs(useDebugStore())
 const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
 
 function formatTime(date: Date) {
@@ -48,7 +48,7 @@ function formatTime(date: Date) {
       >show Camera Helper</label>
     </div>
 
-    <!-- <div class="group">
+    <div class="group">
       <input
         id="showFog"
         v-model="showFog"
@@ -59,7 +59,7 @@ function formatTime(date: Date) {
         class="cursor-pointer group-hover:text-blue-400 select-none ml-1"
         for="showFog"
       >show fog</label>
-    </div> -->
+    </div>
   </div>
 </template>
 

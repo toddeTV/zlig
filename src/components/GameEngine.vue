@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import DistanceFog from '@/components/DistanceFog.vue'
 import useRegisteredForSelectingModelStore from '@/composables/useRegisteredForSelectingModelStore'
 import useClickedModelNodeStore from '@/composables/useSelectedModelsStore'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
 import CameraAndControls from './CameraAndControls.vue'
-import DistanceFog from './DistanceFog.vue'
 import Lights from './Lights.vue'
 import Island from './models/Island.vue'
 import VisualHelper from './VisualHelper.vue'
@@ -39,7 +39,7 @@ function onNodeClick(
   <DistanceFog />
 
   <TresGroup
-    @click="(e) => onNodeClick(e)"
+    @click="(e: TresJsClickEvent) => onNodeClick(e)"
   >
     <Suspense>
       <Island
