@@ -6,7 +6,7 @@ import { AmbientLight, CameraHelper, DirectionalLight } from 'three'
 import { watch } from 'vue'
 
 const { scene } = useTresContext()
-const { isDebugLights } = storeToRefs(useDebugStore())
+const { showLightHelper } = storeToRefs(useDebugStore())
 
 const ambientLight = new AmbientLight(0xFFFFFF, 0.6)
 scene.value.add(ambientLight)
@@ -34,7 +34,7 @@ directionalLight.shadow.camera.bottom = -15
 scene.value.add(directionalLight)
 
 const helper = new CameraHelper(directionalLight.shadow.camera)
-watch(() => isDebugLights.value, (newValue, _oldValue) => {
+watch(() => showLightHelper.value, (newValue, _oldValue) => {
   updateHelperVisibility(newValue)
 })
 function updateHelperVisibility(isVisible: boolean) {
@@ -42,7 +42,7 @@ function updateHelperVisibility(isVisible: boolean) {
   if (isVisible === true)
     scene.value.add(helper)
 }
-updateHelperVisibility(isDebugLights.value)
+updateHelperVisibility(showLightHelper.value)
 </script>
 
 <!-- eslint-disable-next-line vue/valid-template-root -->

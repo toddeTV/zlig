@@ -8,7 +8,7 @@ import { onMounted, ref, watch } from 'vue'
 import type { CameraControlsProps } from '@tresjs/cientos/dist/core/controls/CameraControls.vue.js'
 
 const { scene, setCameraActive } = useTresContext()
-const { isDebugCamera } = storeToRefs(useDebugStore())
+const { showCameraHelper } = storeToRefs(useDebugStore())
 
 const cameraControls = ref<InstanceType<typeof CameraControls>>()
 
@@ -78,7 +78,7 @@ onMounted(() => {
 const perspectiveCameraHelper = ref()
 const cameraHelper = new CameraHelper(perspectiveCamera)
 const boxHelper = new Box3Helper(cameraBoundary)
-watch(() => isDebugCamera.value, (newValue, _oldValue) => {
+watch(() => showCameraHelper.value, (newValue, _oldValue) => {
   updateHelperVisibility(newValue)
 })
 function updateHelperVisibility(isVisible: boolean) {
@@ -93,7 +93,7 @@ function updateHelperVisibility(isVisible: boolean) {
     scene.value.add(boxHelper)
   }
 }
-updateHelperVisibility(isDebugCamera.value)
+updateHelperVisibility(showCameraHelper.value)
 </script>
 
 <template>

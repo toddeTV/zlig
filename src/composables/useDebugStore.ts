@@ -2,13 +2,13 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export default defineStore('debugStore', () => {
-  const isDebugLights = ref(false)
-  const isDebugCamera = ref(false)
-  const isDebugFog = ref(true)
+  const showLightHelper = ref(false)
+  const showCameraHelper = ref(false)
+  const showFog = ref(true)
 
   return {
-    isDebugCamera,
-    isDebugFog,
-    isDebugLights,
+    showCameraHelper,
+    showFog,
+    showLightHelper,
   }
 })
