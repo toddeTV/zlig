@@ -59,7 +59,7 @@
     "@vue/eslint-config-typescript": "13.0.0",
     "@vue/tsconfig": "0.5.1",
     "autoprefixer": "10.4.20",
-    "big.js": "6.2.1",
+    "big.js": "6.2.2",
     "eslint": "9.10.0",
     "eslint-plugin-format": "0.1.2",
     "eslint-plugin-perfectionist": "3.5.0",
