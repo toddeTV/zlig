@@ -2,9 +2,9 @@
 import modelLoader from '@/assets/models/buildings/a.gltf'
 import useThreeHelper from '@/composables/useThreeHelper'
 import { useTresContext } from '@tresjs/core'
-import { computed, watch } from 'vue'
+import { watch } from 'vue'
 import type { BuildingInstance } from '@/game-logic/buildings/types.js'
-import type { Object3D, Object3DEventMap, Vector3 } from 'three'
+import type { Vector3 } from 'three'
 
 const props = defineProps<{
   buildingInstance: BuildingInstance
