@@ -58,7 +58,7 @@ async function getAllModels() {
       continue
     }
 
-    const fullPath = resolve(file.parentPath, file.name)
+    const fullPath = resolve(file.path, file.name)
     const projectRelativePath = join(modelScanDirectory, relative(modelScanDirectory, fullPath))
 
     models.push({

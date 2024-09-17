@@ -14,6 +14,7 @@ export const well: BuildingType = {
       additionalPerLevel: new ResourceRecord({ gold: new Big('2.5') }),
       initial: new ResourceRecord({ gold: new Big('7') }),
     },
+    // @ts-expect-error TODO fix
     getModel: () => null, // TODO: provide real model
     income: {
       additionalPerLevel: new ResourceRecord({ gold: new Big('0.7') }),
