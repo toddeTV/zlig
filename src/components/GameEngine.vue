@@ -6,6 +6,7 @@ import type { TresJsClickEvent } from '@/types/TresJsClickEvent'
 import CameraAndControls from './CameraAndControls.vue'
 import Lights from './Lights.vue'
 import Island from './models/Island.vue'
+import Ocean from './models/Ocean.vue'
 import VisualHelper from './VisualHelper.vue'
 
 const clickedModelNodeStore = useClickedModelNodeStore()
@@ -43,6 +44,11 @@ function onNodeClick(
   >
     <Suspense>
       <Island
+        :position="[0, 0, 0]"
+      />
+    </Suspense>
+    <Suspense>
+      <Ocean
         :position="[0, 0, 0]"
       />
     </Suspense>
