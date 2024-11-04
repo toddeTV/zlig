@@ -24,12 +24,12 @@ varying vec2 vUv;
 uniform float time;
 
 void main() {
-  // Animierte Wellenbewegung
+  // Animated wave movement
   vec3 pos = position;
   pos.z += sin(pos.x * 4.0 + time) * 0.1;
   pos.z += sin(pos.y * 4.0 + time * 0.5) * 0.2;
 
-  // Verwende die normale Vertex-Normale für das Lighting
+  // Use the normal vertex normal for lighting
   vNormal = normal;
 
   vUv = uv;
@@ -42,10 +42,10 @@ varying vec3 vNormal;
 varying vec2 vUv;
 
 void main() {
-  // Einfaches Shading basierend auf der Normalenrichtung
+  // Simple shading based on the normal direction
   float light = dot(vNormal, vec3(0.0, 0.0, 1.0)) * 0.5 + 0.5;
 
-  // Farbe des Wassers (hier ein einfaches Blau)
+  // Water color (simple blue here)
   vec3 waterColor = vec3(0.0, 0.5, 0.7);
   gl_FragColor = vec4(waterColor * light, 1.0);
 }
@@ -65,7 +65,7 @@ const waterMaterial = new ShaderMaterial({
 const geometry = new PlaneGeometry(200, 200, 100, 100)
 const waterMesh = new Mesh(geometry, waterMaterial)
 waterMesh.rotation.x = -Math.PI / 2 // rotate the water
-waterMesh.receiveShadow = true
+waterMesh.receiveShadow = true // TODO fix bc this is not working
 // sceneGroup.add(waterMesh)
 // addShadowAndAddToGroup(sceneGroup, waterMesh)
 
@@ -79,10 +79,9 @@ watch(showWaterShader, () => {
   sceneGroup.remove(waterMesh)
   if (showWaterShader.value) {
     sceneGroup.add(waterMesh)
+    return
   }
-  else {
-    sceneGroup.add(oceanScene.Object.ocean)
-  }
+  sceneGroup.add(oceanScene.Object.ocean)
 }, {
   immediate: true,
 })
