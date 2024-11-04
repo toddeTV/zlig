@@ -47,7 +47,13 @@ void main() {
 
   // Water color (simple blue here)
   vec3 waterColor = vec3(0.0, 0.5, 0.7);
-  gl_FragColor = vec4(waterColor * light, 1.0);
+
+  // Calculate opacity based on a base opacity (0.6) and depth variation
+  float depthFactor = gl_FragCoord.z * 0.4; // 0.4 adjusts the intensity of the effect
+  float opacity = 0.6 - depthFactor;
+
+  // Set color and opacity
+  gl_FragColor = vec4(waterColor * light, opacity);
 }
 `
 
@@ -57,6 +63,7 @@ const uniforms = {
 
 const waterMaterial = new ShaderMaterial({
   fragmentShader,
+  transparent: true,
   uniforms,
   vertexShader,
   wireframe: false,
