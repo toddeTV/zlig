@@ -72,7 +72,7 @@ const waterMaterial = new ShaderMaterial({
 const geometry = new PlaneGeometry(200, 200, 100, 100)
 const waterMesh = new Mesh(geometry, waterMaterial)
 waterMesh.rotation.x = -Math.PI / 2 // rotate the water
-waterMesh.receiveShadow = true // TODO fix bc this is not working
+addShadow(waterMesh, 'receive') // TODO fix bc this is not working
 // sceneGroup.add(waterMesh)
 // addShadowAndAddToGroup(sceneGroup, waterMesh)
 
