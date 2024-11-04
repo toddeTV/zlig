@@ -49,8 +49,8 @@ void main() {
   vec3 waterColor = vec3(0.0, 0.5, 0.7);
 
   // Calculate opacity based on a base opacity (0.6) and depth variation
-  float depthFactor = gl_FragCoord.z * 0.4; // 0.4 adjusts the intensity of the effect
-  float opacity = 0.6 - depthFactor;
+  float depthFactor = gl_FragCoord.z * 0.4; // adjusts the intensity of the effect
+  float opacity = 0.8 - depthFactor;
 
   // Set color and opacity
   gl_FragColor = vec4(waterColor * light, opacity);
