@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import modelLoader from '@/assets/models/buildings/a.gltf'
+import modelLoader from '@/assets/models/buildings/TestBuilding/TestBuilding.gltf'
 import useThreeHelper from '@/composables/useThreeHelper'
 import { useTresContext } from '@tresjs/core'
 import { watch } from 'vue'
-import type { BuildingInstance } from '@/game-logic/buildings/types.js'
+import type { BuildingInstance } from '@/game-logic/types.js'
 import type { Vector3 } from 'three'
 
 const props = defineProps<{
@@ -25,17 +25,8 @@ building.position.copy(props.position)
 addShadowAndAddToGroup(sceneGroup, building)
 
 watch(() => props.buildingInstance.level, (newValue, _oldValue) => {
-  // Building A has no level limit but we cannot simply scale it forever. Clamp the scale between 1.75 and 5 (for
-  // level 100).
-
-  const min = 1.75
-  const max = 5
-
-  const minLevel = 0
-  const maxLevel = 100
-  const levelProgress = Math.min(maxLevel, newValue) / (maxLevel - minLevel)
-
-  building.scale.setScalar(min + (max - min) * levelProgress)
+  // scale size infinitely linearly
+  building.scale.setScalar(2 * newValue)
 })
 </script>
 
