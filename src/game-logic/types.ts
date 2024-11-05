@@ -7,14 +7,17 @@ export type BuildingType = Readonly<{
    * An internal identifier.
    */
   id: string
+
   /**
    * The display name of the building type.
    */
   name: string
+
   /**
    * Determines the available building levels with costs and benefits.
    */
   levelProgression: LevelProgression
+
   /**
    * Determines the maximum allowed buildings to place of this type.
    */
@@ -44,6 +47,7 @@ export type BuildingState = BuildingStateInConstruction | BuildingStateUpgrading
 export type BuildingStateInConstruction = Readonly<{
   state: 'in-construction'
   level: 0
+
   /**
    * The seconds left when the building will be finished and reach level 1.
    */
@@ -57,10 +61,12 @@ export type BuildingStateInConstruction = Readonly<{
  */
 export type BuildingStateUpgrading = Readonly<{
   state: 'upgrading'
+
   /**
    * The level of the building before upgrading started.
    */
   level: number
+
   /**
    * The seconds left when the building will reach the next level.
    */
@@ -72,10 +78,12 @@ export type BuildingStateUpgrading = Readonly<{
  */
 export type BuildingStateProducing = Readonly<{
   state: 'producing'
+
   /**
    * The current level of the building.
    */
   level: number
+
   /**
    * The internal buffer to handle fractional produced resources.
    */
