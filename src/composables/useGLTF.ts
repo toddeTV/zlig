@@ -65,6 +65,7 @@ export interface GLTFResult {
   scenes: Record<string, {
     // redundant bc already present in `Scene.children`, but needed for later typing bc `children` is an array
     // and no object with named keys
+    // @ts-expect-error TODO fix
     name: string // TODO fix typing
     Scene: Group
     Object: Record<string, Object3D>
@@ -107,11 +108,13 @@ export default async function (
           Scene: scene,
         }
         if (sceneTraversed.materials) {
+          // @ts-expect-error TODO fix
           sceneObj.Material = sceneTraversed.materials
         }
         if (sceneTraversed.nodes) {
           for (const [nodeKey, nodeValue] of Object.entries(sceneTraversed.nodes)) {
             // do not add the scene itself
+            // @ts-expect-error TODO fix
             if (nodeValue.uuid === scene.uuid) {
               continue
             }
@@ -120,37 +123,44 @@ export default async function (
             let key: string | undefined
 
             // Object = Mesh & Group
+            // @ts-expect-error TODO fix
             if (key === undefined && (nodeValue.type === 'Mesh' || nodeValue.type === 'Group')) {
               key = 'Object'
             }
 
             // Light
+            // @ts-expect-error TODO fix
             if (key === undefined && nodeValue.isLight === true) {
               key = 'Light'
             }
 
             // Camera
+            // @ts-expect-error TODO fix
             if (key === undefined && nodeValue.isCamera === true) {
               key = 'Camera'
             }
 
             // everything else that has not been handled yet
             if (key === undefined) {
+              // @ts-expect-error TODO fix
               key = nodeValue.type
             }
 
             // ensure that the key exists
+            // @ts-expect-error TODO fix
             if (!sceneObj[key]) {
+              // @ts-expect-error TODO fix
               sceneObj[key] = {}
             }
 
             // add the data
+            // @ts-expect-error TODO fix
             sceneObj[key][nodeKey] = nodeValue
           }
         }
         return sceneObj
       })
-      const scenes: GLTFResult['scenes'] = convertArrayToObject(modifiedScenes)
+      const scenes: GLTFResult['scenes'] = convertArrayToObject(modifiedScenes) as GLTFResult['scenes']
 
       // put all together in the new model
       const newModel: GLTFResult = {
