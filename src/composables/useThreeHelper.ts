@@ -17,17 +17,25 @@ export default function () {
     }
   }
 
+  function addToGroup(
+    group: Scene | Group | Object3D,
+    object: Object3D,
+  ) {
+    group.add(object)
+  }
+
   function addShadowAndAddToGroup(
     group: Scene | Group | Object3D,
     object: Object3D,
     shadowMode: 'both' | 'cast' | 'receive' = 'both',
   ) {
     addShadow(object, shadowMode)
-    group.add(object)
+    addToGroup(group, object)
   }
 
   return {
     addShadow,
     addShadowAndAddToGroup,
+    addToGroup,
   }
 }
