@@ -12,7 +12,7 @@ export default defineStore('buildingLots', () => {
       const { scenes: { Island } } = await modelLoader
 
       Island.Scene.traverse((obj) => {
-        if (obj.userData.is_building_place && obj.name) {
+        if (obj.userData.is_building_area && obj.name) {
           buildingLots.value.push({ id: obj.name, position: obj.position })
         }
       })
