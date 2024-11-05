@@ -10,6 +10,7 @@ export const windmill: BuildingType = {
       baseBuildingSeconds: new Big('5.5'),
       baseCosts: new ResourceRecord({ gold: new Big('15') }),
       baseIncomePerSecond: new ResourceRecord({ gold: new Big('1') }),
+      // @ts-expect-error TODO fix
       model: null, // TODO: provide real model
     },
     {
