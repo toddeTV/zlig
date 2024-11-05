@@ -12,7 +12,7 @@ const { scene } = useTresContext()
 const { addShadow } = useThreeHelper()
 const { scenes } = await modelLoader
 const { render } = useLoop()
-const { showWaterShader } = storeToRefs(useDebugStore())
+const { showWaterWireframe } = storeToRefs(useDebugStore())
 
 const sceneGroup = scene.value.getObjectByName('sceneGroup') ?? scene.value
 const oceanScene = scenes.Ocean
@@ -28,7 +28,7 @@ const waterMaterial = new ShaderMaterial({
   transparent: true,
   uniforms,
   vertexShader,
-  wireframe: false,
+  wireframe: false, // TODO bind to `showWaterWireframe.value`
 })
 
 const geometry = new PlaneGeometry(200, 200, 100, 100)
@@ -43,10 +43,10 @@ render(({ camera, renderer, scene }) => {
   renderer.render(scene, camera)
 })
 
-watch(showWaterShader, () => {
+watch(showWaterWireframe, () => {
   sceneGroup.remove(oceanScene.Object.ocean)
   sceneGroup.remove(waterMesh)
-  if (showWaterShader.value) {
+  if (showWaterWireframe.value) {
     sceneGroup.add(waterMesh)
     return
   }
