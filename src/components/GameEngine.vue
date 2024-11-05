@@ -7,6 +7,7 @@ import CameraAndControls from './CameraAndControls.vue'
 import DistanceFog from './DistanceFog.vue'
 import Lights from './Lights.vue'
 import Island from './models/Island.vue'
+import Ocean from './models/Ocean.vue'
 import VisualHelper from './VisualHelper.vue'
 
 const buildingLots = useBuildingLots()
@@ -44,6 +45,11 @@ const cameraMoved = ref(false)
         :id="lot.id"
         :key="lot.id"
         :position="lot.position"
+      />
+    </Suspense>
+    <Suspense>
+      <Ocean
+        :position="[0, 0, 0]"
       />
     </Suspense>
   </TresGroup>
