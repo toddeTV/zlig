@@ -3,13 +3,13 @@ import modelLoader from '@/assets/models/buildings/TestBuilding/TestBuilding.glt
 import { addShadowAndAddToGroup } from '@/utils/threeHelper'
 import { useTresContext } from '@tresjs/core'
 import { watch } from 'vue'
-import type { BuildingInstance } from '@/game-logic/types.js'
+import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
 import type { Vector3 } from 'three'
 
 const props = defineProps<{
   buildingInstance: BuildingInstance
   position: Vector3
-  buildingAreaId: number
+  buildingAreaId: BuildingAreaId
 }>()
 
 const { scene } = useTresContext()
