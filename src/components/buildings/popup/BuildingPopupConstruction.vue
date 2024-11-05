@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import ProgressBar from '@/components/ui/ProgressBar.vue'
 import useGameState from '@/composables/useGameState.js'
-import type { BuildingLotId, BuildingStateInConstruction, BuildingType } from '@/game-logic/types.js'
+import type { BuildingAreaId, BuildingStateInConstruction, BuildingType } from '@/game-logic/types.js'
 import BasePopupWrapper from './BasePopupWrapper.vue'
 
 const props = defineProps<{
-  lotId: BuildingLotId
+  areaId: BuildingAreaId
   buildingType: BuildingType
   state: BuildingStateInConstruction
 }>()
@@ -16,7 +16,7 @@ const gameState = useGameState()
 const totalBuildingSeconds = props.buildingType.levelProgression.getBaseBuildingSecondsForLevel(1)
 
 function cancelBuild() {
-  gameState.buildings[props.lotId] = undefined
+  gameState.buildings[props.areaId] = undefined
 }
 </script>
 

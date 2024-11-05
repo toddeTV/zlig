@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import Resources from '@/components/ui/Resources.vue'
 import useGameState from '@/composables/useGameState.js'
-import type { BuildingLotId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
+import type { BuildingAreaId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
 import BasePopupWrapper from './BasePopupWrapper.vue'
 
 const props = defineProps<{
-  lotId: BuildingLotId
+  areaId: BuildingAreaId
   buildingType: BuildingType
   state: BuildingStateProducing
 }>()
@@ -60,7 +60,7 @@ function upgrade() {
 
   gameState.resources.remove(getUpgradeCosts().round())
 
-  gameState.buildings[props.lotId] = {
+  gameState.buildings[props.areaId] = {
     level: props.state.level,
     secondsRemaining: getUpgradeBuildingSeconds(),
     state: 'upgrading',
@@ -70,7 +70,7 @@ function upgrade() {
 
 function destroy() {
   // TODO remove building model
-  gameState.buildings[props.lotId] = undefined
+  gameState.buildings[props.areaId] = undefined
 }
 </script>
 

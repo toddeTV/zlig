@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import useGameState from '@/composables/useGameState.js'
 import { useLoop } from '@tresjs/core'
-import type { BuildingLotId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
+import type { BuildingAreaId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
-  lotId: BuildingLotId
+  areaId: BuildingAreaId
   buildingType: BuildingType
   state: BuildingStateProducing
 }>()
@@ -33,7 +33,7 @@ onBeforeRender((event) => {
   buffer = buffer.minus(produced)
 
   gameState.resources.add(produced)
-  gameState.buildings[props.lotId] = {
+  gameState.buildings[props.areaId] = {
     internalBuffer: buffer,
     level: props.state.level,
     state: 'producing',

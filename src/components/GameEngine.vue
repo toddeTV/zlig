@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import useBuildingLots from '@/composables/useBuildingLots.js'
-import useSelectedBuildingLot from '@/composables/useSelectedBuildingLot.js'
+import useBuildingAreas from '@/composables/useBuildingAreas.js'
+import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { ref } from 'vue'
-import BuildingLot from './buildings/BuildingLot.vue'
+import BuildingArea from './buildings/BuildingArea.vue'
 import CameraAndControls from './CameraAndControls.vue'
 import DistanceFog from './DistanceFog.vue'
 import Lights from './Lights.vue'
@@ -10,10 +10,10 @@ import Island from './models/Island.vue'
 import Ocean from './models/Ocean.vue'
 import VisualHelper from './VisualHelper.vue'
 
-const buildingLots = useBuildingLots()
-buildingLots.init()
+const BuildingAreas = useBuildingAreas()
+BuildingAreas.init()
 
-const selectedBuildingLot = useSelectedBuildingLot()
+const selectedBuildingArea = useSelectedBuildingArea()
 
 const cameraMoved = ref(false)
 </script>
@@ -30,7 +30,7 @@ const cameraMoved = ref(false)
     name="sceneGroup"
     @click="() => {
       if (!cameraMoved) {
-        selectedBuildingLot.id = null
+        selectedBuildingArea.id = null
       }
     }"
     @pointer-down="() => cameraMoved = false"
@@ -40,11 +40,11 @@ const cameraMoved = ref(false)
     </Suspense>
 
     <Suspense>
-      <BuildingLot
-        v-for="lot in buildingLots.lots"
-        :id="lot.id"
-        :key="lot.id"
-        :position="lot.position"
+      <BuildingArea
+        v-for="area in BuildingAreas.areas"
+        :id="area.id"
+        :key="area.id"
+        :position="area.position"
       />
     </Suspense>
     <Suspense>

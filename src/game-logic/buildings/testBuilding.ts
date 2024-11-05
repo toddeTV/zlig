@@ -9,8 +9,8 @@ const building: BuildingType = {
   id: 'testBuilding',
   levelProgression: new LinearLevelProgression({
     buildingSeconds: {
-      additionalPerLevel: new Big('20'),
-      initial: new Big('3'),
+      additionalPerLevel: new Big('2'),
+      initial: new Big('5'),
     },
     costs: {
       additionalPerLevel: new ResourceRecord(),

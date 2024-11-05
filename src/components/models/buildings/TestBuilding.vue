@@ -9,14 +9,14 @@ import type { Vector3 } from 'three'
 const props = defineProps<{
   buildingInstance: BuildingInstance
   position: Vector3
-  buildingLotId: number
+  buildingAreaId: number
 }>()
 
 const { scene } = useTresContext()
 
 const { scenes: { TestBuilding } } = await modelLoader
 
-const sceneGroup = scene.value.getObjectByName(`building-lot-${props.buildingLotId}`) ?? scene.value
+const sceneGroup = scene.value.getObjectByName(`building-area-${props.buildingAreaId}`) ?? scene.value
 
 const building = TestBuilding.Scene.clone()
 building.position.copy(props.position)

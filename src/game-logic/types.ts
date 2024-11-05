@@ -28,7 +28,7 @@ export type BuildingType = Readonly<{
 }>
 
 // TODO: Make this more type safe.
-export type BuildingLotId = string
+export type BuildingAreaId = string
 
 export type BuildingInstance = {
   /**

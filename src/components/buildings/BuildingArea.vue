@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Island/Island.gltf'
 import useGameState from '@/composables/useGameState.js'
-import useSelectedBuildingLot from '@/composables/useSelectedBuildingLot.js'
+import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { Html } from '@tresjs/cientos'
 import { Vector3 } from 'three'
 import { computed } from 'vue'
-import type { BuildingLotId } from '@/game-logic/types.js'
+import type { BuildingAreaId } from '@/game-logic/types.js'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
 import ConstructionSite from '../models/buildings/ConstructionSite.vue'
 import ProgressBar from '../ui/ProgressBar.vue'
@@ -18,22 +18,22 @@ import BuildingPopupProducing from './popup/BuildingPopupProducing.vue'
 import BuildingPopupUpgrading from './popup/BuildingPopupUpgrading.vue'
 
 const props = defineProps<{
-  id: BuildingLotId
+  id: BuildingAreaId
   position: Vector3
 }>()
 
 const { scenes: { Island } } = await modelLoader
 
 const gameState = useGameState()
-const selectedBuildingLot = useSelectedBuildingLot()
+const selectedBuildingArea = useSelectedBuildingArea()
 
 const buildingInstance = computed(() => gameState.buildings[props.id])
-const isSelected = computed(() => selectedBuildingLot.id === props.id)
+const isSelected = computed(() => selectedBuildingArea.id === props.id)
 
 function onClick(e: TresJsClickEvent) {
   e.stopPropagation()
 
-  selectedBuildingLot.id = props.id
+  selectedBuildingArea.id = props.id
 }
 
 function getPopupHeightOffset() {
@@ -59,25 +59,25 @@ function getPopupHeightOffset() {
 <template>
   <ConstructingBehavior
     v-if="buildingInstance?.state === 'in-construction'"
+    :area-id="props.id"
     :building-type="buildingInstance.type"
-    :lot-id="props.id"
     :state="buildingInstance"
   />
   <UpgradingBehavior
     v-else-if="buildingInstance?.state === 'upgrading'"
+    :area-id="props.id"
     :building-type="buildingInstance.type"
-    :lot-id="props.id"
     :state="buildingInstance"
   />
   <ProducingBehavior
     v-else-if="buildingInstance?.state === 'producing'"
+    :area-id="props.id"
     :building-type="buildingInstance.type"
-    :lot-id="props.id"
     :state="buildingInstance"
   />
 
   <TresGroup
-    :name="`building-lot-${props.id}`"
+    :name="`building-area-${props.id}`"
     @click="(e: TresJsClickEvent) => onClick(e)"
   >
     <ConstructionSite
@@ -87,8 +87,8 @@ function getPopupHeightOffset() {
     <component
       :is="buildingInstance.type.levelProgression.getModelForLevel(buildingInstance.level)"
       v-else-if="buildingInstance"
+      :building-area-id="props.id"
       :building-instance
-      :building-lot-id="props.id"
       :position="props.position"
     />
     <primitive
@@ -103,25 +103,25 @@ function getPopupHeightOffset() {
     >
       <BuildingPopupConstruction
         v-if="buildingInstance?.state === 'in-construction'"
+        :area-id="props.id"
         :building-type="buildingInstance.type"
-        :lot-id="props.id"
         :state="buildingInstance"
       />
       <BuildingPopupUpgrading
         v-else-if="buildingInstance?.state === 'upgrading'"
+        :area-id="props.id"
         :building-type="buildingInstance.type"
-        :lot-id="props.id"
         :state="buildingInstance"
       />
       <BuildingPopupProducing
         v-else-if="buildingInstance?.state === 'producing'"
+        :area-id="props.id"
         :building-type="buildingInstance.type"
-        :lot-id="props.id"
         :state="buildingInstance"
       />
       <BuildingPopupEmpty
         v-else
-        :lot-id="props.id"
+        :area-id="props.id"
       />
     </Html>
 
