@@ -15,11 +15,11 @@ const props = defineProps<{
 const { scene } = useTresContext()
 const { addShadowAndAddToGroup } = useThreeHelper()
 
-const { scenes: { Scene } } = await modelLoader
+const { scenes: { TestBuilding } } = await modelLoader
 
 const sceneGroup = scene.value.getObjectByName(`building-lot-${props.buildingLotId}`) ?? scene.value
 
-const building = Scene.Scene.clone()
+const building = TestBuilding.Scene.clone()
 building.position.copy(props.position)
 
 addShadowAndAddToGroup(sceneGroup, building)
