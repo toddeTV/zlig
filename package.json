@@ -36,7 +36,7 @@
     "build": "run-p \"type-check\" \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force",
+    "test:types": "vue-tsc --build --force",
     "postinstall": "run-s \"generate:gltf-models\"",
     "generate:gltf-models": "tsx tools/generate-model-types.ts",
     "lint": "eslint .",
