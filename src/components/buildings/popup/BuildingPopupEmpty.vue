@@ -2,7 +2,7 @@
 import Resources from '@/components/ui/Resources.vue'
 import useGameState from '@/composables/useGameState.js'
 import { buildingTypes } from '@/game-logic/buildings/index.js'
-import type { BuildingLotId, BuildingType } from '@/game-logic/buildings/types.js'
+import type { BuildingLotId, BuildingType } from '@/game-logic/types.js'
 import BasePopupWrapper from './BasePopupWrapper.vue'
 
 const props = defineProps<{ lotId: BuildingLotId }>()
@@ -60,7 +60,9 @@ function build(type: BuildingType) {
 }
 
 // TODO: Do not restrict this.
-const availableBuildings = [buildingTypes.a, buildingTypes.b]
+const availableBuildings = [
+  buildingTypes.testBuilding,
+]
 </script>
 
 <template>

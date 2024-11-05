@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Resources from '@/components/ui/Resources.vue'
 import useGameState from '@/composables/useGameState.js'
-import type { BuildingLotId, BuildingStateProducing, BuildingType } from '@/game-logic/buildings/types.js'
+import type { BuildingLotId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
 import BasePopupWrapper from './BasePopupWrapper.vue'
 
 const props = defineProps<{

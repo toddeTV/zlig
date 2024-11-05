@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ProgressBar from '@/components/ui/ProgressBar.vue'
 import useGameState from '@/composables/useGameState.js'
-import type { BuildingLotId, BuildingStateInConstruction, BuildingType } from '@/game-logic/buildings/types.js'
+import type { BuildingLotId, BuildingStateInConstruction, BuildingType } from '@/game-logic/types.js'
 import BasePopupWrapper from './BasePopupWrapper.vue'
 
 const props = defineProps<{

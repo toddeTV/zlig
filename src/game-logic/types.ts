@@ -1,4 +1,4 @@
-import type { LevelProgression } from '@/game-logic/buildings/level-progression.js'
+import type { LevelProgression } from '@/game-logic/level-progression.js'
 import type { ResourceRecord } from '@/game-logic/resources.js'
 import type { Component } from 'vue'
 

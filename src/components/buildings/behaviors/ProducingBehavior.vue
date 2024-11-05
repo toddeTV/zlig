@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import useGameState from '@/composables/useGameState.js'
 import { useLoop } from '@tresjs/core'
-import type { BuildingLotId, BuildingStateProducing, BuildingType } from '@/game-logic/buildings/types.js'
+import type { BuildingLotId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
   lotId: BuildingLotId

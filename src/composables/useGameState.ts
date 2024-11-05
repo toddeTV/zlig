@@ -2,7 +2,7 @@ import { ResourceRecord } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import type { BuildingInstance, BuildingLotId } from '@/game-logic/buildings/types.js'
+import type { BuildingInstance, BuildingLotId } from '@/game-logic/types.js'
 
 export default defineStore('gameState', () => {
   return {
