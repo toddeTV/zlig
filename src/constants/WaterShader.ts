@@ -1,3 +1,5 @@
+import { ShaderMaterial } from 'three'
+
 export const vertexShader = `
 varying vec3 vNormal;
 varying vec2 vUv;
@@ -36,3 +38,16 @@ void main() {
   gl_FragColor = vec4(waterColor * light, opacity);
 }
 `
+
+export function getWaterMaterial() {
+  const waterMaterial = new ShaderMaterial({
+    fragmentShader,
+    transparent: true,
+    uniforms: { // init, must be set in the render loop
+      time: { value: 0.0 },
+    },
+    vertexShader,
+    wireframe: false,
+  })
+  return waterMaterial
+}
