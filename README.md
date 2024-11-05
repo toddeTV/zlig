@@ -70,6 +70,10 @@ In the browser install:
 6. Install dependencies: `pnpm i`
 7. Happy coding <3
 
+### namings
+
+- we use it `building area` (not `building lot` nor `building place`).
+
 ### lint and prettier
 
 This project uses [antfu/eslint-config](https://github.com/antfu/eslint-config) for eslint most of the files.
@@ -104,9 +108,9 @@ Tipp: Favorite them and use the search over all item collections at once: https:
 | `Material Design Icons` | `mdi`     | Apache 2.0 (commercial use is allowed, no attribution required) |                |
 | `Material Line Icons`   | `line-md` | MIT                                                             | animated icons |
 
-### Blender
+### Blender (as software for working with 3D models)
 
-Models are created using [Blender](https://www.blender.org/).
+Models are created and edited using the software [Blender](https://www.blender.org/).
 
 #### glTF export with draco compression
 

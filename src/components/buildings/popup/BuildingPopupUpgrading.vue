@@ -2,11 +2,11 @@
 import ProgressBar from '@/components/ui/ProgressBar.vue'
 import useGameState from '@/composables/useGameState.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
-import type { BuildingLotId, BuildingStateUpgrading, BuildingType } from '@/game-logic/types.js'
+import type { BuildingAreaId, BuildingStateUpgrading, BuildingType } from '@/game-logic/types.js'
 import BasePopupWrapper from './BasePopupWrapper.vue'
 
 const props = defineProps<{
-  lotId: BuildingLotId
+  areaId: BuildingAreaId
   buildingType: BuildingType
   state: BuildingStateUpgrading
 }>()
@@ -17,7 +17,7 @@ const gameState = useGameState()
 const totalBuildingSeconds = props.buildingType.levelProgression.getBaseBuildingSecondsForLevel(props.state.level + 1)
 
 function cancelUpgrade() {
-  gameState.buildings[props.lotId] = {
+  gameState.buildings[props.areaId] = {
     // TODO: Approve that it is ok to loose progress when canceling an upgrade.
     internalBuffer: new ResourceRecord(),
     level: props.state.level,

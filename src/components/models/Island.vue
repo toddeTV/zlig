@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Island/Island.gltf'
-import useThreeHelper from '@/composables/useThreeHelper'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper'
 import { useTresContext } from '@tresjs/core'
 
 const { scene } = useTresContext()
-const { addShadowAndAddToGroup } = useThreeHelper()
 const { scenes } = await modelLoader
 
 addShadowAndAddToGroup(scene.value, scenes.Island.Scene)

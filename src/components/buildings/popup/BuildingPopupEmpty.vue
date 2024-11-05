@@ -2,10 +2,10 @@
 import Resources from '@/components/ui/Resources.vue'
 import useGameState from '@/composables/useGameState.js'
 import { buildingTypes } from '@/game-logic/buildings/index.js'
-import type { BuildingLotId, BuildingType } from '@/game-logic/types.js'
+import type { BuildingAreaId, BuildingType } from '@/game-logic/types.js'
 import BasePopupWrapper from './BasePopupWrapper.vue'
 
-const props = defineProps<{ lotId: BuildingLotId }>()
+const props = defineProps<{ areaId: BuildingAreaId }>()
 
 const gameState = useGameState()
 
@@ -51,7 +51,7 @@ function build(type: BuildingType) {
 
   gameState.resources.remove(getCosts(type).round())
 
-  gameState.buildings[props.lotId] = {
+  gameState.buildings[props.areaId] = {
     level: 0,
     secondsRemaining: getBuildingSeconds(type),
     state: 'in-construction',
@@ -66,7 +66,7 @@ const availableBuildings = [
 </script>
 
 <template>
-  <BasePopupWrapper title="Empty building lot">
+  <BasePopupWrapper title="Empty building area">
     <div class="flex flex-wrap gap-4">
       <div v-for="type of availableBuildings" :key="type.name" class="border rounded p-2 flex flex-col gap-2">
         <p class="font-bold">

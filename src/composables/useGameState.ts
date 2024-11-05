@@ -2,7 +2,7 @@ import { ResourceRecord } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import type { BuildingInstance, BuildingLotId } from '@/game-logic/types.js'
+import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
 
 export default defineStore('gameState', () => {
   return {
@@ -12,7 +12,7 @@ export default defineStore('gameState', () => {
 })
 
 function buildingsState() {
-  const buildings = ref<Record<BuildingLotId, BuildingInstance | undefined >>({
+  const buildings = ref<Record<BuildingAreaId, BuildingInstance | undefined >>({
     // TODO: Load from the saved state.
   })
 

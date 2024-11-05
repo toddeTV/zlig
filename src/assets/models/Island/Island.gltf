@@ -137,7 +137,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":6,
 			"name":"buildArea00",
@@ -154,7 +154,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":7,
 			"name":"buildArea03",
@@ -171,7 +171,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":8,
 			"name":"buildArea02",
@@ -188,7 +188,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":9,
 			"name":"buildArea01",
@@ -205,7 +205,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":10,
 			"name":"buildArea07",
@@ -222,7 +222,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":11,
 			"name":"buildArea04",
@@ -239,7 +239,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":12,
 			"name":"buildArea05",
@@ -256,7 +256,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":13,
 			"name":"buildArea06",
@@ -273,7 +273,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":14,
 			"name":"buildArea08",
@@ -290,7 +290,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":15,
 			"name":"buildArea09",
@@ -307,7 +307,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":16,
 			"name":"buildArea10",
@@ -324,7 +324,7 @@
 		},
 		{
 			"extras":{
-				"is_building_place":true
+				"is_building_area":true
 			},
 			"mesh":17,
 			"name":"buildArea11",

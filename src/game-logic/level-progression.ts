@@ -102,10 +102,12 @@ type BaseLevelFixedProgression = Readonly<{
    * The costs to build/upgrade the building without taking into account any modifiers.
    */
   baseCosts: ResourceRecord
+
   /**
    * The number of seconds it takes to build/upgrade the building without taking into account any modifiers.
    */
   baseBuildingSeconds: Big
+
   /**
    * The currency the player receives each second without taking into account any modifiers.
    */
@@ -113,7 +115,6 @@ type BaseLevelFixedProgression = Readonly<{
 }>
 
 type FirstLevelFixedProgression = BaseLevelFixedProgression & Readonly<{
-
   /**
    * Defines the appearance of the building on the first level.
    */

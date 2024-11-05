@@ -2,10 +2,10 @@
 import useGameState from '@/composables/useGameState.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 import { useLoop } from '@tresjs/core'
-import type { BuildingLotId, BuildingStateUpgrading, BuildingType } from '@/game-logic/types.js'
+import type { BuildingAreaId, BuildingStateUpgrading, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
-  lotId: BuildingLotId
+  areaId: BuildingAreaId
   buildingType: BuildingType
   state: BuildingStateUpgrading
 }>()
@@ -19,7 +19,7 @@ onBeforeRender((event) => {
   const secondsRemaining = props.state.secondsRemaining.minus(delta)
 
   if (secondsRemaining.gt(0)) {
-    gameState.buildings[props.lotId] = {
+    gameState.buildings[props.areaId] = {
       level: props.state.level,
       secondsRemaining,
       state: 'upgrading',
@@ -27,7 +27,7 @@ onBeforeRender((event) => {
     }
   }
   else {
-    gameState.buildings[props.lotId] = {
+    gameState.buildings[props.areaId] = {
       internalBuffer: new ResourceRecord(),
       level: props.state.level + 1,
       state: 'producing',
@@ -38,4 +38,8 @@ onBeforeRender((event) => {
 </script>
 
 <!-- eslint-disable-next-line vue/valid-template-root -->
-<template></template>
+<template>
+</template>
+
+<style scoped>
+</style>
