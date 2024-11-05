@@ -1,5 +1,5 @@
-import type { BuildingModel } from '@/game-logic/types.js'
 import type { ResourceRecord } from '@/game-logic/resources.js'
+import type { BuildingModel } from '@/game-logic/types.js'
 import type Big from 'big.js'
 
 export abstract class LevelProgression {
