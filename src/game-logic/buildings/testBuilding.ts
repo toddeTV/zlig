@@ -5,7 +5,7 @@ import Big from 'big.js'
 import { markRaw } from 'vue'
 import type { BuildingType } from '@/game-logic/types.js'
 
-export const testBuilding: BuildingType = {
+const building: BuildingType = {
   id: 'testBuilding',
   levelProgression: new LinearLevelProgression({
     buildingSeconds: {
@@ -25,3 +25,5 @@ export const testBuilding: BuildingType = {
   maxInstances: 4,
   name: 'Test Building',
 }
+
+export default building
