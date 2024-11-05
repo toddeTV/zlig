@@ -6,10 +6,12 @@ varying vec2 vUv;
 uniform float time;
 
 void main() {
-  // Animated wave movement
+  // original position
   vec3 pos = position;
-  pos.z += sin(pos.x * 4.0 + time) * 0.1;
-  pos.z += sin(pos.y * 4.0 + time * 0.5) * 0.2;
+
+  // Animated wave movement
+  pos.y += sin(pos.x * 100.0 + time) * 0.05;
+  pos.y += sin(pos.z * 100.0 + time * 0.5) * 0.07;
 
   // Use the normal vertex normal for lighting
   vNormal = normal;

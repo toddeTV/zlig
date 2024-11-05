@@ -24,7 +24,7 @@ addShadow(scenes.Ocean.Object.ocean, 'receive')
 addToGroup(scene.value, scenes.Ocean.Object.ocean)
 
 render(({ camera, renderer, scene }) => {
-  uniforms.value.time.value += 0.01
+  uniforms.value.time.value += 0.05
   waterMaterial.uniforms = uniforms.value
   renderer.render(scene, camera)
 })
