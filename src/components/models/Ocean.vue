@@ -2,7 +2,7 @@
 import modelLoader from '@/assets/models/Ocean/Ocean.gltf'
 import useDebugStore from '@/composables/useDebugStore'
 import useThreeHelper from '@/composables/useThreeHelper'
-import { getWaterMaterial } from '@/constants/WaterShader'
+import { getWaterMaterial } from '@/utils/WaterShader'
 import { useLoop, useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue'
