@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/buildings/TestBuilding/TestBuilding.gltf'
-import useThreeHelper from '@/composables/useThreeHelper'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper'
 import { useTresContext } from '@tresjs/core'
 import { watch } from 'vue'
 import type { BuildingInstance } from '@/game-logic/types.js'
@@ -13,7 +13,6 @@ const props = defineProps<{
 }>()
 
 const { scene } = useTresContext()
-const { addShadowAndAddToGroup } = useThreeHelper()
 
 const { scenes: { TestBuilding } } = await modelLoader
 
