@@ -7,8 +7,12 @@ import { Box3, Box3Helper, CameraHelper, PerspectiveCamera, Vector3 } from 'thre
 import { onMounted, ref, watch } from 'vue'
 import type { CameraControlsProps } from '@tresjs/cientos/dist/core/controls/CameraControls.vue.js'
 
+const emit = defineEmits(['cameraMoved'])
+
 const { scene, setCameraActive } = useTresContext()
 const { showCameraHelper } = storeToRefs(useDebugStore())
+
+const cameraIsActive = ref(false)
 
 const cameraControls = ref<InstanceType<typeof CameraControls>>()
 
@@ -102,6 +106,15 @@ updateHelperVisibility(showCameraHelper.value)
   <CameraControls
     v-bind="cameraControlsProps"
     ref="cameraControls"
+    @change="() => {
+      if (cameraIsActive){
+        emit('cameraMoved')
+        // Reset the value here ahead of the end event to only trigger the event once.
+        cameraIsActive = false
+      }
+    }"
+    @end="() => cameraIsActive = false"
+    @start="() => cameraIsActive = true"
   />
 </template>
 
