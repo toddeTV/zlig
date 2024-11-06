@@ -1,16 +1,25 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Ocean/Ocean.gltf'
 import useDebugStore from '@/composables/useDebugStore'
+import useGameState from '@/composables/useGameState'
 import { addShadow } from '@/utils/threeHelper'
 import { useLoop, useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { Mesh, PlaneGeometry, ShaderMaterial } from 'three'
-import { watch } from 'vue'
+import { computed, toRef, watch } from 'vue'
+import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types'
 
 const { scene } = useTresContext()
 const { scenes } = await modelLoader
 const { render } = useLoop()
 const { showWaterShader } = storeToRefs(useDebugStore())
+
+const gameState = useGameState()
+const lvlSum = computed<number>(
+  () => Object.values(gameState.buildings)
+    .map(building => building?.level ?? 0)
+    .reduce((sum, lvl) => sum + lvl, 0),
+)
 
 const sceneGroup = scene.value.getObjectByName('sceneGroup') ?? scene.value
 const oceanScene = scenes.Ocean
@@ -71,6 +80,7 @@ const waterMaterial = new ShaderMaterial({
 const geometry = new PlaneGeometry(200, 200, 100, 100)
 const waterMesh = new Mesh(geometry, waterMaterial)
 waterMesh.rotation.x = -Math.PI / 2 // rotate the water
+
 addShadow(waterMesh, 'receive') // TODO fix bc this is not working
 // sceneGroup.add(waterMesh)
 // addShadowAndAddToGroup(sceneGroup, waterMesh)
@@ -90,6 +100,15 @@ watch(showWaterShader, () => {
   sceneGroup.add(oceanScene.Object.ocean)
 }, {
   immediate: true,
+})
+
+watch(lvlSum, () => {
+  if (showWaterShader.value) {
+    waterMesh.position.y = lvlSum.value * 0.2
+    return
+  }
+
+  oceanScene.Object.ocean.position.y = lvlSum.value * 0.2
 })
 </script>
 
