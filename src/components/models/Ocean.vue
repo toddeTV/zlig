@@ -6,8 +6,7 @@ import { addShadow } from '@/utils/threeHelper'
 import { useLoop, useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { Mesh, PlaneGeometry, ShaderMaterial } from 'three'
-import { computed, toRef, watch } from 'vue'
-import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types'
+import { computed, watch } from 'vue'
 
 const { scene } = useTresContext()
 const { scenes } = await modelLoader
@@ -102,13 +101,14 @@ watch(showWaterShader, () => {
   immediate: true,
 })
 
+const SINKING_MULTIPLIER = 0.3
 watch(lvlSum, () => {
   if (showWaterShader.value) {
-    waterMesh.position.y = lvlSum.value * 0.2
+    waterMesh.position.y = lvlSum.value * SINKING_MULTIPLIER
     return
   }
 
-  oceanScene.Object.ocean.position.y = lvlSum.value * 0.2
+  oceanScene.Object.ocean.position.y = lvlSum.value * SINKING_MULTIPLIER
 })
 </script>
 
