@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DebugOverlay from '@/components/DebugOverlay.vue'
 import GameEngine from '@/components/GameEngine.vue'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { TresCanvas } from '@tresjs/core'
@@ -39,8 +38,6 @@ watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
     >
       <GameEngine />
     </TresCanvas>
-
-    <DebugOverlay />
   </div>
 </template>
 
