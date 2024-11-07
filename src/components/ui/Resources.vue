@@ -21,6 +21,6 @@ const final = computed(() => {
 
 <template>
   <p>
-    {{ final.gold.toNumber().toLocaleString() }} gold
+    Gold: <b>{{ final.gold.toNumber().toLocaleString() }}</b>
   </p>
 </template>
