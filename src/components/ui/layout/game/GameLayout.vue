@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SideBar from './SideBar.vue'
 import TopBar from './TopBar.vue'
+import WorldWindow from './WorldWindow.vue'
 
 const sidebarToggleId = 'sidebar-toggle'
 </script>
@@ -16,7 +17,7 @@ const sidebarToggleId = 'sidebar-toggle'
         class="
           md:hidden
           absolute left-0 top-[7.5%]
-          border shadow rounded-r-full pl-1 py-2 pr-3 flex items-center text-xl
+          border shadow rounded-r-full pl-1 py-2 pr-3 flex items-center text-xl z-10 bg-white/75
         "
         :for="sidebarToggleId"
         title="Toggle menu"
@@ -30,7 +31,7 @@ const sidebarToggleId = 'sidebar-toggle'
           -left-[100%] peer-checked:left-0
           transition-[left]
           max-w-[90%] md:max-w-none md:w-[25%] lg:w-[22.5%] xl:w-[20%]
-          overflow-hidden z-10 shadow
+          overflow-hidden z-20 shadow
         "
       >
         <SideBar :sidebar-toggle-id />
@@ -41,13 +42,13 @@ const sidebarToggleId = 'sidebar-toggle'
           absolute left-0 right-0 top-0 bottom-0 md:hidden
           opacity-0 peer-checked:opacity-50
           pointer-events-none peer-checked:pointer-events-auto
-          transition-opacity bg-black
+          transition-opacity bg-black z-10
         "
         :for="sidebarToggleId"
       />
 
-      <div class=" bg-purple-100/30 flex-grow">
-        <code>gamepanel</code>
+      <div class=" flex-grow">
+        <WorldWindow />
       </div>
     </div>
   </div>
