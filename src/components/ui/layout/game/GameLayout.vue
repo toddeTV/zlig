@@ -9,7 +9,7 @@ const sidebarToggleId = 'sidebar-toggle'
   <div class="flex flex-col flex-grow">
     <TopBar :sidebar-toggle-id />
 
-    <div class="relative flex-grow md:flex">
+    <div class="relative flex flex-grow">
       <input :id="sidebarToggleId" class="hidden peer" type="checkbox">
 
       <div
@@ -21,7 +21,7 @@ const sidebarToggleId = 'sidebar-toggle'
           overflow-hidden z-10 shadow
         "
       >
-        <SideBar />
+        <SideBar :sidebar-toggle-id />
       </div>
 
       <div class=" bg-purple-100/30 flex-grow">
