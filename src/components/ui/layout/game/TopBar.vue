@@ -3,23 +3,12 @@ import useGameState from '@/composables/useGameState.js'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore.js'
 import Resources from '../../Resources.vue'
 
-const { sidebarToggleId } = defineProps({
-  sidebarToggleId: {
-    required: true,
-    type: String,
-  },
-})
-
 const gameState = useGameState()
 const virtualTime = useVirtualTimeStore()
 </script>
 
 <template>
   <div class="bg-gray-300 shadow z-20 flex items-center gap-3 p-3">
-    <label class="md:hidden flex items-center text-xl" :for="sidebarToggleId" title="Toggle menu">
-      <span class="icon-[ph--list]" />
-    </label>
-
     <div class="flex gap-3 items-baseline text-2xl flex-grow justify-center">
       <Resources :resources="gameState.resources.available" />
     </div>

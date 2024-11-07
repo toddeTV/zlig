@@ -7,10 +7,22 @@ const sidebarToggleId = 'sidebar-toggle'
 
 <template>
   <div class="flex flex-col flex-grow">
-    <TopBar :sidebar-toggle-id />
+    <TopBar />
 
     <div class="relative flex flex-grow">
       <input :id="sidebarToggleId" class="hidden peer" type="checkbox">
+
+      <label
+        class="
+          md:hidden
+          absolute left-0 top-[7.5%]
+          border shadow rounded-r-full pl-1 py-2 pr-3 flex items-center text-xl
+        "
+        :for="sidebarToggleId"
+        title="Toggle menu"
+      >
+        <span class="icon-[ph--list]" />
+      </label>
 
       <div
         class="
