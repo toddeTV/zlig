@@ -24,6 +24,16 @@ const sidebarToggleId = 'sidebar-toggle'
         <SideBar :sidebar-toggle-id />
       </div>
 
+      <label
+        class="
+          absolute left-0 right-0 top-0 bottom-0 md:hidden
+          opacity-0 peer-checked:opacity-50
+          pointer-events-none peer-checked:pointer-events-auto
+          transition-opacity bg-black
+        "
+        :for="sidebarToggleId"
+      />
+
       <div class=" bg-purple-100/30 flex-grow">
         <code>gamepanel</code>
       </div>
