@@ -115,7 +115,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"zligMaterial",
-			"uri":"zligMaterial.png"
+			"uri":"../_textures/zligMaterial.png"
 		}
 	],
 	"accessors":[
