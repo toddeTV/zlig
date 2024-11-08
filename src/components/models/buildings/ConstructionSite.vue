@@ -8,6 +8,6 @@ const { scenes: { Island } } = await modelLoader
 
 <template>
   <primitive
-    :object="Island.Object.buildArea00.clone()"
+    :object="Island.Object.zligbuildArea001.clone()"
   />
 </template>
