@@ -1,5 +1,6 @@
 {
 	"asset":{
+		"copyright":"https://zlig.net/",
 		"generator":"Khronos glTF Blender I/O v4.2.69",
 		"version":"2.0"
 	},
@@ -12,14 +13,6 @@
 	"scene":0,
 	"scenes":[
 		{
-			"extras":{
-				"xray_props":{
-					"enable_snapping":false,
-					"enable_xray":0
-				},
-				"uuid":"32e66abd-8d0e-4e61-b480-e4ade617acad",
-				"assets reported":{}
-			},
 			"name":"Ocean",
 			"nodes":[
 				0
@@ -29,7 +22,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"ocean",
+			"name":"ocean.001",
 			"scale":[
 				150,
 				1,
@@ -40,7 +33,7 @@
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"water",
+			"name":"water.001",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
 					0.08437464386224747,
@@ -55,7 +48,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Plane",
+			"name":"Plane.141",
 			"primitives":[
 				{
 					"attributes":{
