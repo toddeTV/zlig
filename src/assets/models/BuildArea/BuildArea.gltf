@@ -21,9 +21,6 @@
 	],
 	"nodes":[
 		{
-			"extras":{
-				"is_building_area":true
-			},
 			"mesh":0,
 			"name":"zlig.buildArea.base.001",
 			"rotation":[

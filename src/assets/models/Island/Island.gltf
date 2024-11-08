@@ -180,7 +180,7 @@
 		},
 		{
 			"extras":{
-				"is_building_area":true
+				"isBuildArea":true
 			},
 			"name":"zlig.buildArea.001",
 			"rotation":[
@@ -197,7 +197,7 @@
 		},
 		{
 			"extras":{
-				"is_building_area":true
+				"isBuildArea":true
 			},
 			"name":"zlig.buildArea.010",
 			"rotation":[
@@ -288,7 +288,7 @@
 		},
 		{
 			"extras":{
-				"is_building_area":true
+				"isBuildArea":true
 			},
 			"name":"zlig.buildArea.011",
 			"rotation":[
@@ -727,7 +727,7 @@
 		},
 		{
 			"extras":{
-				"is_building_area":true
+				"isBuildArea":true
 			},
 			"name":"zlig.buildArea.003",
 			"rotation":[
@@ -744,7 +744,7 @@
 		},
 		{
 			"extras":{
-				"is_building_area":true
+				"isBuildArea":true
 			},
 			"name":"zlig.buildArea.007",
 			"rotation":[
@@ -761,7 +761,7 @@
 		},
 		{
 			"extras":{
-				"is_building_area":true
+				"isBuildArea":true
 			},
 			"name":"zlig.buildArea.006",
 			"rotation":[
@@ -778,7 +778,7 @@
 		},
 		{
 			"extras":{
-				"is_building_area":true
+				"isBuildArea":true
 			},
 			"name":"zlig.buildArea.008",
 			"rotation":[
@@ -795,7 +795,7 @@
 		},
 		{
 			"extras":{
-				"is_building_area":true
+				"isBuildArea":true
 			},
 			"name":"zlig.buildArea.009",
 			"rotation":[
@@ -955,7 +955,7 @@
 		},
 		{
 			"extras":{
-				"is_building_area":true
+				"isBuildArea":true
 			},
 			"name":"zlig.buildArea.004",
 			"rotation":[
@@ -972,7 +972,7 @@
 		},
 		{
 			"extras":{
-				"is_building_area":true
+				"isBuildArea":true
 			},
 			"name":"zlig.buildArea.005",
 			"rotation":[
@@ -1128,7 +1128,7 @@
 		},
 		{
 			"extras":{
-				"is_building_area":true
+				"isBuildArea":true
 			},
 			"name":"zlig.buildArea.002",
 			"rotation":[

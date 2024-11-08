@@ -72,7 +72,7 @@ In the browser install:
 
 ### namings
 
-- we use it `building area` (not `building lot` nor `building place`).
+- we use `build area` and `building area` (not `building lot` nor `building place`).
 
 ### lint and prettier
 
