@@ -18,9 +18,9 @@ const uniforms = ref({
 
 const waterMaterial = getWaterMaterial()
 
-scenes.Ocean.Object.ocean.material = waterMaterial
-addShadow(scenes.Ocean.Object.ocean, 'receive')
-addToGroup(scene.value, scenes.Ocean.Object.ocean)
+scenes.Ocean.Object.ocean001.material = waterMaterial
+addShadow(scenes.Ocean.Object.ocean001, 'receive')
+addToGroup(scene.value, scenes.Ocean.Object.ocean001)
 
 render(({ camera, renderer, scene }) => {
   uniforms.value.time.value += 0.05
