@@ -7,6 +7,7 @@ import { Vector3 } from 'three'
 import { computed } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types.js'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
+import type { Euler } from 'three'
 import ConstructionSite from '../models/buildings/ConstructionSite.vue'
 import ProgressBar from '../ui/ProgressBar.vue'
 import ConstructingBehavior from './behaviors/ConstructingBehavior.vue'
@@ -20,6 +21,7 @@ import BuildingPopupUpgrading from './popup/BuildingPopupUpgrading.vue'
 const props = defineProps<{
   id: BuildingAreaId
   position: Vector3
+  rotation: Euler
 }>()
 
 const { scenes: { Island } } = await modelLoader
@@ -83,6 +85,7 @@ function getPopupHeightOffset() {
     <ConstructionSite
       v-if="buildingInstance?.state === 'in-construction'"
       :position="props.position"
+      :rotation="props.rotation"
     />
     <component
       :is="buildingInstance.type.levelProgression.getModelForLevel(buildingInstance.level)"
@@ -90,6 +93,7 @@ function getPopupHeightOffset() {
       :building-area-id="props.id"
       :building-instance
       :position="props.position"
+      :rotation="props.rotation"
     />
     <primitive
       v-else

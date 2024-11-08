@@ -45,6 +45,7 @@ const cameraMoved = ref(false)
         :id="area.id"
         :key="area.id"
         :position="area.position"
+        :rotation="area.rotation"
       />
     </Suspense>
     <Suspense>
