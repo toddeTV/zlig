@@ -5,7 +5,9 @@ import { buildingTypes } from '@/game-logic/buildings/index.js'
 import type { BuildingAreaId, BuildingType } from '@/game-logic/types.js'
 import BasePopupWrapper from './BasePopupWrapper.vue'
 
-const props = defineProps<{ areaId: BuildingAreaId }>()
+const props = defineProps<{
+  areaId: BuildingAreaId
+}>()
 
 const gameState = useGameState()
 

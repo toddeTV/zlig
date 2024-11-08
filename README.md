@@ -72,7 +72,7 @@ In the browser install:
 
 ### namings
 
-- we use it `building area` (not `building lot` nor `building place`).
+- we use `build area` and `building area` (not `building lot` nor `building place`).
 
 ### lint and prettier
 
@@ -107,10 +107,6 @@ Tipp: Favorite them and use the search over all item collections at once: https:
 | `phosphor`              | `ph`      | MIT                                                             |                |
 | `Material Design Icons` | `mdi`     | Apache 2.0 (commercial use is allowed, no attribution required) |                |
 | `Material Line Icons`   | `line-md` | MIT                                                             | animated icons |
-
-### Blender (as software for working with 3D models)
-
-Models are created and edited using the software [Blender](https://www.blender.org/).
 
 #### glTF export with draco compression
 
@@ -311,13 +307,19 @@ Honorable mentions to people and projects that helped this project:
 - [Andreas Fehn](https://github.com/fehnomenal) helped with the project. Thank you <3
 - [Moritz Starke](https://github.com/Myzios) helped with general 3D and Blender questions. Thanks mate <3
 
-Used services, dependencies and materials - besides the ones in `./package.json`:
+Used programs/ softwares, services and dependencies - besides the ones in `./package.json`:
 
-- [Low Poly Japanese Restaurant props & environment pack](https://www.artstation.com/marketplace/p/yB0RG/low-poly-japanese-restaurant-props-environment-pack)
 - [GitHub Copilot](https://github.com/features/copilot) was used in private mode for programming questions.
+- [Blender](https://www.blender.org/) was used as software for creating and editing 3D models.
+
+Used assets/ materials including images and 3D models:
+
+- ["Japanese Bridge Garden"](https://skfb.ly/oqyrN) by libblekibble, licensed under [Creative Commons Attribution](http://creativecommons.org/licenses/by/4.0/), in this project internally identified as `ea1`.
+- ["Low Poly Japanese Restaurant props & environment pack"](https://www.artstation.com/marketplace/p/yB0RG/low-poly-japanese-restaurant-props-environment-pack) by Asset Kings, licensed under [Creative Commons Attribution](http://creativecommons.org/licenses/by/4.0/), in this project internally identified as `ea2`.
+- ["Wheat Farm At Sunset"](https://skfb.ly/osu7t) by libblekibble is licensed under [Creative Commons Attribution](http://creativecommons.org/licenses/by/4.0/), in this project internally identified as `ea3`.
 
 ## License
 
-Private, only for Thorsten Seyschab.
-For more information see [LICENSE](./LICENSE) file.
+Private, only for Thorsten Seyschab.<br>
+For more information see [LICENSE](./LICENSE) file.<br>
 Copyright (c) 2024-present, [Thorsten Seyschab](https://todde.tv)
