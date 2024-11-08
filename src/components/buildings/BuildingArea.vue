@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import modelLoader from '@/assets/models/Island/Island.gltf'
 import useGameState from '@/composables/useGameState.js'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { Html } from '@tresjs/cientos'
@@ -23,8 +22,6 @@ const props = defineProps<{
   position: Vector3
   rotation: Euler
 }>()
-
-const { scenes: { Island } } = await modelLoader
 
 const gameState = useGameState()
 const selectedBuildingArea = useSelectedBuildingArea()
@@ -82,6 +79,7 @@ function getPopupHeightOffset() {
     :name="`building-area-${props.id}`"
     @click="(e: TresJsClickEvent) => onClick(e)"
   >
+    <!-- TODO fix multiple use of `<ConstructionSite` -->
     <ConstructionSite
       v-if="buildingInstance?.state === 'in-construction'"
       :position="props.position"
@@ -95,9 +93,10 @@ function getPopupHeightOffset() {
       :position="props.position"
       :rotation="props.rotation"
     />
-    <primitive
+    <ConstructionSite
       v-else
-      :object="Island.Object[props.id as keyof typeof Island.Object]"
+      :position="props.position"
+      :rotation="props.rotation"
     />
 
     <Html

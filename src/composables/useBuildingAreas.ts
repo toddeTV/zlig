@@ -11,20 +11,22 @@ export default defineStore('BuildingAreas', () => {
     rotation: Euler
   }[]>([])
 
+  async function init() {
+    const { scenes: { Island } } = await modelLoader
+
+    Island.Scene.traverse((obj) => {
+      if (obj.userData.isBuildArea && obj.name) {
+        BuildingAreas.value.push({
+          id: obj.name,
+          position: obj.position,
+          rotation: obj.rotation,
+        })
+      }
+    })
+  }
+
   return {
     areas: readonly(BuildingAreas),
-    async init() {
-      const { scenes: { Island } } = await modelLoader
-
-      Island.Scene.traverse((obj) => {
-        if (obj.userData.isBuildArea && obj.name) {
-          BuildingAreas.value.push({
-            id: obj.name,
-            position: obj.position,
-            rotation: obj.rotation,
-          })
-        }
-      })
-    },
+    init,
   }
 })
