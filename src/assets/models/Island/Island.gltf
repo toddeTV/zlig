@@ -181,6 +181,9 @@
 			]
 		},
 		{
+			"extras":{
+				"is_building_area":true
+			},
 			"mesh":6,
 			"name":"zlig.buildArea.001",
 			"translation":[
@@ -190,6 +193,9 @@
 			]
 		},
 		{
+			"extras":{
+				"is_building_area":true
+			},
 			"mesh":7,
 			"name":"zlig.buildArea.010",
 			"translation":[
@@ -273,6 +279,9 @@
 			]
 		},
 		{
+			"extras":{
+				"is_building_area":true
+			},
 			"mesh":15,
 			"name":"zlig.buildArea.011",
 			"translation":[
@@ -724,6 +733,9 @@
 			]
 		},
 		{
+			"extras":{
+				"is_building_area":true
+			},
 			"mesh":40,
 			"name":"zlig.buildArea.006",
 			"translation":[
@@ -733,6 +745,9 @@
 			]
 		},
 		{
+			"extras":{
+				"is_building_area":true
+			},
 			"mesh":41,
 			"name":"zlig.buildArea.009",
 			"translation":[
@@ -742,6 +757,9 @@
 			]
 		},
 		{
+			"extras":{
+				"is_building_area":true
+			},
 			"mesh":42,
 			"name":"zlig.buildArea.003",
 			"translation":[
@@ -751,6 +769,9 @@
 			]
 		},
 		{
+			"extras":{
+				"is_building_area":true
+			},
 			"mesh":43,
 			"name":"zlig.buildArea.007",
 			"translation":[
@@ -760,6 +781,9 @@
 			]
 		},
 		{
+			"extras":{
+				"is_building_area":true
+			},
 			"mesh":44,
 			"name":"zlig.buildArea.008",
 			"translation":[
@@ -912,6 +936,9 @@
 			]
 		},
 		{
+			"extras":{
+				"is_building_area":true
+			},
 			"mesh":53,
 			"name":"zlig.buildArea.004",
 			"translation":[
@@ -921,6 +948,9 @@
 			]
 		},
 		{
+			"extras":{
+				"is_building_area":true
+			},
 			"mesh":54,
 			"name":"zlig.buildArea.005",
 			"translation":[
@@ -1069,6 +1099,9 @@
 			]
 		},
 		{
+			"extras":{
+				"is_building_area":true
+			},
 			"mesh":63,
 			"name":"zlig.buildArea.002",
 			"rotation":[
