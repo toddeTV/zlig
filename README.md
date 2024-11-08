@@ -108,10 +108,6 @@ Tipp: Favorite them and use the search over all item collections at once: https:
 | `Material Design Icons` | `mdi`     | Apache 2.0 (commercial use is allowed, no attribution required) |                |
 | `Material Line Icons`   | `line-md` | MIT                                                             | animated icons |
 
-### Blender (as software for working with 3D models)
-
-Models are created and edited using the software [Blender](https://www.blender.org/).
-
 #### glTF export with draco compression
 
 Use [draco compression](https://github.com/google/draco) in [Blender](https://www.blender.org/) on
@@ -311,9 +307,10 @@ Honorable mentions to people and projects that helped this project:
 - [Andreas Fehn](https://github.com/fehnomenal) helped with the project. Thank you <3
 - [Moritz Starke](https://github.com/Myzios) helped with general 3D and Blender questions. Thanks mate <3
 
-Used services and dependencies - besides the ones in `./package.json`:
+Used programs/ softwares, services and dependencies - besides the ones in `./package.json`:
 
 - [GitHub Copilot](https://github.com/features/copilot) was used in private mode for programming questions.
+- [Blender](https://www.blender.org/) was used as software for creating and editing 3D models.
 
 Used assets/ materials including images and 3D models:
 
