@@ -3,40 +3,57 @@ import modelLoader from '@/assets/models/Ocean/Ocean.gltf'
 import useDebugStore from '@/composables/useDebugStore'
 import { addShadow, addToGroup } from '@/utils/threeHelper'
 import { getWaterMaterial } from '@/utils/WaterShader'
-import { useLoop, useTresContext } from '@tresjs/core'
+import { type TresPrimitive, useLoop, useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
-import { ref, watch } from 'vue'
+import { Group, Mesh, PlaneGeometry } from 'three'
+import { onMounted, ref, shallowRef, watch } from 'vue'
+import type { Object3D } from 'three'
 
-const { scene } = useTresContext()
 const { scenes } = await modelLoader
-const { render } = useLoop()
+const { onBeforeRender } = useLoop()
 const { showWaterWireframe } = storeToRefs(useDebugStore())
+
+const obj = shallowRef<TresPrimitive>()
 
 const uniforms = ref({
   time: { value: 0.0 },
 })
 
-const waterMaterial = getWaterMaterial()
+const oceanMaterial = getWaterMaterial({
+  waveSpeed: 0.8,
+  waveTangentialAmplitude: 1.0,
+})
 
-scenes.Ocean.Object.ocean001.material = waterMaterial
-addShadow(scenes.Ocean.Object.ocean001, 'receive')
-addToGroup(scene.value, scenes.Ocean.Object.ocean001)
-
-render(({ camera, renderer, scene }) => {
-  uniforms.value.time.value += 0.05
-  waterMaterial.uniforms = uniforms.value
-  renderer.render(scene, camera)
+onBeforeRender(({ delta, scene }) => {
+  if (!obj.value || !obj.value.material.userData.shader) {
+    return
+  }
+  uniforms.value.time.value += delta
+  obj.value.material.userData.shader.uniforms.time = uniforms.value.time
 })
 
 watch(showWaterWireframe, () => {
-  waterMaterial.wireframe = showWaterWireframe.value
+  oceanMaterial.wireframe = showWaterWireframe.value
 }, {
   immediate: true,
+})
+
+onMounted(() => {
+  if (!obj.value) {
+    return
+  }
+  obj.value.material = oceanMaterial
+  obj.value.position.y += 0.18 // move water plane right up to the edge of the beach as the waves are all lower than this
+  addShadow(obj.value, 'receive')
 })
 </script>
 
 <!-- eslint-disable-next-line vue/valid-template-root -->
 <template>
+  <primitive
+    ref="obj"
+    :object="scenes.Ocean.Object.ocean001.clone()"
+  />
 </template>
 
 <style scoped>
