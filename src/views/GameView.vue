@@ -9,7 +9,7 @@ import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
 import { ref, watch } from 'vue'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 
-const { getColorByTime, rgbToHex, skyTimeColorTransitionPreset } = useVirtualTimeStore()
+const { calculateLightBySunPosition, calculateSunPosition } = useVirtualTimeStore()
 const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
 
 const gl = ref<TresCanvasProps>({
@@ -28,7 +28,9 @@ const gl = ref<TresCanvasProps>({
 // watch the current virtual time
 watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
   // set the sky color
-  gl.value.clearColor = rgbToHex(getColorByTime(newValue, skyTimeColorTransitionPreset))
+  const { skyColor } = calculateLightBySunPosition(calculateSunPosition(newValue))
+  // @ts-expect-error //TODO this works, but it's not correctly typed -> check and fix
+  gl.value.clearColor = skyColor
 })
 </script>
 
