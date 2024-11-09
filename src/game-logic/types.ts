@@ -24,7 +24,7 @@ export type BuildingType = Readonly<{
   maxInstances: number | undefined
 
   // TODO: Maybe restrict the available building places by some criteria?
-  // available_building_areas: 'shore'
+  // availableBuildAreas: 'shore'
 }>
 
 // TODO: Make this more type safe.

@@ -24,7 +24,7 @@ directionalLight.castShadow = true
 directionalLight.shadow.mapSize.width = 1024 * 2 // more beautiful, but performance heavier
 directionalLight.shadow.mapSize.height = 1024 * 2
 
-directionalLight.shadow.bias = -0.01 // fine tune to reduce shadow artifacts (negative and as close to 0 as possible)
+directionalLight.shadow.bias = -0.004 // fine tune to reduce shadow artifacts (negative and as close to 0 as possible)
 
 directionalLight.shadow.camera.near = 10
 directionalLight.shadow.camera.far = 250

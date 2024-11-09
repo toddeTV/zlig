@@ -4,11 +4,12 @@ import { addShadowAndAddToGroup } from '@/utils/threeHelper'
 import { useTresContext } from '@tresjs/core'
 import { watch } from 'vue'
 import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
-import type { Vector3 } from 'three'
+import type { Euler, Vector3 } from 'three'
 
 const props = defineProps<{
   buildingInstance: BuildingInstance
   position: Vector3
+  rotation: Euler
   buildingAreaId: BuildingAreaId
 }>()
 
@@ -20,6 +21,7 @@ const sceneGroup = scene.value.getObjectByName(`building-area-${props.buildingAr
 
 const building = TestBuilding.Scene.clone()
 building.position.copy(props.position)
+building.rotation.copy(props.rotation)
 
 addShadowAndAddToGroup(sceneGroup, building)
 
