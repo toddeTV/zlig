@@ -15,7 +15,7 @@ const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
 const gl = ref<TresCanvasProps>({
   alpha: false,
   clearColor: '#82DBC5',
-  disableRender: true, // Disable render on requestAnimationFrame, useful for PostProcessing // TODO use or not?
+  // disableRender: true, // Disable render on requestAnimationFrame, useful for PostProcessing // TODO use or not?
   outputColorSpace: SRGBColorSpace,
   renderMode: 'always',
   // `VSMShadowMap` better shadows, but more performance heavy; `BasicShadowMap` is faster but has less quality

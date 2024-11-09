@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useDebugStore from '@/composables/useDebugStore'
+import useSelectedBuildingArea from '@/composables/useSelectedBuildingAreaStore'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { storeToRefs } from 'pinia'
 
@@ -11,6 +12,7 @@ const {
   showWaterShader,
 } = storeToRefs(useDebugStore())
 const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
+const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
 
 function formatTime(date: Date) {
   return date.toISOString().slice(11, 19)
@@ -91,6 +93,11 @@ function formatTime(date: Date) {
         class="cursor-pointer group-hover:text-blue-400 select-none ml-1"
         for="showWaterShader"
       >show water shader</label>
+    </div>
+
+    <div class="group">
+      <span>Selected Build Area:</span>
+      <span class="ml-2">{{ selectedBuildAreaId }}</span>
     </div>
   </div>
 </template>

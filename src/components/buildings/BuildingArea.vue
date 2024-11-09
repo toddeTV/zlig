@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import useGameState from '@/composables/useGameState.js'
-import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
+import useSelectedBuildingArea from '@/composables/useSelectedBuildingAreaStore.js'
 import { Html } from '@tresjs/cientos'
+import { storeToRefs } from 'pinia'
 import { Vector3 } from 'three'
 import { computed } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types.js'
@@ -24,15 +25,15 @@ const props = defineProps<{
 }>()
 
 const gameState = useGameState()
-const selectedBuildingArea = useSelectedBuildingArea()
+const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
 
 const buildingInstance = computed(() => gameState.buildings[props.id])
-const isSelected = computed(() => selectedBuildingArea.id === props.id)
+const isSelected = computed(() => selectedBuildAreaId.value === props.id)
 
 function onClick(e: TresJsClickEvent) {
   e.stopPropagation()
 
-  selectedBuildingArea.id = props.id
+  selectedBuildAreaId.value = props.id
 }
 
 function getPopupHeightOffset() {
@@ -40,18 +41,18 @@ function getPopupHeightOffset() {
   // Right now this is hardcoded so that it looks OK.
 
   if (buildingInstance.value?.state === 'in-construction') {
-    return 3.5
+    return 7
   }
 
   if (buildingInstance.value?.state === 'upgrading') {
-    return 5
+    return 10
   }
 
   if (buildingInstance.value?.state === 'producing') {
-    return 9
+    return 18
   }
 
-  return 7.5
+  return 15
 }
 </script>
 
@@ -82,6 +83,7 @@ function getPopupHeightOffset() {
     <!-- TODO fix multiple use of `<ConstructionSite` -->
     <ConstructionSite
       v-if="buildingInstance?.state === 'in-construction'"
+      :building-area-id="props.id"
       :position="props.position"
       :rotation="props.rotation"
     />
@@ -95,6 +97,7 @@ function getPopupHeightOffset() {
     />
     <ConstructionSite
       v-else
+      :building-area-id="props.id"
       :position="props.position"
       :rotation="props.rotation"
     />
