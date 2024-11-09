@@ -3,7 +3,6 @@ import useDebugStore from '@/composables/useDebugStore'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingAreaStore'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
 
 const {
   showCameraHelper,

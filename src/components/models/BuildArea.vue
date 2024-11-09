@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/BuildArea/BuildArea.gltf'
-import { type TresInstance, type TresPrimitive, useTresContext } from '@tresjs/core'
-import { Color, type Euler, Group, type Intersection, Mesh, type Object3D, type Vector3 } from 'three'
+import { type Euler, Group, type Vector3 } from 'three'
 import { onMounted, ref, shallowRef } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types'
+import type { TresPrimitive } from '@tresjs/core'
 
 const props = defineProps<{
   buildingAreaId: BuildingAreaId
