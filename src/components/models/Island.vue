@@ -23,7 +23,7 @@ const lakeMaterial1 = getWaterMaterial({
   waveAmplitude: 0.45,
   waveTangentialAmplitude: 0.0,
 })
-const lakePlane1 = islandScene.getObjectByName('waterfall_lvl0') as Mesh
+const lakePlane1 = islandScene.getObjectByName('zligwaterfalllvl0001') as Mesh
 lakePlane1.material = lakeMaterial1
 
 const lakeMaterial2 = getWaterMaterial({
@@ -32,15 +32,15 @@ const lakeMaterial2 = getWaterMaterial({
   waveAmplitude: 0.3,
   waveTangentialAmplitude: 0.0,
 })
-const lakePlane2 = islandScene.getObjectByName('waterfall_lvl1') as Mesh
+const lakePlane2 = islandScene.getObjectByName('zligwaterfalllvl1001') as Mesh
 lakePlane2.material = lakeMaterial2
 
-const waterfall = islandScene.getObjectByName('waterfall_lvl1_to_lvl0') as Mesh
+const waterfall = islandScene.getObjectByName('zligwaterfalllvl1_to_lvl0001') as Mesh
 waterfall.material = lakeMaterial2
 
 addShadow(islandScene, 'both')
 
-const seabedPlane = islandScene.getObjectByName('island_lvl0_seabed')!
+const seabedPlane = islandScene.getObjectByName('zligislandlvl0_seabed001')!
 seabedPlane.castShadow = false
 seabedPlane.receiveShadow = true
 
@@ -49,12 +49,12 @@ addToGroup(scene.value, islandScene)
 onBeforeRender(({ delta, scene }) => {
   uniforms.value.time.value += delta
 
-  const lakePlane1 = islandScene.getObjectByName('waterfall_lvl0') as Mesh
+  const lakePlane1 = islandScene.getObjectByName('zligwaterfalllvl0001') as Mesh
   if (lakePlane1 && lakePlane1.material.userData.shader) {
     lakePlane1.material.userData.shader.uniforms.time = uniforms.value.time
   }
 
-  const lakePlane2 = islandScene.getObjectByName('waterfall_lvl1') as Mesh
+  const lakePlane2 = islandScene.getObjectByName('zligwaterfalllvl1001') as Mesh
   if (lakePlane2 && lakePlane2.material.userData.shader) {
     lakePlane2.material.userData.shader.uniforms.time = uniforms.value.time
   }
