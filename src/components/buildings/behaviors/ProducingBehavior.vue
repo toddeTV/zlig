@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import useGameState from '@/composables/useGameState.js'
+import { ResourceRecord } from '@/game-logic/resources.js'
 import { useLoop } from '@tresjs/core'
+import Big from 'big.js'
+import { computed } from 'vue'
 import type { BuildingAreaId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
@@ -12,33 +15,39 @@ const props = defineProps<{
 const gameState = useGameState()
 const { onBeforeRender } = useLoop()
 
-function getIncome() {
-  // TODO: Factor in modifiers.
-  const income = props.buildingType.levelProgression.getBaseIncomeForLevel(props.state.level)
+// TODO: Put this into the game state.
+// TODO: Make this individual per building type.
+const incomeModifier = new ResourceRecord({ gold: new Big('1') })
 
-  return income
-}
+const currentIncome = computed(() => {
+  const base = props.buildingType.levelProgression.getBaseIncomeForLevel(props.state.level)
+
+  return base.times(incomeModifier)
+})
 
 onBeforeRender((event) => {
   const { delta } = event
 
-  const income = getIncome().times(delta)
+  const incomeThisTick = currentIncome.value.times(delta)
 
   // The internal buffer is this full now.
-  let buffer = props.state.internalBuffer.plus(income)
+  let buffer = props.state.internalBuffer.plus(incomeThisTick)
   // Pass resources to the "warehouse" if there is more than 1 available. Instead of comparing each individual resource
   // round them down and pass the result to the warehouse. The rounded resources might be all zeroes but this is not a
   // problem.
   const produced = buffer.roundDown()
   buffer = buffer.minus(produced)
 
-  gameState.resources = gameState.resources.plus(produced)
-  gameState.buildings[props.areaId] = {
-    internalBuffer: buffer,
-    level: props.state.level,
-    state: 'producing',
-    type: props.buildingType,
-  }
+  gameState.$patch((state) => {
+    state.resources = state.resources.plus(produced)
+
+    state.buildings[props.areaId] = {
+      internalBuffer: buffer,
+      level: props.state.level,
+      state: 'producing',
+      type: props.buildingType,
+    }
+  })
 })
 </script>
 

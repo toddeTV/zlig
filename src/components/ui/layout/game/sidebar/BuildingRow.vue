@@ -17,28 +17,28 @@ const { buildings, resources } = storeToRefs(gameState)
 
 // TODO: Put this into the game state.
 // TODO: Make this individual per building type.
-const modifiers = {
+const buildModifiers = {
   buildingCosts: new ResourceRecord({ gold: new Big('1') }),
   buildingSeconds: 1,
-  income: new ResourceRecord({ gold: new Big('1') }),
 }
+const incomeModifier = new ResourceRecord({ gold: new Big('1') })
 
 const costs = computed(() => {
   const base = props.buildingType.levelProgression.getBaseCostsForLevel(1)
 
-  return base.times(modifiers.buildingCosts).round()
+  return base.times(buildModifiers.buildingCosts).round()
 })
 
 const buildingSeconds = computed(() => {
   const base = props.buildingType.levelProgression.getBaseBuildingSecondsForLevel(1)
 
-  return base.times(modifiers.buildingSeconds).round(1)
+  return base.times(buildModifiers.buildingSeconds).round(1)
 })
 
 const income = computed(() => {
   const base = props.buildingType.levelProgression.getBaseIncomeForLevel(1)
 
-  return base.times(modifiers.income)
+  return base.times(incomeModifier)
 })
 
 const existingInstancesCount = computed(() => Object.values(buildings.value).filter(building => building?.type.id === props.buildingType.id).length)
