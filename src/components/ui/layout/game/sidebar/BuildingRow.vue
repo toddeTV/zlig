@@ -44,12 +44,12 @@ const income = computed(() => {
 const existingInstancesCount = computed(() => Object.values(buildings.value).filter(building => building?.type.id === props.buildingType.id).length)
 
 const canBuild = computed(() => {
-  if (!resources.value.gte(costs.value)) {
-    return 'no-resources'
-  }
-
   if (typeof props.buildingType.maxInstances === 'number' && existingInstancesCount.value >= props.buildingType.maxInstances) {
     return 'max-instances'
+  }
+
+  if (!resources.value.gte(costs.value)) {
+    return 'no-resources'
   }
 
   return true
@@ -112,7 +112,7 @@ function build() {
     <div v-if="typeof props.buildingType.maxInstances === 'number'">
       <p class="italic" :class="{ 'text-red-500': canBuild === 'max-instances' }">
         You can build
-        <b v-if="existingInstancesCount < props.buildingType.maxInstances">{{ props.buildingType.maxInstances - existingInstancesCount }}</b>
+        <b v-if="canBuild !== 'max-instances'">{{ props.buildingType.maxInstances - existingInstancesCount }}</b>
         <b v-else>no</b>
         more (max. <b>{{ props.buildingType.maxInstances }}</b>)
       </p>

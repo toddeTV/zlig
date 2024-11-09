@@ -3,16 +3,15 @@ import modelLoader from '@/assets/models/Island/Island.gltf'
 import useGameState from '@/composables/useGameState.js'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { Html } from '@tresjs/cientos'
-import { Vector3 } from 'three'
 import { computed } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types.js'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
+import type { Vector3 } from 'three'
 import ConstructionSite from '../models/buildings/ConstructionSite.vue'
 import ProgressBar from '../ui/ProgressBar.vue'
 import ConstructingBehavior from './behaviors/ConstructingBehavior.vue'
 import ProducingBehavior from './behaviors/ProducingBehavior.vue'
 import UpgradingBehavior from './behaviors/UpgradingBehavior.vue'
-import BuildingPopupProducing from './popup/BuildingPopupProducing.vue'
 
 const props = defineProps<{
   id: BuildingAreaId
@@ -25,31 +24,11 @@ const gameState = useGameState()
 const selectedBuildingArea = useSelectedBuildingArea()
 
 const buildingInstance = computed(() => gameState.buildings[props.id])
-const isSelected = computed(() => selectedBuildingArea.id === props.id)
 
 function onClick(e: TresJsClickEvent) {
   e.stopPropagation()
 
   selectedBuildingArea.id = props.id
-}
-
-function getPopupHeightOffset() {
-  // TODO: Somehow calculate this offset to display the popup ABOVE the object on the screen.
-  // Right now this is hardcoded so that it looks OK.
-
-  if (buildingInstance.value?.state === 'in-construction') {
-    return 3.5
-  }
-
-  if (buildingInstance.value?.state === 'upgrading') {
-    return 5
-  }
-
-  if (buildingInstance.value?.state === 'producing') {
-    return 9
-  }
-
-  return 7.5
 }
 </script>
 
@@ -94,30 +73,14 @@ function getPopupHeightOffset() {
     />
 
     <Html
-      v-if="isSelected"
-      center
-      :position="new Vector3(0, getPopupHeightOffset(), 0).add(props.position)"
-    >
-      <BuildingPopupProducing
-        v-if="buildingInstance?.state === 'producing'"
-        :area-id="props.id"
-        :building-type="buildingInstance.type"
-        :state="buildingInstance"
-      />
-    </Html>
-
-    <Html
-      v-else-if="buildingInstance?.state === 'in-construction' || buildingInstance?.state === 'upgrading'"
+      v-if="buildingInstance?.state === 'in-construction' || buildingInstance?.state === 'upgrading'"
       center
       :position="props.position"
     >
       <div class="text-[30%]">
         <ProgressBar
-          :max="
-            // TODO: Factor in modifiers.
-            buildingInstance.type.levelProgression.getBaseBuildingSecondsForLevel(buildingInstance.level + 1).toNumber()
-          "
-          :min="0"
+          :max="buildingInstance.initialSeconds.toNumber()"
+          min="0"
           :value="buildingInstance.secondsRemaining.toNumber()"
         />
       </div>

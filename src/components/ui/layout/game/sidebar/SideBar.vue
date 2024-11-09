@@ -4,6 +4,7 @@ import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 import DebugMenu from '../debug/DebugMenu.vue'
+import SelectedBuildingDetails from './SelectedBuildingDetails.vue'
 import SelectedBuildingInConstruction from './SelectedBuildingInConstruction.vue'
 import SelectedBuildingUpgrading from './SelectedBuildingUpgrading.vue'
 import SelectedEmptyBuildingArea from './SelectedEmptyBuildingArea.vue'
@@ -32,6 +33,12 @@ const hasDebug = ref(true)
       />
       <SelectedBuildingUpgrading
         v-else-if="selectedBuildingInstance?.state === 'upgrading'"
+        :building-area-id="selectedBuildingArea.id"
+        :building-state="selectedBuildingInstance"
+        :building-type="selectedBuildingInstance.type"
+      />
+      <SelectedBuildingDetails
+        v-else-if="selectedBuildingInstance?.state === 'producing'"
         :building-area-id="selectedBuildingArea.id"
         :building-state="selectedBuildingInstance"
         :building-type="selectedBuildingInstance.type"
