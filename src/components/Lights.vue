@@ -3,12 +3,12 @@ import useDebugStore from '@/composables/useDebugStore'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
-import { AmbientLight, CameraHelper, Color, DirectionalLight, Vector3 } from 'three'
+import { AmbientLight, CameraHelper, DirectionalLight } from 'three'
 import { watch } from 'vue'
 
 const { scene } = useTresContext()
 const { showLightHelper } = storeToRefs(useDebugStore())
-const { calculateLightBySunPosition, calculateSunIntensity, calculateSunPosition, rgbToHex } = useVirtualTimeStore()
+const { calculateLightBySunPosition, calculateSunPosition } = useVirtualTimeStore()
 const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
 
 // -------- AmbientLight

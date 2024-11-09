@@ -29,6 +29,7 @@ const gl = ref<TresCanvasProps>({
 watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
   // set the sky color
   const { skyColor } = calculateLightBySunPosition(calculateSunPosition(newValue))
+  // @ts-expect-error //TODO this works, but it's not correctly typed -> check and fix
   gl.value.clearColor = skyColor
 })
 </script>

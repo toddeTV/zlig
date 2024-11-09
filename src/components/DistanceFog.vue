@@ -3,7 +3,7 @@ import useDebugStore from '@/composables/useDebugStore'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
-import { Color, Fog } from 'three'
+import { Fog } from 'three'
 import { watch } from 'vue'
 
 const { scene } = useTresContext()
