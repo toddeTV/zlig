@@ -15,6 +15,8 @@ const uniforms = ref({
   time: { value: 0.0 },
 })
 
+// TODO do not use `getObjectByName` as it is not reliable and not type safe!
+
 const islandScene = scenes.Island.Scene.clone()
 
 const lakeMaterial1 = getWaterMaterial({
