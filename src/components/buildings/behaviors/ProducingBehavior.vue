@@ -29,10 +29,10 @@ onBeforeRender((event) => {
   // Pass resources to the "warehouse" if there is more than 1 available. Instead of comparing each individual resource
   // round them down and pass the result to the warehouse. The rounded resources might be all zeroes but this is not a
   // problem.
-  const produced = buffer.round()
+  const produced = buffer.roundDown()
   buffer = buffer.minus(produced)
 
-  gameState.resources.add(produced)
+  gameState.resources = gameState.resources.plus(produced)
   gameState.buildings[props.areaId] = {
     internalBuffer: buffer,
     level: props.state.level,

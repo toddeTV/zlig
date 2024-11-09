@@ -45,7 +45,7 @@ function canUpgrade(): true | 'max-level' | 'no-resources' {
     return 'max-level'
   }
 
-  if (!gameState.resources.hasAvailable(getUpgradeCosts())) {
+  if (!gameState.resources.gte(getUpgradeCosts())) {
     return 'no-resources'
   }
 
@@ -58,7 +58,7 @@ function upgrade() {
     return
   }
 
-  gameState.resources.remove(getUpgradeCosts().round())
+  gameState.resources = gameState.resources.minus(getUpgradeCosts().round())
 
   gameState.buildings[props.areaId] = {
     level: props.state.level,

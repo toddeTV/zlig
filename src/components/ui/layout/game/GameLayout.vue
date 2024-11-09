@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import SideBar from './SideBar.vue'
+import SideBar from './sidebar/SideBar.vue'
 import TopBar from './TopBar.vue'
 import WorldWindow from './WorldWindow.vue'
 

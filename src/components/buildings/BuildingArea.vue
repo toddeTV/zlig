@@ -13,7 +13,6 @@ import ConstructingBehavior from './behaviors/ConstructingBehavior.vue'
 import ProducingBehavior from './behaviors/ProducingBehavior.vue'
 import UpgradingBehavior from './behaviors/UpgradingBehavior.vue'
 import BuildingPopupConstruction from './popup/BuildingPopupConstruction.vue'
-import BuildingPopupEmpty from './popup/BuildingPopupEmpty.vue'
 import BuildingPopupProducing from './popup/BuildingPopupProducing.vue'
 import BuildingPopupUpgrading from './popup/BuildingPopupUpgrading.vue'
 
@@ -118,10 +117,6 @@ function getPopupHeightOffset() {
         :area-id="props.id"
         :building-type="buildingInstance.type"
         :state="buildingInstance"
-      />
-      <BuildingPopupEmpty
-        v-else
-        :area-id="props.id"
       />
     </Html>
 
