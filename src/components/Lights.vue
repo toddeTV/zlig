@@ -3,12 +3,12 @@ import useDebugStore from '@/composables/useDebugStore'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
-import { AmbientLight, CameraHelper, DirectionalLight, Vector3 } from 'three'
+import { AmbientLight, CameraHelper, DirectionalLight } from 'three'
 import { watch } from 'vue'
 
 const { scene } = useTresContext()
 const { showLightHelper } = storeToRefs(useDebugStore())
-const { calculateSunIntensity, calculateSunPosition } = useVirtualTimeStore()
+const { calculateLightBySunPosition, calculateSunPosition } = useVirtualTimeStore()
 const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
 
 // -------- AmbientLight
@@ -42,25 +42,14 @@ scene.value.add(directionalLight)
 // -------- watch the time and simulate the sun
 
 watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
-  // set sun position
-  directionalLight.position.fromArray(calculateSunPosition(newValue).toArray())
-  directionalLight.lookAt(new Vector3(0, 0, 0))
+  directionalLight.position.fromArray(calculateSunPosition(newValue).toArray()) // set sun position
 
-  // set sun intensity
-  directionalLight.intensity = calculateSunIntensity(directionalLight.position, 0, 2)
+  const { ambientColor, ambientIntensity, sunColor, sunIntensity } = calculateLightBySunPosition(directionalLight.position)
 
-  // set ambient light intensity
-  ambientLight.intensity = calculateSunIntensity(directionalLight.position, 0.1, 0.5)
-
-  // TODO add light color adjustment based on the virtual time
-  // Adjust the light color based on the height of the "sun"
-  // const lightTransitions: TimeColorTransition[] = [
-  //   //...
-  // ]
-  // const colorRGB = getColorByTime(newValue, lightTransitions)
-  // const color = new Color()
-  // color.set(rgbToHex(colorRGB))
-  // directionalLight.color.set(color)
+  directionalLight.intensity = sunIntensity // set sun intensity
+  directionalLight.color = sunColor // set sun color
+  ambientLight.intensity = ambientIntensity // set ambient light intensity
+  ambientLight.color = ambientColor // set ambient color
 })
 
 // -------- CameraHelper for DirectionalLight
