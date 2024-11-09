@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { Vector3 } from 'three'
+import { Color, Vector3 } from 'three'
 import { onMounted, readonly, ref } from 'vue'
 import type { RGB } from 'three'
 
@@ -44,86 +44,59 @@ export default defineStore('virtualTimeStore', () => {
     return new Vector3(x, y, 100)
   }
 
-  // sun intensity
-  function calculateSunIntensity(
+  // ambient intensity
+  function calculateLightBySunPosition(
     sunPosition: Vector3,
-    rangeMin: number,
-    rangeMax: number,
   ) {
-    // Adjust the light intensity based on the height of the "sun" (y value) ...
-    const normalizedY = mapRange(sunPosition.y, -b, b, rangeMin, rangeMax) // Normalize the height between values
-    return mapRange(normalizedY, 0, 1, 0.2, 1) // Lower intensity at sunrise/sunset, max at noon
-  }
+    const normalizedY = mapRange(sunPosition.y, -b, b, -1.0, 1.0) // Normalize the height between values
 
-  // TODO does not work at all ... do not use hours but full time, problems when time span is over midnight & sunrise should not start at midnight
-  // get a color based on the time with transition rules
-  function getColorByTime(
-    date: Date,
-    transitions: TimeColorTransition[],
-  ): RGB {
-    const hours = date.getHours()
-
-    // Loop through all defined transitions
-    for (const transition of transitions) {
-      // If the current hour is within the transition range
-      if (hours >= transition.startHour && hours < transition.endHour) {
-        const totalHours = transition.endHour - transition.startHour
-        const progress = (hours - transition.startHour) / totalHours
-        return getColorForPercentage(progress, transition.startColor, transition.endColor)
-      }
+    let ambientIntensity = 0.8
+    // normal sun intensity
+    let sunIntensity = 1.0
+    // sun is off when under the horizon
+    if (normalizedY <= 0.01) {
+      sunIntensity = 0.0
+      ambientIntensity = 3.0
+    }
+    // if sun is close to horizon the intensity falls off to zero
+    else if (normalizedY <= 0.2) {
+      sunIntensity = mapRange(normalizedY, 0.01, 0.2, 0.0, 1.0)
+      ambientIntensity = mapRange(normalizedY, 0.01, 0.2, 3.0, 0.8)
     }
 
-    // If no transitions match, return the color of the last defined period
-    const lastTransition = transitions[transitions.length - 1]
-    return getColorForPercentage(1, lastTransition.startColor, lastTransition.endColor)
-  }
-
-  // Function to get the interpolated color based on the percentage progress
-  function getColorForPercentage(pct: number, startColor: RGB, endColor: RGB): RGB {
-    const lower = { color: startColor, pct: 0 }
-    const upper = { color: endColor, pct: 1 }
-
-    const range = upper.pct - lower.pct
-    const rangePct = pct / range
-    const pctLower = 1 - rangePct
-    const pctUpper = rangePct
-
-    const color = {
-      b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper),
-      g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
-      r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
+    const colorSunDay = new Color(0xFFF9ED)
+    const colorAmbientDay = new Color(0xE0F3FF)
+    const colorSunDown = new Color(0xEB5B00)
+    // const colorAmbientDown = new Color(0xFFDDB7)
+    const colorAmbientDown = new Color(0xB6818F)
+    const colorSkyDown = new Color(0x403538)
+    const colorAmbientNight = new Color(0x8F91C4)
+    const colorSkyNight = new Color(0x1E1F39)
+    const ambientColor = colorAmbientDay
+    const sunColor = colorSunDay
+    const skyColor = colorAmbientDay
+    if (normalizedY <= -0.25) {
+      ambientColor.set(colorAmbientNight)
+      skyColor.set(colorSkyNight)
+    }
+    else if (normalizedY <= 0.01) {
+      const t = mapRange(normalizedY, -0.25, 0.01, 0.0, 1.0)
+      ambientColor.lerpColors(colorAmbientNight, colorAmbientDown, t)
+      skyColor.lerpColors(colorSkyNight, colorSkyDown, t)
+    }
+    else if (normalizedY <= 0.25) {
+      const t = mapRange(normalizedY, 0.01, 0.25, 0.0, 1.0)
+      sunColor.lerpColors(colorSunDown, colorSunDay, t)
+      ambientColor.lerpColors(colorAmbientDown, colorAmbientDay, t)
+      skyColor.lerpColors(colorSkyDown, colorAmbientDay, t)
     }
 
-    const rgb = { b: color.b, g: color.g, r: color.r }
-
-    return rgb
+    return { ambientColor, ambientIntensity, skyColor, sunColor, sunIntensity }
   }
-
-  function rgbToHex(rgb: RGB): string {
-    return (
-      `#${
-        ((1 << 24) + (rgb.r << 16) + (rgb.g << 8) + rgb.b)
-          .toString(16)
-          .slice(1)
-          .toUpperCase()}`
-    )
-  }
-
-  // time color transition preset for the sky
-  const skyTimeColorTransitionPreset: TimeColorTransition[] = [
-    // TODO develop a better color scheme
-    { endColor: { b: 255, g: 215, r: 135 }, endHour: 4, startColor: { b: 0, g: 0, r: 0 }, startHour: 22 }, // Sunrise
-    { endColor: { b: 0, g: 0, r: 0 }, endHour: 22, startColor: { b: 0, g: 0, r: 0 }, startHour: 15 }, // Night
-    { endColor: { b: 255, g: 215, r: 135 }, endHour: 13, startColor: { b: 255, g: 215, r: 135 }, startHour: 4 }, // Day
-    { endColor: { b: 0, g: 0, r: 0 }, endHour: 15, startColor: { b: 255, g: 215, r: 135 }, startHour: 13 }, // Sunset
-  ]
 
   return {
-    calculateSunIntensity,
+    calculateLightBySunPosition,
     calculateSunPosition,
     currentVirtualTime: readonly(currentVirtualTime),
-    getColorByTime,
-    rgbToHex,
-    skyTimeColorTransitionPreset,
   }
 })

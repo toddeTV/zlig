@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import useDebugStore from '@/composables/useDebugStore'
+import { storeToRefs } from 'pinia'
+
+const { showVisualHelper } = storeToRefs(useDebugStore())
 </script>
 
 <template>
-  <TresAxesHelper />
-  <TresGridHelper />
+  <TresAxesHelper v-if="showVisualHelper" />
+  <TresGridHelper v-if="showVisualHelper" />
 </template>
 
 <style scoped>
