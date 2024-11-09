@@ -19,8 +19,8 @@ importers:
         specifier: 1.10.4
         version: 1.10.4
       '@tresjs/cientos':
-        specifier: 4.0.3
-        version: 4.0.3(@tresjs/core@4.3.1(three@0.169.0)(vue@3.5.4(typescript@5.5.4)))(three@0.169.0)(vue@3.5.4(typescript@5.5.4))
+        specifier: 4.0.2
+        version: 4.0.2(@tresjs/core@4.3.1(three@0.169.0)(vue@3.5.4(typescript@5.5.4)))(three@0.169.0)(vue@3.5.4(typescript@5.5.4))
       '@tresjs/core':
         specifier: 4.3.1
         version: 4.3.1(three@0.169.0)(vue@3.5.4(typescript@5.5.4))
@@ -816,8 +816,8 @@ packages:
     peerDependencies:
       eslint: '>=8.40.0'
 
-  '@tresjs/cientos@4.0.3':
-    resolution: {integrity: sha512-6urkgwGtXzxj7JBZh0HjX5sJwaoNVHXXclFNwFyWVIOBHBikAxFF52GhxTaAlOYfMnun2YKBW/StjnWutq7zAQ==}
+  '@tresjs/cientos@4.0.2':
+    resolution: {integrity: sha512-72Y+tHdysx+ZGv81c1kZixnLfc5bgMKKc2kacW6AQ2XSaRfDQ87ZRhQp78kHYgPNgx6SUd9mXGaub15brMGNFQ==}
     peerDependencies:
       '@tresjs/core': '>=4.2.1'
       three: '>=0.133'
@@ -1138,26 +1138,17 @@ packages:
   '@vueuse/core@10.11.1':
     resolution: {integrity: sha512-guoy26JQktXPcz+0n3GukWIy/JDNKti9v6VEMu6kV2sYBsWuGiTU8OWdg+ADfUbHg3/3DlqySDe7JmdHrktiww==}
 
-  '@vueuse/core@11.0.3':
-    resolution: {integrity: sha512-RENlh64+SYA9XMExmmH1a3TPqeIuJBNNB/63GT35MZI+zpru3oMRUA6cEFr9HmGqEgUisurwGwnIieF6qu3aXw==}
-
   '@vueuse/core@11.2.0':
     resolution: {integrity: sha512-JIUwRcOqOWzcdu1dGlfW04kaJhW3EXnnjJJfLTtddJanymTL7lF1C0+dVVZ/siLfc73mWn+cGP1PE1PKPruRSA==}
 
   '@vueuse/metadata@10.11.1':
     resolution: {integrity: sha512-IGa5FXd003Ug1qAZmyE8wF3sJ81xGLSqTqtQ6jaVfkeZ4i5kS2mwQF61yhVqojRnenVew5PldLyRgvdl4YYuSw==}
 
-  '@vueuse/metadata@11.0.3':
-    resolution: {integrity: sha512-+FtbO4SD5WpsOcQTcC0hAhNlOid6QNLzqedtquTtQ+CRNBoAt9GuV07c6KNHK1wCmlq8DFPwgiLF2rXwgSHX5Q==}
-
   '@vueuse/metadata@11.2.0':
     resolution: {integrity: sha512-L0ZmtRmNx+ZW95DmrgD6vn484gSpVeRbgpWevFKXwqqQxW9hnSi2Ppuh2BzMjnbv4aJRiIw8tQatXT9uOB23dQ==}
 
   '@vueuse/shared@10.11.1':
     resolution: {integrity: sha512-LHpC8711VFZlDaYUXEBbFBCQ7GS3dVU9mjOhhMhXP6txTV4EhYQg/KGnQuvt/sPAtoUKq7VVUnL6mVtFoL42sA==}
-
-  '@vueuse/shared@11.0.3':
-    resolution: {integrity: sha512-0rY2m6HS5t27n/Vp5cTDsKTlNnimCqsbh/fmT2LgE+aaU42EMfXo8+bNX91W9I7DDmxfuACXMmrd7d79JxkqWA==}
 
   '@vueuse/shared@11.2.0':
     resolution: {integrity: sha512-VxFjie0EanOudYSgMErxXfq6fo8vhr5ICI+BuE3I9FnX7ePllEsVrRQ7O6Q1TLgApeLuPKcHQxAXpP+KnlrJsg==}
@@ -3583,10 +3574,10 @@ snapshots:
       - supports-color
       - typescript
 
-  '@tresjs/cientos@4.0.3(@tresjs/core@4.3.1(three@0.169.0)(vue@3.5.4(typescript@5.5.4)))(three@0.169.0)(vue@3.5.4(typescript@5.5.4))':
+  '@tresjs/cientos@4.0.2(@tresjs/core@4.3.1(three@0.169.0)(vue@3.5.4(typescript@5.5.4)))(three@0.169.0)(vue@3.5.4(typescript@5.5.4))':
     dependencies:
       '@tresjs/core': 4.3.1(three@0.169.0)(vue@3.5.4(typescript@5.5.4))
-      '@vueuse/core': 11.0.3(vue@3.5.4(typescript@5.5.4))
+      '@vueuse/core': 11.2.0(vue@3.5.4(typescript@5.5.4))
       camera-controls: 2.9.0(three@0.169.0)
       stats-gl: 2.2.8
       stats.js: 0.17.0
@@ -4046,16 +4037,6 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/core@11.0.3(vue@3.5.4(typescript@5.5.4))':
-    dependencies:
-      '@types/web-bluetooth': 0.0.20
-      '@vueuse/metadata': 11.0.3
-      '@vueuse/shared': 11.0.3(vue@3.5.4(typescript@5.5.4))
-      vue-demi: 0.14.10(vue@3.5.4(typescript@5.5.4))
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - vue
-
   '@vueuse/core@11.2.0(vue@3.5.4(typescript@5.5.4))':
     dependencies:
       '@types/web-bluetooth': 0.0.20
@@ -4068,18 +4049,9 @@ snapshots:
 
   '@vueuse/metadata@10.11.1': {}
 
-  '@vueuse/metadata@11.0.3': {}
-
   '@vueuse/metadata@11.2.0': {}
 
   '@vueuse/shared@10.11.1(vue@3.5.4(typescript@5.5.4))':
-    dependencies:
-      vue-demi: 0.14.10(vue@3.5.4(typescript@5.5.4))
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - vue
-
-  '@vueuse/shared@11.0.3(vue@3.5.4(typescript@5.5.4))':
     dependencies:
       vue-demi: 0.14.10(vue@3.5.4(typescript@5.5.4))
     transitivePeerDependencies:

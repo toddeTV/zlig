@@ -49,7 +49,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "3.5.1",
     "@rushstack/eslint-patch": "1.10.4",
-    "@tresjs/cientos": "4.0.3",
+    "@tresjs/cientos": "4.0.2",
     "@tresjs/core": "4.3.1",
     "@tresjs/post-processing": "1.0.0-next.1",
     "@tsconfig/node20": "20.1.4",
