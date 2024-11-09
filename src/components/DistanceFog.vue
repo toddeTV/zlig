@@ -8,7 +8,7 @@ import { watch } from 'vue'
 
 const { scene } = useTresContext()
 const { showFog } = storeToRefs(useDebugStore())
-const { getColorByTime, rgbToHex, skyTimeColorTransitionPreset } = useVirtualTimeStore()
+const { calculateLightBySunPosition, calculateSunPosition } = useVirtualTimeStore()
 const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
 
 const fog = new Fog(0x82DBC5, 140, 160)
@@ -16,10 +16,8 @@ const fog = new Fog(0x82DBC5, 140, 160)
 // watch the current virtual time
 watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
   // set the sky color
-  const colorRGB = getColorByTime(newValue, skyTimeColorTransitionPreset)
-  const color = new Color()
-  color.set(rgbToHex(colorRGB))
-  fog.color = color
+  const { skyColor } = calculateLightBySunPosition(calculateSunPosition(newValue))
+  fog.color = skyColor
 })
 
 // watch the fog visibility
