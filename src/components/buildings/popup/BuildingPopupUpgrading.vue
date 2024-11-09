@@ -13,9 +13,6 @@ const props = defineProps<{
 
 const gameState = useGameState()
 
-// TODO: Factor in modifiers.
-const totalBuildingSeconds = props.buildingType.levelProgression.getBaseBuildingSecondsForLevel(props.state.level + 1)
-
 function cancelUpgrade() {
   gameState.buildings[props.areaId] = {
     // TODO: Approve that it is ok to loose progress when canceling an upgrade.
@@ -34,7 +31,7 @@ function cancelUpgrade() {
         <span>Remaining:</span>
 
         <ProgressBar
-          :max="totalBuildingSeconds.toNumber()"
+          :max="props.state.initialSeconds.toNumber()"
           :min="0"
           :value="props.state.secondsRemaining.toNumber()"
         />

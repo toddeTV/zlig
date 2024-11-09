@@ -4,6 +4,7 @@ import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 import DebugMenu from '../debug/DebugMenu.vue'
+import SelectedBuildingInConstruction from './SelectedBuildingInConstruction.vue'
 import SelectedEmptyBuildingArea from './SelectedEmptyBuildingArea.vue'
 
 const { buildings } = storeToRefs(useGameState())
@@ -15,16 +16,20 @@ const hasDebug = ref(true)
 
 <template>
   <div class="bg-white h-full flex flex-col gap-1">
-    <div class="flex-grow flex">
-      <SelectedEmptyBuildingArea
-        v-if="selectedBuildingArea.id && !selectedBuildingInstance"
+    <div v-if="!selectedBuildingArea.id" class="flex-grow flex flex-col p-3 items-center justify-center">
+      <p class="text-gray-400">
+        Please select a building or building area...
+      </p>
+    </div>
+
+    <div v-else class="flex-grow p-3">
+      <SelectedBuildingInConstruction
+        v-if="selectedBuildingInstance?.state === 'in-construction'"
         :building-area-id="selectedBuildingArea.id"
+        :building-state="selectedBuildingInstance"
+        :building-type="selectedBuildingInstance.type"
       />
-      <div v-else class="flex flex-grow flex-col items-center justify-center">
-        <p class="text-gray-400">
-          Please select a building or building area...
-        </p>
-      </div>
+      <SelectedEmptyBuildingArea v-else :building-area-id="selectedBuildingArea.id" />
     </div>
 
     <hr>

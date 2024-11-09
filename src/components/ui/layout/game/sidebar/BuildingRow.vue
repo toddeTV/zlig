@@ -58,6 +58,7 @@ const canBuild = computed(() => {
 function build() {
   gameState.$patch((state) => {
     state.buildings[props.buildingAreaId] = {
+      initialSeconds: buildingSeconds.value,
       level: 0,
       secondsRemaining: buildingSeconds.value,
       state: 'in-construction',

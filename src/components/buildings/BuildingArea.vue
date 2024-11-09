@@ -12,7 +12,6 @@ import ProgressBar from '../ui/ProgressBar.vue'
 import ConstructingBehavior from './behaviors/ConstructingBehavior.vue'
 import ProducingBehavior from './behaviors/ProducingBehavior.vue'
 import UpgradingBehavior from './behaviors/UpgradingBehavior.vue'
-import BuildingPopupConstruction from './popup/BuildingPopupConstruction.vue'
 import BuildingPopupProducing from './popup/BuildingPopupProducing.vue'
 import BuildingPopupUpgrading from './popup/BuildingPopupUpgrading.vue'
 
@@ -100,14 +99,8 @@ function getPopupHeightOffset() {
       center
       :position="new Vector3(0, getPopupHeightOffset(), 0).add(props.position)"
     >
-      <BuildingPopupConstruction
-        v-if="buildingInstance?.state === 'in-construction'"
-        :area-id="props.id"
-        :building-type="buildingInstance.type"
-        :state="buildingInstance"
-      />
       <BuildingPopupUpgrading
-        v-else-if="buildingInstance?.state === 'upgrading'"
+        v-if="buildingInstance?.state === 'upgrading'"
         :area-id="props.id"
         :building-type="buildingInstance.type"
         :state="buildingInstance"
