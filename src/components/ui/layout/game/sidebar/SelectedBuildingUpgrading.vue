@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import ProgressBar from '@/components/ui/ProgressBar.vue'
 import useGameState from '@/composables/useGameState.js'
+import { ResourceRecord } from '@/game-logic/resources.js'
 import { computed } from 'vue'
-import type { BuildingAreaId, BuildingStateInConstruction, BuildingType } from '@/game-logic/types.js'
+import type { BuildingAreaId, BuildingStateUpgrading, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
   buildingAreaId: BuildingAreaId
   buildingType: BuildingType
-  buildingState: BuildingStateInConstruction
+  buildingState: BuildingStateUpgrading
 }>()
 
 const secondsRemaining = computed(() => {
@@ -18,11 +19,16 @@ const secondsRemaining = computed(() => {
 
 const gameState = useGameState()
 
-function cancelBuild() {
+function cancelUpgrade() {
   // TODO: Determine the refunds.
 
   gameState.$patch((state) => {
-    state.buildings[props.buildingAreaId] = undefined
+    state.buildings[props.buildingAreaId] = {
+      internalBuffer: new ResourceRecord(),
+      level: props.buildingState.level,
+      state: 'producing',
+      type: props.buildingType,
+    }
   })
 }
 </script>
@@ -30,9 +36,10 @@ function cancelBuild() {
 <template>
   <h3 class="font-semibold mb-4">
     <span class="text-xl">{{ props.buildingType.name }}</span>
+    <span> (Level {{ props.buildingState.level }})</span>
   </h3>
   <p>
-    This building is currently under construction.
+    This building is currently being upgraded to level <b>{{ props.buildingState.level + 1 }}</b>.
     Finished in: <b>{{ secondsRemaining.toLocaleString() }}</b> second{{ secondsRemaining === 1 ? '' : 's' }}
   </p>
   <div class="flex flex-col mt-2 mb-4">
@@ -43,7 +50,7 @@ function cancelBuild() {
     />
   </div>
 
-  <button class="border p-1 rounded" @click="cancelBuild">
-    cancel build
+  <button class="border p-1 rounded" @click="cancelUpgrade">
+    cancel upgrading
   </button>
 </template>

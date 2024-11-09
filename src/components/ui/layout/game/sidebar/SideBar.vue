@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 import DebugMenu from '../debug/DebugMenu.vue'
 import SelectedBuildingInConstruction from './SelectedBuildingInConstruction.vue'
+import SelectedBuildingUpgrading from './SelectedBuildingUpgrading.vue'
 import SelectedEmptyBuildingArea from './SelectedEmptyBuildingArea.vue'
 
 const { buildings } = storeToRefs(useGameState())
@@ -25,6 +26,12 @@ const hasDebug = ref(true)
     <div v-else class="flex-grow p-3">
       <SelectedBuildingInConstruction
         v-if="selectedBuildingInstance?.state === 'in-construction'"
+        :building-area-id="selectedBuildingArea.id"
+        :building-state="selectedBuildingInstance"
+        :building-type="selectedBuildingInstance.type"
+      />
+      <SelectedBuildingUpgrading
+        v-else-if="selectedBuildingInstance?.state === 'upgrading'"
         :building-area-id="selectedBuildingArea.id"
         :building-state="selectedBuildingInstance"
         :building-type="selectedBuildingInstance.type"

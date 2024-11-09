@@ -13,7 +13,6 @@ import ConstructingBehavior from './behaviors/ConstructingBehavior.vue'
 import ProducingBehavior from './behaviors/ProducingBehavior.vue'
 import UpgradingBehavior from './behaviors/UpgradingBehavior.vue'
 import BuildingPopupProducing from './popup/BuildingPopupProducing.vue'
-import BuildingPopupUpgrading from './popup/BuildingPopupUpgrading.vue'
 
 const props = defineProps<{
   id: BuildingAreaId
@@ -99,14 +98,8 @@ function getPopupHeightOffset() {
       center
       :position="new Vector3(0, getPopupHeightOffset(), 0).add(props.position)"
     >
-      <BuildingPopupUpgrading
-        v-if="buildingInstance?.state === 'upgrading'"
-        :area-id="props.id"
-        :building-type="buildingInstance.type"
-        :state="buildingInstance"
-      />
       <BuildingPopupProducing
-        v-else-if="buildingInstance?.state === 'producing'"
+        v-if="buildingInstance?.state === 'producing'"
         :area-id="props.id"
         :building-type="buildingInstance.type"
         :state="buildingInstance"
