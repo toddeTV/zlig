@@ -9,7 +9,7 @@ import { watch } from 'vue'
 
 const { scene } = useTresContext()
 const { scenes } = await modelLoader
-const { render } = useLoop()
+const { onBeforeRender } = useLoop()
 const { showWaterShader } = storeToRefs(useDebugStore())
 
 const sceneGroup = scene.value.getObjectByName('sceneGroup') ?? scene.value
@@ -75,7 +75,7 @@ addShadow(waterMesh, 'receive') // TODO fix bc this is not working
 // sceneGroup.add(waterMesh)
 // addShadowAndAddToGroup(sceneGroup, waterMesh)
 
-render(({ camera, renderer, scene }) => {
+onBeforeRender(({ camera, renderer, scene }) => {
   uniforms.time.value += 0.05
   renderer.render(scene, camera)
 })
