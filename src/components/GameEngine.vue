@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import useBuildingAreas from '@/composables/useBuildingAreas.js'
-import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
+import useSelectedBuildingArea from '@/composables/useSelectedBuildingAreaStore.js'
+import { getLeafObjects } from '@/utils/threeHelper'
+import { useTresContext } from '@tresjs/core'
+import { EffectComposer, Outline } from '@tresjs/post-processing'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import BuildingArea from './buildings/BuildingArea.vue'
 import CameraAndControls from './CameraAndControls.vue'
 import DistanceFog from './DistanceFog.vue'
@@ -11,6 +14,7 @@ import Island from './models/Island.vue'
 import Ocean from './models/Ocean.vue'
 import VisualHelper from './VisualHelper.vue'
 
+const { scene } = useTresContext()
 const { areas } = storeToRefs(useBuildingAreas())
 const { init } = useBuildingAreas()
 init()
