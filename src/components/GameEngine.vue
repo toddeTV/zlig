@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import useBuildingAreas from '@/composables/useBuildingAreas.js'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
+import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import BuildingArea from './buildings/BuildingArea.vue'
 import CameraAndControls from './CameraAndControls.vue'
@@ -10,8 +11,9 @@ import Island from './models/Island.vue'
 import Ocean from './models/Ocean.vue'
 import VisualHelper from './VisualHelper.vue'
 
-const BuildingAreas = useBuildingAreas()
-BuildingAreas.init()
+const { areas } = storeToRefs(useBuildingAreas())
+const { init } = useBuildingAreas()
+init()
 
 const selectedBuildingArea = useSelectedBuildingArea()
 
@@ -41,10 +43,11 @@ const cameraMoved = ref(false)
 
     <Suspense>
       <BuildingArea
-        v-for="area in BuildingAreas.areas"
+        v-for="area in areas"
         :id="area.id"
         :key="area.id"
         :position="area.position"
+        :rotation="area.rotation"
       />
     </Suspense>
     <Suspense>

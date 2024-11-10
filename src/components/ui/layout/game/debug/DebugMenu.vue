@@ -12,6 +12,9 @@ const debug = useDebugStore()
     </h3>
 
     <div class="grid grid-cols-2 gap-1">
+      <ToggleVisibilityButton v-model="debug.showVisualHelper">
+        visual helper
+      </ToggleVisibilityButton>
       <ToggleVisibilityButton v-model="debug.showLightHelper">
         lights helper
       </ToggleVisibilityButton>
