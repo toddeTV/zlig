@@ -8,18 +8,18 @@ import type { BuildingType } from '@/game-logic/types.js'
 const building: BuildingType = {
   id: 'testBuilding',
   levelProgression: new LinearLevelProgression({
-    buildingSeconds: {
-      additionalPerLevel: new Big('2'),
-      initial: new Big('5'),
+    buildingMilliseconds: {
+      additionalPerLevel: new Big('2').times(60).times(60).times(1000), // game time hours
+      initial: new Big('5').times(60).times(60).times(1000), // game time hours
     },
     costs: {
       additionalPerLevel: new ResourceRecord(),
       initial: new ResourceRecord({ gold: new Big('10') }),
     },
     getModel: () => markRaw(TestBuilding),
-    income: {
-      additionalPerLevel: new ResourceRecord({ gold: new Big('0.05') }),
-      initial: new ResourceRecord({ gold: new Big('0.1') }),
+    incomePerMillisecond: {
+      additionalPerLevel: new ResourceRecord({ gold: new Big('0.3') }).divided_by(60).divided_by(60).divided_by(1000), // per game time hour
+      initial: new ResourceRecord({ gold: new Big('0.5') }).divided_by(60).divided_by(60).divided_by(1000), // per game time hour
     },
   }),
   maxInstances: 4,

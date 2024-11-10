@@ -137,10 +137,10 @@ function getPopupHeightOffset() {
         <ProgressBar
           :max="
             // TODO: Factor in modifiers.
-            buildingInstance.type.levelProgression.getBaseBuildingSecondsForLevel(buildingInstance.level + 1).toNumber()
+            buildingInstance.type.levelProgression.getBaseBuildingMillisecondsForLevel(buildingInstance.level + 1).toNumber()
           "
           :min="0"
-          :value="buildingInstance.secondsRemaining.toNumber()"
+          :value="buildingInstance.millisecondsRemaining.toNumber()"
         />
       </div>
     </Html>

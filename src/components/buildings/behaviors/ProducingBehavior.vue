@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import useGameState from '@/composables/useGameState.js'
-import { useLoop } from '@tresjs/core'
+import useGameTime from '@/composables/useGameTime.js'
+import { storeToRefs } from 'pinia'
+import { watch } from 'vue'
 import type { BuildingAreaId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
@@ -9,9 +11,6 @@ const props = defineProps<{
   state: BuildingStateProducing
 }>()
 
-const gameState = useGameState()
-const { onBeforeRender } = useLoop()
-
 function getIncome() {
   // TODO: Factor in modifiers.
   const income = props.buildingType.levelProgression.getBaseIncomeForLevel(props.state.level)
@@ -19,10 +18,13 @@ function getIncome() {
   return income
 }
 
-onBeforeRender((event) => {
-  const { delta } = event
+const gameState = useGameState()
+const { currentTime } = storeToRefs(useGameTime())
 
-  const income = getIncome().times(delta)
+watch(currentTime, (time, prev) => {
+  const deltaMs = time.getTime() - prev.getTime()
+
+  const income = getIncome().times(deltaMs)
 
   // The internal buffer is this full now.
   let buffer = props.state.internalBuffer.plus(income)

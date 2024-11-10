@@ -13,7 +13,7 @@ const props = defineProps<{
 const gameState = useGameState()
 
 // TODO: Factor in modifiers.
-const totalBuildingSeconds = props.buildingType.levelProgression.getBaseBuildingSecondsForLevel(1)
+const totalBuildingSeconds = props.buildingType.levelProgression.getBaseBuildingMillisecondsForLevel(1)
 
 function cancelBuild() {
   gameState.buildings[props.areaId] = undefined
@@ -29,10 +29,10 @@ function cancelBuild() {
         <ProgressBar
           :max="totalBuildingSeconds.toNumber()"
           :min="0"
-          :value="props.state.secondsRemaining.toNumber()"
+          :value="props.state.millisecondsRemaining.toNumber()"
         />
 
-        <span>{{ props.state.secondsRemaining.round().toNumber().toLocaleString() }} s</span>
+        <span>{{ props.state.millisecondsRemaining.div(1000).round().toNumber().toLocaleString() }} s (game time)</span>
       </p>
 
       <p>

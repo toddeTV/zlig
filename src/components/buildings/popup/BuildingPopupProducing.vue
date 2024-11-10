@@ -26,9 +26,9 @@ function getUpgradeCosts() {
   return costs
 }
 
-function getUpgradeBuildingSeconds() {
+function getUpgradeBuildingMilliseconds() {
   // TODO: Factor in modifiers.
-  const seconds = props.buildingType.levelProgression.getBaseBuildingSecondsForLevel(props.state.level + 1)
+  const seconds = props.buildingType.levelProgression.getBaseBuildingMillisecondsForLevel(props.state.level + 1)
 
   return seconds
 }
@@ -62,7 +62,7 @@ function upgrade() {
 
   gameState.buildings[props.areaId] = {
     level: props.state.level,
-    secondsRemaining: getUpgradeBuildingSeconds(),
+    millisecondsRemaining: getUpgradeBuildingMilliseconds(),
     state: 'upgrading',
     type: props.buildingType,
   }
@@ -79,9 +79,9 @@ function destroy() {
     <div class="flex flex-col gap-2">
       <div class="flex flex-col gap-1 ml-4">
         <p class="font-semibold text-sm -ml-4">
-          Produces per second
+          Produces per game hour
         </p>
-        <Resources :resources="getCurrentIncome()" :round="false" />
+        <Resources :resources="getCurrentIncome().times(60).times(60).times(1000)" :round="false" />
       </div>
 
       <div v-if="canUpgrade() !== 'max-level'" class="flex flex-col gap-1 ml-4">
@@ -89,14 +89,14 @@ function destroy() {
           Costs to upgrade
         </p>
         <Resources :resources="getUpgradeCosts()" round />
-        <p>Takes {{ getUpgradeBuildingSeconds().round(1).toNumber().toLocaleString() }} seconds</p>
+        <p>Takes {{ getUpgradeBuildingMilliseconds().div(1000).round(1).toNumber().toLocaleString() }} seconds (game time)</p>
       </div>
 
       <div v-if="canUpgrade() !== 'max-level'" class="flex flex-col gap-1 ml-4">
         <p class="font-semibold text-sm -ml-4">
-          Upgraded produces per second
+          Upgraded produces per game hour
         </p>
-        <Resources :resources="getUpgradedIncome()" :round="false" />
+        <Resources :resources="getUpgradedIncome().times(60).times(60).times(1000)" :round="false" />
       </div>
 
       <p class="flex items-center justify-between">

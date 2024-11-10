@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import useGameState from '@/composables/useGameState.js'
+import useGameTime from '@/composables/useGameTime.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
-import { useLoop } from '@tresjs/core'
+import { storeToRefs } from 'pinia'
+import { watch } from 'vue'
 import type { BuildingAreaId, BuildingStateUpgrading, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
@@ -11,17 +13,17 @@ const props = defineProps<{
 }>()
 
 const gameState = useGameState()
-const { onBeforeRender } = useLoop()
+const { currentTime } = storeToRefs(useGameTime())
 
-onBeforeRender((event) => {
-  const { delta } = event
+watch(currentTime, (time, prev) => {
+  const deltaMs = time.getTime() - prev.getTime()
 
-  const secondsRemaining = props.state.secondsRemaining.minus(delta)
+  const millisecondsRemaining = props.state.millisecondsRemaining.minus(deltaMs)
 
-  if (secondsRemaining.gt(0)) {
+  if (millisecondsRemaining.gt(0)) {
     gameState.buildings[props.areaId] = {
       level: props.state.level,
-      secondsRemaining,
+      millisecondsRemaining,
       state: 'upgrading',
       type: props.buildingType,
     }
