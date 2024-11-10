@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { buildingTypes } from '@/game-logic/buildings/index.js'
-import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
+import type { BuildingAreaId } from '@/game-logic/types.js'
 import BuildingRow from './BuildingRow.vue'
 
 const props = defineProps<{
