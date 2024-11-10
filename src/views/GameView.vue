@@ -2,12 +2,21 @@
 import SideBar from '@/components/ui/layout/game/sidebar/SideBar.vue'
 import TopBar from '@/components/ui/layout/game/TopBar.vue'
 import WorldWindow from '@/components/ui/layout/game/WorldWindow.vue'
+import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { ref } from 'vue'
 
 const sidebarOpen = ref(false)
 function toggleSidebar() {
   sidebarOpen.value = !sidebarOpen.value
 }
+
+const selectedBuildingArea = useSelectedBuildingArea()
+selectedBuildingArea.$subscribe((_, newId) => {
+  if (newId) {
+    // The user selected a building area.
+    sidebarOpen.value = true
+  }
+})
 </script>
 
 <template>
