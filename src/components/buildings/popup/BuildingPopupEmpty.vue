@@ -87,7 +87,7 @@ const availableBuildings = [
           <p class="font-semibold text-sm -ml-4">
             Produces per game hour
           </p>
-          <Resources :resources="getIncome(type).times(60).times(60).times(1000)" :round="false" />
+          <Resources :resources="getIncome(type).perHour()" :round="false" />
         </div>
 
         <p>

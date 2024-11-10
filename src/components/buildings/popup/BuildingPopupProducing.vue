@@ -81,7 +81,7 @@ function destroy() {
         <p class="font-semibold text-sm -ml-4">
           Produces per game hour
         </p>
-        <Resources :resources="getCurrentIncome().times(60).times(60).times(1000)" :round="false" />
+        <Resources :resources="getCurrentIncome().perHour()" :round="false" />
       </div>
 
       <div v-if="canUpgrade() !== 'max-level'" class="flex flex-col gap-1 ml-4">
@@ -96,7 +96,7 @@ function destroy() {
         <p class="font-semibold text-sm -ml-4">
           Upgraded produces per game hour
         </p>
-        <Resources :resources="getUpgradedIncome().times(60).times(60).times(1000)" :round="false" />
+        <Resources :resources="getUpgradedIncome().perHour()" :round="false" />
       </div>
 
       <p class="flex items-center justify-between">

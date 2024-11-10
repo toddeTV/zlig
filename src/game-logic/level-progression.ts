@@ -1,4 +1,4 @@
-import type { ResourceRecord } from '@/game-logic/resources.js'
+import { type ResourceRecord, ResourcesPerMillisecond } from '@/game-logic/resources.js'
 import type { BuildingModel } from '@/game-logic/types.js'
 import type Big from 'big.js'
 
@@ -48,7 +48,7 @@ export abstract class LevelProgression {
 
   protected abstract doGetBaseCostsForLevel(level: number): ResourceRecord
   protected abstract doGetBaseBuildingMillisecondsForLevel(level: number): Big
-  protected abstract doGetBaseIncomeForLevel(level: number): ResourceRecord
+  protected abstract doGetBaseIncomeForLevel(level: number): ResourcesPerMillisecond
   protected abstract doGetModelForLevel(level: number): BuildingModel
 
   private validateLevel(level: number) {
@@ -80,7 +80,7 @@ export class FixedLevelProgression extends LevelProgression {
   }
 
   protected doGetBaseIncomeForLevel(level: number) {
-    return this.levels[level - 1].baseIncomePerMillisecond
+    return this.levels[level - 1].baseIncome
   }
 
   protected doGetModelForLevel(level: number) {
@@ -111,7 +111,7 @@ type BaseLevelFixedProgression = Readonly<{
   /**
    * The currency the player receives each game time millisecond without taking into account any modifiers.
    */
-  baseIncomePerMillisecond: ResourceRecord
+  baseIncome: ResourcesPerMillisecond
 }>
 
 type FirstLevelFixedProgression = BaseLevelFixedProgression & Readonly<{
@@ -144,12 +144,12 @@ export class LinearLevelProgression extends LevelProgression {
     additionalPerLevel: Big
   }
 
-  private incomePerMillisecond: {
+  private income: {
     initial: ResourceRecord
     additionalPerLevel: ResourceRecord
   }
 
-  constructor({ buildingMilliseconds, costs, getModel, incomePerMillisecond, maxLevel }: {
+  constructor({ buildingMilliseconds, costs, getModel, income, maxLevel }: {
     costs: {
       initial: ResourceRecord
       additionalPerLevel: ResourceRecord
@@ -158,7 +158,7 @@ export class LinearLevelProgression extends LevelProgression {
       initial: Big
       additionalPerLevel: Big
     }
-    incomePerMillisecond: {
+    income: {
       initial: ResourceRecord
       additionalPerLevel: ResourceRecord
     }
@@ -169,7 +169,7 @@ export class LinearLevelProgression extends LevelProgression {
 
     this.costs = costs
     this.buildingMilliseconds = buildingMilliseconds
-    this.incomePerMillisecond = incomePerMillisecond
+    this.income = income
     this.doGetModelForLevel = getModel
   }
 
@@ -178,11 +178,11 @@ export class LinearLevelProgression extends LevelProgression {
   }
 
   protected doGetBaseBuildingMillisecondsForLevel(level: number): Big {
-    return this.buildingMilliseconds.initial.plus(this.buildingMilliseconds.additionalPerLevel.times(level))
+    return this.buildingMilliseconds.initial.plus(this.buildingMilliseconds.additionalPerLevel.times(level - 1))
   }
 
-  protected doGetBaseIncomeForLevel(level: number): ResourceRecord {
-    return this.incomePerMillisecond.initial.plus(this.incomePerMillisecond.additionalPerLevel.times(level))
+  protected doGetBaseIncomeForLevel(level: number) {
+    return new ResourcesPerMillisecond(this.income.initial.plus(this.income.additionalPerLevel.times(level - 1)))
   }
 
   protected doGetModelForLevel(_level: number): BuildingModel {

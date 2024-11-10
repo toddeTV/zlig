@@ -1,6 +1,6 @@
 import TestBuilding from '@/components/models/buildings/TestBuilding.vue'
 import { LinearLevelProgression } from '@/game-logic/level-progression.js'
-import { ResourceRecord } from '@/game-logic/resources.js'
+import { ResourceRecord, resourcesPerHour } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { markRaw } from 'vue'
 import type { BuildingType } from '@/game-logic/types.js'
@@ -17,9 +17,9 @@ const building: BuildingType = {
       initial: new ResourceRecord({ gold: new Big('10') }),
     },
     getModel: () => markRaw(TestBuilding),
-    incomePerMillisecond: {
-      additionalPerLevel: new ResourceRecord({ gold: new Big('0.3') }).divided_by(60).divided_by(60).divided_by(1000), // per game time hour
-      initial: new ResourceRecord({ gold: new Big('0.5') }).divided_by(60).divided_by(60).divided_by(1000), // per game time hour
+    income: {
+      additionalPerLevel: resourcesPerHour({ gold: new Big('0.2') }),
+      initial: resourcesPerHour({ gold: new Big('0.5') }),
     },
   }),
   maxInstances: 4,
