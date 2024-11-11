@@ -70,6 +70,7 @@ const positionsSiftedSlightlyUpwards = computed(() => {
     />
     <ConstructionSite
       v-else
+      :building-area-id="props.id"
       :position="props.position"
       :rotation="props.rotation"
     />
