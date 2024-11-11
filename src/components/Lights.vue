@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useDebugStore from '@/composables/useDebugStore'
+import useSunPosition from '@/composables/useSunPosition.js'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
@@ -8,8 +9,8 @@ import { watch } from 'vue'
 
 const { scene } = useTresContext()
 const { showLightHelper } = storeToRefs(useDebugStore())
-const { calculateLightBySunPosition, calculateSunPosition } = useVirtualTimeStore()
-const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
+const { calculateLightBySunPosition } = useVirtualTimeStore()
+const { sunPosition } = storeToRefs(useSunPosition())
 
 // -------- AmbientLight
 
@@ -41,10 +42,10 @@ scene.value.add(directionalLight)
 
 // -------- watch the time and simulate the sun
 
-watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
-  directionalLight.position.fromArray(calculateSunPosition(newValue).toArray()) // set sun position
+watch(sunPosition, (position) => {
+  directionalLight.position.fromArray(position.toArray()) // set sun position
 
-  const { ambientColor, ambientIntensity, sunColor, sunIntensity } = calculateLightBySunPosition(directionalLight.position)
+  const { ambientColor, ambientIntensity, sunColor, sunIntensity } = calculateLightBySunPosition(position)
 
   directionalLight.intensity = sunIntensity // set sun intensity
   directionalLight.color = sunColor // set sun color

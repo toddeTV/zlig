@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import GameEngine from '@/components/GameEngine.vue'
+import useSunPosition from '@/composables/useSunPosition.js'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { TresCanvas } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
@@ -7,8 +8,8 @@ import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
 import { ref, watch } from 'vue'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 
-const { calculateLightBySunPosition, calculateSunPosition } = useVirtualTimeStore()
-const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
+const { calculateLightBySunPosition } = useVirtualTimeStore()
+const { sunPosition } = storeToRefs(useSunPosition())
 
 const gl = ref<TresCanvasProps>({
   alpha: false,
@@ -24,9 +25,9 @@ const gl = ref<TresCanvasProps>({
 })
 
 // watch the current virtual time
-watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
+watch(sunPosition, (position) => {
   // set the sky color
-  const { skyColor } = calculateLightBySunPosition(calculateSunPosition(newValue))
+  const { skyColor } = calculateLightBySunPosition(position)
   // @ts-expect-error //TODO this works, but it's not correctly typed -> check and fix
   gl.value.clearColor = skyColor
 })

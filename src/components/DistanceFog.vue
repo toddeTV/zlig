@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useDebugStore from '@/composables/useDebugStore'
+import useSunPosition from '@/composables/useSunPosition.js'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
@@ -8,15 +9,15 @@ import { watch } from 'vue'
 
 const { scene } = useTresContext()
 const { showFog } = storeToRefs(useDebugStore())
-const { calculateLightBySunPosition, calculateSunPosition } = useVirtualTimeStore()
-const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
+const { calculateLightBySunPosition } = useVirtualTimeStore()
+const { sunPosition } = storeToRefs(useSunPosition())
 
 const fog = new Fog(0x82DBC5, 140, 160)
 
 // watch the current virtual time
-watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
+watch(sunPosition, (position) => {
   // set the sky color
-  const { skyColor } = calculateLightBySunPosition(calculateSunPosition(newValue))
+  const { skyColor } = calculateLightBySunPosition(position)
   fog.color = skyColor
 })
 

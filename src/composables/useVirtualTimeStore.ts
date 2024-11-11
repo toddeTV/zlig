@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import { Color, Vector3 } from 'three'
+import { Color } from 'three'
 import { onMounted, readonly, ref } from 'vue'
-import type { RGB } from 'three'
+import type { RGB, Vector3 } from 'three'
 
 export interface TimeColorTransition {
   startHour: number
@@ -14,7 +14,6 @@ export default defineStore('virtualTimeStore', () => {
   // helper variables
   const virtualTimeMultiplier = 2000 // `1` means real time, `2` means 2x speed, `0.5` means half speed, etc.
   const intervalSpeed = 100 // in milliseconds, how often to update the virtual time
-  const a = 50 // Semi-major axis along the X-axis
   const b = 25 // Semi-minor axis along the Y-axis
 
   // Function to map a value between a range
@@ -30,19 +29,6 @@ export default defineStore('virtualTimeStore', () => {
       currentVirtualTime.value = new Date(currentVirtualTime.value.getTime() + virtualTimeMultiplier * intervalSpeed)
     }, intervalSpeed)
   })
-
-  // sun position
-  function calculateSunPosition(time: Date) {
-    // Calculate the angle (here you scale the time to a full cycle in a virtual "day")
-    const theta = (time.getTime() / 1000 * 2 * Math.PI) / (24 * 3600)
-
-    // Calculate the light's position on the ellipse
-    const x = a * Math.cos(theta)
-    const y = b * Math.sin(theta)
-
-    // set sun position
-    return new Vector3(x, y, 100)
-  }
 
   // ambient intensity
   function calculateLightBySunPosition(
@@ -96,7 +82,6 @@ export default defineStore('virtualTimeStore', () => {
 
   return {
     calculateLightBySunPosition,
-    calculateSunPosition,
     currentVirtualTime: readonly(currentVirtualTime),
   }
 })
