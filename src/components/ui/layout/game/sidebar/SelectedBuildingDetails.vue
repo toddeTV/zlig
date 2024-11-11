@@ -101,7 +101,7 @@ function destroyBuilding() {
     </div>
   </div>
 
-  <div v-if="DEV" class="mb-4">
+  <div v-if="DEV" class="mb-4 border-4 border-red-600 text-red-950 bg-red-100 p-2 border-dashed">
     <p class="font-semibold">
       Internal resource buffer:
     </p>
