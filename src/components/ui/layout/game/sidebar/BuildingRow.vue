@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Resources from '@/components/ui/Resources.vue'
 import useGameState from '@/composables/useGameState.js'
-import { ResourceRecord } from '@/game-logic/resources.js'
+import { ResourceRecord, ResourcesPerMillisecond } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
@@ -18,27 +18,27 @@ const { buildings, resources } = storeToRefs(gameState)
 // TODO: Put this into the game state.
 // TODO: Make this individual per building type.
 const buildModifiers = {
-  buildingCosts: new ResourceRecord({ gold: new Big('1') }),
-  buildingSeconds: 1,
+  costs: new ResourceRecord({ gold: new Big('1') }),
+  duration: 1,
 }
 const incomeModifier = new ResourceRecord({ gold: new Big('1') })
 
 const costs = computed(() => {
   const base = props.buildingType.levelProgression.getBaseCostsForLevel(1)
 
-  return base.times(buildModifiers.buildingCosts).round()
+  return base.times(buildModifiers.costs).round()
 })
 
-const buildingSeconds = computed(() => {
-  const base = props.buildingType.levelProgression.getBaseBuildingSecondsForLevel(1)
+const buildingDuration = computed(() => {
+  const base = props.buildingType.levelProgression.getBaseBuildingDurationForLevel(1)
 
-  return base.times(buildModifiers.buildingSeconds).round(1)
+  return base.times(buildModifiers.duration)
 })
 
 const income = computed(() => {
   const base = props.buildingType.levelProgression.getBaseIncomeForLevel(1)
 
-  return base.times(incomeModifier)
+  return new ResourcesPerMillisecond(base.times(incomeModifier))
 })
 
 const existingInstancesCount = computed(() => Object.values(buildings.value).filter(building => building?.type.id === props.buildingType.id).length)
@@ -58,9 +58,9 @@ const canBuild = computed(() => {
 function build() {
   gameState.$patch((state) => {
     state.buildings[props.buildingAreaId] = {
-      initialSeconds: buildingSeconds.value,
+      durationRemaining: buildingDuration.value,
+      initialDuration: buildingDuration.value,
       level: 0,
-      secondsRemaining: buildingSeconds.value,
       state: 'in-construction',
       type: props.buildingType,
     }
@@ -97,15 +97,15 @@ function build() {
     </div>
 
     <p class="font-semibold">
-      Seconds to build: <b>{{ buildingSeconds.toNumber().toLocaleString() }}</b>
+      Duration to build: <b>{{ buildingDuration.format() }}</b>
     </p>
 
     <div>
       <p class="font-semibold">
-        Produces per second:
+        Produces per hour:
       </p>
       <div class="flex gap-2 ml-4">
-        <Resources :resources="income" />
+        <Resources :resources="income.perHour()" />
       </div>
     </div>
 

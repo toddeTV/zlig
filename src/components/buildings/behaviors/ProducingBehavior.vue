@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import useGameState from '@/composables/useGameState.js'
+import useGameTime from '@/composables/useGameTime.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
-import { useLoop } from '@tresjs/core'
 import Big from 'big.js'
-import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { computed, watch } from 'vue'
 import type { BuildingAreaId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
@@ -13,7 +14,6 @@ const props = defineProps<{
 }>()
 
 const gameState = useGameState()
-const { onBeforeRender } = useLoop()
 
 // TODO: Put this into the game state.
 // TODO: Make this individual per building type.
@@ -25,10 +25,12 @@ const currentIncome = computed(() => {
   return base.times(incomeModifier)
 })
 
-onBeforeRender((event) => {
-  const { delta } = event
+const { currentTime } = storeToRefs(useGameTime())
 
-  const incomeThisTick = currentIncome.value.times(delta)
+watch(currentTime, (time, prev) => {
+  const deltaMs = time.getTime() - prev.getTime()
+
+  const incomeThisTick = currentIncome.value.times(deltaMs)
 
   // The internal buffer is this full now.
   let buffer = props.state.internalBuffer.plus(incomeThisTick)

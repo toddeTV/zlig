@@ -1,5 +1,6 @@
 import type { LevelProgression } from '@/game-logic/level-progression.js'
 import type { ResourceRecord } from '@/game-logic/resources.js'
+import type { Duration } from '@/utils/duration.js'
 import type { Component } from 'vue'
 
 export type BuildingType = Readonly<{
@@ -49,14 +50,14 @@ export type BuildingStateInConstruction = Readonly<{
   level: 0
 
   /**
-   * The seconds left when the building will be finished and reach level 1.
+   * The duration left when the building will be finished and reach level 1.
    */
-  secondsRemaining: Big
+  durationRemaining: Duration
 
   /**
-   * The seconds it takes to construct this building.
+   * The total duration it takes to construct this building.
    */
-  initialSeconds: Big
+  initialDuration: Duration
 }>
 
 /**
@@ -73,14 +74,14 @@ export type BuildingStateUpgrading = Readonly<{
   level: number
 
   /**
-   * The seconds left when the building will reach the next level.
+   * The duration left when the building will reach the next level.
    */
-  secondsRemaining: Big
+  durationRemaining: Duration
 
   /**
-   * The seconds it takes to upgrade this building.
+   * The total duration it takes to upgrade this building.
    */
-  initialSeconds: Big
+  initialDuration: Duration
 }>
 
 /**

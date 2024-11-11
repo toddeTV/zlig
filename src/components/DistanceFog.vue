@@ -1,23 +1,21 @@
 <script setup lang="ts">
+import useCalculatedLights from '@/composables/useCalculatedLights.js'
 import useDebugStore from '@/composables/useDebugStore'
-import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { Fog } from 'three'
-import { watch } from 'vue'
+import { watch, watchEffect } from 'vue'
 
 const { scene } = useTresContext()
 const { showFog } = storeToRefs(useDebugStore())
-const { calculateLightBySunPosition, calculateSunPosition } = useVirtualTimeStore()
-const { currentVirtualTime } = storeToRefs(useVirtualTimeStore())
+const { lightColors } = storeToRefs(useCalculatedLights())
 
 const fog = new Fog(0x82DBC5, 140, 160)
 
 // watch the current virtual time
-watch(() => currentVirtualTime.value, (newValue, _oldValue) => {
+watchEffect(() => {
   // set the sky color
-  const { skyColor } = calculateLightBySunPosition(calculateSunPosition(newValue))
-  fog.color = skyColor
+  fog.color = lightColors.value.sky
 })
 
 // watch the fog visibility

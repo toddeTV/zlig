@@ -2,7 +2,6 @@
 import ProgressBar from '@/components/ui/ProgressBar.vue'
 import useGameState from '@/composables/useGameState.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
-import { computed } from 'vue'
 import type { BuildingAreaId, BuildingStateUpgrading, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
@@ -10,12 +9,6 @@ const props = defineProps<{
   buildingType: BuildingType
   buildingState: BuildingStateUpgrading
 }>()
-
-const secondsRemaining = computed(() => {
-  const seconds = props.buildingState.secondsRemaining
-  const decimals = seconds.lt(1) ? 1 : 0
-  return seconds.round(decimals).toNumber()
-})
 
 const gameState = useGameState()
 
@@ -40,13 +33,13 @@ function cancelUpgrade() {
   </h3>
   <p>
     This building is currently being upgraded to level <b>{{ props.buildingState.level + 1 }}</b>.
-    Finished in: <b>{{ secondsRemaining.toLocaleString() }}</b> second{{ secondsRemaining === 1 ? '' : 's' }}
+    Finished in: <b>{{ props.buildingState.durationRemaining.format() }}</b>
   </p>
   <div class="flex flex-col mt-2 mb-4">
     <ProgressBar
-      :max="props.buildingState.initialSeconds.toNumber()"
+      :max="props.buildingState.initialDuration.milliseconds.toNumber()"
       :min="0"
-      :value="props.buildingState.secondsRemaining.toNumber()"
+      :value="props.buildingState.durationRemaining.milliseconds.toNumber()"
     />
   </div>
 

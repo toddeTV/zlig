@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import useBuildingAreas from '@/composables/useBuildingAreas.js'
+import useGameTime from '@/composables/useGameTime.js'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
+import { useLoop } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import BuildingArea from './buildings/BuildingArea.vue'
@@ -12,8 +14,15 @@ import Ocean from './models/Ocean.vue'
 import Waterfall from './models/Waterfall.vue'
 import VisualHelper from './VisualHelper.vue'
 
+const { onBeforeRender } = useLoop()
+const gameTime = useGameTime()
 const { areas } = storeToRefs(useBuildingAreas())
 const { init } = useBuildingAreas()
+
+onBeforeRender(({ delta }) => {
+  gameTime.tick(delta)
+})
+
 init()
 
 const selectedBuildingArea = useSelectedBuildingArea()

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Resources from '@/components/ui/Resources.vue'
 import useGameState from '@/composables/useGameState.js'
-import { ResourceRecord } from '@/game-logic/resources.js'
+import { ResourceRecord, ResourcesPerMillisecond } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
@@ -19,33 +19,33 @@ const { resources } = storeToRefs(gameState)
 // TODO: Put this into the game state.
 // TODO: Make this individual per building type.
 const upgradeModifiers = {
-  buildingCosts: new ResourceRecord({ gold: new Big('1') }),
-  buildingSeconds: 1,
+  costs: new ResourceRecord({ gold: new Big('1') }),
+  duration: 1,
 }
 const incomeModifier = new ResourceRecord({ gold: new Big('1') })
 
 const currentIncome = computed(() => {
   const base = props.buildingType.levelProgression.getBaseIncomeForLevel(props.buildingState.level)
 
-  return base.times(incomeModifier)
+  return new ResourcesPerMillisecond(base.times(incomeModifier))
 })
 
 const upgradeCosts = computed(() => {
   const base = props.buildingType.levelProgression.getBaseCostsForLevel(props.buildingState.level + 1)
 
-  return base.times(upgradeModifiers.buildingCosts).round()
+  return base.times(upgradeModifiers.costs).round()
 })
 
-const upgradeBuildingSeconds = computed(() => {
-  const base = props.buildingType.levelProgression.getBaseBuildingSecondsForLevel(props.buildingState.level + 1)
+const upgradeBuildingDuration = computed(() => {
+  const base = props.buildingType.levelProgression.getBaseBuildingDurationForLevel(props.buildingState.level + 1)
 
-  return base.times(upgradeModifiers.buildingSeconds).round(1)
+  return base.times(upgradeModifiers.duration)
 })
 
 const upgradedIncome = computed(() => {
   const base = props.buildingType.levelProgression.getBaseIncomeForLevel(props.buildingState.level + 1)
 
-  return base.times(incomeModifier)
+  return new ResourcesPerMillisecond(base.times(incomeModifier))
 })
 
 const canUpgrade = computed(() => {
@@ -63,9 +63,9 @@ const canUpgrade = computed(() => {
 function upgradeBuilding() {
   gameState.$patch((state) => {
     state.buildings[props.buildingAreaId] = {
-      initialSeconds: upgradeBuildingSeconds.value,
+      durationRemaining: upgradeBuildingDuration.value,
+      initialDuration: upgradeBuildingDuration.value,
       level: props.buildingState.level,
-      secondsRemaining: upgradeBuildingSeconds.value,
       state: 'upgrading',
       type: props.buildingType,
     }
@@ -93,10 +93,10 @@ function destroyBuilding() {
 
   <div class="mb-4">
     <p class="font-semibold">
-      This building produces per second:
+      This building produces per hour:
     </p>
     <div class="flex gap-2 ml-4">
-      <Resources :resources="currentIncome" />
+      <Resources :resources="currentIncome.perHour()" />
     </div>
   </div>
 
@@ -124,15 +124,15 @@ function destroyBuilding() {
         </div>
 
         <p class="font-semibold">
-          Seconds to upgrade: <b>{{ upgradeBuildingSeconds.toNumber().toLocaleString() }}</b>
+          Duration to upgrade: <b>{{ upgradeBuildingDuration.format() }}</b>
         </p>
 
         <div>
           <p class="font-semibold">
-            Produces per second after upgrade:
+            Produces per hour after upgrade:
           </p>
           <div class="flex gap-2 ml-4">
-            <Resources :resources="upgradedIncome" />
+            <Resources :resources="upgradedIncome.perHour()" />
           </div>
         </div>
       </template>
