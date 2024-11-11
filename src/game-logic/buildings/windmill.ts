@@ -10,20 +10,20 @@ const building: BuildingType = {
   id: 'windmill',
   levelProgression: new LinearLevelProgression({
     buildingDuration: {
-      additionalPerLevel: Duration.fromHours(new Big('2')),
-      initial: Duration.fromHours(new Big('5')),
+      additionalPerLevel: Duration.fromHours(new Big('48')),
+      initial: Duration.fromHours(new Big('24')),
     },
     costs: {
       additionalPerLevel: new ResourceRecord(),
-      initial: new ResourceRecord({ gold: new Big('10') }),
+      initial: new ResourceRecord({ gold: new Big('1000') }),
     },
     getModel: () => markRaw(Windmill),
     income: {
-      additionalPerLevel: resourcesPerHour({ gold: new Big('0.2') }),
-      initial: resourcesPerHour({ gold: new Big('0.5') }),
+      additionalPerLevel: resourcesPerHour({ gold: new Big('0.3') }),
+      initial: resourcesPerHour({ gold: new Big('1.5') }),
     },
   }),
-  maxInstances: 4,
+  maxInstances: 2,
   name: 'Windmill',
 }
 
