@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SideBar from '@/components/ui/layout/game/sidebar/SideBar.vue'
-import TopBar from '@/components/ui/layout/game/TopBar.vue'
+import TopBar from '@/components/ui/layout/game/topbar/TopBar.vue'
 import WorldWindow from '@/components/ui/layout/game/WorldWindow.vue'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { ref } from 'vue'
