@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import Resources from '@/components/ui/Resources.vue'
 import useGameState from '@/composables/useGameState.js'
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore.js'
-import Resources from '../../Resources.vue'
 
 const gameState = useGameState()
 const virtualTime = useVirtualTimeStore()
@@ -20,7 +20,7 @@ const virtualTime = useVirtualTimeStore()
 
       <div class="flex gap-1 text-xl">
         <!-- TODO: Implement this -->
-        <button>
+        <!-- <button>
           <span class="icon-[ph--pause-circle-light] hover:icon-[ph--pause-circle-bold]" />
         </button>
         <button>
@@ -28,7 +28,7 @@ const virtualTime = useVirtualTimeStore()
         </button>
         <button>
           <span class="icon-[ph--fast-forward-circle-light] hover:icon-[ph--fast-forward-circle-bold]" />
-        </button>
+        </button> -->
       </div>
     </div>
   </div>
