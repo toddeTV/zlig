@@ -1,26 +1,15 @@
 <script setup lang="ts">
-import { type PlainResources, ResourceRecord } from '@/game-logic/resources.js'
-import { computed } from 'vue'
+import type { PlainResources } from '@/game-logic/resources.js'
+import ResourceEntry from './misc/resources/ResourceEntry.vue'
 
 const props = defineProps<{
-  resources: ResourceRecord
-  round: boolean
-} | {
   resources: PlainResources
-  round?: boolean
+  available?: PlainResources
 }>()
-
-const final = computed(() => {
-  if (props.resources instanceof ResourceRecord) {
-    return props.round ? props.resources.round().asPlain() : props.resources.asPlain()
-  }
-
-  return props.resources
-})
 </script>
 
 <template>
   <p>
-    {{ final.gold.toNumber().toLocaleString() }} gold
+    Gold: <ResourceEntry :available="props.available?.gold" :resource="props.resources.gold" />
   </p>
 </template>

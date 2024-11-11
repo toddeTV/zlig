@@ -52,6 +52,11 @@ export type BuildingStateInConstruction = Readonly<{
    * The seconds left when the building will be finished and reach level 1.
    */
   secondsRemaining: Big
+
+  /**
+   * The seconds it takes to construct this building.
+   */
+  initialSeconds: Big
 }>
 
 /**
@@ -71,6 +76,11 @@ export type BuildingStateUpgrading = Readonly<{
    * The seconds left when the building will reach the next level.
    */
   secondsRemaining: Big
+
+  /**
+   * The seconds it takes to upgrade this building.
+   */
+  initialSeconds: Big
 }>
 
 /**

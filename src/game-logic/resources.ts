@@ -4,7 +4,7 @@ import Big from 'big.js'
  * Determines the available resources.
  */
 export type Resource = keyof {
-  // This extracts all keys of the record class that are of type number.
+  // This extracts all keys of the record class that are of the custom big integer type.
   [K in keyof ResourceRecord as [ResourceRecord[K]] extends [Big] ? K : never]: 0
 }
 
@@ -18,7 +18,7 @@ const ZERO = new Big('0')
  * A new resource can easily be added by adding a new field to this class. It will be automatically available on all
  * places. It is only important to give it an initial value of zero.
  */
-export class ResourceRecord {
+export class ResourceRecord implements PlainResources {
   readonly gold: Big = ZERO
 
   constructor(init?: Partial<PlainResources>) {
@@ -86,6 +86,14 @@ export class ResourceRecord {
    * @returns A record with only integer values.
    */
   round() {
+    // Another shortcut: Pretend to calculate but only use the value of this record.
+    return this.calc(new ResourceRecord(), a => a.round(0, Big.roundHalfUp))
+  }
+
+  /**
+   * @returns A record with only integer values (rounded down).
+   */
+  roundDown() {
     // Another shortcut: Pretend to calculate but only use the value of this record.
     return this.calc(new ResourceRecord(), a => a.round(0, Big.roundDown))
   }
