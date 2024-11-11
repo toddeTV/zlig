@@ -1,18 +1,18 @@
 <script setup lang="ts">
+import BuildingArea from '@/components/buildings/BuildingArea.vue'
+import CameraAndControls from '@/components/CameraAndControls.vue'
+import DistanceFog from '@/components/DistanceFog.vue'
+import Lights from '@/components/Lights.vue'
+import Island from '@/components/models/Island.vue'
+import Ocean from '@/components/models/Ocean.vue'
+import Waterfall from '@/components/models/Waterfall.vue'
+import VisualHelper from '@/components/VisualHelper.vue'
 import useBuildingAreas from '@/composables/useBuildingAreas.js'
 import useGameTime from '@/composables/useGameTime.js'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { useLoop } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
-import BuildingArea from './buildings/BuildingArea.vue'
-import CameraAndControls from './CameraAndControls.vue'
-import DistanceFog from './DistanceFog.vue'
-import Lights from './Lights.vue'
-import Island from './models/Island.vue'
-import Ocean from './models/Ocean.vue'
-import Waterfall from './models/Waterfall.vue'
-import VisualHelper from './VisualHelper.vue'
 
 const { onBeforeRender } = useLoop()
 const gameTime = useGameTime()

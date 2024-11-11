@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import ResourceEntry from '@/components/ui/misc/resources/ResourceEntry.vue'
 import type { PlainResources } from '@/game-logic/resources.js'
-import ResourceEntry from './misc/resources/ResourceEntry.vue'
 
 const props = defineProps<{
   resources: PlainResources
@@ -13,3 +13,6 @@ const props = defineProps<{
     Gold: <ResourceEntry :available="props.available?.gold" :resource="props.resources.gold" />
   </p>
 </template>
+
+<style scoped>
+</style>

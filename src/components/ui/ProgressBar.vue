@@ -14,3 +14,6 @@ const props = defineProps<{
     :value="props.value"
   />
 </template>
+
+<style scoped>
+</style>

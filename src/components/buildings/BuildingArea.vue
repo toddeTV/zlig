@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import ConstructingBehavior from '@/components/buildings/behaviors/ConstructingBehavior.vue'
+import ProducingBehavior from '@/components/buildings/behaviors/ProducingBehavior.vue'
+import UpgradingBehavior from '@/components/buildings/behaviors/UpgradingBehavior.vue'
+import ConstructionSite from '@/components/models/BuildArea.vue'
+import ProgressBar from '@/components/ui/ProgressBar.vue'
 import useGameState from '@/composables/useGameState.js'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { Html } from '@tresjs/cientos'
@@ -6,11 +11,6 @@ import { computed } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types.js'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
 import type { Euler, Vector3 } from 'three'
-import ConstructionSite from '../models/BuildArea.vue'
-import ProgressBar from '../ui/ProgressBar.vue'
-import ConstructingBehavior from './behaviors/ConstructingBehavior.vue'
-import ProducingBehavior from './behaviors/ProducingBehavior.vue'
-import UpgradingBehavior from './behaviors/UpgradingBehavior.vue'
 
 const props = defineProps<{
   id: BuildingAreaId
@@ -90,3 +90,6 @@ const positionsSiftedSlightlyUpwards = computed(() => {
     </Html>
   </TresGroup>
 </template>
+
+<style scoped>
+</style>

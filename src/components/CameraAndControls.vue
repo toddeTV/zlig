@@ -4,7 +4,7 @@ import { CameraControls } from '@tresjs/cientos'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { Box3, Box3Helper, CameraHelper, PerspectiveCamera, Vector3 } from 'three'
-import { onMounted, ref, watch } from 'vue'
+import { ref, shallowRef, watch } from 'vue'
 import type { CameraControlsProps } from '@tresjs/cientos/dist/core/controls/CameraControls.vue.js'
 
 const emit = defineEmits(['cameraMoved'])
@@ -14,7 +14,7 @@ const { showCameraHelper } = storeToRefs(useDebugStore())
 
 const cameraIsActive = ref(false)
 
-const cameraControls = ref<InstanceType<typeof CameraControls>>()
+const cameraControlsRef = shallowRef<InstanceType<typeof CameraControls>>()
 
 const cameraStartingPosition = new Vector3(60, 60, 60)
 const cameraRotateSpeed = 0.3
@@ -51,21 +51,23 @@ const cameraControlsProps: CameraControlsProps = {
     three: 0, // = none
   },
 }
+/* eslint-enable */
 
 const perspectiveCamera = new PerspectiveCamera()
 perspectiveCamera.position.fromArray(cameraStartingPosition.toArray())
 perspectiveCamera.far = 200
 
-function configureCameraControls() {
-  if (!cameraControls.value || !cameraControls.value.instance) {
+watch(cameraControlsRef, (newValue) => {
+  if (!newValue || !newValue.instance) {
     return
   }
+
   // Set camera boundary
-  cameraControls.value.instance.setBoundary(cameraBoundary)
+  newValue.instance.setBoundary(cameraBoundary)
 
   // Set look at target (which also sets the viewing angle)
   const lookAtTarget = new Vector3(10, 10, 0)
-  cameraControls.value.instance.setLookAt(
+  newValue.instance.setLookAt(
     cameraStartingPosition.x,
     cameraStartingPosition.y,
     cameraStartingPosition.z,
@@ -73,31 +75,25 @@ function configureCameraControls() {
     lookAtTarget.y,
     lookAtTarget.z,
   )
-}
-
-onMounted(() => {
-  configureCameraControls()
 })
 
 const perspectiveCameraHelper = ref()
 const cameraHelper = new CameraHelper(perspectiveCamera)
 const boxHelper = new Box3Helper(cameraBoundary)
-watch(() => showCameraHelper.value, (newValue, _oldValue) => {
-  updateHelperVisibility(newValue)
-})
-function updateHelperVisibility(isVisible: boolean) {
+watch(showCameraHelper, (newValue) => {
   setCameraActive(perspectiveCamera)
   scene.value.remove(cameraHelper)
   scene.value.remove(boxHelper)
-  if (isVisible === true) {
+  if (newValue === true) {
     perspectiveCameraHelper.value = perspectiveCamera.clone()
     perspectiveCameraHelper.value.far = 1000
     setCameraActive(perspectiveCameraHelper.value)
     scene.value.add(cameraHelper)
     scene.value.add(boxHelper)
   }
-}
-updateHelperVisibility(showCameraHelper.value)
+}, {
+  immediate: true,
+})
 </script>
 
 <template>
@@ -105,7 +101,7 @@ updateHelperVisibility(showCameraHelper.value)
   <!-- TODO also, there is a bug: going in debug and back removes the max zoom out -> maybe with imperative code this is fixes? -->
   <CameraControls
     v-bind="cameraControlsProps"
-    ref="cameraControls"
+    ref="cameraControlsRef"
     @change="() => {
       if (cameraIsActive){
         emit('cameraMoved')

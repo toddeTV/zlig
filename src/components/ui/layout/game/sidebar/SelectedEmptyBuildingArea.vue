@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import BuildingRow from '@/components/ui/layout/game/sidebar/BuildingRow.vue'
 import { buildingTypes } from '@/game-logic/buildings/index.js'
 import type { BuildingAreaId } from '@/game-logic/types.js'
-import BuildingRow from './BuildingRow.vue'
 
 const props = defineProps<{
   buildingAreaId: BuildingAreaId
@@ -30,3 +30,6 @@ const availableBuildings = [
     />
   </div>
 </template>
+
+<style scoped>
+</style>
