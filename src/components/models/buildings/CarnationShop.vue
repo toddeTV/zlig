@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/_Buildings/CarnationShop/CarnationShop.gltf'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper'
-import { useLoop } from '@tresjs/core'
 import { shallowRef, toRef, watch } from 'vue'
 import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
 import type { Euler, Group, Vector3 } from 'three'
