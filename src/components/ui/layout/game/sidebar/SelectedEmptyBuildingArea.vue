@@ -8,9 +8,7 @@ const props = defineProps<{
 }>()
 
 // TODO: Create categories for the buildings.
-const availableBuildings = [
-  buildingTypes.testBuilding,
-]
+const availableBuildings = Object.values(buildingTypes)
 </script>
 
 <template>
