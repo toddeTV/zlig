@@ -64,7 +64,6 @@ onMounted(() => {
 })
 </script>
 
-<!-- eslint-disable-next-line vue/valid-template-root -->
 <template>
   <TresGroup
     ref="groupWrapperRef"
