@@ -14,13 +14,15 @@ import Ocean from './models/Ocean.vue'
 import Waterfall from './models/Waterfall.vue'
 import VisualHelper from './VisualHelper.vue'
 
+const { onBeforeRender } = useLoop()
 const gameTime = useGameTime()
-useLoop().onBeforeRender(({ delta }) => {
+const { areas } = storeToRefs(useBuildingAreas())
+const { init } = useBuildingAreas()
+
+onBeforeRender(({ delta }) => {
   gameTime.tick(delta)
 })
 
-const { areas } = storeToRefs(useBuildingAreas())
-const { init } = useBuildingAreas()
 init()
 
 const selectedBuildingArea = useSelectedBuildingArea()

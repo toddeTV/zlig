@@ -65,3 +65,6 @@ selectedBuildingArea.$subscribe((_, newId) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+</style>
