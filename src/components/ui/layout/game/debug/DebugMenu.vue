@@ -29,6 +29,6 @@ const debug = useDebugStore()
       </ToggleVisibilityButton>
     </div>
 
-    # TODO: Add time controls here.
+    <!-- TODO: Add time controls here. -->
   </div>
 </template>

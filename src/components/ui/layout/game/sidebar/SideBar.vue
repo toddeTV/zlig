@@ -13,6 +13,7 @@ const { buildings } = storeToRefs(useGameState())
 const selectedBuildingArea = useSelectedBuildingArea()
 const selectedBuildingInstance = computed(() => selectedBuildingArea.id ? buildings.value[selectedBuildingArea.id] : undefined)
 
+// TODO bind this so that it is only active for real debug purposes
 const hasDebug = ref(true)
 </script>
 
@@ -51,9 +52,13 @@ const hasDebug = ref(true)
     <DebugMenu v-if="hasDebug" />
 
     <div class="text-gray-600 text-sm p-2 flex justify-between">
-      <span>&copy; {{ new Date().getFullYear() }} The zlig authors</span>
+      <a href="https://github.com/toddeTV/zlig/" rel="noopener noreferrer" target="_blank">
+        &copy; {{ new Date().getFullYear() }} zlig
+      </a>
 
-      <span># TODO: version</span>
+      <!-- TODO Privacy Policy -->
+      <!-- TODO Legal Notice -->
+      <!-- TODO version -->
     </div>
   </div>
 </template>
