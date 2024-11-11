@@ -26,9 +26,9 @@ function getUpgradeCosts() {
   return costs
 }
 
-function getUpgradeBuildingMilliseconds() {
+function getUpgradeBuildingDuration() {
   // TODO: Factor in modifiers.
-  const seconds = props.buildingType.levelProgression.getBaseBuildingMillisecondsForLevel(props.state.level + 1)
+  const seconds = props.buildingType.levelProgression.getBaseBuildingDurationForLevel(props.state.level + 1)
 
   return seconds
 }
@@ -61,8 +61,8 @@ function upgrade() {
   gameState.resources.remove(getUpgradeCosts().round())
 
   gameState.buildings[props.areaId] = {
+    durationRemaining: getUpgradeBuildingDuration(),
     level: props.state.level,
-    millisecondsRemaining: getUpgradeBuildingMilliseconds(),
     state: 'upgrading',
     type: props.buildingType,
   }
@@ -89,7 +89,7 @@ function destroy() {
           Costs to upgrade
         </p>
         <Resources :resources="getUpgradeCosts()" round />
-        <p>Takes {{ getUpgradeBuildingMilliseconds().div(1000).round(1).toNumber().toLocaleString() }} seconds (game time)</p>
+        <p>Takes {{ getUpgradeBuildingDuration().format() }} (game time)</p>
       </div>
 
       <div v-if="canUpgrade() !== 'max-level'" class="flex flex-col gap-1 ml-4">

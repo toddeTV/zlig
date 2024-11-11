@@ -2,6 +2,7 @@
 import useGameState from '@/composables/useGameState.js'
 import useGameTime from '@/composables/useGameTime.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
+import { Duration } from '@/utils/duration.js'
 import { storeToRefs } from 'pinia'
 import { watch } from 'vue'
 import type { BuildingAreaId, BuildingStateInConstruction, BuildingType } from '@/game-logic/types.js'
@@ -16,14 +17,12 @@ const gameState = useGameState()
 const { currentTime } = storeToRefs(useGameTime())
 
 watch(currentTime, (time, prev) => {
-  const deltaMs = time.getTime() - prev.getTime()
+  const durationRemaining = props.state.durationRemaining.minus(Duration.fromDates(prev, time))
 
-  const millisecondsRemaining = props.state.millisecondsRemaining.minus(deltaMs)
-
-  if (millisecondsRemaining.gt(0)) {
+  if (durationRemaining.milliseconds.gt(0)) {
     gameState.buildings[props.areaId] = {
+      durationRemaining,
       level: 0,
-      millisecondsRemaining,
       state: 'in-construction',
       type: props.buildingType,
     }

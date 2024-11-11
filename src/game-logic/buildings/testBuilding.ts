@@ -1,6 +1,7 @@
 import TestBuilding from '@/components/models/buildings/TestBuilding.vue'
 import { LinearLevelProgression } from '@/game-logic/level-progression.js'
 import { ResourceRecord, resourcesPerHour } from '@/game-logic/resources.js'
+import { Duration } from '@/utils/duration.js'
 import Big from 'big.js'
 import { markRaw } from 'vue'
 import type { BuildingType } from '@/game-logic/types.js'
@@ -8,9 +9,9 @@ import type { BuildingType } from '@/game-logic/types.js'
 const building: BuildingType = {
   id: 'testBuilding',
   levelProgression: new LinearLevelProgression({
-    buildingMilliseconds: {
-      additionalPerLevel: new Big('2').times(60).times(60).times(1000), // game time hours
-      initial: new Big('5').times(60).times(60).times(1000), // game time hours
+    buildingDuration: {
+      additionalPerLevel: Duration.fromHours(new Big('2')),
+      initial: Duration.fromHours(new Big('5')),
     },
     costs: {
       additionalPerLevel: new ResourceRecord(),

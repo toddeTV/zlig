@@ -1,6 +1,6 @@
 import { type ResourceRecord, ResourcesPerMillisecond } from '@/game-logic/resources.js'
 import type { BuildingModel } from '@/game-logic/types.js'
-import type Big from 'big.js'
+import type { Duration } from '@/utils/duration.js'
 
 export abstract class LevelProgression {
   constructor(
@@ -20,12 +20,12 @@ export abstract class LevelProgression {
   }
 
   /**
-   * @returns The number of game time milliseconds it takes to build/upgrade the building without taking into account any modifiers.
+   * @returns The duration it takes to build/upgrade the building without taking into account any modifiers.
    */
-  getBaseBuildingMillisecondsForLevel(level: number) {
+  getBaseBuildingDurationForLevel(level: number) {
     this.validateLevel(level)
 
-    return this.doGetBaseBuildingMillisecondsForLevel(level)
+    return this.doGetBaseBuildingDurationForLevel(level)
   }
 
   /**
@@ -47,7 +47,7 @@ export abstract class LevelProgression {
   }
 
   protected abstract doGetBaseCostsForLevel(level: number): ResourceRecord
-  protected abstract doGetBaseBuildingMillisecondsForLevel(level: number): Big
+  protected abstract doGetBaseBuildingDurationForLevel(level: number): Duration
   protected abstract doGetBaseIncomeForLevel(level: number): ResourcesPerMillisecond
   protected abstract doGetModelForLevel(level: number): BuildingModel
 
@@ -75,8 +75,8 @@ export class FixedLevelProgression extends LevelProgression {
     return this.levels[level - 1].baseCosts
   }
 
-  protected doGetBaseBuildingMillisecondsForLevel(level: number) {
-    return this.levels[level - 1].baseBuildingMilliseconds
+  protected doGetBaseBuildingDurationForLevel(level: number) {
+    return this.levels[level - 1].baseBuildingDuration
   }
 
   protected doGetBaseIncomeForLevel(level: number) {
@@ -104,9 +104,9 @@ type BaseLevelFixedProgression = Readonly<{
   baseCosts: ResourceRecord
 
   /**
-   * The number of game time milliseconds it takes to build/upgrade the building without taking into account any modifiers.
+   * The duration it takes to build/upgrade the building without taking into account any modifiers.
    */
-  baseBuildingMilliseconds: Big
+  baseBuildingDuration: Duration
 
   /**
    * The currency the player receives each game time millisecond without taking into account any modifiers.
@@ -139,9 +139,9 @@ export class LinearLevelProgression extends LevelProgression {
     additionalPerLevel: ResourceRecord
   }
 
-  private buildingMilliseconds: {
-    initial: Big
-    additionalPerLevel: Big
+  private buildingDuration: {
+    initial: Duration
+    additionalPerLevel: Duration
   }
 
   private income: {
@@ -149,14 +149,14 @@ export class LinearLevelProgression extends LevelProgression {
     additionalPerLevel: ResourceRecord
   }
 
-  constructor({ buildingMilliseconds, costs, getModel, income, maxLevel }: {
+  constructor({ buildingDuration: buildingMilliseconds, costs, getModel, income, maxLevel }: {
     costs: {
       initial: ResourceRecord
       additionalPerLevel: ResourceRecord
     }
-    buildingMilliseconds: {
-      initial: Big
-      additionalPerLevel: Big
+    buildingDuration: {
+      initial: Duration
+      additionalPerLevel: Duration
     }
     income: {
       initial: ResourceRecord
@@ -168,7 +168,7 @@ export class LinearLevelProgression extends LevelProgression {
     super(maxLevel)
 
     this.costs = costs
-    this.buildingMilliseconds = buildingMilliseconds
+    this.buildingDuration = buildingMilliseconds
     this.income = income
     this.doGetModelForLevel = getModel
   }
@@ -177,8 +177,8 @@ export class LinearLevelProgression extends LevelProgression {
     return this.costs.initial.plus(this.costs.additionalPerLevel.times(level))
   }
 
-  protected doGetBaseBuildingMillisecondsForLevel(level: number): Big {
-    return this.buildingMilliseconds.initial.plus(this.buildingMilliseconds.additionalPerLevel.times(level - 1))
+  protected doGetBaseBuildingDurationForLevel(level: number): Duration {
+    return this.buildingDuration.initial.plus(this.buildingDuration.additionalPerLevel.times(level - 1))
   }
 
   protected doGetBaseIncomeForLevel(level: number) {

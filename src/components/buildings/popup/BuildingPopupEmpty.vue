@@ -18,9 +18,9 @@ function getCosts(type: BuildingType) {
   return costs
 }
 
-function getBuildingMilliseconds(type: BuildingType) {
+function getBuildingDuration(type: BuildingType) {
   // TODO: Factor in modifiers.
-  const seconds = type.levelProgression.getBaseBuildingMillisecondsForLevel(1)
+  const seconds = type.levelProgression.getBaseBuildingDurationForLevel(1)
 
   return seconds
 }
@@ -54,8 +54,8 @@ function build(type: BuildingType) {
   gameState.resources.remove(getCosts(type).round())
 
   gameState.buildings[props.areaId] = {
+    durationRemaining: getBuildingDuration(type),
     level: 0,
-    millisecondsRemaining: getBuildingMilliseconds(type),
     state: 'in-construction',
     type,
   }
@@ -80,7 +80,7 @@ const availableBuildings = [
             Costs to build
           </p>
           <Resources :resources="getCosts(type)" round />
-          <p>Takes {{ getBuildingMilliseconds(type).div(1000).round(1).toNumber().toLocaleString() }} seconds (game time)</p>
+          <p>Takes {{ getBuildingDuration(type).format() }} (game time)</p>
         </div>
 
         <div class="flex flex-col gap-1 ml-4">
