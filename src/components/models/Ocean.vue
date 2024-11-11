@@ -5,7 +5,7 @@ import { addShadowAndAddToGroup } from '@/utils/threeHelper'
 import { getWaterMaterial } from '@/utils/WaterShader'
 import { useLoop } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
-import { onMounted, ref, shallowRef, watch } from 'vue'
+import { ref, shallowRef, watch } from 'vue'
 
 const { scenes } = await modelLoader
 const { onBeforeRender } = useLoop()
@@ -43,10 +43,13 @@ watch(showWaterWireframe, () => {
   immediate: true,
 })
 
-onMounted(() => {
+watch(groupWrapperRef, (newValue) => {
+  if (!newValue) {
+    return
+  }
   const model = scenes.Ocean.Object.ocean001.clone()
   model.material = waterMaterial
-  addShadowAndAddToGroup(groupWrapperRef.value, model, 'receive')
+  addShadowAndAddToGroup(newValue, model, 'receive')
 })
 </script>
 
