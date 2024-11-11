@@ -114,28 +114,3 @@ export function getWaterMaterial(
   }
   return waterMaterial
 }
-
-export function getWaterfallMaterial() {
-  const waterfallMaterial = new MeshStandardMaterial({
-    color: 0x0384C4,
-    opacity: 0.9,
-    transparent: true,
-  })
-  waterfallMaterial.onBeforeCompile = function (shader) {
-    shader.uniforms.time = { value: 0.0 }
-    shader.fragmentShader = shader.fragmentShader.replace(
-      `#define STANDARD`,
-      `#define STANDARD\nuniform float time;`,
-    )
-    shader.fragmentShader = shader.fragmentShader.replace(
-      `void main() {`,
-      `float wave(vec2 position) {
-        return 0.0;
-      }
-  
-      void main() {`,
-    )
-    this.userData.shader = shader
-  }
-  return waterfallMaterial
-}
