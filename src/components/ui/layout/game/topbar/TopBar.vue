@@ -1,11 +1,24 @@
 <script setup lang="ts">
 import useGameState from '@/composables/useGameState.js'
 import useGameTime, { GAME_TIME_FACTOR_FAST, GAME_TIME_FACTOR_FASTER, GAME_TIME_FACTOR_REGULAR } from '@/composables/useGameTime.js'
+import { computed } from 'vue'
 import Resources from '../../../Resources.vue'
 import GameSpeedButton from './GameSpeedButton.vue'
 
 const gameState = useGameState()
 const gameTime = useGameTime()
+
+// a computed property that rounds the current in-game time to the nearest 10-minute interval and returns
+// it as a localized, short-formatted time string (no minutes < 10 and no seconds).
+const displayTime = computed(() => {
+  const time = gameTime.currentTime
+  const minutes = time.getMinutes()
+  const roundedMinutes = Math.round(minutes / 10) * 10
+  time.setMinutes(roundedMinutes)
+  time.setSeconds(0)
+  time.setMilliseconds(0)
+  return time.toLocaleTimeString(undefined, { timeStyle: 'short' })
+})
 </script>
 
 <template>
@@ -15,8 +28,9 @@ const gameTime = useGameTime()
     </div>
 
     <div class="flex flex-col gap-1 items-center">
-      <p class="text-lg border rounded-lg px-1 bg-white">
-        {{ gameTime.currentTime.toLocaleTimeString(undefined, { timeStyle: 'short' }) }}
+      <p class="border rounded-lg px-1 bg-white flex">
+        <span class="icon-[ph--clock] mt-1 mr-1 text-xl" />
+        <span class="text-lg">{{ displayTime }}</span>
       </p>
 
       <div class="flex gap-1 text-xl">
