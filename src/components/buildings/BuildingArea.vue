@@ -28,6 +28,12 @@ function onClick(e: TresJsClickEvent) {
 
   selectedBuildingArea.id = props.id
 }
+
+const positionsSiftedSlightlyUpwards = computed(() => {
+  const position = props.position.clone()
+  position.y += 0.5
+  return position
+})
 </script>
 
 <template>
@@ -71,12 +77,12 @@ function onClick(e: TresJsClickEvent) {
     <Html
       v-if="buildingInstance?.state === 'in-construction' || buildingInstance?.state === 'upgrading'"
       center
-      :position="props.position"
+      :position="positionsSiftedSlightlyUpwards"
     >
-      <div class="text-[30%]">
+      <div class="text-[30%] w-full h-full">
         <ProgressBar
           :max="buildingInstance.initialSeconds.toNumber()"
-          min="0"
+          :min="0"
           :value="buildingInstance.secondsRemaining.toNumber()"
         />
       </div>
