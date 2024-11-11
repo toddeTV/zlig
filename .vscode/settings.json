@@ -50,6 +50,7 @@
     "*.css": "tailwindcss"
   },
   "files.autoSave": "onFocusChange",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.preferences.renameMatchingJsxTags": true,
   "npm.packageManager": "pnpm",
   "prettier.enable": false,
