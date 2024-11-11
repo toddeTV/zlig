@@ -51,7 +51,7 @@ watchEffect(() => ambientLight.color = lightColors.value.ambient)
 // -------- CameraHelper for DirectionalLight
 
 const helper = new CameraHelper(directionalLight.shadow.camera)
-watch(() => showLightHelper.value, (newValue) => {
+watch(showLightHelper, (newValue) => {
   scene.value.remove(helper)
   if (newValue === true)
     scene.value.add(helper)

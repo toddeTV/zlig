@@ -19,7 +19,7 @@ watchEffect(() => {
 })
 
 // watch the fog visibility
-watch(() => showFog.value, (newValue) => {
+watch(showFog, (newValue) => {
   scene.value.fog = fog
   if (newValue === false)
     scene.value.fog = null

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/buildings/TestBuilding/TestBuilding.gltf'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper'
-import { shallowRef, watch } from 'vue'
+import { shallowRef, toRef, watch } from 'vue'
 import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
 import type { Euler, Vector3 } from 'three'
 
@@ -11,6 +11,8 @@ const props = defineProps<{
   position: Vector3
   rotation: Euler
 }>()
+
+const buildingInstance = toRef(props, 'buildingInstance')
 
 const { scenes: { TestBuilding } } = await modelLoader
 
@@ -27,9 +29,9 @@ watch(groupWrapperRef, (newValue) => {
   addShadowAndAddToGroup(newValue, building)
 })
 
-watch(() => props.buildingInstance.level, (newValue, _oldValue) => {
+watch(buildingInstance, (newValue) => {
   // scale size infinitely linearly
-  building.scale.setScalar(2 * newValue)
+  building.scale.setScalar(2 * newValue.level)
 })
 </script>
 
