@@ -15,6 +15,7 @@ const gl = ref<TresCanvasProps>({
   disableRender: true, // Disable render on requestAnimationFrame, useful for PostProcessing // TODO use or not?
   outputColorSpace: SRGBColorSpace,
   renderMode: 'always',
+  // resize: true, // not present? hmm ... documentation says it's there and important for resizable canvas - weird
   // `VSMShadowMap` better shadows, but more performance heavy; `BasicShadowMap` is faster but has less quality
   shadowMapType: VSMShadowMap, // BasicShadowMap | PCFShadowMap | PCFSoftShadowMap | VSMShadowMap
   shadows: true,
@@ -22,7 +23,6 @@ const gl = ref<TresCanvasProps>({
   useLegacyLights: false,
 })
 
-// watch the current virtual time
 watchEffect(() => {
   // set the sky color
   // @ts-expect-error //TODO this works, but it's not correctly typed -> check and fix
@@ -32,9 +32,15 @@ watchEffect(() => {
 
 <!-- @pointer-missed="() => firePointerMissedEvent()" -->
 <template>
-  <TresCanvas
-    v-bind="gl"
+  <div
+    class="w-full h-full flex-1 relative"
   >
-    <GameEngine />
-  </TresCanvas>
+    <!-- will create the dom `canvas` -->
+    <TresCanvas
+      v-bind="gl"
+      class="absolute inset-0"
+    >
+      <GameEngine />
+    </TresCanvas>
+  </div>
 </template>

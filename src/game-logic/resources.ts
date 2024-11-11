@@ -87,7 +87,7 @@ export class ResourceRecord implements PlainResources {
    */
   round(): ResourceRecord {
     // Another shortcut: Pretend to calculate but only use the value of this record.
-    return this.calc(new ResourceRecord(), a => a.round(0, Big.roundHalfUp))
+    return this.calc({}, a => a.round(0, Big.roundHalfUp))
   }
 
   /**

@@ -28,6 +28,12 @@ function onClick(e: TresJsClickEvent) {
 
   selectedBuildingArea.id = props.id
 }
+
+const positionsSiftedSlightlyUpwards = computed(() => {
+  const position = props.position.clone()
+  position.y += 0.5
+  return position
+})
 </script>
 
 <template>
@@ -54,15 +60,9 @@ function onClick(e: TresJsClickEvent) {
     :name="`building-area-${props.id}`"
     @click="(e: TresJsClickEvent) => onClick(e)"
   >
-    <!-- TODO fix multiple use of `<ConstructionSite` -->
-    <ConstructionSite
-      v-if="buildingInstance?.state === 'in-construction'"
-      :position="props.position"
-      :rotation="props.rotation"
-    />
     <component
       :is="buildingInstance.type.levelProgression.getModelForLevel(buildingInstance.level)"
-      v-else-if="buildingInstance"
+      v-if="buildingInstance?.state !== 'in-construction' && buildingInstance"
       :building-area-id="props.id"
       :building-instance
       :position="props.position"
@@ -70,6 +70,7 @@ function onClick(e: TresJsClickEvent) {
     />
     <ConstructionSite
       v-else
+      :building-area-id="props.id"
       :position="props.position"
       :rotation="props.rotation"
     />
@@ -77,9 +78,9 @@ function onClick(e: TresJsClickEvent) {
     <Html
       v-if="buildingInstance?.state === 'in-construction' || buildingInstance?.state === 'upgrading'"
       center
-      :position="props.position"
+      :position="positionsSiftedSlightlyUpwards"
     >
-      <div class="text-[30%]">
+      <div class="text-[30%] w-full h-full">
         <ProgressBar
           :max="buildingInstance.initialDuration.milliseconds.toNumber()"
           min="0"
