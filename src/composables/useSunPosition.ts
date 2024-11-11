@@ -1,4 +1,4 @@
-import useVirtualTimeStore from '@/composables/useVirtualTimeStore.js'
+import useGameTime from '@/composables/useGameTime.js'
 import { defineStore, storeToRefs } from 'pinia'
 import { Vector3 } from 'three'
 import { mapLinear } from 'three/src/math/MathUtils.js'
@@ -8,12 +8,11 @@ const a = 50 // Semi-major axis along the X-axis
 const b = 25 // Semi-minor axis along the Y-axis
 
 export default defineStore('sunPosition', () => {
-  const virtualTime = useVirtualTimeStore()
-  const { currentVirtualTime } = storeToRefs(virtualTime)
+  const { currentTime } = storeToRefs(useGameTime())
 
   // Calculate the angle (here you scale the time to a full cycle in a virtual "day")
   const theta = computed(() => {
-    return (currentVirtualTime.value.getTime() / 1000 * 2 * Math.PI) / (24 * 3600)
+    return (currentTime.value.getTime() / 1000 * 2 * Math.PI) / (24 * 3600)
   })
 
   // Calculate the light's position on the ellipse
