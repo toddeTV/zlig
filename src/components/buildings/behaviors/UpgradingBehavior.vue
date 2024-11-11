@@ -18,22 +18,25 @@ onBeforeRender((event) => {
 
   const secondsRemaining = props.state.secondsRemaining.minus(delta)
 
-  if (secondsRemaining.gt(0)) {
-    gameState.buildings[props.areaId] = {
-      level: props.state.level,
-      secondsRemaining,
-      state: 'upgrading',
-      type: props.buildingType,
+  gameState.$patch((state) => {
+    if (secondsRemaining.gt(0)) {
+      state.buildings[props.areaId] = {
+        initialSeconds: props.state.initialSeconds,
+        level: props.state.level,
+        secondsRemaining,
+        state: 'upgrading',
+        type: props.buildingType,
+      }
     }
-  }
-  else {
-    gameState.buildings[props.areaId] = {
-      internalBuffer: new ResourceRecord(),
-      level: props.state.level + 1,
-      state: 'producing',
-      type: props.buildingType,
+    else {
+      state.buildings[props.areaId] = {
+        internalBuffer: new ResourceRecord(),
+        level: props.state.level + 1,
+        state: 'producing',
+        type: props.buildingType,
+      }
     }
-  }
+  })
 })
 </script>
 
