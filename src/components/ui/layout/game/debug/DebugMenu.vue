@@ -26,8 +26,8 @@ const gameTime = useGameTime()
       <ToggleVisibilityButton v-model="debug.showFog">
         fog
       </ToggleVisibilityButton>
-      <ToggleVisibilityButton v-model="debug.showWaterShader">
-        water shader
+      <ToggleVisibilityButton v-model="debug.showWaterWireframe">
+        water wireframe
       </ToggleVisibilityButton>
     </div>
 

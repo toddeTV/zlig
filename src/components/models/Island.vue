@@ -1,21 +1,30 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Island/Island.gltf'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper'
-import { useTresContext } from '@tresjs/core'
+import { onMounted, shallowRef } from 'vue'
 
-const { scene } = useTresContext()
 const { scenes } = await modelLoader
 
-addShadowAndAddToGroup(scene.value, scenes.Island.Scene)
+const groupWrapperRef = shallowRef()
 
-// const sceneGroup = scene.value.getObjectByName('sceneGroup') ?? scene.value
-// const islandScene = scenes.Island
-// addShadowAndAddToGroup(sceneGroup, islandScene.Object.island_lvl4_grass)
-// addShadowAndAddToGroup(sceneGroup, islandScene.Object.island_lvl2_beach)
+onMounted(() => {
+  const model = scenes.Island.Scene.clone()
+  addShadowAndAddToGroup(groupWrapperRef.value, model, 'both')
+
+  // TODO do not use `getObjectByName` bc a string is not catched when name changes
+  const seabedPlane = model.getObjectByName('zligislandlvl0_seabed001')
+  if (!seabedPlane) {
+    return
+  }
+  seabedPlane.receiveShadow = false
+  seabedPlane.castShadow = false
+})
 </script>
 
-<!-- eslint-disable-next-line vue/valid-template-root -->
 <template>
+  <TresGroup
+    ref="groupWrapperRef"
+  />
 </template>
 
 <style scoped>
