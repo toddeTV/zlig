@@ -83,7 +83,7 @@ const positionsSiftedSlightlyUpwards = computed(() => {
       <div class="text-[30%] w-full h-full">
         <ProgressBar
           :max="buildingInstance.initialDuration.milliseconds.toNumber()"
-          min="0"
+          :min="0"
           :value="buildingInstance.durationRemaining.milliseconds.toNumber()"
         />
       </div>

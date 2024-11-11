@@ -38,7 +38,7 @@ const gameTime = useGameTime()
         <input
           v-model.number="gameTime.currentFactor"
           :max="GAME_TIME_FACTOR_FASTER * 3"
-          min="0"
+          :min="0"
           type="range"
         >
       </label>
