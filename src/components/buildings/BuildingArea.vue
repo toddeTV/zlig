@@ -54,15 +54,9 @@ function onClick(e: TresJsClickEvent) {
     :name="`building-area-${props.id}`"
     @click="(e: TresJsClickEvent) => onClick(e)"
   >
-    <!-- TODO fix multiple use of `<ConstructionSite` -->
-    <ConstructionSite
-      v-if="buildingInstance?.state === 'in-construction'"
-      :position="props.position"
-      :rotation="props.rotation"
-    />
     <component
       :is="buildingInstance.type.levelProgression.getModelForLevel(buildingInstance.level)"
-      v-else-if="buildingInstance"
+      v-if="buildingInstance?.state !== 'in-construction' && buildingInstance"
       :building-area-id="props.id"
       :building-instance
       :position="props.position"
