@@ -32,6 +32,7 @@ onBeforeRender((event) => {
 
   // The internal buffer is this full now.
   let buffer = props.state.internalBuffer.plus(incomeThisTick)
+
   // Pass resources to the "warehouse" if there is more than 1 available. Instead of comparing each individual resource
   // round them down and pass the result to the warehouse. The rounded resources might be all zeroes but this is not a
   // problem.
