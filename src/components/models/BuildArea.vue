@@ -29,3 +29,6 @@ onMounted(() => {
     ref="groupWrapperRef"
   />
 </template>
+
+<style scoped>
+</style>

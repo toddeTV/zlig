@@ -90,3 +90,6 @@ const positionsSiftedSlightlyUpwards = computed(() => {
     </Html>
   </TresGroup>
 </template>
+
+<style scoped>
+</style>

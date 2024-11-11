@@ -62,3 +62,6 @@ const hasDebug = ref(true)
     </div>
   </div>
 </template>
+
+<style scoped>
+</style>

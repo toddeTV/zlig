@@ -47,3 +47,6 @@ function cancelUpgrade() {
     cancel upgrading
   </button>
 </template>
+
+<style scoped>
+</style>

@@ -30,3 +30,6 @@ const availableBuildings = [
     />
   </div>
 </template>
+
+<style scoped>
+</style>

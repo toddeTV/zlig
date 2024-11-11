@@ -13,3 +13,6 @@ const props = defineProps<{
     Gold: <ResourceEntry :available="props.available?.gold" :resource="props.resources.gold" />
   </p>
 </template>
+
+<style scoped>
+</style>

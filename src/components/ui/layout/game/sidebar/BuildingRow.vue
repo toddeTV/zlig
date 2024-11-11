@@ -119,3 +119,6 @@ function build() {
     </div>
   </button>
 </template>
+
+<style scoped>
+</style>

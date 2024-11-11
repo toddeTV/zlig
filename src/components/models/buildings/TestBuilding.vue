@@ -35,3 +35,6 @@ watch(() => props.buildingInstance.level, (newValue, _oldValue) => {
     ref="groupWrapperRef"
   />
 </template>
+
+<style scoped>
+</style>

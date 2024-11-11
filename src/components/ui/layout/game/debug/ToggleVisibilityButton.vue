@@ -13,3 +13,6 @@ const model = defineModel<boolean>()
     <span class="uppercase"><slot /></span>
   </label>
 </template>
+
+<style scoped>
+</style>

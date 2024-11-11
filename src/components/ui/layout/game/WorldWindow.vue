@@ -44,3 +44,6 @@ watchEffect(() => {
     </TresCanvas>
   </div>
 </template>
+
+<style scoped>
+</style>

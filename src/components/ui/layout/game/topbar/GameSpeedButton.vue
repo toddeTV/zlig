@@ -14,3 +14,6 @@ const gameTime = useGameTime()
     <span :class="props.class" :data-active="gameTime.currentFactor === targetFactor ? true : undefined" />
   </button>
 </template>
+
+<style scoped>
+</style>

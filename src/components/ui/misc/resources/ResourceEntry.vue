@@ -15,3 +15,6 @@ const props = defineProps<{
     }"
   >{{ props.resource.toNumber().toLocaleString() }}</b>
 </template>
+
+<style scoped>
+</style>

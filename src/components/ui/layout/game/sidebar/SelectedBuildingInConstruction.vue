@@ -40,3 +40,6 @@ function cancelBuild() {
     cancel build
   </button>
 </template>
+
+<style scoped>
+</style>
