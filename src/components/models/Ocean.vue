@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Ocean/Ocean.gltf'
 import useDebugStore from '@/composables/useDebugStore'
-import { addShadow, addShadowAndAddToGroup, addToGroup } from '@/utils/threeHelper'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper'
 import { getWaterMaterial } from '@/utils/WaterShader'
-import { type TresPrimitive, useLoop, useTresContext } from '@tresjs/core'
+import { useLoop } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
-import { Group, Mesh, Plane, PlaneGeometry } from 'three'
 import { onMounted, ref, shallowRef, watch } from 'vue'
-import type { Object3D } from 'three'
 
 const { scenes } = await modelLoader
 const { onBeforeRender } = useLoop()

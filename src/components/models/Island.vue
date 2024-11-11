@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Island/Island.gltf'
-import { addShadow, addShadowAndAddToGroup, addToGroup } from '@/utils/threeHelper'
-import { getWaterMaterial } from '@/utils/WaterShader'
-import { useGLTF } from '@tresjs/cientos'
-import { useLoop, useTresContext } from '@tresjs/core'
-import { onMounted, ref, shallowRef } from 'vue'
-import type { Group, Mesh, Object3D } from 'three'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper'
+import { onMounted, shallowRef } from 'vue'
 
 const { scenes } = await modelLoader
 
