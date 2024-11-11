@@ -9,6 +9,7 @@ import DistanceFog from './DistanceFog.vue'
 import Lights from './Lights.vue'
 import Island from './models/Island.vue'
 import Ocean from './models/Ocean.vue'
+import Waterfall from './models/Waterfall.vue'
 import VisualHelper from './VisualHelper.vue'
 
 const { areas } = storeToRefs(useBuildingAreas())
@@ -50,8 +51,15 @@ const cameraMoved = ref(false)
         :rotation="area.rotation"
       />
     </Suspense>
+
     <Suspense>
       <Ocean
+        :position="[0, 0, 0]"
+      />
+    </Suspense>
+
+    <Suspense>
+      <Waterfall
         :position="[0, 0, 0]"
       />
     </Suspense>
