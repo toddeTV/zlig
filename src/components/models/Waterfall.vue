@@ -31,6 +31,8 @@ const waterMaterialDown = getWaterMaterial({
   waveTangentialAmplitude: 0.0,
 })
 
+// Use the real game tick and not the `useGameTime` tick bc the waterfall should always move with the same speed
+// and should not depend on the in game time/ speed.
 onBeforeRender(({ delta }) => {
   if (groupWrapperRef.value.children.length === 0) {
     return
