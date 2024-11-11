@@ -1,5 +1,6 @@
 {
 	"asset":{
+		"copyright":"https://zlig.net/",
 		"generator":"Khronos glTF Blender I/O v4.2.69",
 		"version":"2.0"
 	},
@@ -12,14 +13,6 @@
 	"scene":0,
 	"scenes":[
 		{
-			"extras":{
-				"xray_props":{
-					"enable_snapping":false,
-					"enable_xray":0
-				},
-				"uuid":"32e66abd-8d0e-4e61-b480-e4ade617acad",
-				"assets reported":{}
-			},
 			"name":"Ocean",
 			"nodes":[
 				0
@@ -29,33 +22,12 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"ocean",
-			"scale":[
-				150,
-				1,
-				150
-			]
-		}
-	],
-	"materials":[
-		{
-			"doubleSided":true,
-			"name":"water",
-			"pbrMetallicRoughness":{
-				"baseColorFactor":[
-					0.08437464386224747,
-					0.8307706713676453,
-					0.7011022567749023,
-					1
-				],
-				"metallicFactor":0,
-				"roughnessFactor":0.5
-			}
+			"name":"ocean.001"
 		}
 	],
 	"meshes":[
 		{
-			"name":"Plane",
+			"name":"Plane.009",
 			"primitives":[
 				{
 					"attributes":{
@@ -74,7 +46,6 @@
 						}
 					},
 					"indices":3,
-					"material":0,
 					"mode":4
 				}
 			]
@@ -83,45 +54,45 @@
 	"accessors":[
 		{
 			"componentType":5126,
-			"count":4,
+			"count":10404,
 			"max":[
-				1,
+				150,
 				0,
-				1
+				150
 			],
 			"min":[
-				-1,
+				-150,
 				0,
-				-1
+				-150
 			],
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":4,
+			"count":10404,
 			"type":"VEC3"
 		},
 		{
 			"componentType":5126,
-			"count":4,
+			"count":10404,
 			"type":"VEC2"
 		},
 		{
 			"componentType":5123,
-			"count":6,
+			"count":61206,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":166,
+			"byteLength":10926,
 			"byteOffset":0
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":168,
+			"byteLength":10928,
 			"uri":"Ocean.bin"
 		}
 	]
