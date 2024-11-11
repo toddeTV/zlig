@@ -51,15 +51,13 @@ watchEffect(() => ambientLight.color = lightColors.value.ambient)
 // -------- CameraHelper for DirectionalLight
 
 const helper = new CameraHelper(directionalLight.shadow.camera)
-watch(() => showLightHelper.value, (newValue, _oldValue) => {
-  updateHelperVisibility(newValue)
-})
-function updateHelperVisibility(isVisible: boolean) {
+watch(() => showLightHelper.value, (newValue) => {
   scene.value.remove(helper)
-  if (isVisible === true)
+  if (newValue === true)
     scene.value.add(helper)
-}
-updateHelperVisibility(showLightHelper.value)
+}, {
+  immediate: true,
+})
 </script>
 
 <!-- eslint-disable-next-line vue/valid-template-root -->

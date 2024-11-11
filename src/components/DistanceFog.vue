@@ -19,15 +19,13 @@ watchEffect(() => {
 })
 
 // watch the fog visibility
-watch(() => showFog.value, (newValue, _oldValue) => {
-  updateHelperVisibility(newValue)
-})
-function updateHelperVisibility(isVisible: boolean) {
+watch(() => showFog.value, (newValue) => {
   scene.value.fog = fog
-  if (isVisible === false)
+  if (newValue === false)
     scene.value.fog = null
-}
-updateHelperVisibility(showFog.value)
+}, {
+  immediate: true,
+})
 </script>
 
 <!-- eslint-disable-next-line vue/valid-template-root -->

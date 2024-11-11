@@ -51,6 +51,7 @@ const cameraControlsProps: CameraControlsProps = {
     three: 0, // = none
   },
 }
+/* eslint-enable */
 
 const perspectiveCamera = new PerspectiveCamera()
 perspectiveCamera.position.fromArray(cameraStartingPosition.toArray())
@@ -82,22 +83,20 @@ onMounted(() => {
 const perspectiveCameraHelper = ref()
 const cameraHelper = new CameraHelper(perspectiveCamera)
 const boxHelper = new Box3Helper(cameraBoundary)
-watch(() => showCameraHelper.value, (newValue, _oldValue) => {
-  updateHelperVisibility(newValue)
-})
-function updateHelperVisibility(isVisible: boolean) {
+watch(() => showCameraHelper.value, (newValue) => {
   setCameraActive(perspectiveCamera)
   scene.value.remove(cameraHelper)
   scene.value.remove(boxHelper)
-  if (isVisible === true) {
+  if (newValue === true) {
     perspectiveCameraHelper.value = perspectiveCamera.clone()
     perspectiveCameraHelper.value.far = 1000
     setCameraActive(perspectiveCameraHelper.value)
     scene.value.add(cameraHelper)
     scene.value.add(boxHelper)
   }
-}
-updateHelperVisibility(showCameraHelper.value)
+}, {
+  immediate: true,
+})
 </script>
 
 <template>
