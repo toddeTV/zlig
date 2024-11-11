@@ -3,6 +3,7 @@ import Resources from '@/components/ui/Resources.vue'
 import useGameState from '@/composables/useGameState.js'
 import { ResourceRecord, ResourcesPerMillisecond } from '@/game-logic/resources.js'
 import Big from 'big.js'
+import { DEV } from 'esm-env'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import type { BuildingAreaId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
@@ -97,6 +98,15 @@ function destroyBuilding() {
     </p>
     <div class="flex gap-2 ml-4">
       <Resources :resources="currentIncome.perHour()" />
+    </div>
+  </div>
+
+  <div v-if="DEV" class="mb-4">
+    <p class="font-semibold">
+      Internal resource buffer:
+    </p>
+    <div class="flex gap-2 ml-4">
+      <Resources :resources="props.buildingState.internalBuffer" />
     </div>
   </div>
 

@@ -69,6 +69,9 @@ importers:
       eslint-plugin-vue:
         specifier: 9.28.0
         version: 9.28.0(eslint@9.10.0(jiti@1.21.6))
+      esm-env:
+        specifier: 1.1.4
+        version: 1.1.4
       npm-run-all2:
         specifier: 6.2.2
         version: 6.2.2
@@ -1648,6 +1651,9 @@ packages:
     peerDependenciesMeta:
       jiti:
         optional: true
+
+  esm-env@1.1.4:
+    resolution: {integrity: sha512-oO82nKPHKkzIj/hbtuDYy/JHqBHFlMIW36SDiPCVsj87ntDLcWN+sJ1erdVryd4NxODacFTsdrIE3b7IamqbOg==}
 
   espree@10.1.0:
     resolution: {integrity: sha512-M1M6CpiE6ffoigIOWYO9UDP8TMUw9kqb21tf+08IgDYjCsOvCuDt4jQcZmoYxx+w7zlKw9/N0KXfto+I8/FrXA==}
@@ -4640,6 +4646,8 @@ snapshots:
       jiti: 1.21.6
     transitivePeerDependencies:
       - supports-color
+
+  esm-env@1.1.4: {}
 
   espree@10.1.0:
     dependencies:

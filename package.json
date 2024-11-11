@@ -66,6 +66,7 @@
     "eslint-plugin-format": "0.1.2",
     "eslint-plugin-perfectionist": "3.5.0",
     "eslint-plugin-vue": "9.28.0",
+    "esm-env": "1.1.4",
     "npm-run-all2": "6.2.2",
     "pinia": "2.2.2",
     "postcss": "8.4.45",
