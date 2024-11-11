@@ -45,7 +45,7 @@ function cancelUpgrade() {
   <div class="flex flex-col mt-2 mb-4">
     <ProgressBar
       :max="props.buildingState.initialSeconds.toNumber()"
-      min="0"
+      :min="0"
       :value="props.buildingState.secondsRemaining.toNumber()"
     />
   </div>
