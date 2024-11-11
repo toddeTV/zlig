@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import useDebugStore from '@/composables/useDebugStore'
+import useGameTime, { GAME_TIME_FACTOR_FASTER } from '@/composables/useGameTime.js'
 import ToggleVisibilityButton from './ToggleVisibilityButton.vue'
 
 const debug = useDebugStore()
+const gameTime = useGameTime()
 </script>
 
 <template>
@@ -29,6 +31,22 @@ const debug = useDebugStore()
       </ToggleVisibilityButton>
     </div>
 
-    # TODO: Add time controls here.
+    <div class="mt-4 flex gap-2 items-center">
+      <label>
+        Current game time factor:
+
+        <input
+          v-model.number="gameTime.currentFactor"
+          :max="GAME_TIME_FACTOR_FASTER * 3"
+          min="0"
+          type="range"
+        >
+      </label>
+
+      <b>{{ gameTime.currentFactor.toLocaleString() }}</b>
+    </div>
+    <p class="text-sm italic">
+      each real time milliseconds progresses the game time by that much milliseconds
+    </p>
   </div>
 </template>
