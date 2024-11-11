@@ -1,16 +1,16 @@
 <script setup lang="ts">
+import useCalculatedLights from '@/composables/useCalculatedLights.js'
 import useDebugStore from '@/composables/useDebugStore'
 import useSunPosition from '@/composables/useSunPosition.js'
-import useVirtualTimeStore from '@/composables/useVirtualTimeStore'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { AmbientLight, CameraHelper, DirectionalLight } from 'three'
-import { watch } from 'vue'
+import { watch, watchEffect } from 'vue'
 
 const { scene } = useTresContext()
 const { showLightHelper } = storeToRefs(useDebugStore())
-const { calculateLightBySunPosition } = useVirtualTimeStore()
 const { sunPosition } = storeToRefs(useSunPosition())
+const { ambientIntensity, lightColors, sunIntensity } = storeToRefs(useCalculatedLights())
 
 // -------- AmbientLight
 
@@ -42,16 +42,11 @@ scene.value.add(directionalLight)
 
 // -------- watch the time and simulate the sun
 
-watch(sunPosition, (position) => {
-  directionalLight.position.fromArray(position.toArray()) // set sun position
-
-  const { ambientColor, ambientIntensity, sunColor, sunIntensity } = calculateLightBySunPosition(position)
-
-  directionalLight.intensity = sunIntensity // set sun intensity
-  directionalLight.color = sunColor // set sun color
-  ambientLight.intensity = ambientIntensity // set ambient light intensity
-  ambientLight.color = ambientColor // set ambient color
-})
+watchEffect(() => directionalLight.position.fromArray(sunPosition.value.toArray()))
+watchEffect(() => directionalLight.intensity = sunIntensity.value)
+watchEffect(() => directionalLight.color = lightColors.value.sun)
+watchEffect(() => ambientLight.intensity = ambientIntensity.value)
+watchEffect(() => ambientLight.color = lightColors.value.ambient)
 
 // -------- CameraHelper for DirectionalLight
 

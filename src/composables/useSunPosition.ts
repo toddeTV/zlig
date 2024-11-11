@@ -1,13 +1,13 @@
 import useVirtualTimeStore from '@/composables/useVirtualTimeStore.js'
-import mapRange from '@/utils/mapRange.js'
 import { defineStore, storeToRefs } from 'pinia'
 import { Vector3 } from 'three'
+import { mapLinear } from 'three/src/math/MathUtils.js'
 import { computed } from 'vue'
 
-export default defineStore('sunPosition', () => {
-  const a = 50 // Semi-major axis along the X-axis
-  const b = 25 // Semi-minor axis along the Y-axis
+const a = 50 // Semi-major axis along the X-axis
+const b = 25 // Semi-minor axis along the Y-axis
 
+export default defineStore('sunPosition', () => {
   const virtualTime = useVirtualTimeStore()
   const { currentVirtualTime } = storeToRefs(virtualTime)
 
@@ -23,7 +23,7 @@ export default defineStore('sunPosition', () => {
   const sunPosition = computed(() => new Vector3(x.value, y.value, 100))
 
   // Normalize the height between values
-  const normalizedSunY = computed(() => mapRange(y.value, -b, b, -1.0, 1.0))
+  const normalizedSunY = computed(() => mapLinear(y.value, -b, b, -1.0, 1.0))
 
   return {
     normalizedSunY,
