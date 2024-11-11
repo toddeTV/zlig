@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const props = defineProps<{
-  min: number
-  max: number
-  value: number
+  min: number | string
+  max: number | string
+  value: number | string
 }>()
 </script>
 

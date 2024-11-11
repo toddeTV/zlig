@@ -19,22 +19,25 @@ const { currentTime } = storeToRefs(useGameTime())
 watch(currentTime, (time, prev) => {
   const durationRemaining = props.state.durationRemaining.minus(Duration.fromDates(prev, time))
 
-  if (durationRemaining.milliseconds.gt(0)) {
-    gameState.buildings[props.areaId] = {
-      durationRemaining,
-      level: props.state.level,
-      state: 'upgrading',
-      type: props.buildingType,
+  gameState.$patch((state) => {
+    if (durationRemaining.milliseconds.gt(0)) {
+      state.buildings[props.areaId] = {
+        durationRemaining,
+        initialDuration: props.state.initialDuration,
+        level: props.state.level,
+        state: 'upgrading',
+        type: props.buildingType,
+      }
     }
-  }
-  else {
-    gameState.buildings[props.areaId] = {
-      internalBuffer: new ResourceRecord(),
-      level: props.state.level + 1,
-      state: 'producing',
-      type: props.buildingType,
+    else {
+      state.buildings[props.areaId] = {
+        internalBuffer: new ResourceRecord(),
+        level: props.state.level + 1,
+        state: 'producing',
+        type: props.buildingType,
+      }
     }
-  }
+  })
 })
 </script>
 

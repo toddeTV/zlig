@@ -53,6 +53,11 @@ export type BuildingStateInConstruction = Readonly<{
    * The duration left when the building will be finished and reach level 1.
    */
   durationRemaining: Duration
+
+  /**
+   * The total duration it takes to construct this building.
+   */
+  initialDuration: Duration
 }>
 
 /**
@@ -72,6 +77,11 @@ export type BuildingStateUpgrading = Readonly<{
    * The duration left when the building will reach the next level.
    */
   durationRemaining: Duration
+
+  /**
+   * The total duration it takes to upgrade this building.
+   */
+  initialDuration: Duration
 }>
 
 /**

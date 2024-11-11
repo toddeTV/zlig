@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import useGameState from '@/composables/useGameState.js'
 import useGameTime from '@/composables/useGameTime.js'
+import { ResourceRecord } from '@/game-logic/resources.js'
+import Big from 'big.js'
 import { storeToRefs } from 'pinia'
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
 import type { BuildingAreaId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
@@ -11,36 +13,44 @@ const props = defineProps<{
   state: BuildingStateProducing
 }>()
 
-function getIncome() {
-  // TODO: Factor in modifiers.
-  const income = props.buildingType.levelProgression.getBaseIncomeForLevel(props.state.level)
-
-  return income
-}
-
 const gameState = useGameState()
+
+// TODO: Put this into the game state.
+// TODO: Make this individual per building type.
+const incomeModifier = new ResourceRecord({ gold: new Big('1') })
+
+const currentIncome = computed(() => {
+  const base = props.buildingType.levelProgression.getBaseIncomeForLevel(props.state.level)
+
+  return base.times(incomeModifier)
+})
+
 const { currentTime } = storeToRefs(useGameTime())
 
 watch(currentTime, (time, prev) => {
   const deltaMs = time.getTime() - prev.getTime()
 
-  const income = getIncome().times(deltaMs)
+  const incomeThisTick = currentIncome.value.times(deltaMs)
 
   // The internal buffer is this full now.
-  let buffer = props.state.internalBuffer.plus(income)
+  let buffer = props.state.internalBuffer.plus(incomeThisTick)
+
   // Pass resources to the "warehouse" if there is more than 1 available. Instead of comparing each individual resource
   // round them down and pass the result to the warehouse. The rounded resources might be all zeroes but this is not a
   // problem.
-  const produced = buffer.round()
+  const produced = buffer.roundDown()
   buffer = buffer.minus(produced)
 
-  gameState.resources.add(produced)
-  gameState.buildings[props.areaId] = {
-    internalBuffer: buffer,
-    level: props.state.level,
-    state: 'producing',
-    type: props.buildingType,
-  }
+  gameState.$patch((state) => {
+    state.resources = state.resources.plus(produced)
+
+    state.buildings[props.areaId] = {
+      internalBuffer: buffer,
+      level: props.state.level,
+      state: 'producing',
+      type: props.buildingType,
+    }
+  })
 })
 </script>
 

@@ -4,7 +4,7 @@ import Big from 'big.js'
  * Determines the available resources.
  */
 export type Resource = keyof {
-  // This extracts all keys of the record class that are of type number.
+  // This extracts all keys of the record class that are of the custom big integer type.
   [K in keyof ResourceRecord as [ResourceRecord[K]] extends [Big] ? K : never]: 0
 }
 
@@ -86,6 +86,14 @@ export class ResourceRecord implements PlainResources {
    * @returns A record with only integer values.
    */
   round(): ResourceRecord {
+    // Another shortcut: Pretend to calculate but only use the value of this record.
+    return this.calc(new ResourceRecord(), a => a.round(0, Big.roundHalfUp))
+  }
+
+  /**
+   * @returns A record with only integer values (rounded down).
+   */
+  roundDown(): ResourceRecord {
     // Another shortcut: Pretend to calculate but only use the value of this record.
     return this.calc({}, a => a.round(0, Big.roundDown))
   }
