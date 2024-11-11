@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/BuildArea/BuildArea.gltf'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper'
-import { Html } from '@tresjs/cientos'
-import { useTresContext } from '@tresjs/core'
 import { onMounted, shallowRef } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types'
 import type { Euler, Vector3 } from 'three'
