@@ -11,7 +11,7 @@ const gameTime = useGameTime()
 // a computed property that rounds the current in-game time to the nearest 10-minute interval and returns
 // it as a localized, short-formatted time string (no minutes < 10 and no seconds).
 const displayTime = computed(() => {
-  const time = gameTime.currentTime
+  const time = new Date(gameTime.currentTime.getTime())
   const minutes = time.getMinutes()
   const roundedMinutes = Math.round(minutes / 10) * 10
   time.setMinutes(roundedMinutes)
