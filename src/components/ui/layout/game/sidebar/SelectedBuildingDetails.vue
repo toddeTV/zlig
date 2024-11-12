@@ -13,8 +13,7 @@ const props = defineProps<{
   buildingState: BuildingStateProducing
 }>()
 
-const gameState = useGameState()
-const { resources } = storeToRefs(gameState)
+const { buildings, resources } = storeToRefs(useGameState())
 
 // TODO: Put this into the game state.
 // TODO: Make this individual per building type.
@@ -61,25 +60,21 @@ const canUpgrade = computed(() => {
 })
 
 function upgradeBuilding() {
-  gameState.$patch((state) => {
-    state.buildings[props.buildingAreaId] = {
-      durationRemaining: upgradeBuildingDuration.value,
-      initialDuration: upgradeBuildingDuration.value,
-      level: props.buildingState.level,
-      state: 'upgrading',
-      type: props.buildingType,
-    }
+  buildings.value[props.buildingAreaId] = {
+    durationRemaining: upgradeBuildingDuration.value,
+    initialDuration: upgradeBuildingDuration.value,
+    level: props.buildingState.level,
+    state: 'upgrading',
+    type: props.buildingType,
+  }
 
-    state.resources = state.resources.minus(upgradeCosts.value)
-  })
+  resources.value = resources.value.minus(upgradeCosts.value)
 }
 
 function destroyBuilding() {
   // TODO: Determine the refunds.
 
-  gameState.$patch((state) => {
-    state.buildings[props.buildingAreaId] = undefined
-  })
+  buildings.value[props.buildingAreaId] = undefined
 }
 </script>
 
