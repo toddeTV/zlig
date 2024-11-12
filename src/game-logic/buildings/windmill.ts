@@ -7,6 +7,7 @@ import { markRaw } from 'vue'
 import type { BuildingType } from '@/game-logic/types.js'
 
 const building: BuildingType = {
+  description: 'A innovative conception which extracts gold from the wind by rotating sharp blades 🤯',
   id: 'windmill',
   levelProgression: new LinearLevelProgression({
     buildingDuration: {

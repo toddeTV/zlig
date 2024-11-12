@@ -15,6 +15,11 @@ export type BuildingType = Readonly<{
   name: string
 
   /**
+   * A description displayed for each building.
+   */
+  description: string
+
+  /**
    * Determines the available building levels with costs and benefits.
    */
   levelProgression: LevelProgression

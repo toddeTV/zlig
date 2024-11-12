@@ -7,6 +7,7 @@ import { markRaw } from 'vue'
 import type { BuildingType } from '@/game-logic/types.js'
 
 const building: BuildingType = {
+  description: 'Selling flowers can make a great income',
   id: 'carnationShop',
   levelProgression: new LinearLevelProgression({
     buildingDuration: {

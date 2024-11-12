@@ -27,10 +27,15 @@ function cancelUpgrade() {
 </script>
 
 <template>
-  <h3 class="font-semibold mb-4">
+  <h3 class="font-semibold mb-2">
     <span class="text-xl">{{ props.buildingType.name }}</span>
     <span> (Level {{ props.buildingState.level }})</span>
   </h3>
+
+  <p class="ml-4 mb-6">
+    {{ props.buildingType.description }}
+  </p>
+
   <p>
     This building is currently being upgraded to level <b>{{ props.buildingState.level + 1 }}</b>.
     Finished in: <b>{{ props.buildingState.durationRemaining.format() }}</b>
