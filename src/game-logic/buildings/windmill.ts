@@ -7,6 +7,7 @@ import { markRaw } from 'vue'
 import type { BuildingType } from '@/game-logic/types.js'
 
 const building: BuildingType = {
+  description: 'A innovative conception which extracts gold from the wind by rotating sharp blades 🤯',
   id: 'windmill',
   levelProgression: new LinearLevelProgression({
     buildingDuration: {
@@ -14,7 +15,7 @@ const building: BuildingType = {
       initial: Duration.fromHours(new Big('24')),
     },
     costs: {
-      additionalPerLevel: new ResourceRecord(),
+      additionalPerLevel: new ResourceRecord({ gold: new Big('123') }),
       initial: new ResourceRecord({ gold: new Big('1000') }),
     },
     getModel: () => markRaw(Windmill),

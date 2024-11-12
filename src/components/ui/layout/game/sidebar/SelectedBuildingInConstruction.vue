@@ -20,9 +20,14 @@ function cancelBuild() {
 </script>
 
 <template>
-  <h3 class="font-semibold mb-4">
+  <h3 class="font-semibold mb-2">
     <span class="text-xl">{{ props.buildingType.name }}</span>
   </h3>
+
+  <p class="ml-4 mb-6">
+    {{ props.buildingType.description }}
+  </p>
+
   <p>
     This building is currently under construction.
     Finished in: <b>{{ props.buildingState.durationRemaining.format() }}</b>

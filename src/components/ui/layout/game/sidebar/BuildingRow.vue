@@ -82,7 +82,9 @@ function build() {
       {{ props.buildingType.name }}
     </p>
 
-    <!-- TODO: Add building type descriptions and display them here. -->
+    <p class="ml-4 mb-2">
+      {{ props.buildingType.description }}
+    </p>
 
     <div>
       <p class="font-semibold">
