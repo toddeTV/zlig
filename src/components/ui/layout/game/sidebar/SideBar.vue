@@ -18,7 +18,7 @@ const hasDebug = ref(true)
 </script>
 
 <template>
-  <div class="bg-white h-full flex flex-col gap-1">
+  <div class="bg-white h-full flex flex-col gap-1 overflow-y-scroll max-h-screen">
     <div v-if="!selectedBuildingArea.id" class="flex-grow flex flex-col p-3 items-center justify-center">
       <p class="text-gray-400">
         Please select a building or building area...

@@ -1,13 +1,16 @@
-import { useRoute } from 'vue-router'
+let params = {}
 
 export default function () {
-  const route = useRoute()
+  function init(newParams: any) {
+    params = newParams
+  }
 
   function isParamPresent(param: string): boolean {
-    return param in route.query
+    return param in params
   }
 
   return {
+    init,
     isParamPresent,
   }
 }

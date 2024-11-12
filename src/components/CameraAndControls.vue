@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useDebugStore from '@/composables/useDebugStore'
+import useGetParam from '@/composables/useGetParam'
 import { CameraControls } from '@tresjs/cientos'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
@@ -11,6 +12,7 @@ const emit = defineEmits(['cameraMoved'])
 
 const { scene, setCameraActive } = useTresContext()
 const { showCameraHelper } = storeToRefs(useDebugStore())
+const { isParamPresent } = useGetParam()
 
 const cameraIsActive = ref(false)
 
@@ -25,18 +27,21 @@ const cameraBoundary = new Box3(
 )
 
 /* eslint-disable perfectionist/sort-objects */
-const cameraControlsProps: CameraControlsProps = {
-  makeDefault: true,
-
-  azimuthRotateSpeed: cameraRotateSpeed,
-  polarRotateSpeed: cameraRotateSpeed,
-
+const limits = {
   minDistance: 20,
   maxDistance: 100,
   distance: 80,
 
   minPolarAngle: Math.PI * 0.2,
   maxPolarAngle: Math.PI * 0.45,
+}
+const cameraControlsProps: CameraControlsProps = {
+  ...(!isParamPresent('camera') ? limits : {}),
+
+  makeDefault: true,
+
+  azimuthRotateSpeed: cameraRotateSpeed,
+  polarRotateSpeed: cameraRotateSpeed,
 
   mouseButtons: {
     left: 1, // = rotate
@@ -62,19 +67,24 @@ watch(cameraControlsRef, (newValue) => {
     return
   }
 
-  // Set camera boundary
-  newValue.instance.setBoundary(cameraBoundary)
+  if (isParamPresent('world') || isParamPresent('camera')) {
+    newValue.instance.setPosition(10, 10, 10)
+  }
+  else {
+    // Set camera boundary
+    newValue.instance.setBoundary(cameraBoundary)
 
-  // Set look at target (which also sets the viewing angle)
-  const lookAtTarget = new Vector3(10, 10, 0)
-  newValue.instance.setLookAt(
-    cameraStartingPosition.x,
-    cameraStartingPosition.y,
-    cameraStartingPosition.z,
-    lookAtTarget.x,
-    lookAtTarget.y,
-    lookAtTarget.z,
-  )
+    // Set look at target (which also sets the viewing angle)
+    const lookAtTarget = new Vector3(10, 10, 0)
+    newValue.instance.setLookAt(
+      cameraStartingPosition.x,
+      cameraStartingPosition.y,
+      cameraStartingPosition.z,
+      lookAtTarget.x,
+      lookAtTarget.y,
+      lookAtTarget.z,
+    )
+  }
 })
 
 const perspectiveCameraHelper = ref()
@@ -94,6 +104,17 @@ watch(showCameraHelper, (newValue) => {
 }, {
   immediate: true,
 })
+
+if (isParamPresent('camera')) {
+  perspectiveCameraHelper.value = perspectiveCamera.clone()
+  perspectiveCameraHelper.value.far = 1000
+  const cameraStartingPositionHelp = new Vector3(-5, 2, 2)
+  perspectiveCameraHelper.value.position.fromArray(cameraStartingPositionHelp.toArray())
+  perspectiveCameraHelper.value.lookAt(new Vector3(0, 0, 0))
+  const cameraHelperH = new CameraHelper(perspectiveCameraHelper.value)
+  scene.value.add(perspectiveCameraHelper.value)
+  scene.value.add(cameraHelperH)
+}
 </script>
 
 <template>

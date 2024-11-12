@@ -2,8 +2,15 @@
 import GameCanvas from '@/components/ui/layout/game/GameCanvas.vue'
 import SideBar from '@/components/ui/layout/game/sidebar/SideBar.vue'
 import TopBar from '@/components/ui/layout/game/topbar/TopBar.vue'
+import useGetParam from '@/composables/useGetParam'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const { init, isParamPresent } = useGetParam()
+
+init(route.query)
 
 const sidebarOpen = ref(false)
 function toggleSidebar() {
@@ -21,10 +28,11 @@ selectedBuildingArea.$subscribe((_, newId) => {
 
 <template>
   <div class="flex flex-col flex-grow">
-    <TopBar />
+    <TopBar v-if="!isParamPresent('world') && !isParamPresent('camera')" />
 
     <div class="relative flex flex-grow">
       <span
+        v-if="!isParamPresent('world') && !isParamPresent('camera')"
         class="
           md:hidden
           absolute left-0 top-[7.5%] transition-[left]
@@ -38,7 +46,9 @@ selectedBuildingArea.$subscribe((_, newId) => {
       </span>
 
       <div
+        v-if="!isParamPresent('world') && !isParamPresent('camera')"
         class="
+          max-h-screen
           absolute md:relative md:left-0 right-0 top-0 bottom-0
           -left-[100%] transition-[left]
           max-w-[90%] md:max-w-none md:w-[25%] lg:w-[22.5%] xl:w-[20%]
@@ -50,6 +60,7 @@ selectedBuildingArea.$subscribe((_, newId) => {
       </div>
 
       <span
+        v-if="!isParamPresent('world') && !isParamPresent('camera')"
         class="
           absolute left-0 right-0 top-0 bottom-0 md:hidden
           opacity-0 pointer-events-none

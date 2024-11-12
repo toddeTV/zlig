@@ -9,6 +9,7 @@ import Waterfall from '@/components/models/Waterfall.vue'
 import VisualHelper from '@/components/VisualHelper.vue'
 import useBuildingAreas from '@/composables/useBuildingAreas.js'
 import useGameTime from '@/composables/useGameTime.js'
+import useGetParam from '@/composables/useGetParam'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { useLoop } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
@@ -18,6 +19,7 @@ const { onBeforeRender } = useLoop()
 const gameTime = useGameTime()
 const { areas } = storeToRefs(useBuildingAreas())
 const { init } = useBuildingAreas()
+const { isParamPresent } = useGetParam()
 
 onBeforeRender(({ delta }) => {
   gameTime.tick(delta)
@@ -28,6 +30,11 @@ init()
 const selectedBuildingArea = useSelectedBuildingArea()
 
 const cameraMoved = ref(false)
+
+if (isParamPresent('world') || isParamPresent('camera')) {
+  gameTime.currentFactor = 0
+  gameTime.currentTime.setHours(3)
+}
 </script>
 
 <template>
@@ -47,11 +54,11 @@ const cameraMoved = ref(false)
     }"
     @pointer-down="() => cameraMoved = false"
   >
-    <Suspense>
+    <Suspense v-if="!isParamPresent('world') && !isParamPresent('camera')">
       <Island />
     </Suspense>
 
-    <Suspense>
+    <Suspense v-if="!isParamPresent('world') && !isParamPresent('camera')">
       <BuildingArea
         v-for="area in areas"
         :id="area.id"
@@ -61,13 +68,13 @@ const cameraMoved = ref(false)
       />
     </Suspense>
 
-    <Suspense>
+    <Suspense v-if="!isParamPresent('world') && !isParamPresent('camera')">
       <Ocean
         :position="[0, 0, 0]"
       />
     </Suspense>
 
-    <Suspense>
+    <Suspense v-if="!isParamPresent('world') && !isParamPresent('camera')">
       <Waterfall
         :position="[0, 0, 0]"
       />
