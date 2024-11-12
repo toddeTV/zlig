@@ -8,8 +8,14 @@ const { isParamPresent } = useGetParam()
 </script>
 
 <template>
-  <TresAxesHelper v-if="showVisualHelper || isParamPresent('world') || isParamPresent('camera')" />
-  <TresGridHelper v-if="showVisualHelper || isParamPresent('world') || isParamPresent('camera')" />
+  <TresAxesHelper
+    v-if="showVisualHelper
+      || isParamPresent('world') || isParamPresent('camera') || isParamPresent('lights')"
+  />
+  <TresGridHelper
+    v-if="showVisualHelper
+      || isParamPresent('world') || isParamPresent('camera') || isParamPresent('lights')"
+  />
 </template>
 
 <style scoped>
