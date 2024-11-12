@@ -14,7 +14,7 @@ const building: BuildingType = {
       initial: Duration.fromHours(new Big('24')),
     },
     costs: {
-      additionalPerLevel: new ResourceRecord(),
+      additionalPerLevel: new ResourceRecord({ gold: new Big('123') }),
       initial: new ResourceRecord({ gold: new Big('1000') }),
     },
     getModel: () => markRaw(Windmill),
