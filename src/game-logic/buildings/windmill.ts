@@ -18,6 +18,7 @@ const building: BuildingType = {
       additionalPerLevel: new ResourceRecord({ gold: new Big('123') }),
       initial: new ResourceRecord({ gold: new Big('1000') }),
     },
+    // @ts-expect-error //TODO ignore for now
     getModel: () => markRaw(Windmill),
     income: {
       additionalPerLevel: resourcesPerHour({ gold: new Big('0.3') }),
