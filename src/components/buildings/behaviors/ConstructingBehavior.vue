@@ -27,14 +27,14 @@ watch(currentTime, (time, prev) => {
       state: 'in-construction',
       type: props.buildingType,
     }
+    return
   }
-  else {
-    buildings.value[props.areaId] = {
-      internalBuffer: new ResourceRecord(),
-      level: 1,
-      state: 'producing',
-      type: props.buildingType,
-    }
+
+  buildings.value[props.areaId] = {
+    internalBuffer: new ResourceRecord(),
+    level: 1,
+    state: 'producing',
+    type: props.buildingType,
   }
 })
 </script>
