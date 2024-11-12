@@ -12,8 +12,7 @@ const props = defineProps<{
   buildingAreaId: BuildingAreaId
 }>()
 
-const gameState = useGameState()
-const { buildings, resources } = storeToRefs(gameState)
+const { buildings, resources } = storeToRefs(useGameState())
 
 // TODO: Put this into the game state.
 // TODO: Make this individual per building type.
@@ -56,17 +55,15 @@ const canBuild = computed(() => {
 })
 
 function build() {
-  gameState.$patch((state) => {
-    state.buildings[props.buildingAreaId] = {
-      durationRemaining: buildingDuration.value,
-      initialDuration: buildingDuration.value,
-      level: 0,
-      state: 'in-construction',
-      type: props.buildingType,
-    }
+  buildings.value[props.buildingAreaId] = {
+    durationRemaining: buildingDuration.value,
+    initialDuration: buildingDuration.value,
+    level: 0,
+    state: 'in-construction',
+    type: props.buildingType,
+  }
 
-    state.resources = state.resources.minus(costs.value)
-  })
+  resources.value = resources.value.minus(costs.value)
 }
 </script>
 
@@ -85,7 +82,9 @@ function build() {
       {{ props.buildingType.name }}
     </p>
 
-    <!-- TODO: Add building type descriptions and display them here. -->
+    <p class="ml-4 mb-2">
+      {{ props.buildingType.description }}
+    </p>
 
     <div>
       <p class="font-semibold">

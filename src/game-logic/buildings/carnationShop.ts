@@ -7,11 +7,12 @@ import { markRaw } from 'vue'
 import type { BuildingType } from '@/game-logic/types.js'
 
 const building: BuildingType = {
+  description: 'Selling flowers can make a great income',
   id: 'carnationShop',
   levelProgression: new LinearLevelProgression({
     buildingDuration: {
-      additionalPerLevel: Duration.fromHours(new Big('10')),
-      initial: Duration.fromHours(new Big('5')),
+      additionalPerLevel: Duration.fromHours(new Big('2.5')),
+      initial: Duration.fromHours(new Big('10')),
     },
     costs: {
       additionalPerLevel: new ResourceRecord({ gold: new Big('20') }),
@@ -20,10 +21,10 @@ const building: BuildingType = {
     getModel: () => markRaw(CarnationShop),
     income: {
       additionalPerLevel: resourcesPerHour({ gold: new Big('0.2') }),
-      initial: resourcesPerHour({ gold: new Big('0.4') }),
+      initial: resourcesPerHour({ gold: new Big('0.55') }),
     },
   }),
-  maxInstances: 4,
+  maxInstances: 7,
   name: 'Carnation Shop',
 }
 

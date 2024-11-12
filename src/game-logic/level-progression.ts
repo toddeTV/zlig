@@ -174,7 +174,7 @@ export class LinearLevelProgression extends LevelProgression {
   }
 
   protected doGetBaseCostsForLevel(level: number): ResourceRecord {
-    return this.costs.initial.plus(this.costs.additionalPerLevel.times(level))
+    return this.costs.initial.plus(this.costs.additionalPerLevel.times(level - 1))
   }
 
   protected doGetBaseBuildingDurationForLevel(level: number): Duration {

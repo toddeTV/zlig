@@ -14,8 +14,7 @@ const props = defineProps<{
   buildingState: BuildingStateProducing
 }>()
 
-const gameState = useGameState()
-const { resources } = storeToRefs(gameState)
+const { buildings, resources } = storeToRefs(useGameState())
 
 // TODO: Put this into the game state.
 // TODO: Make this individual per building type.
@@ -62,35 +61,33 @@ const canUpgrade = computed(() => {
 })
 
 function upgradeBuilding() {
-  gameState.$patch((state) => {
-    state.buildings[props.buildingAreaId] = {
-      durationRemaining: upgradeBuildingDuration.value,
-      initialDuration: upgradeBuildingDuration.value,
-      level: props.buildingState.level,
-      state: 'upgrading',
-      type: props.buildingType,
-    }
+  buildings.value[props.buildingAreaId] = {
+    durationRemaining: upgradeBuildingDuration.value,
+    initialDuration: upgradeBuildingDuration.value,
+    level: props.buildingState.level,
+    state: 'upgrading',
+    type: props.buildingType,
+  }
 
-    state.resources = state.resources.minus(upgradeCosts.value)
-  })
+  resources.value = resources.value.minus(upgradeCosts.value)
 }
 
 function destroyBuilding() {
   // TODO: Determine the refunds.
 
-  gameState.$patch((state) => {
-    state.buildings[props.buildingAreaId] = undefined
-  })
+  buildings.value[props.buildingAreaId] = undefined
 }
 </script>
 
 <template>
-  <h3 class="font-semibold mb-4">
+  <h3 class="font-semibold mb-2">
     <span class="text-xl">{{ props.buildingType.name }}</span>
     <span> (Level {{ props.buildingState.level }})</span>
   </h3>
 
-  <!-- TODO: Add building type descriptions and display them here. -->
+  <p class="ml-4 mb-6">
+    {{ props.buildingType.description }}
+  </p>
 
   <div class="mb-4">
     <p class="font-semibold">

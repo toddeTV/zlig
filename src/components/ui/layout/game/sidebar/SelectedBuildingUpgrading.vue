@@ -2,6 +2,7 @@
 import ProgressBar from '@/components/ui/ProgressBar.vue'
 import useGameState from '@/composables/useGameState.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
+import { storeToRefs } from 'pinia'
 import type { BuildingAreaId, BuildingStateUpgrading, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
@@ -10,27 +11,30 @@ const props = defineProps<{
   buildingState: BuildingStateUpgrading
 }>()
 
-const gameState = useGameState()
+const { buildings } = storeToRefs(useGameState())
 
 function cancelUpgrade() {
   // TODO: Determine the refunds.
 
-  gameState.$patch((state) => {
-    state.buildings[props.buildingAreaId] = {
-      internalBuffer: new ResourceRecord(),
-      level: props.buildingState.level,
-      state: 'producing',
-      type: props.buildingType,
-    }
-  })
+  buildings.value[props.buildingAreaId] = {
+    internalBuffer: new ResourceRecord(),
+    level: props.buildingState.level,
+    state: 'producing',
+    type: props.buildingType,
+  }
 }
 </script>
 
 <template>
-  <h3 class="font-semibold mb-4">
+  <h3 class="font-semibold mb-2">
     <span class="text-xl">{{ props.buildingType.name }}</span>
     <span> (Level {{ props.buildingState.level }})</span>
   </h3>
+
+  <p class="ml-4 mb-6">
+    {{ props.buildingType.description }}
+  </p>
+
   <p>
     This building is currently being upgraded to level <b>{{ props.buildingState.level + 1 }}</b>.
     Finished in: <b>{{ props.buildingState.durationRemaining.format() }}</b>

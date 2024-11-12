@@ -13,7 +13,7 @@ const props = defineProps<{
   state: BuildingStateProducing
 }>()
 
-const gameState = useGameState()
+const { buildings, resources } = storeToRefs(useGameState())
 
 // TODO: Put this into the game state.
 // TODO: Make this individual per building type.
@@ -41,16 +41,14 @@ watch(currentTime, (time, prev) => {
   const produced = buffer.roundDown()
   buffer = buffer.minus(produced)
 
-  gameState.$patch((state) => {
-    state.resources = state.resources.plus(produced)
+  resources.value = resources.value.plus(produced)
 
-    state.buildings[props.areaId] = {
-      internalBuffer: buffer,
-      level: props.state.level,
-      state: 'producing',
-      type: props.buildingType,
-    }
-  })
+  buildings.value[props.areaId] = {
+    internalBuffer: buffer,
+    level: props.state.level,
+    state: 'producing',
+    type: props.buildingType,
+  }
 })
 </script>
 
