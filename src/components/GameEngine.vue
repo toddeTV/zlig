@@ -39,8 +39,8 @@ if (isParamPresent('world') || isParamPresent('camera') || isParamPresent('light
 }
 
 if (isParamPresent('lights')) {
-  const directionalLight = new DirectionalLight(0xFFFFFF, 1.2)
-  directionalLight.position.set(-3, 3, 5)
+  const directionalLight = new DirectionalLight(0xFFFFFF, 0)
+  directionalLight.position.set(-0.5, 3, 5)
   directionalLight.castShadow = true
 
   // directionalLight.shadow.mapSize.width = 1024 * 1 // more beautiful, but performance heavier
@@ -69,6 +69,22 @@ if (isParamPresent('lights')) {
   />
   <Lights />
   <DistanceFog />
+
+  <TresMesh v-if="isParamPresent('meshes')" :cast-shadow="isParamPresent('shadows')" :position="[0, 1, 0]">
+    <TresBoxGeometry :args="[2, 2, 2]" />
+    <!-- <TresMeshToonMaterial color="#ab2657" /> -->
+    <TresMeshNormalMaterial />
+  </TresMesh>
+
+  <TresMesh
+    v-if="isParamPresent('meshes')"
+    :position="[0, 0, 0]"
+    :receive-shadow="isParamPresent('shadows')"
+    :rotation="[-Math.PI / 2, 0, 0]"
+  >
+    <TresPlaneGeometry :args="[10, 10, 1]" />
+    <TresMeshToonMaterial color="#fefefe" />
+  </TresMesh>
 
   <TresGroup
     name="sceneGroup"
