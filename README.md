@@ -27,7 +27,7 @@ Current deployment on:
 
 #### VM ID
 
-Development VM ID from Thorsten Seyschab for this project: `014`<br>
+Development VM ID from Thorsten for this project: `014`<br>
 (Only interesting to him.)
 
 #### system requirements for developing
@@ -298,14 +298,18 @@ Building, deploying and hosting is done via [Vercel](https://vercel.com/toddetv-
 
 ## Attribution/ Contribution
 
-Head of project:
+Project founder & head of project:
 
 - [Thorsten Seyschab](https://todde.tv)
 
-Honorable mentions to people and projects that helped this project:
+Honorable mentions to people that helped this project:
 
 - [Andreas Fehn](https://github.com/fehnomenal) helped with the project. Thank you <3
 - [Moritz Starke](https://github.com/Myzios) helped with general 3D and Blender questions. Thanks mate <3
+
+Respectable mentions to projects that helped this project:
+
+- \[currently none\]
 
 Used programs/ softwares, services and dependencies - besides the ones in `./package.json`:
 
@@ -320,6 +324,16 @@ Used assets/ materials including images and 3D models:
 
 ## License
 
-Private, only for Thorsten Seyschab.<br>
-For more information see [LICENSE](./LICENSE) file.<br>
 Copyright (c) 2024-present, [Thorsten Seyschab](https://todde.tv)
+
+This project, including original code and models, is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)). Under this license, others are allowed to remix, adapt, and build upon this work non-commercially, provided they credit the project founder and license any derivative works under the same terms.
+
+Please note that this license applies only to the original content authored by the project’s creators. Third-party libraries, assets, 3D models, and other materials utilized in this project are listed under "Attribution/ Contribution" above and remain the property of their original creators, licensed under their respective terms.
+
+The project founder reserves the right to modify the terms of this license or to offer different licensing arrangements for specific use cases.
+
+For the full license text, please see the [LICENSE](./LICENSE) file.
+
+### Need a Different License?
+
+If you are interested in discussing a different licensing arrangement for individual use cases, please feel free to reach out. Custom licensing may be available, but it is not guaranteed.
