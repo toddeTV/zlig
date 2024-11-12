@@ -8,9 +8,10 @@ import type { Euler, Group, Vector3 } from 'three'
 
 const props = defineProps<{
   buildingAreaId: BuildingAreaId
-  buildingInstance: BuildingInstance
+  buildingInstance?: BuildingInstance
   position: Vector3
   rotation: Euler
+  noAnimation?: boolean
 }>()
 
 const buildingInstance = toRef(props, 'buildingInstance')
@@ -33,14 +34,17 @@ watch(groupWrapperRef, (newValue) => {
 
 watch(buildingInstance, (newValue) => {
   // scale size infinitely linearly
-  building.scale.setScalar(1 + 0.1 * newValue.level)
+  building.scale.setScalar(1)
+  if (newValue) {
+    building.scale.setScalar(1 + 0.1 * newValue.level)
+  }
 })
 
 // animate the windmill
 // watch(currentTime, (time, prev) => { // relate to in-game time
 //   const deltaMs = time.getTime() - prev.getTime()
 onBeforeRender(({ elapsed }) => { // relate on renderer
-  if (!groupWrapperRef.value) {
+  if (!groupWrapperRef.value || props.noAnimation === true) {
     return
   }
   // TODO do not use string in `getObjectByName` bc string will not throw error on build time

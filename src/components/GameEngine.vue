@@ -3,6 +3,7 @@ import BuildingArea from '@/components/buildings/BuildingArea.vue'
 import CameraAndControls from '@/components/CameraAndControls.vue'
 import DistanceFog from '@/components/DistanceFog.vue'
 import Lights from '@/components/Lights.vue'
+import Windmill from '@/components/models/buildings/Windmill.vue'
 import Island from '@/components/models/Island.vue'
 import Ocean from '@/components/models/Ocean.vue'
 import Waterfall from '@/components/models/Waterfall.vue'
@@ -13,7 +14,7 @@ import useGetParam from '@/composables/useGetParam'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { useLoop, useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
-import { CameraHelper, DirectionalLight } from 'three'
+import { CameraHelper, DirectionalLight, Euler, Vector3 } from 'three'
 import { ref } from 'vue'
 
 const { onBeforeRender } = useLoop()
@@ -60,6 +61,12 @@ if (isParamPresent('lights')) {
   scene.value.add(directionalLight)
   scene.value.add(directionalLightHelper)
 }
+
+const windmillPosition = new Vector3(0, 0, 0)
+const windmillRotation = new Euler(0, 0, 0)
+
+// if (isParamPresent('models')) {
+// }
 </script>
 
 <template>
@@ -70,14 +77,18 @@ if (isParamPresent('lights')) {
   <Lights />
   <DistanceFog />
 
-  <TresMesh v-if="isParamPresent('meshes')" :cast-shadow="isParamPresent('shadows')" :position="[0, 1, 0]">
+  <TresMesh
+    v-if="isParamPresent('meshes') && !isParamPresent('models')"
+    :cast-shadow="isParamPresent('shadows')"
+    :position="[0, 1, 0]"
+  >
     <TresBoxGeometry :args="[2, 2, 2]" />
     <!-- <TresMeshToonMaterial color="#ab2657" /> -->
     <TresMeshNormalMaterial />
   </TresMesh>
 
   <TresMesh
-    v-if="isParamPresent('meshes')"
+    v-if="isParamPresent('meshes') && !isParamPresent('models')"
     :position="[0, 0, 0]"
     :receive-shadow="isParamPresent('shadows')"
     :rotation="[-Math.PI / 2, 0, 0]"
@@ -85,6 +96,18 @@ if (isParamPresent('lights')) {
     <TresPlaneGeometry :args="[10, 10, 1]" />
     <TresMeshToonMaterial color="#fefefe" />
   </TresMesh>
+
+  <Suspense
+    v-if="isParamPresent('models')"
+  >
+    <Windmill
+      building-area-id=""
+      :building-instance="undefined"
+      :no-animation="!isParamPresent('animations')"
+      :position="windmillPosition"
+      :rotation="windmillRotation"
+    />
+  </Suspense>
 
   <TresGroup
     name="sceneGroup"
