@@ -28,11 +28,11 @@ selectedBuildingArea.$subscribe((_, newId) => {
 
 <template>
   <div class="flex flex-col flex-grow">
-    <TopBar v-if="!isParamPresent('world') && !isParamPresent('camera') && !isParamPresent('lights')" />
+    <TopBar v-if="!isParamPresent('world')" />
 
     <div class="relative flex flex-grow">
       <span
-        v-if="!isParamPresent('world') && !isParamPresent('camera') && !isParamPresent('lights')"
+        v-if="!isParamPresent('world')"
         class="
           md:hidden
           absolute left-0 top-[7.5%] transition-[left]
@@ -46,7 +46,7 @@ selectedBuildingArea.$subscribe((_, newId) => {
       </span>
 
       <div
-        v-if="!isParamPresent('world') && !isParamPresent('camera') && !isParamPresent('lights')"
+        v-if="!isParamPresent('world')"
         class="
           max-h-screen
           absolute md:relative md:left-0 right-0 top-0 bottom-0
@@ -60,7 +60,7 @@ selectedBuildingArea.$subscribe((_, newId) => {
       </div>
 
       <span
-        v-if="!isParamPresent('world') && !isParamPresent('camera') && !isParamPresent('lights')"
+        v-if="!isParamPresent('world')"
         class="
           absolute left-0 right-0 top-0 bottom-0 md:hidden
           opacity-0 pointer-events-none

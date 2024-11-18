@@ -67,7 +67,7 @@ watch(cameraControlsRef, (newValue) => {
     return
   }
 
-  if (isParamPresent('world') || isParamPresent('camera') || isParamPresent('lights')) {
+  if (isParamPresent('world')) {
     newValue.instance.setPosition(10, 10, 10)
   }
   else {
@@ -105,7 +105,7 @@ watch(showCameraHelper, (newValue) => {
   immediate: true,
 })
 
-if (isParamPresent('camera') || isParamPresent('lights')) {
+if (isParamPresent('camera')) {
   perspectiveCameraHelper.value = perspectiveCamera.clone()
   perspectiveCameraHelper.value.far = 1000
   const cameraStartingPositionHelp = new Vector3(-5, 2, 2)

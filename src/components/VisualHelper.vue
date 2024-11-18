@@ -9,12 +9,10 @@ const { isParamPresent } = useGetParam()
 
 <template>
   <TresAxesHelper
-    v-if="showVisualHelper
-      || isParamPresent('world') || isParamPresent('camera') || isParamPresent('lights')"
+    v-if="showVisualHelper || isParamPresent('world')"
   />
   <TresGridHelper
-    v-if="showVisualHelper
-      || isParamPresent('world') || isParamPresent('camera') || isParamPresent('lights')"
+    v-if="showVisualHelper || isParamPresent('world')"
   />
 </template>
 

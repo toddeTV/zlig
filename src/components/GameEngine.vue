@@ -34,7 +34,7 @@ const selectedBuildingArea = useSelectedBuildingArea()
 
 const cameraMoved = ref(false)
 
-if (isParamPresent('world') || isParamPresent('camera') || isParamPresent('lights')) {
+if (isParamPresent('world')) {
   gameTime.currentFactor = 0
   gameTime.currentTime.setHours(3)
 }
@@ -118,11 +118,11 @@ const windmillRotation = new Euler(0, 0, 0)
     }"
     @pointer-down="() => cameraMoved = false"
   >
-    <Suspense v-if="!isParamPresent('world') && !isParamPresent('camera') && !isParamPresent('lights')">
+    <Suspense v-if="!isParamPresent('world')">
       <Island />
     </Suspense>
 
-    <Suspense v-if="!isParamPresent('world') && !isParamPresent('camera') && !isParamPresent('lights')">
+    <Suspense v-if="!isParamPresent('world')">
       <BuildingArea
         v-for="area in areas"
         :id="area.id"
@@ -132,13 +132,13 @@ const windmillRotation = new Euler(0, 0, 0)
       />
     </Suspense>
 
-    <Suspense v-if="!isParamPresent('world') && !isParamPresent('camera') && !isParamPresent('lights')">
+    <Suspense v-if="!isParamPresent('world')">
       <Ocean
         :position="[0, 0, 0]"
       />
     </Suspense>
 
-    <Suspense v-if="!isParamPresent('world') && !isParamPresent('camera') && !isParamPresent('lights')">
+    <Suspense v-if="!isParamPresent('world')">
       <Waterfall
         :position="[0, 0, 0]"
       />
