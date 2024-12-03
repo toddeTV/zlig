@@ -3,6 +3,10 @@ import type { ResourceRecord, ResourcesPerMillisecond } from '@/game-logic/resou
 import type { BuildingModel } from '@/game-logic/types.js'
 import type { Duration } from '@/utils/duration.js'
 
+/**
+ * This type of building level progression accepts arbitrary functions to perform calculations and serves as an
+ * alternative to traditional sub-classing.
+ */
 export class CalculatingLevelProgression extends LevelProgression {
   constructor({ costs, duration, income, maxLevel, model }: {
     costs: typeof LevelProgression.prototype['doGetBaseCostsForLevel']
