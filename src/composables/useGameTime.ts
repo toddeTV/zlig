@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, readonly, ref } from 'vue'
+import { computed, onUnmounted, readonly, ref } from 'vue'
 
 // One second in real time are 15 minutes in game time.
 export const GAME_TIME_FACTOR_REGULAR = 60 * 15
@@ -20,15 +20,30 @@ export default defineStore('gameTime', () => {
 
   const currentFactor = ref(GAME_TIME_FACTOR_REGULAR)
 
+  const listeners = new Set<(deltaGameSeconds: number) => void>()
+
   function tick(deltaSeconds: number) {
     const gameTimeSecondsPassed = deltaSeconds * currentFactor.value
 
-    currentMilliseconds.value += gameTimeSecondsPassed * 1000
+    if (gameTimeSecondsPassed) {
+      currentMilliseconds.value += gameTimeSecondsPassed * 1000
+
+      listeners.forEach(cb => cb(gameTimeSecondsPassed))
+    }
+  }
+
+  function onTick(callback: (deltaGameSeconds: number) => void) {
+    listeners.add(callback)
+
+    onUnmounted(() => {
+      listeners.delete(callback)
+    })
   }
 
   return {
     currentFactor,
     currentTime: readonly(currentTime),
+    onTick,
     tick,
   }
 })
