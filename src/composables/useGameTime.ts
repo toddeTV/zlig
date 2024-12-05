@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { mapLinear } from 'three/src/math/MathUtils.js'
 import { computed, onUnmounted, readonly, ref } from 'vue'
 
 // One second in real time are 15 minutes in game time.
@@ -20,7 +21,7 @@ export default defineStore('gameTime', () => {
 
   const currentFactor = ref(GAME_TIME_FACTOR_REGULAR)
 
-  const listeners = new Set<(deltaGameSeconds: number) => void>()
+  const listeners = new Set<OnTickFn>()
 
   function tick(deltaSeconds: number) {
     const gameTimeSecondsPassed = deltaSeconds * currentFactor.value
@@ -28,11 +29,19 @@ export default defineStore('gameTime', () => {
     if (gameTimeSecondsPassed) {
       currentMilliseconds.value += gameTimeSecondsPassed * 1000
 
-      listeners.forEach(cb => cb(gameTimeSecondsPassed))
+      const divisor = mapLinear(gameTimeSecondsPassed, 0, 100, 1, 4)
+
+      const args: OnTickFnArgs = {
+        ambientAnimationDelta: gameTimeSecondsPassed / 1000 / divisor,
+        deltaGameSeconds: gameTimeSecondsPassed,
+        gameTime: currentTime.value,
+      }
+
+      listeners.forEach(cb => cb(args))
     }
   }
 
-  function onTick(callback: (deltaGameSeconds: number) => void) {
+  function onTick(callback: OnTickFn) {
     listeners.add(callback)
 
     onUnmounted(() => {
@@ -47,3 +56,11 @@ export default defineStore('gameTime', () => {
     tick,
   }
 })
+
+interface OnTickFnArgs {
+  deltaGameSeconds: number
+  gameTime: Date
+  ambientAnimationDelta: number
+}
+
+type OnTickFn = (args: OnTickFnArgs) => void
