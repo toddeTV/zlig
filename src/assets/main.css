@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  @apply h-screen
+}
 body {
-  @apply flex flex-col h-screen overflow-y-scroll;
+  @apply flex flex-col;
 }
 
 #app {

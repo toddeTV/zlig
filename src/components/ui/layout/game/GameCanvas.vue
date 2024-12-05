@@ -32,17 +32,12 @@ watchEffect(() => {
 
 <!-- @pointer-missed="() => firePointerMissedEvent()" -->
 <template>
-  <div
-    class="w-full h-full flex-1 relative"
+  <!-- will create the dom `canvas` -->
+  <TresCanvas
+    v-bind="gl"
   >
-    <!-- will create the dom `canvas` -->
-    <TresCanvas
-      v-bind="gl"
-      class="absolute inset-0"
-    >
-      <GameEngine />
-    </TresCanvas>
-  </div>
+    <GameEngine />
+  </TresCanvas>
 </template>
 
 <style scoped>
