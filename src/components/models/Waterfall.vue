@@ -28,8 +28,8 @@ const waterMaterialDown = getWaterMaterial({
 })
 
 onTick(({ ambientAnimationDelta }) => {
-  waterMaterial.userData.shader.uniforms.time.value += ambientAnimationDelta
-  waterMaterialDown.userData.shader.uniforms.time.value += ambientAnimationDelta
+  waterMaterial.uniforms.time.value += ambientAnimationDelta
+  waterMaterialDown.uniforms.time.value += ambientAnimationDelta
 })
 
 watch(showWaterWireframe, () => {
