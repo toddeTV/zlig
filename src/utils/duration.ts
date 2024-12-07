@@ -7,8 +7,10 @@ export class Duration {
     return new this(new Big(end.getTime() - start.getTime()))
   }
 
-  static fromSeconds(seconds: Big): Duration {
-    return new this(seconds.times(1000))
+  static fromSeconds(seconds: number): Duration
+  static fromSeconds(seconds: Big): Duration
+  static fromSeconds(seconds: number | Big): Duration {
+    return new this((typeof seconds === 'number' ? new Big(seconds) : seconds).times(1000))
   }
 
   static fromMinutes(minutes: Big): Duration {
