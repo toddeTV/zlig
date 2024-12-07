@@ -59,7 +59,9 @@ selectedBuildingArea.$subscribe((_, newId) => {
       @click="toggleSidebar"
     />
 
-    <GameCanvas />
+    <div class="flex-1 relative">
+      <GameCanvas />
+    </div>
   </div>
 </template>
 
