@@ -39,16 +39,16 @@ const cameraControlsProps: CameraControlsProps = {
   maxPolarAngle: Math.PI * 0.45,
 
   mouseButtons: {
-    left: 1, // = rotate
-    middle: 0, // = none
-    right: 2, // = truck
-    wheel: 8, // = dolly
+    left: BaseCameraControls.ACTION.ROTATE,
+    middle: BaseCameraControls.ACTION.NONE,
+    right: BaseCameraControls.ACTION.TRUCK,
+    wheel: BaseCameraControls.ACTION.DOLLY,
   },
 
   touches: {
-    one: 0, // = none
-    two: 1024, // = TOUCH_DOLLY_TRUCK
-    three: 0, // = none
+    one: BaseCameraControls.ACTION.TOUCH_ROTATE,
+    two: BaseCameraControls.ACTION.TOUCH_DOLLY_TRUCK,
+    three: BaseCameraControls.ACTION.NONE,
   },
 }
 /* eslint-enable */
