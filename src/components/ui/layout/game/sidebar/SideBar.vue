@@ -18,14 +18,14 @@ const hasDebug = ref(true)
 </script>
 
 <template>
-  <div class="bg-white h-full flex flex-col gap-1">
-    <div v-if="!selectedBuildingArea.id" class="flex-grow flex flex-col p-3 items-center justify-center">
+  <div class="bg-white min-h-0 flex flex-1 flex-col gap-1">
+    <div v-if="!selectedBuildingArea.id" class="flex flex-1 flex-col p-3 items-center justify-center">
       <p class="text-gray-400">
         Please select a building or building area...
       </p>
     </div>
 
-    <div v-else class="flex-grow p-3">
+    <div v-else class="flex-grow overflow-y-auto p-3">
       <SelectedBuildingInConstruction
         v-if="selectedBuildingInstance?.state === 'in-construction'"
         :building-area-id="selectedBuildingArea.id"
