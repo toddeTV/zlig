@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@9.10.0",
+  "packageManager": "pnpm@10.0.0",
   "description": "",
   "author": "Thorsten Seyschab <business@todde.tv> (https://todde.tv/)",
   "contributors": [
@@ -27,8 +27,8 @@
     "url": "https://github.com/toddeTV/zlig/issues"
   },
   "engines": {
-    "node": "20",
-    "pnpm": "9"
+    "node": "22",
+    "pnpm": "10"
   },
   "scripts": {
     "dev": "vite --port 3000",

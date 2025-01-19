@@ -38,13 +38,13 @@ The following softwares are required for development:<br>
 | software | command for version output                | my version at last use | information          |
 | -------- | ----------------------------------------- | ---------------------- | -------------------- |
 | Ubuntu   | `lsb_release -a` or `cat /etc/os-release` | 22.04.4 LTS            | OS                   |
-| Linux    | `uname -r`                                | 5.15.0-119-generic     | Linux Kernel         |
+| Linux    | `uname -r`                                | 5.15.0-125-generic     | Linux Kernel         |
 | VSCode   | `code -v`                                 | 1.93.2                 | IDE                  |
-| nvm      | `nvm -v`                                  | v0.39.7                | Node Version Manager |
-| Node     | `node -v` (old `nodejs --version`)        | v20.16.0               | NodeJS/ Node.js      |
-| npm      | `npm -v`                                  | v10.8.1                |                      |
-| npx      | `npx -v`                                  | v10.8.1                |                      |
-| pnpm     | `pnpm -v`                                 | v9.10.0                |                      |
+| nvm      | `nvm -v`                                  | v0.40.1                | Node Version Manager |
+| Node     | `node -v` (old `nodejs --version`)        | v22.13.0               | NodeJS/ Node.js      |
+| npm      | `npm -v`                                  | v10.9.2                |                      |
+| npx      | `npx -v`                                  | v10.9.2                |                      |
+| pnpm     | `pnpm -v`                                 | v10.0.0                |                      |
 
 In the browser install:
 
