@@ -315,6 +315,7 @@ Used programs/ softwares, services and dependencies - besides the ones in `./pac
 
 - [GitHub Copilot](https://github.com/features/copilot) was used in private mode for programming questions.
 - [Blender](https://www.blender.org/) was used as software for creating and editing 3D models.
+- [ChatGPT](https://chatgpt.com/) used for DALL-E image generation, text based questions and programming code generation.
 
 Used assets/ materials including images and 3D models:
 
