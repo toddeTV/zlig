@@ -3,17 +3,24 @@ import GameCanvas from '@/components/ui/layout/game/GameCanvas.vue'
 import SideBar from '@/components/ui/layout/game/sidebar/SideBar.vue'
 import TopBar from '@/components/ui/layout/game/topbar/TopBar.vue'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
-import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { ref, watchEffect } from 'vue'
 
+const { id: selectedBuildingAreaId } = storeToRefs(useSelectedBuildingArea())
 const sidebarOpen = ref(false)
+
 function toggleSidebar() {
-  sidebarOpen.value = !sidebarOpen.value
+  if (sidebarOpen.value) {
+    sidebarOpen.value = false
+    selectedBuildingAreaId.value = null
+  }
+  else {
+    sidebarOpen.value = true
+  }
 }
 
-const selectedBuildingArea = useSelectedBuildingArea()
-selectedBuildingArea.$subscribe((_, newId) => {
-  if (newId) {
-    // The user selected a building area.
+watchEffect(() => {
+  if (selectedBuildingAreaId.value) {
     sidebarOpen.value = true
   }
 })

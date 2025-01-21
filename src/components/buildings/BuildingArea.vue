@@ -58,7 +58,7 @@ const positionsSiftedSlightlyUpwards = computed(() => {
 
   <TresGroup
     :name="`building-area-${props.id}`"
-    @click="(e: TresJsClickEvent) => onClick(e)"
+    @pointer-up="(e: TresJsClickEvent) => onClick(e)"
   >
     <component
       :is="buildingInstance.type.levelProgression.getModelForLevel(buildingInstance.level)"
