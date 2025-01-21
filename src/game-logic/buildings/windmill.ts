@@ -1,5 +1,5 @@
 import Windmill from '@/components/models/buildings/Windmill.vue'
-import { LinearLevelProgression } from '@/game-logic/level-progression.js'
+import { LinearLevelProgression } from '@/game-logic/level-progression/linear-progression.js'
 import { ResourceRecord, resourcesPerHour } from '@/game-logic/resources.js'
 import { Duration } from '@/utils/duration.js'
 import Big from 'big.js'
