@@ -90,12 +90,15 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      unplugin-gltf:
+        specifier: '*'
+        version: link:../gltf-vite-plugin
       vite:
         specifier: 5.4.4
         version: 5.4.4(@types/node@20.16.5)
       vite-plugin-vue-devtools:
         specifier: 7.4.5
-        version: 7.4.5(rollup@4.21.1)(vite@5.4.4(@types/node@20.16.5))(vue@3.5.4(typescript@5.5.4))
+        version: 7.4.5(vite@5.4.4(@types/node@20.16.5))(vue@3.5.4(typescript@5.5.4))
       vue-router:
         specifier: 4.4.4
         version: 4.4.4(vue@3.5.4(typescript@5.5.4))
@@ -3511,13 +3514,11 @@ snapshots:
 
   '@polka/url@1.0.0-next.25': {}
 
-  '@rollup/pluginutils@5.1.0(rollup@4.21.1)':
+  '@rollup/pluginutils@5.1.0':
     dependencies:
       '@types/estree': 1.0.5
       estree-walker: 2.0.2
       picomatch: 2.3.1
-    optionalDependencies:
-      rollup: 4.21.1
 
   '@rollup/rollup-android-arm-eabi@4.21.1':
     optional: true
@@ -5896,10 +5897,10 @@ snapshots:
     dependencies:
       vite: 5.4.4(@types/node@20.16.5)
 
-  vite-plugin-inspect@0.8.7(rollup@4.21.1)(vite@5.4.4(@types/node@20.16.5)):
+  vite-plugin-inspect@0.8.7(vite@5.4.4(@types/node@20.16.5)):
     dependencies:
       '@antfu/utils': 0.7.10
-      '@rollup/pluginutils': 5.1.0(rollup@4.21.1)
+      '@rollup/pluginutils': 5.1.0
       debug: 4.3.6
       error-stack-parser-es: 0.1.5
       fs-extra: 11.2.0
@@ -5912,7 +5913,7 @@ snapshots:
       - rollup
       - supports-color
 
-  vite-plugin-vue-devtools@7.4.5(rollup@4.21.1)(vite@5.4.4(@types/node@20.16.5))(vue@3.5.4(typescript@5.5.4)):
+  vite-plugin-vue-devtools@7.4.5(vite@5.4.4(@types/node@20.16.5))(vue@3.5.4(typescript@5.5.4)):
     dependencies:
       '@vue/devtools-core': 7.4.5(vite@5.4.4(@types/node@20.16.5))(vue@3.5.4(typescript@5.5.4))
       '@vue/devtools-kit': 7.4.5
@@ -5920,7 +5921,7 @@ snapshots:
       execa: 8.0.1
       sirv: 2.0.4
       vite: 5.4.4(@types/node@20.16.5)
-      vite-plugin-inspect: 0.8.7(rollup@4.21.1)(vite@5.4.4(@types/node@20.16.5))
+      vite-plugin-inspect: 0.8.7(vite@5.4.4(@types/node@20.16.5))
       vite-plugin-vue-inspector: 5.2.0(vite@5.4.4(@types/node@20.16.5))
     transitivePeerDependencies:
       - '@nuxt/kit'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import modelLoader from '@/assets/models/_Buildings/CarnationShop/CarnationShop.gltf'
+import { CarnationShopScene, getNode } from '@/assets/models/_Buildings/CarnationShop/CarnationShop.gltf.js'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper'
 import { shallowRef, toRef, watch } from 'vue'
 import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
@@ -14,11 +14,9 @@ const props = defineProps<{
 
 const buildingInstance = toRef(props, 'buildingInstance')
 
-const { scenes: { CarnationShop } } = await modelLoader
-
 const groupWrapperRef = shallowRef<Group>()
 
-const building = CarnationShop.Scene.clone()
+const building = (await getNode(CarnationShopScene)).clone()
 building.position.copy(props.position)
 building.rotation.copy(props.rotation)
 

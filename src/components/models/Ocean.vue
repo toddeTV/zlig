@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import modelLoader from '@/assets/models/Ocean/Ocean.gltf'
+import { getNode, OceanScene } from '@/assets/models/Ocean/Ocean.gltf.js'
 import useDebugStore from '@/composables/useDebugStore'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper'
 import { getWaterMaterial } from '@/utils/WaterShader'
@@ -7,7 +7,6 @@ import { useLoop } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { ref, shallowRef, watch } from 'vue'
 
-const { scenes } = await modelLoader
 const { onBeforeRender } = useLoop()
 const { showWaterWireframe } = storeToRefs(useDebugStore())
 
@@ -23,6 +22,9 @@ const waterMaterial = getWaterMaterial({
   waveSpeed: 1.0,
   waveTangentialAmplitude: 1.0,
 })
+
+const model = await getNode(OceanScene.ocean001)
+model.material = waterMaterial
 
 // Use the real game tick and not the `useGameTime` tick bc the ocean should always move with the same speed
 // and should not depend on the in game time/ speed.
@@ -47,8 +49,6 @@ watch(groupWrapperRef, (newValue) => {
   if (!newValue) {
     return
   }
-  const model = scenes.Ocean.Object.ocean001.clone()
-  model.material = waterMaterial
   addShadowAndAddToGroup(newValue, model, 'receive')
 })
 </script>

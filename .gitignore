@@ -21,3 +21,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Generated model files
+*.gltf.d.ts
+*.gltf.js
