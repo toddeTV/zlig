@@ -14,6 +14,7 @@ import { getLeafObjects } from '@/utils/threeHelper'
 import { useLoop, useTresContext } from '@tresjs/core'
 import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { storeToRefs } from 'pinia'
+import { BlendFunction } from 'postprocessing'
 import { computed, ref } from 'vue'
 
 const { scene } = useTresContext()
@@ -92,6 +93,8 @@ const cameraMoved = ref(false)
   <Suspense>
     <EffectComposerPmndrs>
       <OutlinePmndrs
+        :blend-function="BlendFunction.SCREEN"
+        :edge-glow="10"
         :edge-strength="50"
         :outlined-objects="outlinedObjects"
         :pattern-scale="50"
