@@ -1,100 +1,62 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Ocean/Ocean.gltf'
 import useDebugStore from '@/composables/useDebugStore'
-import { addShadow } from '@/utils/threeHelper'
-import { useLoop, useTresContext } from '@tresjs/core'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper'
+import { getWaterMaterial } from '@/utils/WaterShader'
+import { useLoop } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
-import { Mesh, PlaneGeometry, ShaderMaterial } from 'three'
-import { watch } from 'vue'
+import { ref, shallowRef, watch } from 'vue'
 
-const { scene } = useTresContext()
 const { scenes } = await modelLoader
 const { onBeforeRender } = useLoop()
-const { showWaterShader } = storeToRefs(useDebugStore())
+const { showWaterWireframe } = storeToRefs(useDebugStore())
 
-const sceneGroup = scene.value.getObjectByName('sceneGroup') ?? scene.value
-const oceanScene = scenes.Ocean
+const groupWrapperRef = shallowRef()
 
-addShadow(oceanScene.Object.ocean)
-
-const vertexShader = `
-varying vec3 vNormal;
-varying vec2 vUv;
-uniform float time;
-
-void main() {
-  // Animated wave movement
-  vec3 pos = position;
-  pos.z += sin(pos.x * 4.0 + time) * 0.1;
-  pos.z += sin(pos.y * 4.0 + time * 0.5) * 0.2;
-
-  // Use the normal vertex normal for lighting
-  vNormal = normal;
-
-  vUv = uv;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-}
-`
-
-const fragmentShader = `
-varying vec3 vNormal;
-varying vec2 vUv;
-
-void main() {
-  // Simple shading based on the normal direction
-  float light = dot(vNormal, vec3(0.0, 0.0, 1.0)) * 0.5 + 0.5;
-
-  // Water color (simple blue here)
-  vec3 waterColor = vec3(0.0, 0.5, 0.7);
-
-  // Calculate opacity based on a base opacity (0.6) and depth variation
-  float depthFactor = gl_FragCoord.z * 0.4; // adjusts the intensity of the effect
-  float opacity = 0.8 - depthFactor;
-
-  // Set color and opacity
-  gl_FragColor = vec4(waterColor * light, opacity);
-}
-`
-
-const uniforms = {
+const uniforms = ref({
   time: { value: 0.0 },
-}
-
-const waterMaterial = new ShaderMaterial({
-  fragmentShader,
-  transparent: true,
-  uniforms,
-  vertexShader,
-  wireframe: false,
 })
 
-const geometry = new PlaneGeometry(200, 200, 100, 100)
-const waterMesh = new Mesh(geometry, waterMaterial)
-waterMesh.rotation.x = -Math.PI / 2 // rotate the water
-addShadow(waterMesh, 'receive') // TODO fix bc this is not working
-// sceneGroup.add(waterMesh)
-// addShadowAndAddToGroup(sceneGroup, waterMesh)
-
-onBeforeRender(({ camera, renderer, scene }) => {
-  uniforms.time.value += 0.05
-  renderer.render(scene, camera)
+const waterMaterial = getWaterMaterial({
+  relativeHeightOffset: -0.68,
+  waveAmplitude: 2.0,
+  waveSpeed: 1.0,
+  waveTangentialAmplitude: 1.0,
 })
 
-watch(showWaterShader, () => {
-  sceneGroup.remove(oceanScene.Object.ocean)
-  sceneGroup.remove(waterMesh)
-  if (showWaterShader.value) {
-    sceneGroup.add(waterMesh)
+// Use the real game tick and not the `useGameTime` tick bc the ocean should always move with the same speed
+// and should not depend on the in game time/ speed.
+onBeforeRender(({ delta }) => {
+  if (groupWrapperRef.value.children.length === 0) {
     return
   }
-  sceneGroup.add(oceanScene.Object.ocean)
+  if (!groupWrapperRef.value.children[0].material.userData.shader) {
+    return
+  }
+  uniforms.value.time.value += delta
+  groupWrapperRef.value.children[0].material.userData.shader.uniforms.time = uniforms.value.time
+})
+
+watch(showWaterWireframe, () => {
+  waterMaterial.wireframe = showWaterWireframe.value
 }, {
   immediate: true,
 })
+
+watch(groupWrapperRef, (newValue) => {
+  if (!newValue) {
+    return
+  }
+  const model = scenes.Ocean.Object.ocean001.clone()
+  model.material = waterMaterial
+  addShadowAndAddToGroup(newValue, model, 'receive')
+})
 </script>
 
-<!-- eslint-disable-next-line vue/valid-template-root -->
 <template>
+  <TresGroup
+    ref="groupWrapperRef"
+  />
 </template>
 
 <style scoped>

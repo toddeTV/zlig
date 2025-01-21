@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import useGameState from '@/composables/useGameState.js'
+import useGameTime from '@/composables/useGameTime.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
-import { useLoop } from '@tresjs/core'
+import { Duration } from '@/utils/duration.js'
+import { storeToRefs } from 'pinia'
+import { watch } from 'vue'
 import type { BuildingAreaId, BuildingStateInConstruction, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
@@ -10,29 +13,28 @@ const props = defineProps<{
   state: BuildingStateInConstruction
 }>()
 
-const gameState = useGameState()
-const { onBeforeRender } = useLoop()
+const { buildings } = storeToRefs(useGameState())
+const { currentTime } = storeToRefs(useGameTime())
 
-onBeforeRender((event) => {
-  const { delta } = event
+watch(currentTime, (time, prev) => {
+  const durationRemaining = props.state.durationRemaining.minus(Duration.fromDates(prev, time))
 
-  const secondsRemaining = props.state.secondsRemaining.minus(delta)
-
-  if (secondsRemaining.gt(0)) {
-    gameState.buildings[props.areaId] = {
+  if (durationRemaining.milliseconds.gt(0)) {
+    buildings.value[props.areaId] = {
+      durationRemaining,
+      initialDuration: props.state.initialDuration,
       level: 0,
-      secondsRemaining,
       state: 'in-construction',
       type: props.buildingType,
     }
+    return
   }
-  else {
-    gameState.buildings[props.areaId] = {
-      internalBuffer: new ResourceRecord(),
-      level: 1,
-      state: 'producing',
-      type: props.buildingType,
-    }
+
+  buildings.value[props.areaId] = {
+    internalBuffer: new ResourceRecord(),
+    level: 1,
+    state: 'producing',
+    type: props.buildingType,
   }
 })
 </script>

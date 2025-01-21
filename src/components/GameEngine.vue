@@ -1,22 +1,30 @@
 <script setup lang="ts">
+import BuildingArea from '@/components/buildings/BuildingArea.vue'
+import CameraAndControls from '@/components/CameraAndControls.vue'
+import DistanceFog from '@/components/DistanceFog.vue'
+import Lights from '@/components/Lights.vue'
+import Island from '@/components/models/Island.vue'
+import Ocean from '@/components/models/Ocean.vue'
+import Waterfall from '@/components/models/Waterfall.vue'
+import VisualHelper from '@/components/VisualHelper.vue'
 import useBuildingAreas from '@/composables/useBuildingAreas.js'
-import useSelectedBuildingArea from '@/composables/useSelectedBuildingAreaStore.js'
+import useGameTime from '@/composables/useGameTime.js'
+import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { getLeafObjects } from '@/utils/threeHelper'
-import { useTresContext } from '@tresjs/core'
-import { EffectComposer, Outline } from '@tresjs/post-processing'
+import { useLoop, useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
-import BuildingArea from './buildings/BuildingArea.vue'
-import CameraAndControls from './CameraAndControls.vue'
-import DistanceFog from './DistanceFog.vue'
-import Lights from './Lights.vue'
-import Island from './models/Island.vue'
-import Ocean from './models/Ocean.vue'
-import VisualHelper from './VisualHelper.vue'
 
 const { scene } = useTresContext()
+const { onBeforeRender } = useLoop()
+const gameTime = useGameTime()
 const { areas } = storeToRefs(useBuildingAreas())
 const { init } = useBuildingAreas()
+
+onBeforeRender(({ delta }) => {
+  gameTime.tick(delta)
+})
+
 init()
 
 const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
@@ -69,6 +77,12 @@ const cameraMoved = ref(false)
 
     <Suspense>
       <Ocean
+        :position="[0, 0, 0]"
+      />
+    </Suspense>
+
+    <Suspense>
+      <Waterfall
         :position="[0, 0, 0]"
       />
     </Suspense>

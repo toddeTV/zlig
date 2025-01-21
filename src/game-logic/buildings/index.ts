@@ -1,5 +1,7 @@
-import testBuilding from '@/game-logic/buildings/testBuilding'
+import carnationShop from '@/game-logic/buildings/carnationShop'
+import windmill from '@/game-logic/buildings/windmill'
 
 export const buildingTypes = {
-  testBuilding,
+  carnationShop,
+  windmill,
 }
