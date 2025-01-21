@@ -67,6 +67,5 @@
   "typescript.preferences.renameMatchingJsxTags": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "volar.autoCompleteRefs": true,
-  "volar.completion.preferredTagNameCase": "pascal",
-  "window.zoomLevel": 0.05
+  "volar.completion.preferredTagNameCase": "pascal"
 }
