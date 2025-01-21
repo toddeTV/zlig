@@ -6,6 +6,7 @@ html,
 body {
   @apply h-screen;
 }
+
 body {
   @apply flex flex-col;
 }
