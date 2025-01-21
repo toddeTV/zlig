@@ -12,6 +12,7 @@ import useGameTime from '@/composables/useGameTime.js'
 import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
 import { getLeafObjects } from '@/utils/threeHelper'
 import { useLoop, useTresContext } from '@tresjs/core'
+import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 
@@ -89,13 +90,13 @@ const cameraMoved = ref(false)
   </TresGroup>
 
   <Suspense>
-    <EffectComposer>
-      <Outline
+    <EffectComposerPmndrs>
+      <OutlinePmndrs
         :edge-strength="50"
         :outlined-objects="outlinedObjects"
         :pattern-scale="50"
       />
-    </EffectComposer>
+    </EffectComposerPmndrs>
   </Suspense>
 </template>
 
