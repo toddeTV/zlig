@@ -87,9 +87,6 @@ importers:
       three:
         specifier: 0.168.0
         version: 0.168.0
-      tsx:
-        specifier: 4.19.1
-        version: 4.19.1
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -2917,11 +2914,6 @@ packages:
   tslib@2.7.0:
     resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
 
-  tsx@4.19.1:
-    resolution: {integrity: sha512-0flMz1lh74BR4wOvBjuh9olbnwqCPc35OOlfyzHba0Dc+QNUeWX/Gq2YTbnwcWPO3BMd8fkzRVrHcsR+a7z7rA==}
-    engines: {node: '>=18.0.0'}
-    hasBin: true
-
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
@@ -4663,6 +4655,7 @@ snapshots:
       '@esbuild/win32-arm64': 0.23.1
       '@esbuild/win32-ia32': 0.23.1
       '@esbuild/win32-x64': 0.23.1
+    optional: true
 
   escalade@3.1.2: {}
 
@@ -6142,13 +6135,6 @@ snapshots:
   ts-interface-checker@0.1.13: {}
 
   tslib@2.7.0: {}
-
-  tsx@4.19.1:
-    dependencies:
-      esbuild: 0.23.1
-      get-tsconfig: 4.7.6
-    optionalDependencies:
-      fsevents: 2.3.3
 
   type-check@0.4.0:
     dependencies:
