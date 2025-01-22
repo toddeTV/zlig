@@ -4,7 +4,7 @@ import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { storeToRefs } from 'pinia'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 import type { BuildingAreaId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
@@ -13,6 +13,7 @@ const props = defineProps<{
   state: BuildingStateProducing
 }>()
 
+const { onTick } = useGameTimeStore()
 const { buildings, resources } = storeToRefs(useGameStateStore())
 
 // TODO: Put this into the game state.
@@ -25,12 +26,8 @@ const currentIncome = computed(() => {
   return base.times(incomeModifier)
 })
 
-const { currentTime } = storeToRefs(useGameTimeStore())
-
-watch(currentTime, (time, prev) => {
-  const deltaMs = time.getTime() - prev.getTime()
-
-  const incomeThisTick = currentIncome.value.times(deltaMs)
+onTick(({ deltaGameSeconds }) => {
+  const incomeThisTick = currentIncome.value.times(deltaGameSeconds * 1000)
 
   // The internal buffer is this full now.
   let buffer = props.state.internalBuffer.plus(incomeThisTick)

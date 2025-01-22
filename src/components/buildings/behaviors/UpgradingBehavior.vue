@@ -4,7 +4,6 @@ import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 import { Duration } from '@/utils/duration.js'
 import { storeToRefs } from 'pinia'
-import { watch } from 'vue'
 import type { BuildingAreaId, BuildingStateUpgrading, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{
@@ -13,11 +12,11 @@ const props = defineProps<{
   state: BuildingStateUpgrading
 }>()
 
+const { onTick } = useGameTimeStore()
 const { buildings } = storeToRefs(useGameStateStore())
-const { currentTime } = storeToRefs(useGameTimeStore())
 
-watch(currentTime, (time, prev) => {
-  const durationRemaining = props.state.durationRemaining.minus(Duration.fromDates(prev, time))
+onTick(({ deltaGameSeconds }) => {
+  const durationRemaining = props.state.durationRemaining.minus(Duration.fromSeconds(deltaGameSeconds))
 
   if (durationRemaining.milliseconds.gt(0)) {
     buildings.value[props.areaId] = {
