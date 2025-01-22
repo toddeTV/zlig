@@ -1,10 +1,10 @@
-import useSunPosition from '@/composables/useSunPosition.js'
+import useSunPosition from '@/composables/useSunPositionStore.js'
 import { defineStore, storeToRefs } from 'pinia'
 import { Color } from 'three'
 import { lerp, smootherstep, smoothstep } from 'three/src/math/MathUtils.js'
 import { computed } from 'vue'
 
-export default defineStore('calculatedLights', () => {
+export default defineStore('calculated-lights', () => {
   const intensityFraction = calculateSunFractionAtHorizonForIntensities()
   const ambientIntensity = computed(() => lerp(3, 0.8, intensityFraction.value))
   const sunIntensity = computed(() => lerp(0, 1, intensityFraction.value))

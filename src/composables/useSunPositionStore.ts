@@ -1,4 +1,4 @@
-import useGameTime from '@/composables/useGameTime.js'
+import useGameTime from '@/composables/useGameTimeStore.js'
 import { defineStore, storeToRefs } from 'pinia'
 import { Vector3 } from 'three'
 import { mapLinear } from 'three/src/math/MathUtils.js'
@@ -7,7 +7,7 @@ import { computed } from 'vue'
 const a = 50 // Semi-major axis along the X-axis
 const b = 25 // Semi-minor axis along the Y-axis
 
-export default defineStore('sunPosition', () => {
+export default defineStore('sun-position', () => {
   const { currentTime } = storeToRefs(useGameTime())
 
   // Calculate the angle (here you scale the time to a full cycle in a virtual "day")
