@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Waterfall/Waterfall.gltf'
-import useDebugStore from '@/composables/useDebugStore'
+import useDebugStore from '@/composables/useDebugStore.js'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
 import { getWaterMaterial } from '@/utils/WaterShader.js'
 import { useLoop } from '@tresjs/core'
