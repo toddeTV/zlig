@@ -38,13 +38,13 @@ The following softwares are required for development:<br>
 | software | command for version output                | my version at last use | information          |
 | -------- | ----------------------------------------- | ---------------------- | -------------------- |
 | Ubuntu   | `lsb_release -a` or `cat /etc/os-release` | 22.04.4 LTS            | OS                   |
-| Linux    | `uname -r`                                | 5.15.0-119-generic     | Linux Kernel         |
+| Linux    | `uname -r`                                | 5.15.0-125-generic     | Linux Kernel         |
 | VSCode   | `code -v`                                 | 1.93.2                 | IDE                  |
-| nvm      | `nvm -v`                                  | v0.39.7                | Node Version Manager |
-| Node     | `node -v` (old `nodejs --version`)        | v20.16.0               | NodeJS/ Node.js      |
-| npm      | `npm -v`                                  | v10.8.1                |                      |
-| npx      | `npx -v`                                  | v10.8.1                |                      |
-| pnpm     | `pnpm -v`                                 | v9.10.0                |                      |
+| nvm      | `nvm -v`                                  | v0.40.1                | Node Version Manager |
+| Node     | `node -v` (old `nodejs --version`)        | v22.13.0               | NodeJS/ Node.js      |
+| npm      | `npm -v`                                  | v10.9.2                |                      |
+| npx      | `npx -v`                                  | v10.9.2                |                      |
+| pnpm     | `pnpm -v`                                 | v10.0.0                |                      |
 
 In the browser install:
 
@@ -108,7 +108,7 @@ Tipp: Favorite them and use the search over all item collections at once: https:
 | `Material Design Icons` | `mdi`     | Apache 2.0 (commercial use is allowed, no attribution required) |                |
 | `Material Line Icons`   | `line-md` | MIT                                                             | animated icons |
 
-#### glTF export with draco compression
+### glTF export with draco compression
 
 Use [draco compression](https://github.com/google/draco) in [Blender](https://www.blender.org/) on
 [glTF 2](https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/README.md) files:
@@ -159,7 +159,7 @@ _Method 1: With direct useGLTF_
 
 ```vue
 <script setup lang="ts">
-import useGLTF from '@/composables/useGLTF'
+import useGLTF from '@/composables/useGLTF.js'
 
 const { scenes } = await useGLTF('/MyModel/MyModel.gltf')
 </script>
@@ -315,6 +315,7 @@ Used programs/ softwares, services and dependencies - besides the ones in `./pac
 
 - [GitHub Copilot](https://github.com/features/copilot) was used in private mode for programming questions.
 - [Blender](https://www.blender.org/) was used as software for creating and editing 3D models.
+- [ChatGPT](https://chatgpt.com/) used for DALL-E image generation, text based questions and programming code generation.
 
 Used assets/ materials including images and 3D models:
 
@@ -332,7 +333,7 @@ Please note that this license applies only to the original content authored by t
 
 The project founder reserves the right to modify the terms of this license or to offer different licensing arrangements for specific use cases.
 
-For the full license text, please see the [LICENSE](./LICENSE) file.
+For the full license text, please see the [LICENSE](./LICENSE.md) file.
 
 ### Need a Different License?
 

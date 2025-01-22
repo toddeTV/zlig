@@ -7,7 +7,6 @@
     "source.organizeImports": "never"
   },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-  "editor.fontSize": 15,
   "editor.formatOnSave": false,
   "editor.linkedEditing": true,
   "editor.rulers": [120],
@@ -51,6 +50,7 @@
   },
   "files.autoSave": "onFocusChange",
   "javascript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifierEnding": "js",
   "javascript.preferences.renameMatchingJsxTags": true,
   "npm.packageManager": "pnpm",
   "prettier.enable": false,
@@ -64,9 +64,9 @@
   "search.useIgnoreFiles": false,
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifierEnding": "js",
   "typescript.preferences.renameMatchingJsxTags": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "volar.autoCompleteRefs": true,
-  "volar.completion.preferredTagNameCase": "pascal",
-  "window.zoomLevel": 0.05
+  "volar.completion.preferredTagNameCase": "pascal"
 }

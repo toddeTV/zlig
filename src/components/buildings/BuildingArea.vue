@@ -4,8 +4,8 @@ import ProducingBehavior from '@/components/buildings/behaviors/ProducingBehavio
 import UpgradingBehavior from '@/components/buildings/behaviors/UpgradingBehavior.vue'
 import ConstructionSite from '@/components/models/BuildArea.vue'
 import ProgressBar from '@/components/ui/ProgressBar.vue'
-import useGameState from '@/composables/useGameState.js'
-import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
+import { useGameStateStore } from '@/composables/useGameStateStore.js'
+import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
 import { Html } from '@tresjs/cientos'
 import { computed } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types.js'
@@ -18,8 +18,8 @@ const props = defineProps<{
   rotation: Euler
 }>()
 
-const gameState = useGameState()
-const selectedBuildingArea = useSelectedBuildingArea()
+const gameState = useGameStateStore()
+const selectedBuildingArea = useSelectedBuildingAreaStore()
 
 const buildingInstance = computed(() => gameState.buildings[props.id])
 

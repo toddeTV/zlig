@@ -10,7 +10,7 @@ export const GAME_TIME_FACTOR_FAST = 60 * 60
 // One second in real time are three hours in game time.
 export const GAME_TIME_FACTOR_FASTER = 60 * 60 * 3
 
-export default defineStore('gameTime', () => {
+export const useGameTimeStore = defineStore('game-time', () => {
   const startTime = new Date(0)
   // TODO: Find hour that starts the day.
   startTime.setHours(8)

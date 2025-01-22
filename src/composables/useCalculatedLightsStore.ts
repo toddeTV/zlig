@@ -1,10 +1,10 @@
-import useSunPosition from '@/composables/useSunPosition.js'
+import { useSunPositionStore } from '@/composables/useSunPositionStore.js'
 import { defineStore, storeToRefs } from 'pinia'
 import { Color } from 'three'
 import { lerp, smootherstep, smoothstep } from 'three/src/math/MathUtils.js'
 import { computed } from 'vue'
 
-export default defineStore('calculatedLights', () => {
+export const useCalculatedLightsStore = defineStore('calculated-lights', () => {
   const intensityFraction = calculateSunFractionAtHorizonForIntensities()
   const ambientIntensity = computed(() => lerp(3, 0.8, intensityFraction.value))
   const sunIntensity = computed(() => lerp(0, 1, intensityFraction.value))
@@ -22,7 +22,7 @@ function calculateSunFractionAtHorizonForIntensities() {
   const AT_HORIZON_Y = 0.01
   const NEAR_HORIZON_Y = 0.2
 
-  const { normalizedSunY } = storeToRefs(useSunPosition())
+  const { normalizedSunY } = storeToRefs(useSunPositionStore())
 
   // The smootherstep function returns a fraction that the sun y is between the two constants.
   // It also clamps them which is all we want, yay.
@@ -34,7 +34,7 @@ function calculateLightColors() {
   const AT_HORIZON_Y = 0.01
   const NEAR_HORIZON_Y = 0.25
 
-  const { normalizedSunY } = storeToRefs(useSunPosition())
+  const { normalizedSunY } = storeToRefs(useSunPositionStore())
 
   return computed(() => {
     const colorSunDay = new Color(0xFFF9ED)
