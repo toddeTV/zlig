@@ -30,9 +30,10 @@ export default defineStore('gameTime', () => {
       currentMilliseconds.value += gameTimeSecondsPassed * 1000
 
       const divisor = mapLinear(gameTimeSecondsPassed, 0, 100, 1000, 4000)
+      const ambientAnimationDelta = currentFactor.value === 0 ? 0 : gameTimeSecondsPassed / divisor
 
       const args: OnTickFnArgs = {
-        ambientAnimationDelta: gameTimeSecondsPassed / divisor,
+        ambientAnimationDelta,
         deltaGameSeconds: gameTimeSecondsPassed,
         gameTime: currentTime.value,
       }
