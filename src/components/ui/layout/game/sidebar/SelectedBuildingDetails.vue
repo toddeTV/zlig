@@ -3,7 +3,6 @@ import Resources from '@/components/ui/Resources.vue'
 import useGameState from '@/composables/useGameState.js'
 import { ResourceRecord, ResourcesPerMillisecond } from '@/game-logic/resources.js'
 import Big from 'big.js'
-import { DEV } from 'esm-env'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import type { BuildingAreaId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
@@ -98,7 +97,7 @@ function destroyBuilding() {
     </div>
   </div>
 
-  <div v-if="DEV" class="mb-4 border-4 border-red-600 text-red-950 bg-red-100 p-2 border-dashed">
+  <div class="mb-4 border-4 border-red-600 text-red-950 bg-red-100 p-2 border-dashed">
     <p class="font-semibold">
       Internal resource buffer:
     </p>
