@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import useCalculatedLights from '@/composables/useCalculatedLights.js'
-import useDebugStore from '@/composables/useDebugStore.js'
+import { useCalculatedLightsStore } from '@/composables/useCalculatedLightsStore.js'
+import { useDebugStore } from '@/composables/useDebugStore.js'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { Fog } from 'three'
@@ -8,7 +8,7 @@ import { watch, watchEffect } from 'vue'
 
 const { scene } = useTresContext()
 const { showFog } = storeToRefs(useDebugStore())
-const { lightColors } = storeToRefs(useCalculatedLights())
+const { lightColors } = storeToRefs(useCalculatedLightsStore())
 
 const fog = new Fog(0x82DBC5, 140, 160)
 

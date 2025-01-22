@@ -4,7 +4,7 @@ import { readonly, ref } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types.js'
 import type { Euler, Vector3 } from 'three'
 
-export default defineStore('BuildingAreas', () => {
+export const useBuildingAreasStore = defineStore('building-areas', () => {
   const BuildingAreas = ref<{
     id: BuildingAreaId
     position: Vector3
