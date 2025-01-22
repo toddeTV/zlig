@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useDebugStore from '@/composables/useDebugStore'
+import useDebugStore from '@/composables/useDebugStore.js'
 import { CameraControls } from '@tresjs/cientos'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
