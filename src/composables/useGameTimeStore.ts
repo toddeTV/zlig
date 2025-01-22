@@ -24,13 +24,13 @@ export const useGameTimeStore = defineStore('game-time', () => {
   const listeners = new Set<OnTickFn>()
 
   function tick(deltaSeconds: number) {
-    if (currentFactor.value > 0) {
+    if (currentFactor.value > 0) { // no updates when paused
       const gameTimeSecondsPassed = deltaSeconds * currentFactor.value
 
       currentMilliseconds.value += gameTimeSecondsPassed * 1000
 
       const divisor = mapLinear(gameTimeSecondsPassed, 0, 100, 1000, 4000)
-      const ambientAnimationDelta = currentFactor.value === 0 ? 0 : gameTimeSecondsPassed / divisor
+      const ambientAnimationDelta = gameTimeSecondsPassed / divisor
 
       const args: OnTickFnArgs = {
         ambientAnimationDelta,
