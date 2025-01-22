@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Waterfall/Waterfall.gltf'
-import useDebugStore from '@/composables/useDebugStore'
-import useGameTime from '@/composables/useGameTime.js'
-import { addShadowAndAddToGroup } from '@/utils/threeHelper'
-import { getWaterMaterial } from '@/utils/WaterShader'
+import { useDebugStore } from '@/composables/useDebugStore.js'
+import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
+import { getWaterMaterial } from '@/utils/WaterShader.js'
 import { storeToRefs } from 'pinia'
 import { shallowRef, watch } from 'vue'
 
 const { scenes } = await modelLoader
-const { onTick } = useGameTime()
+const { onTick } = useGameTimeStore()
 const { showWaterWireframe } = storeToRefs(useDebugStore())
 
 const groupWrapperRef = shallowRef()

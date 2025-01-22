@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import ToggleVisibilityButton from '@/components/ui/layout/game/debug/ToggleVisibilityButton.vue'
-import useDebugStore from '@/composables/useDebugStore'
-import useGameTime, { GAME_TIME_FACTOR_FASTER } from '@/composables/useGameTime.js'
+import { useDebugStore } from '@/composables/useDebugStore.js'
+import { GAME_TIME_FACTOR_FASTER, useGameTimeStore } from '@/composables/useGameTimeStore.js'
 
 const debug = useDebugStore()
-const gameTime = useGameTime()
+const gameTime = useGameTimeStore()
 </script>
 
 <template>

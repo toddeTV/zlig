@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/_Buildings/Windmill/Windmill.gltf'
-import useGameTime from '@/composables/useGameTime.js'
-import { addShadowAndAddToGroup } from '@/utils/threeHelper'
+import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
 import { shallowRef, toRef, watch } from 'vue'
 import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
 import type { Euler, Group, Vector3 } from 'three'
@@ -15,7 +15,7 @@ const props = defineProps<{
 
 const buildingInstance = toRef(props, 'buildingInstance')
 
-const { onTick } = useGameTime()
+const { onTick } = useGameTimeStore()
 const { scenes: { Windmill } } = await modelLoader
 
 const groupWrapperRef = shallowRef<Group>()
