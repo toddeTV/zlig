@@ -2,7 +2,7 @@ import { Buffer } from 'node:buffer'
 import { existsSync, readFileSync } from 'node:fs'
 import { basename, dirname, relative, resolve } from 'node:path'
 import type { Plugin } from 'vite'
-import { generateAllModelTypes } from './generate-model-types'
+import { generateAllModelTypes } from './generate-model-types.js'
 
 const FILE_EXTENSION = '.gltf'
 
