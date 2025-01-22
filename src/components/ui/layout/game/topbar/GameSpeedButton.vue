@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useGameTime from '@/composables/useGameTime.js'
+import useGameTime from '@/composables/useGameTimeStore.js'
 
 const props = defineProps<{
   targetFactor: number

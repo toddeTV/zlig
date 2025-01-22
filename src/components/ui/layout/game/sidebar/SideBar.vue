@@ -4,8 +4,8 @@ import SelectedBuildingDetails from '@/components/ui/layout/game/sidebar/Selecte
 import SelectedBuildingInConstruction from '@/components/ui/layout/game/sidebar/SelectedBuildingInConstruction.vue'
 import SelectedBuildingUpgrading from '@/components/ui/layout/game/sidebar/SelectedBuildingUpgrading.vue'
 import SelectedEmptyBuildingArea from '@/components/ui/layout/game/sidebar/SelectedEmptyBuildingArea.vue'
-import useGameState from '@/composables/useGameState.js'
-import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
+import useGameState from '@/composables/useGameStateStore.js'
+import useSelectedBuildingArea from '@/composables/useSelectedBuildingAreaStore.js'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 

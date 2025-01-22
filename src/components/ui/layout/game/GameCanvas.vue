@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import GameEngine from '@/components/GameEngine.vue'
-import useCalculatedLights from '@/composables/useCalculatedLights.js'
+import useCalculatedLights from '@/composables/useCalculatedLightsStore.js'
 import { TresCanvas } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'

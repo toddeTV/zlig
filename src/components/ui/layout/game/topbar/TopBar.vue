@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import GameSpeedButton from '@/components/ui/layout/game/topbar/GameSpeedButton.vue'
 import Resources from '@/components/ui/Resources.vue'
-import useGameState from '@/composables/useGameState.js'
-import useGameTime, { GAME_TIME_FACTOR_FAST, GAME_TIME_FACTOR_FASTER, GAME_TIME_FACTOR_REGULAR } from '@/composables/useGameTime.js'
+import useGameState from '@/composables/useGameStateStore.js'
+import useGameTime, { GAME_TIME_FACTOR_FAST, GAME_TIME_FACTOR_FASTER, GAME_TIME_FACTOR_REGULAR } from '@/composables/useGameTimeStore.js'
 import { computed } from 'vue'
 
 const gameState = useGameState()

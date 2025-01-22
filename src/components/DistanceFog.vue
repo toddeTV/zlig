@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useCalculatedLights from '@/composables/useCalculatedLights.js'
+import useCalculatedLights from '@/composables/useCalculatedLightsStore.js'
 import useDebugStore from '@/composables/useDebugStore'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'

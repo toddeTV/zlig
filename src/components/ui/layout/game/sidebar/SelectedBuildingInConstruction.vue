@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ProgressBar from '@/components/ui/ProgressBar.vue'
-import useGameState from '@/composables/useGameState.js'
+import useGameState from '@/composables/useGameStateStore.js'
 import { storeToRefs } from 'pinia'
 import type { BuildingAreaId, BuildingStateInConstruction, BuildingType } from '@/game-logic/types.js'
 

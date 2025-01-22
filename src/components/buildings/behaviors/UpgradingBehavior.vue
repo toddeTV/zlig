@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import useGameState from '@/composables/useGameState.js'
-import useGameTime from '@/composables/useGameTime.js'
+import useGameState from '@/composables/useGameStateStore.js'
+import useGameTime from '@/composables/useGameTimeStore.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 import { Duration } from '@/utils/duration.js'
 import { storeToRefs } from 'pinia'

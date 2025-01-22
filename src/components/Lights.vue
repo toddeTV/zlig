@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import useCalculatedLights from '@/composables/useCalculatedLights.js'
-import useDebugStore from '@/composables/useDebugStore'
-import useSunPosition from '@/composables/useSunPosition.js'
+import useCalculatedLights from '@/composables/useCalculatedLightsStore.js'
+import useDebugStore from '@/composables/useDebugStore.js'
+import useSunPosition from '@/composables/useSunPositionStore.js'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { AmbientLight, CameraHelper, DirectionalLight } from 'three'

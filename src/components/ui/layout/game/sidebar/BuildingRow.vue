@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Resources from '@/components/ui/Resources.vue'
-import useGameState from '@/composables/useGameState.js'
+import useGameState from '@/composables/useGameStateStore.js'
 import { ResourceRecord, ResourcesPerMillisecond } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { storeToRefs } from 'pinia'
