@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Waterfall/Waterfall.gltf'
 import useDebugStore from '@/composables/useDebugStore'
-import { addShadowAndAddToGroup } from '@/utils/threeHelper'
-import { getWaterMaterial } from '@/utils/WaterShader'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
+import { getWaterMaterial } from '@/utils/WaterShader.js'
 import { useLoop } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { ref, shallowRef, watch } from 'vue'

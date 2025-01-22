@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/Island/Island.gltf'
-import { addShadowAndAddToGroup } from '@/utils/threeHelper'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
 import { shallowRef, watch } from 'vue'
 
 const { scenes } = await modelLoader
