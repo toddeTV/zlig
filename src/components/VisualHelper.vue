@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useDebugStore from '@/composables/useDebugStore'
+import useDebugStore from '@/composables/useDebugStore.js'
 import { storeToRefs } from 'pinia'
 
 const { showVisualHelper } = storeToRefs(useDebugStore())

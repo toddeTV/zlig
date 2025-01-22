@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import modelLoader from '@/assets/models/_Buildings/Windmill/Windmill.gltf'
-import { addShadowAndAddToGroup } from '@/utils/threeHelper'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
 import { useLoop } from '@tresjs/core'
 import { shallowRef, toRef, watch } from 'vue'
 import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
