@@ -24,9 +24,9 @@ export default defineStore('gameTime', () => {
   const listeners = new Set<OnTickFn>()
 
   function tick(deltaSeconds: number) {
-    const gameTimeSecondsPassed = deltaSeconds * currentFactor.value
+    if (currentFactor.value > 0) {
+      const gameTimeSecondsPassed = deltaSeconds * currentFactor.value
 
-    if (gameTimeSecondsPassed) {
       currentMilliseconds.value += gameTimeSecondsPassed * 1000
 
       const divisor = mapLinear(gameTimeSecondsPassed, 0, 100, 1000, 4000)
