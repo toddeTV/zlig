@@ -159,7 +159,7 @@ _Method 1: With direct useGLTF_
 
 ```vue
 <script setup lang="ts">
-import useGLTF from '@/composables/useGLTF'
+import useGLTF from '@/composables/useGLTF.js'
 
 const { scenes } = await useGLTF('/MyModel/MyModel.gltf')
 </script>
