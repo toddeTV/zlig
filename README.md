@@ -108,7 +108,7 @@ Tipp: Favorite them and use the search over all item collections at once: https:
 | `Material Design Icons` | `mdi`     | Apache 2.0 (commercial use is allowed, no attribution required) |                |
 | `Material Line Icons`   | `line-md` | MIT                                                             | animated icons |
 
-#### glTF export with draco compression
+### glTF export with draco compression
 
 Use [draco compression](https://github.com/google/draco) in [Blender](https://www.blender.org/) on
 [glTF 2](https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/README.md) files:
