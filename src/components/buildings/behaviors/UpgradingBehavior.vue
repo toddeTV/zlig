@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import useGameState from '@/composables/useGameState.js'
-import useGameTime from '@/composables/useGameTime.js'
+import { useGameStateStore } from '@/composables/useGameStateStore.js'
+import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 import { Duration } from '@/utils/duration.js'
 import { storeToRefs } from 'pinia'
@@ -13,8 +13,8 @@ const props = defineProps<{
   state: BuildingStateUpgrading
 }>()
 
-const { buildings } = storeToRefs(useGameState())
-const { currentTime } = storeToRefs(useGameTime())
+const { buildings } = storeToRefs(useGameStateStore())
+const { currentTime } = storeToRefs(useGameTimeStore())
 
 watch(currentTime, (time, prev) => {
   const durationRemaining = props.state.durationRemaining.minus(Duration.fromDates(prev, time))

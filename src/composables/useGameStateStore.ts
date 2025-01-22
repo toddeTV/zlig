@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
 
-export default defineStore('gameState', () => {
+export const useGameStateStore = defineStore('game-state', () => {
   return {
     buildings: buildingsState(),
     resources: availableResources(),

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import useGameTime from '@/composables/useGameTime.js'
+import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 
 const props = defineProps<{
   targetFactor: number
   class: string
 }>()
 
-const gameTime = useGameTime()
+const gameTime = useGameTimeStore()
 </script>
 
 <template>

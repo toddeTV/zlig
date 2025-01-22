@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import useGameState from '@/composables/useGameState.js'
-import useGameTime from '@/composables/useGameTime.js'
+import { useGameStateStore } from '@/composables/useGameStateStore.js'
+import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { storeToRefs } from 'pinia'
@@ -13,7 +13,7 @@ const props = defineProps<{
   state: BuildingStateProducing
 }>()
 
-const { buildings, resources } = storeToRefs(useGameState())
+const { buildings, resources } = storeToRefs(useGameStateStore())
 
 // TODO: Put this into the game state.
 // TODO: Make this individual per building type.
@@ -25,7 +25,7 @@ const currentIncome = computed(() => {
   return base.times(incomeModifier)
 })
 
-const { currentTime } = storeToRefs(useGameTime())
+const { currentTime } = storeToRefs(useGameTimeStore())
 
 watch(currentTime, (time, prev) => {
   const deltaMs = time.getTime() - prev.getTime()

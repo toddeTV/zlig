@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ProgressBar from '@/components/ui/ProgressBar.vue'
-import useGameState from '@/composables/useGameState.js'
+import { useGameStateStore } from '@/composables/useGameStateStore.js'
 import { storeToRefs } from 'pinia'
 import type { BuildingAreaId, BuildingStateInConstruction, BuildingType } from '@/game-logic/types.js'
 
@@ -10,7 +10,7 @@ const props = defineProps<{
   buildingState: BuildingStateInConstruction
 }>()
 
-const { buildings } = storeToRefs(useGameState())
+const { buildings } = storeToRefs(useGameStateStore())
 
 function cancelBuild() {
   // TODO: Determine the refunds.
