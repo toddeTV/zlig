@@ -333,7 +333,7 @@ Please note that this license applies only to the original content authored by t
 
 The project founder reserves the right to modify the terms of this license or to offer different licensing arrangements for specific use cases.
 
-For the full license text, please see the [LICENSE](./LICENSE) file.
+For the full license text, please see the [LICENSE](./LICENSE.md) file.
 
 ### Need a Different License?
 
