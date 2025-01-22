@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-export default defineStore('debug', () => {
+export const useDebugStore = defineStore('debug', () => {
   const showVisualHelper = ref(false)
   const showLightHelper = ref(false)
   const showCameraHelper = ref(false)

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import useCalculatedLights from '@/composables/useCalculatedLightsStore.js'
-import useDebugStore from '@/composables/useDebugStore.js'
-import useSunPosition from '@/composables/useSunPositionStore.js'
+import { useCalculatedLightsStore } from '@/composables/useCalculatedLightsStore.js'
+import { useDebugStore } from '@/composables/useDebugStore.js'
+import { useSunPositionStore } from '@/composables/useSunPositionStore.js'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { AmbientLight, CameraHelper, DirectionalLight } from 'three'
@@ -9,8 +9,8 @@ import { watch, watchEffect } from 'vue'
 
 const { scene } = useTresContext()
 const { showLightHelper } = storeToRefs(useDebugStore())
-const { sunPosition } = storeToRefs(useSunPosition())
-const { ambientIntensity, lightColors, sunIntensity } = storeToRefs(useCalculatedLights())
+const { sunPosition } = storeToRefs(useSunPositionStore())
+const { ambientIntensity, lightColors, sunIntensity } = storeToRefs(useCalculatedLightsStore())
 
 // -------- AmbientLight
 

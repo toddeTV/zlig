@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Resources from '@/components/ui/Resources.vue'
-import useGameState from '@/composables/useGameStateStore.js'
+import { useGameStateStore } from '@/composables/useGameStateStore.js'
 import { ResourceRecord, ResourcesPerMillisecond } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { storeToRefs } from 'pinia'
@@ -12,7 +12,7 @@ const props = defineProps<{
   buildingAreaId: BuildingAreaId
 }>()
 
-const { buildings, resources } = storeToRefs(useGameState())
+const { buildings, resources } = storeToRefs(useGameStateStore())
 
 // TODO: Put this into the game state.
 // TODO: Make this individual per building type.

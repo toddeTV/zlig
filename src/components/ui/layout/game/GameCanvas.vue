@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import GameEngine from '@/components/GameEngine.vue'
-import useCalculatedLights from '@/composables/useCalculatedLightsStore.js'
+import { useCalculatedLightsStore } from '@/composables/useCalculatedLightsStore.js'
 import { TresCanvas } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
 import { ref, watchEffect } from 'vue'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 
-const { lightColors } = storeToRefs(useCalculatedLights())
+const { lightColors } = storeToRefs(useCalculatedLightsStore())
 
 const gl = ref<TresCanvasProps>({
   alpha: false,

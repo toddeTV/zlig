@@ -7,17 +7,17 @@ import Island from '@/components/models/Island.vue'
 import Ocean from '@/components/models/Ocean.vue'
 import Waterfall from '@/components/models/Waterfall.vue'
 import VisualHelper from '@/components/VisualHelper.vue'
-import useBuildingAreas from '@/composables/useBuildingAreasStore.js'
-import useGameTime from '@/composables/useGameTimeStore.js'
-import useSelectedBuildingArea from '@/composables/useSelectedBuildingAreaStore.js'
+import { useBuildingAreasStore } from '@/composables/useBuildingAreasStore.js'
+import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
+import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
 import { useLoop } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
 const { onBeforeRender } = useLoop()
-const gameTime = useGameTime()
-const { areas } = storeToRefs(useBuildingAreas())
-const { init } = useBuildingAreas()
+const gameTime = useGameTimeStore()
+const { areas } = storeToRefs(useBuildingAreasStore())
+const { init } = useBuildingAreasStore()
 
 onBeforeRender(({ delta }) => {
   gameTime.tick(delta)
@@ -25,7 +25,7 @@ onBeforeRender(({ delta }) => {
 
 init()
 
-const selectedBuildingArea = useSelectedBuildingArea()
+const selectedBuildingArea = useSelectedBuildingAreaStore()
 
 const cameraMoved = ref(false)
 </script>
