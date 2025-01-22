@@ -52,9 +52,9 @@ const hasDebug = ref(true)
     <DebugMenu v-if="hasDebug" />
 
     <div class="text-gray-600 text-sm p-2 flex justify-between">
-      <a href="https://github.com/toddeTV/zlig/" rel="noopener noreferrer" target="_blank">
-        &copy; {{ new Date().getFullYear() }} zlig
-      </a>
+      <RouterLink rel="noopener noreferrer" target="_blank" to="//github.com/toddeTV/zlig/">
+        &copy; 2024 - {{ new Date().getFullYear() }} zlig
+      </RouterLink>
 
       <!-- TODO Privacy Policy -->
       <!-- TODO Legal Notice -->
