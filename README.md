@@ -15,6 +15,12 @@ Current deployment on:
   - branch `dev`: [https://zlig-git-dev-toddetv-projects.vercel.app/](https://zlig-git-dev-toddetv-projects.vercel.app/)
   - each PR will get a individual custom URL automatically
 
+## Sponsoring
+
+If you like this project and want to support us, we would be very happy to see you as a sponsor on GitHub ❤️<br>
+You can find the `Sponsor` button on the top right of the [GitHub project page](https://github.com/toddeTV/zlig).<br>
+Thanks a lot for the support <3
+
 ## dev
 
 ### commands
