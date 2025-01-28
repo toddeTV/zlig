@@ -11,12 +11,12 @@ const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
 </script>
 
 <template>
-  <div class="border-4 border-red-600 text-red-950 bg-red-100 p-2 border-dashed flex flex-col gap-y-4 w-full">
+  <div class="border-4 border-red-600 text-red-950 bg-red-100 p-2 border-dashed flex flex-col gap-y-1 w-full">
     <h3 class="text-lg font-bold">
       Debug menu
     </h3>
 
-    <div class="grid grid-cols-2 gap-1">
+    <div class="grid grid-cols-3 gap-1">
       <ToggleVisibilityButton v-model="debug.showVisualHelper">
         visual helper
       </ToggleVisibilityButton>
@@ -34,9 +34,9 @@ const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
       </ToggleVisibilityButton>
     </div>
 
-    <div class="flex flex-col">
+    <div class="flex flex-row gap-2">
       <div>
-        Selected Build Area:
+        Selected Area:
       </div>
       <div>
         {{ selectedBuildAreaId ?? '<none>' }}
@@ -56,9 +56,9 @@ const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
         >
         <b>{{ gameTime.currentFactor.toLocaleString() }}</b>
       </div>
-      <p class="text-sm italic">
+      <!-- <p class="text-sm italic">
         each real time milliseconds progresses the game time by that much milliseconds
-      </p>
+      </p> -->
     </div>
   </div>
 </template>
