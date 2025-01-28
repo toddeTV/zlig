@@ -16,49 +16,31 @@ const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
       Debug menu
     </h3>
 
-    <div class="grid grid-cols-3 gap-1">
+    <div class="grid grid-cols-5 gap-1 text-xs">
       <ToggleVisibilityButton v-model="debug.showVisualHelper">
-        visual helper
+        visuals
       </ToggleVisibilityButton>
       <ToggleVisibilityButton v-model="debug.showLightHelper">
-        lights helper
+        lights
       </ToggleVisibilityButton>
       <ToggleVisibilityButton v-model="debug.showCameraHelper">
-        camera helper
+        camera
       </ToggleVisibilityButton>
       <ToggleVisibilityButton v-model="debug.showFog">
         fog
       </ToggleVisibilityButton>
       <ToggleVisibilityButton v-model="debug.showWaterWireframe">
-        water wireframe
+        water
       </ToggleVisibilityButton>
     </div>
 
-    <div class="flex flex-row gap-2">
+    <div class="flex flex-row gap-2 text-sm">
       <div>
-        Selected Area:
+        Area:
       </div>
       <div>
         {{ selectedBuildAreaId ?? '<none>' }}
       </div>
-    </div>
-
-    <div class="flex flex-col">
-      <label for="gameTimeFactor">Current game time factor:</label>
-      <div class="flex gap-2 items-center w-max-full">
-        <input
-          id="gameTimeFactor"
-          v-model.number="gameTime.currentFactor"
-          class="w-2/3"
-          :max="GAME_TIME_FACTOR_FASTER * 2"
-          :min="0"
-          type="range"
-        >
-        <b>{{ gameTime.currentFactor.toLocaleString() }}</b>
-      </div>
-      <!-- <p class="text-sm italic">
-        each real time milliseconds progresses the game time by that much milliseconds
-      </p> -->
     </div>
   </div>
 </template>
