@@ -23,9 +23,9 @@ const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
       <ToggleVisibilityButton v-model="debug.showLightHelper">
         lights
       </ToggleVisibilityButton>
-      <ToggleVisibilityButton v-model="debug.showCameraHelper">
+      <!-- <ToggleVisibilityButton v-model="debug.showCameraHelper">
         camera
-      </ToggleVisibilityButton>
+      </ToggleVisibilityButton> -->
       <ToggleVisibilityButton v-model="debug.showFog">
         fog
       </ToggleVisibilityButton>
