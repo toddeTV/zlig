@@ -16,7 +16,7 @@ const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
       Debug menu
     </h3>
 
-    <div class="grid grid-cols-5 gap-1 text-xs">
+    <div class="grid grid-cols-4 gap-1 text-xs">
       <ToggleVisibilityButton v-model="debug.showVisualHelper">
         visuals
       </ToggleVisibilityButton>
