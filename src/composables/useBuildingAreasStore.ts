@@ -1,4 +1,4 @@
-import { IslandScene, getNode } from '@/assets/models/Island/Island.gltf.js'
+import { getNode, IslandScene } from '@/assets/models/Island/Island.gltf.js'
 import { defineStore } from 'pinia'
 import { readonly, ref } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types.js'
@@ -12,7 +12,6 @@ export const useBuildingAreasStore = defineStore('building-areas', () => {
   }[]>([])
 
   async function init() {
-
     (await getNode(IslandScene)).traverse((obj) => {
       if (obj.userData.isBuildArea && obj.name) {
         BuildingAreas.value.push({
