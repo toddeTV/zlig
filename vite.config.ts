@@ -1,4 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
+// eslint-disable-next-line import/extensions
 import gltf from '@todde.tv/gltf-type-toolkit/vite'
 import { templateCompilerOptions } from '@tresjs/core'
 import vue from '@vitejs/plugin-vue'
