@@ -1,4 +1,4 @@
-import { MeshStandardMaterial } from 'three'
+import { MeshStandardMaterial, UniformsUtils } from 'three'
 import type { ColorRepresentation } from 'three'
 
 /**
@@ -33,12 +33,24 @@ export function getWaterMaterial(
     transparent: true,
   })
 
+  const timeUniform = { time: { value: 0 } }
+
   waterMaterial.onBeforeCompile = function (shader) {
-    shader.uniforms.time = { value: 0.0 }
-    shader.uniforms.waveAmplitude = { value: waveAmplitude }
-    shader.uniforms.waveTangentialAmplitude = { value: waveTangentialAmplitude }
-    shader.uniforms.waveSpeed = { value: waveSpeed }
-    shader.uniforms.relativeHeightOffset = { value: relativeHeightOffset }
+    shader.uniforms = UniformsUtils.merge([
+      shader.uniforms,
+      timeUniform,
+      {
+        relativeHeightOffset: { value: relativeHeightOffset },
+        waveAmplitude: { value: waveAmplitude },
+        waveSpeed: { value: waveSpeed },
+        waveTangentialAmplitude: { value: waveTangentialAmplitude },
+      },
+    ])
+
+    // We need to reassign this because `UniformsUtils.merge` clones each uniform and in this process the connection to
+    // the original object is lost...
+    timeUniform.time = shader.uniforms.time
+
     shader.vertexShader = shader.vertexShader.replace(
       `#define STANDARD`,
       `#define STANDARD
@@ -110,7 +122,7 @@ export function getWaterMaterial(
             vPosition = transformed;
           #endif`,
     )
-    this.userData.shader = shader
   }
-  return waterMaterial
+
+  return Object.assign(waterMaterial, { uniforms: timeUniform })
 }

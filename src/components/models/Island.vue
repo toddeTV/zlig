@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getNode, IslandScene } from '@/assets/models/Island/Island.gltf.js'
-import { addShadowAndAddToGroup } from '@/utils/threeHelper'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
 import { shallowRef, watch } from 'vue'
 
 const model = await getNode(IslandScene)
