@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import GameEngine from '@/components/GameEngine.vue'
-import useCalculatedLights from '@/composables/useCalculatedLights.js'
+import { useCalculatedLightsStore } from '@/composables/useCalculatedLightsStore.js'
 import { TresCanvas } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
 import { ref, watchEffect } from 'vue'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 
-const { lightColors } = storeToRefs(useCalculatedLights())
+const { lightColors } = storeToRefs(useCalculatedLightsStore())
 
 const gl = ref<TresCanvasProps>({
   alpha: false,
@@ -32,17 +32,12 @@ watchEffect(() => {
 
 <!-- @pointer-missed="() => firePointerMissedEvent()" -->
 <template>
-  <div
-    class="w-full h-full flex-1 relative"
+  <!-- will create the dom `canvas` -->
+  <TresCanvas
+    v-bind="gl"
   >
-    <!-- will create the dom `canvas` -->
-    <TresCanvas
-      v-bind="gl"
-      class="absolute inset-0"
-    >
-      <GameEngine />
-    </TresCanvas>
-  </div>
+    <GameEngine />
+  </TresCanvas>
 </template>
 
 <style scoped>

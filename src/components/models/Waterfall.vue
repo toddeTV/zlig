@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import { getNode, WaterfallScene } from '@/assets/models/Waterfall/Waterfall.gltf.js'
-import useDebugStore from '@/composables/useDebugStore'
-import { addShadowAndAddToGroup } from '@/utils/threeHelper'
-import { getWaterMaterial } from '@/utils/WaterShader'
-import { useLoop } from '@tresjs/core'
+import { useDebugStore } from '@/composables/useDebugStore.js'
+import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
+import { getWaterMaterial } from '@/utils/WaterShader.js'
 import { storeToRefs } from 'pinia'
-import { ref, shallowRef, watch } from 'vue'
+import { shallowRef, watch } from 'vue'
 
-const { onBeforeRender } = useLoop()
+const { onTick } = useGameTimeStore()
 const { showWaterWireframe } = storeToRefs(useDebugStore())
 
 const groupWrapperRef = shallowRef()
-
-const uniforms = ref({
-  time: { value: 0.0 },
-})
 
 const waterMaterial = getWaterMaterial({
   relativeHeightOffset: -0.45,
@@ -39,18 +35,9 @@ model2.material = waterMaterial
 const model3 = await getNode(WaterfallScene.zligwaterfalllvl1_to_lvl0001)
 model3.material = waterMaterialDown
 
-// Use the real game tick and not the `useGameTime` tick bc the waterfall should always move with the same speed
-// and should not depend on the in game time/ speed.
-onBeforeRender(({ delta }) => {
-  if (groupWrapperRef.value.children.length === 0) {
-    return
-  }
-  uniforms.value.time.value += delta
-  groupWrapperRef.value.children.forEach((child: any) => { // TODO fix type
-    if (child.material.userData.shader) {
-      child.material.userData.shader.uniforms.time = uniforms.value.time
-    }
-  })
+onTick(({ ambientAnimationDelta }) => {
+  waterMaterial.uniforms.time.value += ambientAnimationDelta
+  waterMaterialDown.uniforms.time.value += ambientAnimationDelta
 })
 
 watch(showWaterWireframe, () => {
