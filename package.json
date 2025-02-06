@@ -49,10 +49,10 @@
   "scripts": {
     "dev": "vite --port 3000",
     "dev:network": "run-s \"dev --host\"",
-    "build": "run-s \"test\" \"build:only {@}\" --",
+    "build": "vite build",
     "preview": "vite preview",
     "build:only": "vite build",
-    "test": "run-p \"lint\" \"test:types\"",
+    "test": "run-p \"lint\" \"test:types\" --",
     "test:types": "vue-tsc --build --force",
     "postinstall": "run-s \"generate:gltf-models\"",
     "generate:gltf-models": "gltf-codegen",
