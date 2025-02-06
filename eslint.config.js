@@ -33,6 +33,8 @@ export default antfu(
       '**/*.vue',
       '**/*.xml',
       '**/*.yaml',
+      '**/*.yaml',
+      '**/*.yml',
     ],
 
     ignores: [
