@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import modelLoader from '@/assets/models/_Buildings/Windmill/Windmill.gltf'
+import { getNode, WindmillScene } from '@/assets/models/_Buildings/Windmill/Windmill.gltf.js'
 import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
 import { shallowRef, toRef, watch } from 'vue'
@@ -16,11 +16,10 @@ const props = defineProps<{
 const buildingInstance = toRef(props, 'buildingInstance')
 
 const { onTick } = useGameTimeStore()
-const { scenes: { Windmill } } = await modelLoader
 
 const groupWrapperRef = shallowRef<Group>()
 
-const building = Windmill.Scene.clone()
+const building = (await getNode(WindmillScene)).clone()
 building.position.copy(props.position)
 building.rotation.copy(props.rotation)
 

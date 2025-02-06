@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import modelLoader from '@/assets/models/BuildArea/BuildArea.gltf'
+import { BuildAreaScene, getNode } from '@/assets/models/BuildArea/BuildArea.gltf.js'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
 import { shallowRef, watch } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types.js'
@@ -11,11 +11,9 @@ const props = defineProps<{
   rotation: Euler
 }>()
 
-const { scenes } = await modelLoader
-
 const groupWrapperRef = shallowRef<Group>()
 
-const building = scenes.BuildArea.Object.zligbuildAreabase001.clone()
+const building = (await getNode(BuildAreaScene.zligbuildAreabase001)).clone()
 building.position.copy(props.position)
 building.rotation.copy(props.rotation)
 

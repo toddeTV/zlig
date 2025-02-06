@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import modelLoader from '@/assets/models/Ocean/Ocean.gltf'
+import { getNode, OceanScene } from '@/assets/models/Ocean/Ocean.gltf.js'
 import { useDebugStore } from '@/composables/useDebugStore.js'
 import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
@@ -7,7 +7,6 @@ import { getWaterMaterial } from '@/utils/WaterShader.js'
 import { storeToRefs } from 'pinia'
 import { shallowRef, watch } from 'vue'
 
-const { scenes } = await modelLoader
 const { onTick } = useGameTimeStore()
 const { showWaterWireframe } = storeToRefs(useDebugStore())
 
@@ -19,6 +18,9 @@ const waterMaterial = getWaterMaterial({
   waveSpeed: 1.0,
   waveTangentialAmplitude: 1.0,
 })
+
+const model = await getNode(OceanScene.ocean001)
+model.material = waterMaterial
 
 onTick(({ ambientAnimationDelta }) => {
   waterMaterial.uniforms.time.value += ambientAnimationDelta
@@ -34,8 +36,6 @@ watch(groupWrapperRef, (newValue) => {
   if (!newValue) {
     return
   }
-  const model = scenes.Ocean.Object.ocean001.clone()
-  model.material = waterMaterial
   addShadowAndAddToGroup(newValue, model, 'receive')
 })
 </script>
