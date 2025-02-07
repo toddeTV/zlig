@@ -6,10 +6,10 @@ permissions:
 on:
   push:
     branches:
-      - dev
+      - main
   pull_request:
     branches:
-      - dev
+      - main
   workflow_dispatch: {}
 
 jobs:
