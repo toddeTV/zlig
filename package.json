@@ -51,7 +51,6 @@
     "dev:network": "run-s \"dev --host\"",
     "build": "vite build",
     "preview": "vite preview",
-    "build:only": "vite build",
     "test": "run-p \"lint\" \"test:types\" --",
     "test:types": "vue-tsc --build --force",
     "postinstall": "run-s \"generate:gltf-models\"",
