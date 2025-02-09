@@ -1,9 +1,9 @@
 {
-  "name": "toddetv_zlig",
+  "name": "@todde.tv/zlig",
   "type": "module",
-  "version": "0.0.0",
+  "version": "1.0.0-rc.0",
   "packageManager": "pnpm@9.15.4",
-  "description": "",
+  "description": "zlig is a Japanese zen-inspired idle browser game showcasing lightweight web technologies like Vue and Three.js to create fully browser-based games.",
   "author": "Thorsten Seyschab <business@todde.tv> (https://todde.tv/)",
   "contributors": [
     {
@@ -20,21 +20,38 @@
   "homepage": "https://todde.tv/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/toddeTV/zlig"
+    "url": "git+https://github.com/toddeTV/zlig.git"
   },
   "bugs": {
     "url": "https://github.com/toddeTV/zlig/issues"
   },
+  "keywords": [
+    "browser-game",
+    "cc-by-nc-sa-4-0",
+    "game",
+    "gltf",
+    "gltf2",
+    "idle-game",
+    "three-js",
+    "threejs",
+    "tresjs",
+    "typescript",
+    "vite",
+    "vue3",
+    "vuejs",
+    "web",
+    "website"
+  ],
   "engines": {
-    "node": "22",
-    "pnpm": "9"
+    "node": "~22",
+    "pnpm": "~9.15.4"
   },
   "scripts": {
     "dev": "vite --port 3000",
     "dev:network": "run-s \"dev --host\"",
-    "build": "run-p \"type-check\" \"build-only {@}\" --",
+    "build": "vite build",
     "preview": "vite preview",
-    "build-only": "vite build",
+    "test": "run-p \"lint\" \"test:types\" --",
     "test:types": "vue-tsc --build --force",
     "postinstall": "run-s \"generate:gltf-models\"",
     "generate:gltf-models": "gltf-codegen",

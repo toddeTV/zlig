@@ -8,6 +8,8 @@ Short project name: `zlig` (stands for `zen-landscape-idle-game`)
 
 Current deployment on:
 
+<!-- TODO -->
+
 - production
   - branch `main`: [https://zlig.net/](https://zlig.net/)<br>
     (This is a custom domain for [https://zlig.vercel.app/](https://zlig.vercel.app/))

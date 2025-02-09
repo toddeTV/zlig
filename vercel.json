@@ -1,4 +1,12 @@
 {
+  "buildCommand": "pnpm run build",
+  "devCommand": "pnpm run dev",
+  "framework": "vue",
+  "git": {
+    "deploymentEnabled": false
+  },
+  "installCommand": "pnpm install --frozen-lockfile",
+  "outputDirectory": "dist",
   "rewrites": [
     {
       "destination": "/",
