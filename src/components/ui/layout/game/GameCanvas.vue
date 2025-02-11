@@ -12,7 +12,7 @@ const { lightColors } = storeToRefs(useCalculatedLightsStore())
 const gl = ref<TresCanvasProps>({
   alpha: false,
   clearColor: '#82DBC5',
-  disableRender: true, // Disable render on requestAnimationFrame, useful for PostProcessing // TODO use or not?
+  // disableRender: true, // Disable render on requestAnimationFrame, useful for PostProcessing // TODO use or not?
   outputColorSpace: SRGBColorSpace,
   renderMode: 'always',
   // resize: true, // not present? hmm ... documentation says it's there and important for resizable canvas - weird

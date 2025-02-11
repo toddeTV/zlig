@@ -7,6 +7,7 @@ import ProgressBar from '@/components/ui/ProgressBar.vue'
 import { useGameStateStore } from '@/composables/useGameStateStore.js'
 import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
 import { Html } from '@tresjs/cientos'
+import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types.js'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
@@ -19,14 +20,14 @@ const props = defineProps<{
 }>()
 
 const gameState = useGameStateStore()
-const selectedBuildingArea = useSelectedBuildingAreaStore()
+const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingAreaStore())
 
 const buildingInstance = computed(() => gameState.buildings[props.id])
 
 function onClick(e: TresJsClickEvent) {
   e.stopPropagation()
 
-  selectedBuildingArea.id = props.id
+  selectedBuildAreaId.value = props.id
 }
 
 const positionsSiftedSlightlyUpwards = computed(() => {

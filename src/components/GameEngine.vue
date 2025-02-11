@@ -10,10 +10,14 @@ import VisualHelper from '@/components/VisualHelper.vue'
 import { useBuildingAreasStore } from '@/composables/useBuildingAreasStore.js'
 import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
-import { useLoop } from '@tresjs/core'
+import { getLeafObjects } from '@/utils/threeHelper.js'
+import { useLoop, useTresContext } from '@tresjs/core'
+import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { BlendFunction } from 'postprocessing'
+import { computed, ref } from 'vue'
 
+const { scene } = useTresContext()
 const { onBeforeRender } = useLoop()
 const gameTime = useGameTimeStore()
 const { areas } = storeToRefs(useBuildingAreasStore())
@@ -25,7 +29,19 @@ onBeforeRender(({ delta }) => {
 
 init()
 
-const selectedBuildingArea = useSelectedBuildingAreaStore()
+const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingAreaStore())
+
+const outlinedObjects = computed(() => {
+  if (!selectedBuildAreaId.value) {
+    return []
+  }
+  // const selectedBuildingArea = scene.value.getObjectByName(selectedBuildAreaId.value)
+  const selectedBuildingArea = scene.value.getObjectByName(`building-area-${selectedBuildAreaId.value}`)
+  if (!selectedBuildingArea) {
+    return []
+  }
+  return getLeafObjects(selectedBuildingArea)
+})
 
 const cameraMoved = ref(false)
 </script>
@@ -42,7 +58,7 @@ const cameraMoved = ref(false)
     name="sceneGroup"
     @click="() => {
       if (!cameraMoved) {
-        selectedBuildingArea.id = null
+        selectedBuildAreaId = null
       }
     }"
     @pointer-down="() => cameraMoved = false"
@@ -73,6 +89,18 @@ const cameraMoved = ref(false)
       />
     </Suspense>
   </TresGroup>
+
+  <Suspense>
+    <EffectComposerPmndrs>
+      <OutlinePmndrs
+        :blend-function="BlendFunction.SCREEN"
+        :edge-glow="10"
+        :edge-strength="50"
+        :outlined-objects="outlinedObjects"
+        :pattern-scale="50"
+      />
+    </EffectComposerPmndrs>
+  </Suspense>
 </template>
 
 <style scoped>

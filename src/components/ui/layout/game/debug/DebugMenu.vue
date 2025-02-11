@@ -1,53 +1,45 @@
 <script setup lang="ts">
 import ToggleVisibilityButton from '@/components/ui/layout/game/debug/ToggleVisibilityButton.vue'
 import { useDebugStore } from '@/composables/useDebugStore.js'
-import { GAME_TIME_FACTOR_FASTER, useGameTimeStore } from '@/composables/useGameTimeStore.js'
+import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
+import { storeToRefs } from 'pinia'
 
 const debug = useDebugStore()
-const gameTime = useGameTimeStore()
+const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingAreaStore())
 </script>
 
 <template>
-  <div class="border-4 border-red-600 text-red-950 bg-red-100 p-2 border-dashed">
-    <h3 class="text-lg font-bold mb-2">
+  <div class="border-4 border-red-600 text-red-950 bg-red-100 p-2 border-dashed flex flex-col gap-y-1 w-full">
+    <h3 class="text-lg font-bold">
       Debug menu
     </h3>
 
-    <div class="grid grid-cols-2 gap-1">
+    <div class="grid grid-cols-5 gap-1 text-[0.6em]">
       <ToggleVisibilityButton v-model="debug.showVisualHelper">
-        visual helper
+        visuals
       </ToggleVisibilityButton>
       <ToggleVisibilityButton v-model="debug.showLightHelper">
-        lights helper
+        lights
       </ToggleVisibilityButton>
       <ToggleVisibilityButton v-model="debug.showCameraHelper">
-        camera helper
+        camera
       </ToggleVisibilityButton>
       <ToggleVisibilityButton v-model="debug.showFog">
         fog
       </ToggleVisibilityButton>
       <ToggleVisibilityButton v-model="debug.showWaterWireframe">
-        water wireframe
+        water
       </ToggleVisibilityButton>
     </div>
 
-    <div class="mt-4 flex gap-2 items-center">
-      <label>
-        Current game time factor:
-
-        <input
-          v-model.number="gameTime.currentFactor"
-          :max="GAME_TIME_FACTOR_FASTER * 3"
-          :min="0"
-          type="range"
-        >
-      </label>
-
-      <b>{{ gameTime.currentFactor.toLocaleString() }}</b>
+    <div class="flex flex-row gap-2 text-sm">
+      <div>
+        Area:
+      </div>
+      <div>
+        {{ selectedBuildAreaId ?? '<none>' }}
+      </div>
     </div>
-    <p class="text-sm italic">
-      each real time milliseconds progresses the game time by that much milliseconds
-    </p>
   </div>
 </template>
 
