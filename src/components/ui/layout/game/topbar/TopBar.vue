@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import GameSetButton from '@/components/ui/layout/game/topbar/GameSetButton.vue'
 import GameSpeedButton from '@/components/ui/layout/game/topbar/GameSpeedButton.vue'
 import Resources from '@/components/ui/Resources.vue'
 import { useGameStateStore } from '@/composables/useGameStateStore.js'
@@ -19,6 +20,9 @@ const displayTime = computed(() => {
   time.setMilliseconds(0)
   return time.toLocaleTimeString(undefined, { timeStyle: 'short' })
 })
+
+const dayStartTime = new Date(0)
+dayStartTime.setHours(2)
 </script>
 
 <template>
@@ -34,6 +38,14 @@ const displayTime = computed(() => {
       </p>
 
       <div class="flex gap-1 text-xl">
+        <GameSetButton
+          class="
+            icon-[ph--skip-back-circle-light]
+            hover:icon-[ph--skip-back-circle]
+          "
+          :target-time="dayStartTime.getTime()"
+        />
+
         <GameSpeedButton
           class="
             icon-[ph--pause-circle-light]
