@@ -19,9 +19,9 @@ import { computed, ref } from 'vue'
 
 const { scene } = useTresContext()
 const { onBeforeRender } = useLoop()
-const gameTime = useGameTime()
-const { areas } = storeToRefs(useBuildingAreas())
-const { init } = useBuildingAreas()
+const gameTime = useGameTimeStore()
+const { areas } = storeToRefs(useBuildingAreasStore())
+const { init } = useBuildingAreasStore()
 
 onBeforeRender(({ delta }) => {
   gameTime.tick(delta)

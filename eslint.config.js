@@ -33,6 +33,8 @@ export default antfu(
       '**/*.vue',
       '**/*.xml',
       '**/*.yaml',
+      '**/*.yaml',
+      '**/*.yml',
     ],
 
     ignores: [
@@ -45,6 +47,16 @@ export default antfu(
     rules: {
       'antfu/consistent-chaining': [
         'off',
+      ],
+      'import/extensions': [ // ensure consistent file extensions in import declarations
+        'error',
+        'always',
+        {
+          gltf: 'always',
+          js: 'always',
+          ts: 'never',
+          vue: 'always',
+        },
       ],
       'jsonc/sort-keys': [
         'error',

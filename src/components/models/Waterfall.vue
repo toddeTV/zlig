@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import modelLoader from '@/assets/models/Waterfall/Waterfall.gltf'
-import useDebugStore from '@/composables/useDebugStore'
-import { addShadowAndAddToGroup } from '@/utils/threeHelper'
-import { getWaterMaterial } from '@/utils/WaterShader'
-import { useLoop } from '@tresjs/core'
+import { getNode, WaterfallScene } from '@/assets/models/Waterfall/Waterfall.gltf.js'
+import { useDebugStore } from '@/composables/useDebugStore.js'
+import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
+import { getWaterMaterial } from '@/utils/WaterShader.js'
 import { storeToRefs } from 'pinia'
-import { ref, shallowRef, watch } from 'vue'
+import { shallowRef, watch } from 'vue'
 
-const { scenes } = await modelLoader
-const { onBeforeRender } = useLoop()
+const { onTick } = useGameTimeStore()
 const { showWaterWireframe } = storeToRefs(useDebugStore())
 
 const groupWrapperRef = shallowRef()
-
-const uniforms = ref({
-  time: { value: 0.0 },
-})
 
 const waterMaterial = getWaterMaterial({
   relativeHeightOffset: -0.45,
@@ -31,18 +26,18 @@ const waterMaterialDown = getWaterMaterial({
   waveTangentialAmplitude: 0.0,
 })
 
-// Use the real game tick and not the `useGameTime` tick bc the waterfall should always move with the same speed
-// and should not depend on the in game time/ speed.
-onBeforeRender(({ delta }) => {
-  if (groupWrapperRef.value.children.length === 0) {
-    return
-  }
-  uniforms.value.time.value += delta
-  groupWrapperRef.value.children.forEach((child: any) => { // TODO fix type
-    if (child.material.userData.shader) {
-      child.material.userData.shader.uniforms.time = uniforms.value.time
-    }
-  })
+const model1 = await getNode(WaterfallScene.zligwaterfalllvl0001)
+model1.material = waterMaterial
+
+const model2 = await getNode(WaterfallScene.zligwaterfalllvl1002)
+model2.material = waterMaterial
+
+const model3 = await getNode(WaterfallScene.zligwaterfalllvl1_to_lvl0001)
+model3.material = waterMaterialDown
+
+onTick(({ ambientAnimationDelta }) => {
+  waterMaterial.uniforms.time.value += ambientAnimationDelta
+  waterMaterialDown.uniforms.time.value += ambientAnimationDelta
 })
 
 watch(showWaterWireframe, () => {
@@ -56,16 +51,8 @@ watch(groupWrapperRef, (newValue) => {
     return
   }
 
-  const model1 = scenes.Waterfall.Object.zligwaterfalllvl0001.clone()
-  model1.material = waterMaterial
   addShadowAndAddToGroup(newValue, model1, 'receive')
-
-  const model2 = scenes.Waterfall.Object.zligwaterfalllvl1002.clone()
-  model2.material = waterMaterial
   addShadowAndAddToGroup(newValue, model2, 'receive')
-
-  const model3 = scenes.Waterfall.Object.zligwaterfalllvl1_to_lvl0001.clone()
-  model3.material = waterMaterialDown
   addShadowAndAddToGroup(newValue, model3, 'receive')
 })
 </script>

@@ -21,3 +21,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Generated glTF model files (from dependency `@todde.tv/gltf-type-toolkit`)
+*.gltf.d.ts
+*.gltf.js

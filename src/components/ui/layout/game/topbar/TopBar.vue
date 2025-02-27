@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import GameSpeedButton from '@/components/ui/layout/game/topbar/GameSpeedButton.vue'
 import Resources from '@/components/ui/Resources.vue'
-import useGameState from '@/composables/useGameState.js'
-import useGameTime, { GAME_TIME_FACTOR_FAST, GAME_TIME_FACTOR_FASTER, GAME_TIME_FACTOR_REGULAR } from '@/composables/useGameTime.js'
+import { useGameStateStore } from '@/composables/useGameStateStore.js'
+import { GAME_TIME_FACTOR_FAST, GAME_TIME_FACTOR_FASTER, GAME_TIME_FACTOR_REGULAR, useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { computed } from 'vue'
 
-const gameState = useGameState()
-const gameTime = useGameTime()
+const gameState = useGameStateStore()
+const gameTime = useGameTimeStore()
 
 // a computed property that rounds the current in-game time to the nearest 10-minute interval and returns
 // it as a localized, short-formatted time string (no minutes < 10 and no seconds).

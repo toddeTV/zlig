@@ -4,13 +4,13 @@ import SelectedBuildingDetails from '@/components/ui/layout/game/sidebar/Selecte
 import SelectedBuildingInConstruction from '@/components/ui/layout/game/sidebar/SelectedBuildingInConstruction.vue'
 import SelectedBuildingUpgrading from '@/components/ui/layout/game/sidebar/SelectedBuildingUpgrading.vue'
 import SelectedEmptyBuildingArea from '@/components/ui/layout/game/sidebar/SelectedEmptyBuildingArea.vue'
-import useGameState from '@/composables/useGameState.js'
-import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
+import { useGameStateStore } from '@/composables/useGameStateStore.js'
+import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 
-const { buildings } = storeToRefs(useGameState())
-const selectedBuildingArea = useSelectedBuildingArea()
+const { buildings } = storeToRefs(useGameStateStore())
+const selectedBuildingArea = useSelectedBuildingAreaStore()
 const selectedBuildingInstance = computed(() => selectedBuildingArea.id ? buildings.value[selectedBuildingArea.id] : undefined)
 
 // TODO bind this so that it is only active for real debug purposes
@@ -52,9 +52,9 @@ const hasDebug = ref(true)
     <DebugMenu v-if="hasDebug" />
 
     <div class="text-gray-600 text-sm p-2 flex justify-between">
-      <a href="https://github.com/toddeTV/zlig/" rel="noopener noreferrer" target="_blank">
-        &copy; {{ new Date().getFullYear() }} zlig
-      </a>
+      <RouterLink rel="noopener noreferrer" target="_blank" to="//github.com/toddeTV/zlig/">
+        &copy; 2024 - {{ new Date().getFullYear() }} zlig
+      </RouterLink>
 
       <!-- TODO Privacy Policy -->
       <!-- TODO Legal Notice -->
