@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import ToggleVisibilityButton from '@/components/ui/layout/game/debug/ToggleVisibilityButton.vue'
-import useDebugStore from '@/composables/useDebugStore'
-import useGameTime, { GAME_TIME_FACTOR_FASTER } from '@/composables/useGameTime.js'
-import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
+import { useDebugStore } from '@/composables/useDebugStore.js'
+import { GAME_TIME_FACTOR_FASTER, useGameTimeStore } from '@/composables/useGameTimeStore.js'
+import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
 import { storeToRefs } from 'pinia'
 
 const debug = useDebugStore()
-const gameTime = useGameTime()
-const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
+const { currentFactor } = storeToRefs(useGameTimeStore())
+const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingAreaStore())
 </script>
 
 <template>
@@ -48,13 +48,13 @@ const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
       <div class="flex gap-2 items-center w-max-full">
         <input
           id="gameTimeFactor"
-          v-model.number="gameTime.currentFactor"
+          v-model.number="currentFactor"
           class="w-2/3"
           :max="GAME_TIME_FACTOR_FASTER * 2"
           :min="0"
           type="range"
         >
-        <b>{{ gameTime.currentFactor.toLocaleString() }}</b>
+        <b>{{ currentFactor.toLocaleString() }}</b>
       </div>
       <p class="text-sm italic">
         each real time milliseconds progresses the game time by that much milliseconds

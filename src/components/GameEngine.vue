@@ -7,10 +7,10 @@ import Island from '@/components/models/Island.vue'
 import Ocean from '@/components/models/Ocean.vue'
 import Waterfall from '@/components/models/Waterfall.vue'
 import VisualHelper from '@/components/VisualHelper.vue'
-import useBuildingAreas from '@/composables/useBuildingAreas.js'
-import useGameTime from '@/composables/useGameTime.js'
-import useSelectedBuildingArea from '@/composables/useSelectedBuildingArea.js'
-import { getLeafObjects } from '@/utils/threeHelper'
+import { useBuildingAreasStore } from '@/composables/useBuildingAreasStore.js'
+import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
+import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
+import { getLeafObjects } from '@/utils/threeHelper.js'
 import { useLoop, useTresContext } from '@tresjs/core'
 import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { storeToRefs } from 'pinia'
@@ -29,7 +29,7 @@ onBeforeRender(({ delta }) => {
 
 init()
 
-const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
+const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingAreaStore())
 
 const outlinedObjects = computed(() => {
   if (!selectedBuildAreaId.value) {

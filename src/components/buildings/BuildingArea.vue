@@ -19,8 +19,8 @@ const props = defineProps<{
   rotation: Euler
 }>()
 
-const gameState = useGameState()
-const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingArea())
+const gameState = useGameStateStore()
+const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingAreaStore())
 
 const buildingInstance = computed(() => gameState.buildings[props.id])
 
