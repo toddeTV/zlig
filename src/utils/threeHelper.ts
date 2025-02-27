@@ -1,4 +1,4 @@
-import type { Group, Object3D, Scene } from 'three'
+import { type Group, Object3D, type Scene } from 'three'
 
 export function getLeafObjects(object: Object3D): Object3D[] {
   if (object.children.length === 0) {
