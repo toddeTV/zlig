@@ -15,9 +15,9 @@ import { useLoop, useTresContext } from '@tresjs/core'
 import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { storeToRefs } from 'pinia'
 import { BlendFunction } from 'postprocessing'
-import { computed, ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 
-const { scene } = useTresContext()
+const { renderer, scene } = useTresContext()
 const { onBeforeRender } = useLoop()
 const gameTime = useGameTimeStore()
 const { areas } = storeToRefs(useBuildingAreasStore())
@@ -44,6 +44,13 @@ const outlinedObjects = computed(() => {
 })
 
 const cameraMoved = ref(false)
+
+watchEffect(() => {
+  if (!renderer.value)
+    return
+  renderer.value.autoClearColor = false
+  // TODO stop watcher
+})
 </script>
 
 <template>
