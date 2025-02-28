@@ -2,14 +2,17 @@
 import ToggleVisibilityButton from '@/components/ui/layout/game/debug/ToggleVisibilityButton.vue'
 import { useDebugStore } from '@/composables/useDebugStore.js'
 import { GAME_TIME_FACTOR_FASTER, useGameTimeStore } from '@/composables/useGameTimeStore.js'
+import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
+import { storeToRefs } from 'pinia'
 
 const debug = useDebugStore()
-const gameTime = useGameTimeStore()
+const { currentFactor } = storeToRefs(useGameTimeStore())
+const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingAreaStore())
 </script>
 
 <template>
-  <div class="border-4 border-red-600 text-red-950 bg-red-100 p-2 border-dashed">
-    <h3 class="text-lg font-bold mb-2">
+  <div class="border-4 border-red-600 text-red-950 bg-red-100 p-2 border-dashed flex flex-col gap-y-4 w-full">
+    <h3 class="text-lg font-bold">
       Debug menu
     </h3>
 
@@ -31,23 +34,32 @@ const gameTime = useGameTimeStore()
       </ToggleVisibilityButton>
     </div>
 
-    <div class="mt-4 flex gap-2 items-center">
-      <label>
-        Current game time factor:
+    <div class="flex flex-col">
+      <div>
+        Selected Build Area:
+      </div>
+      <div>
+        {{ selectedBuildAreaId ?? '<none>' }}
+      </div>
+    </div>
 
+    <div class="flex flex-col">
+      <label for="gameTimeFactor">Current game time factor:</label>
+      <div class="flex gap-2 items-center w-max-full">
         <input
-          v-model.number="gameTime.currentFactor"
-          :max="GAME_TIME_FACTOR_FASTER * 3"
+          id="gameTimeFactor"
+          v-model.number="currentFactor"
+          class="w-2/3"
+          :max="GAME_TIME_FACTOR_FASTER * 2"
           :min="0"
           type="range"
         >
-      </label>
-
-      <b>{{ gameTime.currentFactor.toLocaleString() }}</b>
+        <b>{{ currentFactor.toLocaleString() }}</b>
+      </div>
+      <p class="text-sm italic">
+        each real time milliseconds progresses the game time by that much milliseconds
+      </p>
     </div>
-    <p class="text-sm italic">
-      each real time milliseconds progresses the game time by that much milliseconds
-    </p>
   </div>
 </template>
 
