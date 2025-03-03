@@ -16,7 +16,7 @@ import { useLoop, useTresContext } from '@tresjs/core'
 import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { storeToRefs } from 'pinia'
 import { BlendFunction } from 'postprocessing'
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref } from 'vue'
 
 const { scene } = useTresContext()
 const { onBeforeRender } = useLoop()
