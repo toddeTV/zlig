@@ -17,6 +17,7 @@ import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { storeToRefs } from 'pinia'
 import { BlendFunction } from 'postprocessing'
 import { computed, ref } from 'vue'
+import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
 
 const { scene } = useTresContext()
 const { onBeforeRender } = useLoop()
@@ -71,7 +72,9 @@ onBeforeRender(({ delta }) => {
     @pointer-down="() => cameraMoved = false"
   >
     <Suspense>
-      <Island />
+      <Island
+        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
+      />
     </Suspense>
 
     <Suspense>
@@ -87,6 +90,7 @@ onBeforeRender(({ delta }) => {
     <Suspense>
       <Ocean
         :position="[0, 0, 0]"
+        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
       />
     </Suspense>
 
