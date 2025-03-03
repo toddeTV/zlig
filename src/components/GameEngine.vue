@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BuildingArea from '@/components/buildings/BuildingArea.vue'
 import CameraAndControls from '@/components/CameraAndControls.vue'
-import DistanceFog from '@/components/DistanceFog.vue'
+import FixedDistanceFog from '@/components/FixedDistanceFog.vue'
 import Lights from '@/components/Lights.vue'
 import Island from '@/components/models/Island.vue'
 import Ocean from '@/components/models/Ocean.vue'
@@ -59,7 +59,7 @@ onBeforeRender(({ delta }) => {
   />
   <SkyDome />
   <Lights />
-  <DistanceFog />
+  <FixedDistanceFog />
 
   <TresGroup
     name="sceneGroup"
