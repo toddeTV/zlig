@@ -9,14 +9,16 @@ import Waterfall from '@/components/models/Waterfall.vue'
 import SkyDome from '@/components/SkyDome.vue'
 import VisualHelper from '@/components/VisualHelper.vue'
 import { useBuildingAreasStore } from '@/composables/useBuildingAreasStore.js'
+import { useDebugStore } from '@/composables/useDebugStore.js'
 import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
 import { getLeafObjects } from '@/utils/threeHelper.js'
 import { useLoop, useTresContext } from '@tresjs/core'
 import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
+import { useTimeoutFn } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { BlendFunction } from 'postprocessing'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 const { scene } = useTresContext()
 const { onBeforeRender } = useLoop()
@@ -25,8 +27,10 @@ const { areas } = storeToRefs(useBuildingAreasStore())
 const { init } = useBuildingAreasStore()
 
 const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingAreaStore())
+const { showCameraHelper } = storeToRefs(useDebugStore())
 
 const cameraMoved = ref(false)
+const showOutline = ref(false)
 
 // // Disable auto clear color to allow for constant outline color independent of the clear color.
 // // (When the clear color is a dark color, the outline color will be dark as well and therefore vanish.)
@@ -49,6 +53,19 @@ const outlinedObjects = computed(() => {
 
 onBeforeRender(({ delta }) => {
   gameTime.tick(delta)
+})
+
+// The post-processing outline effect breaks the scene when the active camera is changed, so initialize the effect
+// each time new when the camera was changed.
+const { start, stop } = useTimeoutFn(() => {
+  showOutline.value = true
+}, 150)
+watch(showCameraHelper, () => {
+  stop()
+  showOutline.value = false
+  start()
+}, {
+  immediate: true,
 })
 </script>
 
@@ -98,7 +115,10 @@ onBeforeRender(({ delta }) => {
   </TresGroup>
 
   <Suspense>
-    <EffectComposerPmndrs>
+    <!-- using `enabled` does not work - we have to remove and set it again, otherwise the debug camera bugs -->
+    <EffectComposerPmndrs
+      v-if="showOutline"
+    >
       <OutlinePmndrs
         :blend-function="BlendFunction.SCREEN"
         :edge-glow="10"
