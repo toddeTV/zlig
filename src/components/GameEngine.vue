@@ -1,33 +1,55 @@
 <script setup lang="ts">
 import BuildingArea from '@/components/buildings/BuildingArea.vue'
 import CameraAndControls from '@/components/CameraAndControls.vue'
-import DistanceFog from '@/components/DistanceFog.vue'
+import FixedDistanceFog from '@/components/FixedDistanceFog.vue'
 import Lights from '@/components/Lights.vue'
 import Island from '@/components/models/Island.vue'
 import Ocean from '@/components/models/Ocean.vue'
 import Waterfall from '@/components/models/Waterfall.vue'
+import SkyDome from '@/components/SkyDome.vue'
 import VisualHelper from '@/components/VisualHelper.vue'
 import { useBuildingAreasStore } from '@/composables/useBuildingAreasStore.js'
 import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
-import { useLoop } from '@tresjs/core'
+import { getLeafObjects } from '@/utils/threeHelper.js'
+import { useLoop, useTresContext } from '@tresjs/core'
+import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { BlendFunction } from 'postprocessing'
+import { computed, ref } from 'vue'
 
+const { scene } = useTresContext()
 const { onBeforeRender } = useLoop()
 const gameTime = useGameTimeStore()
 const { areas } = storeToRefs(useBuildingAreasStore())
 const { init } = useBuildingAreasStore()
 
-onBeforeRender(({ delta }) => {
-  gameTime.tick(delta)
-})
+const { id: selectedBuildAreaId } = storeToRefs(useSelectedBuildingAreaStore())
+
+const cameraMoved = ref(false)
+
+// // Disable auto clear color to allow for constant outline color independent of the clear color.
+// // (When the clear color is a dark color, the outline color will be dark as well and therefore vanish.)
+// // Alternative solution: Use sky dome instead of clear color as sky (Done in this project!)
+// renderer.value.autoClearColor = false
 
 init()
 
-const selectedBuildingArea = useSelectedBuildingAreaStore()
+const outlinedObjects = computed(() => {
+  if (!selectedBuildAreaId.value) {
+    return []
+  }
+  // const selectedBuildingArea = scene.value.getObjectByName(selectedBuildAreaId.value)
+  const selectedBuildingArea = scene.value.getObjectByName(`building-area-${selectedBuildAreaId.value}`)
+  if (!selectedBuildingArea) {
+    return []
+  }
+  return getLeafObjects(selectedBuildingArea)
+})
 
-const cameraMoved = ref(false)
+onBeforeRender(({ delta }) => {
+  gameTime.tick(delta)
+})
 </script>
 
 <template>
@@ -35,14 +57,15 @@ const cameraMoved = ref(false)
   <CameraAndControls
     @camera-moved="() => cameraMoved = true"
   />
+  <SkyDome />
   <Lights />
-  <DistanceFog />
+  <FixedDistanceFog />
 
   <TresGroup
     name="sceneGroup"
     @click="() => {
       if (!cameraMoved) {
-        selectedBuildingArea.id = null
+        selectedBuildAreaId = null
       }
     }"
     @pointer-down="() => cameraMoved = false"
@@ -73,6 +96,21 @@ const cameraMoved = ref(false)
       />
     </Suspense>
   </TresGroup>
+
+  <Suspense>
+    <EffectComposerPmndrs>
+      <OutlinePmndrs
+        :blend-function="BlendFunction.SCREEN"
+        :edge-glow="10"
+        :edge-strength="2000"
+        hidden-edge-color="#ff0000"
+        :outlined-objects="outlinedObjects"
+        :pattern-scale="50"
+        visible-edge-color="#c9c9c9"
+        :x-ray="false"
+      />
+    </EffectComposerPmndrs>
+  </Suspense>
 </template>
 
 <style scoped>
