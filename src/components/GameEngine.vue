@@ -103,8 +103,11 @@ onBeforeRender(({ delta }) => {
         :blend-function="BlendFunction.SCREEN"
         :edge-glow="10"
         :edge-strength="2000"
+        hidden-edge-color="#ff0000"
         :outlined-objects="outlinedObjects"
         :pattern-scale="50"
+        visible-edge-color="#c9c9c9"
+        :x-ray="false"
       />
     </EffectComposerPmndrs>
   </Suspense>

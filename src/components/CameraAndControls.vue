@@ -55,7 +55,7 @@ const cameraControlsProps: CameraControlsProps = {
 
 const perspectiveCamera = new PerspectiveCamera()
 perspectiveCamera.position.fromArray(cameraStartingPosition.toArray())
-perspectiveCamera.far = 200
+perspectiveCamera.far = 270
 
 watch(cameraControlsRef, (newValue) => {
   if (!newValue || !newValue.instance) {
