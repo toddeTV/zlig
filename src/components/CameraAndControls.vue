@@ -36,7 +36,7 @@ registerCamera(perspectiveCamera.value)
 
 // create a perspective camera as debug camera
 const perspectiveDebugCamera = ref(perspectiveCamera.value.clone()) // clone to set the same settings as the normal camera as default
-perspectiveDebugCamera.value.far = 1000
+perspectiveDebugCamera.value.far = 2000
 registerCamera(perspectiveDebugCamera.value)
 
 // create helper boxes for showing in debug
