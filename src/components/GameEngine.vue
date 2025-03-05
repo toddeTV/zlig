@@ -19,6 +19,7 @@ import { useTimeoutFn } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { BlendFunction } from 'postprocessing'
 import { computed, ref, watch } from 'vue'
+import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
 
 const { scene } = useTresContext()
 const { onBeforeRender } = useLoop()
