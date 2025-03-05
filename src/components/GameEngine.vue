@@ -75,7 +75,9 @@ watch(showCameraHelper, () => {
   <CameraAndControls
     @camera-moved="() => cameraMoved = true"
   />
-  <SkyDome />
+  <Suspense>
+    <SkyDome />
+  </Suspense>
   <Lights />
   <FixedDistanceFog />
 

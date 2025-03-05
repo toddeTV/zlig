@@ -32,11 +32,12 @@ watch(showWaterWireframe, () => {
   immediate: true,
 })
 
-watch(groupWrapperRef, (newValue) => {
+const { stop } = watch(groupWrapperRef, (newValue) => {
   if (!newValue) {
     return
   }
   addShadowAndAddToGroup(newValue, model, 'receive')
+  stop()
 })
 </script>
 
