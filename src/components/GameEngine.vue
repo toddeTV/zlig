@@ -88,7 +88,9 @@ watch(showCameraHelper, () => {
     @pointer-down="() => cameraMoved = false"
   >
     <Suspense>
-      <Island />
+      <Island
+        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
+      />
     </Suspense>
 
     <Suspense>
@@ -104,6 +106,7 @@ watch(showCameraHelper, () => {
     <Suspense>
       <Ocean
         :position="[0, 0, 0]"
+        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
       />
     </Suspense>
 
