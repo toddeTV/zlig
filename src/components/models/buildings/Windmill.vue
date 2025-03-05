@@ -23,11 +23,12 @@ const building = (await getNode(WindmillScene)).clone()
 building.position.copy(props.position)
 building.rotation.copy(props.rotation)
 
-watch(groupWrapperRef, (newValue) => {
+const { stop } = watch(groupWrapperRef, (newValue) => {
   if (!newValue) {
     return
   }
   addShadowAndAddToGroup(newValue, building)
+  stop()
 })
 
 watch(buildingInstance, (newValue) => {
