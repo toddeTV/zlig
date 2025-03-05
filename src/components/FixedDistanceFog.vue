@@ -4,7 +4,7 @@ import { useDebugStore } from '@/composables/useDebugStore.js'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { Mesh, MeshBasicMaterial, TorusGeometry } from 'three'
-import { watch, watchEffect } from 'vue'
+import { watch } from 'vue'
 
 // TODO Fixed fog missing completely. The Torus here should have a Ray Marching depth gradient shader applied to it, so
 // that it has a gradient from 1000% transparency to 0% transparency with a inner solid gradient to mimic a fog effect.
@@ -20,8 +20,8 @@ const torusMaterial = new MeshBasicMaterial({ color: 0x3498DB })
 const torus = new Mesh(torusGeometry, torusMaterial)
 torus.rotation.x = Math.PI / 2
 
-watchEffect(() => {
-  torusMaterial.color = lightColors.value.sky
+watch(() => lightColors.value.sky, (newValue) => {
+  torusMaterial.color = newValue
 })
 
 watch(showFog, (newValue) => {

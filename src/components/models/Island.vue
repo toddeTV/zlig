@@ -11,12 +11,12 @@ seabedPlane.castShadow = false
 
 const groupWrapperRef = shallowRef()
 
-watch(groupWrapperRef, (newValue: Group | undefined) => {
+const { stop } = watch(groupWrapperRef, (newValue: Group | undefined) => {
   if (!newValue) {
     return
   }
-
   addShadowAndAddToGroup(newValue, model, 'both')
+  stop()
 })
 </script>
 

@@ -17,11 +17,12 @@ const building = (await getNode(BuildAreaScene.zligbuildAreabase001)).clone()
 building.position.copy(props.position)
 building.rotation.copy(props.rotation)
 
-watch(groupWrapperRef, (newValue) => {
+const { stop } = watch(groupWrapperRef, (newValue) => {
   if (!newValue) {
     return
   }
   addShadowAndAddToGroup(newValue, building)
+  stop()
 })
 </script>
 
