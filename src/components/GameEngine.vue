@@ -53,6 +53,13 @@ const outlinedObjects = computed(() => {
   return getLeafObjects(selectedBuildingArea)
 })
 
+function deselectBuildAreaIfCameraIsNotMoved(event: TresJsClickEvent) {
+  if (!cameraMoved.value) {
+    event.stopPropagation()
+    selectedBuildAreaId.value = null
+  }
+}
+
 onBeforeRender(({ delta }) => {
   gameTime.tick(delta)
 })
@@ -80,16 +87,12 @@ watch(showCameraHelper, () => {
 
   <TresGroup
     name="sceneGroup"
-    @click="() => {
-      if (!cameraMoved) {
-        selectedBuildAreaId = null
-      }
-    }"
+    @click="(e: TresJsClickEvent) => { deselectBuildAreaIfCameraIsNotMoved(e) }"
     @pointer-down="() => cameraMoved = false"
   >
     <Suspense>
       <Island
-        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
+        @click="(e: TresJsClickEvent) => { deselectBuildAreaIfCameraIsNotMoved(e) }"
       />
     </Suspense>
 
@@ -104,9 +107,7 @@ watch(showCameraHelper, () => {
     </Suspense>
 
     <Suspense>
-      <Ocean
-        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
-      />
+      <Ocean />
     </Suspense>
 
     <Suspense>
@@ -114,15 +115,11 @@ watch(showCameraHelper, () => {
     </Suspense>
 
     <Suspense>
-      <SkyDome
-        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
-      />
+      <SkyDome />
     </Suspense>
 
     <Suspense>
-      <OceanFloor
-        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
-      />
+      <OceanFloor />
     </Suspense>
 
     <DistanceFog />
