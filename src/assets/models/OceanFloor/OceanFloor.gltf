@@ -13,7 +13,7 @@
 	"scene":0,
 	"scenes":[
 		{
-			"name":"SeaBed",
+			"name":"OceanFloor",
 			"nodes":[
 				0
 			]
@@ -22,7 +22,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"zlig.island.lvl0_seabed.001",
+			"name":"ocean_floor",
 			"scale":[
 				150,
 				1,
@@ -135,7 +135,7 @@
 	"buffers":[
 		{
 			"byteLength":1504,
-			"uri":"SeaBed.bin"
+			"uri":"OceanFloor.bin"
 		}
 	]
 }

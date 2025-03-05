@@ -5,9 +5,9 @@ import DistanceFog from '@/components/DistanceFog.vue'
 import Lights from '@/components/Lights.vue'
 import Island from '@/components/models/Island.vue'
 import Ocean from '@/components/models/Ocean.vue'
+import OceanFloor from '@/components/models/OceanFloor.vue'
+import SkyDome from '@/components/models/SkyDome.vue'
 import Waterfall from '@/components/models/Waterfall.vue'
-import SeaBed from '@/components/SeaBed.vue'
-import SkyDome from '@/components/SkyDome.vue'
 import VisualHelper from '@/components/VisualHelper.vue'
 import { useBuildingAreasStore } from '@/composables/useBuildingAreasStore.js'
 import { useDebugStore } from '@/composables/useDebugStore.js'
@@ -120,7 +120,7 @@ watch(showCameraHelper, () => {
     </Suspense>
 
     <Suspense>
-      <SeaBed
+      <OceanFloor
         @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
       />
     </Suspense>
