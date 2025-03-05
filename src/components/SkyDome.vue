@@ -1,30 +1,39 @@
 <script setup lang="ts">
+import { getNode, SkyDomeScene } from '@/assets/models/SkyDome/SkyDome.gltf.js'
 import { useCalculatedLightsStore } from '@/composables/useCalculatedLightsStore.js'
-import { useTresContext } from '@tresjs/core'
+import { addToGroup } from '@/utils/threeHelper.js'
 import { storeToRefs } from 'pinia'
-import { BackSide, Mesh, MeshBasicMaterial, SphereGeometry } from 'three'
-import { watchEffect } from 'vue'
+import { MeshBasicMaterial } from 'three'
+import { shallowRef, watch } from 'vue'
 
-const { scene } = useTresContext()
 const { lightColors } = storeToRefs(useCalculatedLightsStore())
 
-const sky = new Mesh(
-  new SphereGeometry(150, 32, 32),
-  new MeshBasicMaterial({
-    color: lightColors.value.sky,
-    side: BackSide,
-  }),
-)
+const groupWrapperRef = shallowRef()
 
-scene.value.add(sky)
+const material = new MeshBasicMaterial({
+  color: lightColors.value.sky,
+})
 
-watchEffect(() => {
-  sky.material.color = lightColors.value.sky
+const model = await getNode(SkyDomeScene.Sphere)
+model.material = material
+
+const { stop } = watch(groupWrapperRef, (newValue) => {
+  if (!newValue) {
+    return
+  }
+  addToGroup(newValue, model)
+  stop()
+})
+
+watch(() => lightColors.value.sky, (newValue) => {
+  material.color = newValue
 })
 </script>
 
-<!-- eslint-disable-next-line vue/valid-template-root -->
 <template>
+  <TresGroup
+    ref="groupWrapperRef"
+  />
 </template>
 
 <style scoped>
