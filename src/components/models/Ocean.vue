@@ -2,7 +2,7 @@
 import { getNode, OceanScene } from '@/assets/models/Ocean/Ocean.gltf.js'
 import { useDebugStore } from '@/composables/useDebugStore.js'
 import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
-import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
+import { addShadowAndAddToGroup, removeFogDependence } from '@/utils/threeHelper.js'
 import { getWaterMaterial } from '@/utils/WaterShader.js'
 import { storeToRefs } from 'pinia'
 import { shallowRef, watch } from 'vue'
@@ -13,6 +13,8 @@ const { showWaterWireframe } = storeToRefs(useDebugStore())
 const groupWrapperRef = shallowRef()
 
 const waterMaterial = getWaterMaterial({
+  fogActive: true,
+  fogDistanceOffset: 30,
   relativeHeightOffset: -0.68,
   waveAmplitude: 2.0,
   waveSpeed: 1.0,
@@ -36,7 +38,7 @@ const { stop } = watch(groupWrapperRef, (newValue) => {
   if (!newValue) {
     return
   }
-  addShadowAndAddToGroup(newValue, model, 'receive')
+  addShadowAndAddToGroup(newValue, model, 'receive', true)
   stop()
 })
 </script>

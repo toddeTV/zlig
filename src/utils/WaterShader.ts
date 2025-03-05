@@ -1,5 +1,6 @@
-import { MeshStandardMaterial, UniformsUtils } from 'three'
-import type { ColorRepresentation } from 'three'
+import { overrideFogShader } from '@/utils/threeHelper.js'
+import { MeshStandardMaterial, UniformsUtils, Vector3 } from 'three'
+import type { ColorRepresentation, WebGLProgramParametersWithUniforms } from 'three'
 
 /**
  * Wave displacement code (getWave and wavedx functions) by afl_ext provided under MIT License (https://www.shadertoy.com/view/MdXyzX)
@@ -9,6 +10,9 @@ import type { ColorRepresentation } from 'three'
  */
 export function getWaterMaterial(
   {
+    fogActive = false,
+    fogCenter = new Vector3(0, 0, 0),
+    fogDistanceOffset = 0,
     relativeHeightOffset = -0.75,
     waterColor = 0x0384C4,
     waveAmplitude = 1.8,
@@ -16,6 +20,9 @@ export function getWaterMaterial(
     waveTangentialAmplitude = 1.0,
   }:
   {
+    fogActive?: boolean
+    fogCenter?: Vector3
+    fogDistanceOffset?: number
     waterColor?: ColorRepresentation
     waveSpeed?: number
     waveAmplitude?: number
@@ -35,7 +42,7 @@ export function getWaterMaterial(
 
   const timeUniform = { time: { value: 0 } }
 
-  waterMaterial.onBeforeCompile = function (shader) {
+  waterMaterial.onBeforeCompile = function (shader: WebGLProgramParametersWithUniforms) {
     shader.uniforms = UniformsUtils.merge([
       shader.uniforms,
       timeUniform,
@@ -60,6 +67,11 @@ export function getWaterMaterial(
        uniform float waveTangentialAmplitude;
        uniform float relativeHeightOffset;`,
     )
+
+    if (fogActive) {
+      overrideFogShader(shader, fogCenter, fogDistanceOffset)
+    }
+
     shader.vertexShader = shader.vertexShader.replace(
       `void main() {`,
       `vec2 hash22(vec2 p)
