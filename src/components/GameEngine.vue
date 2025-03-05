@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import BuildingArea from '@/components/buildings/BuildingArea.vue'
 import CameraAndControls from '@/components/CameraAndControls.vue'
-import FixedDistanceFog from '@/components/FixedDistanceFog.vue'
+import DistanceFog from '@/components/DistanceFog.vue'
 import Lights from '@/components/Lights.vue'
 import Island from '@/components/models/Island.vue'
 import Ocean from '@/components/models/Ocean.vue'
 import Waterfall from '@/components/models/Waterfall.vue'
+import SeaBed from '@/components/SeaBed.vue'
 import SkyDome from '@/components/SkyDome.vue'
 import VisualHelper from '@/components/VisualHelper.vue'
 import { useBuildingAreasStore } from '@/composables/useBuildingAreasStore.js'
@@ -18,8 +19,10 @@ import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { useTimeoutFn } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { BlendFunction } from 'postprocessing'
+import { Material, Mesh } from 'three'
 import { computed, ref, watch } from 'vue'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
+import type { Object3D } from 'three'
 
 const { scene } = useTresContext()
 const { onBeforeRender } = useLoop()
@@ -75,11 +78,7 @@ watch(showCameraHelper, () => {
   <CameraAndControls
     @camera-moved="() => cameraMoved = true"
   />
-  <Suspense>
-    <SkyDome />
-  </Suspense>
   <Lights />
-  <FixedDistanceFog />
 
   <TresGroup
     name="sceneGroup"
@@ -108,16 +107,27 @@ watch(showCameraHelper, () => {
 
     <Suspense>
       <Ocean
-        :position="[0, 0, 0]"
         @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
       />
     </Suspense>
 
     <Suspense>
-      <Waterfall
-        :position="[0, 0, 0]"
+      <Waterfall />
+    </Suspense>
+
+    <Suspense>
+      <SkyDome
+        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
       />
     </Suspense>
+
+    <Suspense>
+      <SeaBed
+        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
+      />
+    </Suspense>
+
+    <DistanceFog />
   </TresGroup>
 
   <Suspense>
