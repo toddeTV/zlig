@@ -58,7 +58,9 @@ onBeforeRender(({ delta }) => {
   <CameraAndControls
     @camera-moved="() => cameraMoved = true"
   />
-  <SkyDome />
+  <Suspense>
+    <SkyDome />
+  </Suspense>
   <Lights />
   <FixedDistanceFog />
 
