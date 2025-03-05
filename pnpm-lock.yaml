@@ -57,6 +57,9 @@ importers:
       '@vue/tsconfig':
         specifier: ~0.5.1
         version: 0.5.1
+      '@vueuse/core':
+        specifier: ~12.7.0
+        version: 12.7.0(typescript@5.5.4)
       autoprefixer:
         specifier: ~10.4.20
         version: 10.4.20(postcss@8.4.45)
