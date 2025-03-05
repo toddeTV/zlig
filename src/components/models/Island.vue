@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { getNode, IslandScene } from '@/assets/models/Island/Island.gltf.js'
-import { addShadowAndAddToGroup, overrideFogShader, removeFogDependence } from '@/utils/threeHelper.js'
-import { Mesh, MeshStandardMaterial } from 'three'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
 import { shallowRef, watch } from 'vue'
-import type { Group, Material } from 'three'
+import type { Group } from 'three'
 
 const model = await getNode(IslandScene)
 

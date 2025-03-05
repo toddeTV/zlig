@@ -2,7 +2,7 @@
 import { getNode, OceanScene } from '@/assets/models/Ocean/Ocean.gltf.js'
 import { useDebugStore } from '@/composables/useDebugStore.js'
 import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
-import { addShadowAndAddToGroup, removeFogDependence } from '@/utils/threeHelper.js'
+import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
 import { getWaterMaterial } from '@/utils/WaterShader.js'
 import { storeToRefs } from 'pinia'
 import { shallowRef, watch } from 'vue'

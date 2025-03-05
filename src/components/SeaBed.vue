@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { getNode, SeaBedScene } from '@/assets/models/SeaBed/SeaBed.gltf.js'
-import { useCalculatedLightsStore } from '@/composables/useCalculatedLightsStore.js'
-import { addToGroup, overrideFogShader, removeFogDependence } from '@/utils/threeHelper.js'
-import { storeToRefs } from 'pinia'
-import { MeshBasicMaterial, MeshStandardMaterial, Vector3, type WebGLProgramParametersWithUniforms } from 'three'
+import { addToGroup, overrideFogShader } from '@/utils/threeHelper.js'
+import { Vector3, type WebGLProgramParametersWithUniforms } from 'three'
 import { shallowRef, watch } from 'vue'
 
 const groupWrapperRef = shallowRef()

@@ -19,10 +19,8 @@ import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { useTimeoutFn } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { BlendFunction } from 'postprocessing'
-import { Material, Mesh } from 'three'
 import { computed, ref, watch } from 'vue'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
-import type { Object3D } from 'three'
 
 const { scene } = useTresContext()
 const { onBeforeRender } = useLoop()
