@@ -43,6 +43,10 @@ export function getWaterMaterial(
   const timeUniform = { time: { value: 0 } }
 
   waterMaterial.onBeforeCompile = function (shader: WebGLProgramParametersWithUniforms) {
+    if (fogActive) {
+      overrideFogShader(shader, fogCenter, fogDistanceOffset)
+    }
+
     shader.uniforms = UniformsUtils.merge([
       shader.uniforms,
       timeUniform,
@@ -67,10 +71,6 @@ export function getWaterMaterial(
        uniform float waveTangentialAmplitude;
        uniform float relativeHeightOffset;`,
     )
-
-    if (fogActive) {
-      overrideFogShader(shader, fogCenter, fogDistanceOffset)
-    }
 
     shader.vertexShader = shader.vertexShader.replace(
       `void main() {`,
