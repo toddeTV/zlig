@@ -14,7 +14,6 @@ const groupWrapperRef = shallowRef()
 
 const waterMaterial = getWaterMaterial({
   fogActive: true,
-  fogDistanceOffset: 30,
   relativeHeightOffset: -0.68,
   waveAmplitude: 2.0,
   waveSpeed: 1.0,
