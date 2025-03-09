@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import BuildingArea from '@/components/buildings/BuildingArea.vue'
 import CameraAndControls from '@/components/CameraAndControls.vue'
-import FixedDistanceFog from '@/components/FixedDistanceFog.vue'
+import DistanceFog from '@/components/DistanceFog.vue'
 import Lights from '@/components/Lights.vue'
 import Island from '@/components/models/Island.vue'
 import Ocean from '@/components/models/Ocean.vue'
+import OceanFloor from '@/components/models/OceanFloor.vue'
+import SkyDome from '@/components/models/SkyDome.vue'
 import Waterfall from '@/components/models/Waterfall.vue'
-import SkyDome from '@/components/SkyDome.vue'
 import VisualHelper from '@/components/VisualHelper.vue'
 import { useBuildingAreasStore } from '@/composables/useBuildingAreasStore.js'
 import { useDebugStore } from '@/composables/useDebugStore.js'
@@ -52,6 +53,13 @@ const outlinedObjects = computed(() => {
   return getLeafObjects(selectedBuildingArea)
 })
 
+function deselectBuildAreaIfCameraIsNotMoved(event: TresJsClickEvent) {
+  if (!cameraMoved.value) {
+    event.stopPropagation()
+    selectedBuildAreaId.value = null
+  }
+}
+
 onBeforeRender(({ delta }) => {
   gameTime.tick(delta)
 })
@@ -75,24 +83,16 @@ watch(showCameraHelper, () => {
   <CameraAndControls
     @camera-moved="() => cameraMoved = true"
   />
-  <Suspense>
-    <SkyDome />
-  </Suspense>
   <Lights />
-  <FixedDistanceFog />
 
   <TresGroup
     name="sceneGroup"
-    @click="() => {
-      if (!cameraMoved) {
-        selectedBuildAreaId = null
-      }
-    }"
+    @click="(e: TresJsClickEvent) => { deselectBuildAreaIfCameraIsNotMoved(e) }"
     @pointer-down="() => cameraMoved = false"
   >
     <Suspense>
       <Island
-        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
+        @click="(e: TresJsClickEvent) => { deselectBuildAreaIfCameraIsNotMoved(e) }"
       />
     </Suspense>
 
@@ -107,17 +107,22 @@ watch(showCameraHelper, () => {
     </Suspense>
 
     <Suspense>
-      <Ocean
-        :position="[0, 0, 0]"
-        @click="(e: TresJsClickEvent) => { e.stopPropagation() }"
-      />
+      <Ocean />
     </Suspense>
 
     <Suspense>
-      <Waterfall
-        :position="[0, 0, 0]"
-      />
+      <Waterfall />
     </Suspense>
+
+    <Suspense>
+      <SkyDome />
+    </Suspense>
+
+    <Suspense>
+      <OceanFloor />
+    </Suspense>
+
+    <DistanceFog />
   </TresGroup>
 
   <Suspense>

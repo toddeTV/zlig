@@ -5,9 +5,6 @@ import { shallowRef, watch } from 'vue'
 import type { Group } from 'three'
 
 const model = await getNode(IslandScene)
-const seabedPlane = await getNode(IslandScene.zligislandlvl0_seabed001)
-seabedPlane.receiveShadow = false
-seabedPlane.castShadow = false
 
 const groupWrapperRef = shallowRef()
 
