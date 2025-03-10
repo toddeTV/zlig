@@ -11,20 +11,21 @@ const building: BuildingType = {
   id: 'Blacksmith',
   levelProgression: new LinearLevelProgression({
     buildingDuration: {
-      additionalPerLevel: Duration.fromHours(new Big('2.5')),
-      initial: Duration.fromHours(new Big('10')),
+      additionalPerLevel: Duration.fromHours(new Big('4')),
+      initial: Duration.fromHours(new Big('15')),
     },
     costs: {
-      additionalPerLevel: new ResourceRecord({ gold: new Big('20') }),
+      additionalPerLevel: new ResourceRecord({ gold: new Big('60') }),
       initial: new ResourceRecord({ gold: new Big('60') }),
     },
     getModel: () => markRaw(Blacksmith),
     income: {
-      additionalPerLevel: resourcesPerHour({ gold: new Big('0.2') }),
-      initial: resourcesPerHour({ gold: new Big('0.55') }),
+      additionalPerLevel: resourcesPerHour({ gold: new Big('0.35') }),
+      initial: resourcesPerHour({ gold: new Big('0.7') }),
     },
+    maxLevel: 5,
   }),
-  maxInstances: 7,
+  maxInstances: 2,
   name: 'Blacksmith',
 }
 
