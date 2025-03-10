@@ -325,41 +325,24 @@ Used programs/ softwares, services and dependencies - besides the ones in `./pac
 - [Blender](https://www.blender.org/) was used as software for creating and editing 3D models.
 - [ChatGPT](https://chatgpt.com/) used for DALL-E image generation, text based questions and programming code generation.
 
-Used assets/ materials including images and 3D models:<br>
-_(Prefix `ea` for `external asset`.)_
+Used assets/ materials including images and 3D models:
 
-- Internally identified with ID `ea1`:
-  - Name: `Japanese Bridge Garden`
+- Internally identified with ID `14`:
+  - Name: `Nature Kit`
   - Cost: free
-  - License: [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/) (commercial use allowed, credits needed)
-  - Author: [libblekibble](https://sketchfab.com/libblekibble)
+  - License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (commercial use allowed, no credits needed)
+  - Author: [Kenney](https://kenney.nl/)
   - Downloaded:
-    - Date: 2024-11-06
-    - From: [Sketchfab](https://skfb.ly/oqyrN)
-- Internally identified with ID `ea2`:
-  - Name: `Low Poly Japanese Restaurant props & environment pack`
+    - Date: 2025-03-04
+    - From: [kenney](https://kenney.nl/assets/nature-kit)
+- Internally identified with ID `19`:
+  - Name: `KayKit - Medieval Hexagon Pack`
   - Cost: free
-  - License: [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/) (commercial use allowed, credits needed)
-  - Author: [Asset Kings](https://www.artstation.com/assetkings9)
+  - License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (commercial use allowed, no credits needed)
+  - Author: [Kay Lousberg](https://kaylousberg.itch.io/)
   - Downloaded:
-    - Date: 2024-06-28
-    - From: [ArtStation](https://www.artstation.com/marketplace/p/yB0RG/low-poly-japanese-restaurant-props-environment-pack)
-- Internally identified with ID `ea3`:
-  - Name: `Wheat Farm At Sunset`
-  - Cost: free
-  - License: [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/) (commercial use allowed, credits needed)
-  - Author: [libblekibble](https://sketchfab.com/libblekibble)
-  - Downloaded:
-    - Date: 2024-11-06
-    - From: [Sketchfab](https://skfb.ly/osu7t)
-- Internally identified with ID `ea4`:
-  - Name: `Japanese low poly building`
-  - Cost: free
-  - License: [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/) (commercial use allowed, credits needed)
-  - Author: [NemerionRae](https://sketchfab.com/NemerionRae)
-  - Downloaded:
-    - Date: 2024-11-06
-    - From: [Sketchfab](https://skfb.ly/otNuU)
+    - Date: 2025-03-04
+    - From: [itch.io](https://kaylousberg.itch.io/kaykit-medieval-hexagon)
 
 ## License
 
