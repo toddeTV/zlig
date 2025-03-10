@@ -13,7 +13,7 @@ const props = defineProps<{
 
 const groupWrapperRef = shallowRef<Group>()
 
-const building = (await getNode(BuildAreaScene.zligbuildAreabase001)).clone()
+const building = (await getNode(BuildAreaScene)).clone()
 building.position.copy(props.position)
 building.rotation.copy(props.rotation)
 

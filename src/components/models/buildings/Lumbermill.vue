@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { BuildingsScene, getNode } from '@/assets/models/Buildings/Buildings.gltf.js'
-import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
 import { shallowRef, toRef, watch } from 'vue'
 import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
@@ -15,11 +14,9 @@ const props = defineProps<{
 
 const buildingInstance = toRef(props, 'buildingInstance')
 
-const { onTick } = useGameTimeStore()
-
 const groupWrapperRef = shallowRef<Group>()
 
-const building = (await getNode(BuildingsScene.building_windmill_yellow003)).clone()
+const building = (await getNode(BuildingsScene.building_lumbermill_yellow003)).clone()
 building.position.copy(props.position)
 building.rotation.copy(props.rotation)
 
@@ -34,15 +31,6 @@ const { stop } = watch(groupWrapperRef, (newValue) => {
 watch(buildingInstance, (newValue) => {
   // scale size infinitely linearly
   building.scale.setScalar(1 + 0.1 * newValue.level)
-})
-
-// animate the windmill
-onTick(({ ambientAnimationDelta }) => {
-  // TODO use own `getNode` for direct node access and not depth first search via `getObjectByName`
-  const turbine = groupWrapperRef.value?.getObjectByName('building_windmill_top_fan_yellow003')
-  if (turbine) {
-    turbine.rotateZ(ambientAnimationDelta * 2)
-  }
 })
 </script>
 
