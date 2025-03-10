@@ -314,6 +314,7 @@ Honorable mentions to people that helped this project:
 
 - [Andreas Fehn](https://github.com/fehnomenal) helped with the project. Thank you <3
 - [Moritz Starke](https://github.com/Myzios) helped with general 3D and Blender questions. Thanks mate <3
+- [gundul0](https://github.com/gundul0) helped with the island's design concept and overall concept ideas. Thanks a lot <3
 
 Respectable mentions to projects that helped this project:
 
