@@ -11,7 +11,7 @@ import { useBuildingAreasStore } from '@/composables/useBuildingAreasStore.js'
 import { useDebugStore } from '@/composables/useDebugStore.js'
 import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
-import { getLeafObjects } from '@/utils/threeHelper.js'
+import { getAllObjects } from '@/utils/threeHelper.js'
 import { useLoop, useTresContext } from '@tresjs/core'
 import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { useTimeoutFn } from '@vueuse/core'
@@ -48,7 +48,7 @@ const outlinedObjects = computed(() => {
   if (!selectedBuildingArea) {
     return []
   }
-  return getLeafObjects(selectedBuildingArea)
+  return getAllObjects(selectedBuildingArea)
 })
 
 function deselectBuildAreaIfCameraIsNotMoved(event: TresJsClickEvent) {
