@@ -11,20 +11,21 @@ const building: BuildingType = {
   id: 'HomeA',
   levelProgression: new LinearLevelProgression({
     buildingDuration: {
-      additionalPerLevel: Duration.fromHours(new Big('2.5')),
-      initial: Duration.fromHours(new Big('10')),
+      additionalPerLevel: Duration.fromHours(new Big('1.5')),
+      initial: Duration.fromHours(new Big('5')),
     },
     costs: {
-      additionalPerLevel: new ResourceRecord({ gold: new Big('20') }),
-      initial: new ResourceRecord({ gold: new Big('60') }),
+      additionalPerLevel: new ResourceRecord({ gold: new Big('25') }),
+      initial: new ResourceRecord({ gold: new Big('20') }),
     },
     getModel: () => markRaw(HomeA),
     income: {
-      additionalPerLevel: resourcesPerHour({ gold: new Big('0.2') }),
-      initial: resourcesPerHour({ gold: new Big('0.55') }),
+      additionalPerLevel: resourcesPerHour({ gold: new Big('0.05') }),
+      initial: resourcesPerHour({ gold: new Big('0.2') }),
     },
+    maxLevel: 4,
   }),
-  maxInstances: 7,
+  maxInstances: undefined,
   name: 'Home A',
 }
 
