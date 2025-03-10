@@ -4,7 +4,16 @@ export function getLeafObjects(object: Object3D): Object3D[] {
   if (object.children.length === 0) {
     return [object]
   }
-  return object.children.flatMap(child => getLeafObjects(child))
+  const children = object.children.flatMap(child => getLeafObjects(child))
+  return children
+}
+
+export function getAllObjects(object: Object3D): Object3D[] {
+  if (object.children.length === 0) {
+    return [object]
+  }
+  const children = object.children.flatMap(child => getAllObjects(child))
+  return [object, ...children]
 }
 
 export function addShadow(

@@ -8,7 +8,7 @@ import type { BuildingType } from '@/game-logic/types.js'
 
 const building: BuildingType = {
   description: 'A innovative conception which extracts gold from the wind by rotating sharp blades 🤯',
-  id: 'windmill',
+  id: 'Windmill',
   levelProgression: new LinearLevelProgression({
     buildingDuration: {
       additionalPerLevel: Duration.fromHours(new Big('48')),
