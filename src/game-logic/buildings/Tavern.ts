@@ -20,11 +20,12 @@ const building: BuildingType = {
     },
     getModel: () => markRaw(Tavern),
     income: {
-      additionalPerLevel: resourcesPerHour({ gold: new Big('0.2') }),
-      initial: resourcesPerHour({ gold: new Big('0.55') }),
+      additionalPerLevel: resourcesPerHour({ gold: new Big('0.15') }),
+      initial: resourcesPerHour({ gold: new Big('0.6') }),
     },
+    maxLevel: 3,
   }),
-  maxInstances: 7,
+  maxInstances: 1,
   name: 'Tavern',
 }
 

@@ -11,20 +11,21 @@ const building: BuildingType = {
   id: 'Lumbermill',
   levelProgression: new LinearLevelProgression({
     buildingDuration: {
-      additionalPerLevel: Duration.fromHours(new Big('2.5')),
-      initial: Duration.fromHours(new Big('10')),
+      additionalPerLevel: Duration.fromHours(new Big('1.5')),
+      initial: Duration.fromHours(new Big('12')),
     },
     costs: {
       additionalPerLevel: new ResourceRecord({ gold: new Big('20') }),
-      initial: new ResourceRecord({ gold: new Big('60') }),
+      initial: new ResourceRecord({ gold: new Big('90') }),
     },
     getModel: () => markRaw(Lumbermill),
     income: {
-      additionalPerLevel: resourcesPerHour({ gold: new Big('0.2') }),
-      initial: resourcesPerHour({ gold: new Big('0.55') }),
+      additionalPerLevel: resourcesPerHour({ gold: new Big('0.15') }),
+      initial: resourcesPerHour({ gold: new Big('0.8') }),
     },
+    maxLevel: 10,
   }),
-  maxInstances: 7,
+  maxInstances: 3,
   name: 'Lumbermill',
 }
 
