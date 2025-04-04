@@ -66,6 +66,7 @@
     "@antfu/eslint-config": "~3.5.1",
     "@iconify-json/ph": "~1.2.1",
     "@iconify/tailwind4": "~1.0.6",
+    "@nuxt/ui": "~3.0.2",
     "@rushstack/eslint-patch": "~1.10.4",
     "@todde.tv/gltf-type-toolkit": "~1.1.0",
     "@tresjs/cientos": "~4.0.2",

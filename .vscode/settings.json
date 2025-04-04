@@ -9,6 +9,9 @@
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": false,
   "editor.linkedEditing": true,
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
   "editor.rulers": [120],
   "eslint.rules.customizations": [
     { "rule": "style/*", "severity": "off" },
@@ -62,6 +65,16 @@
     "pnpm-lock.yaml": true
   },
   "search.useIgnoreFiles": false,
+  "tailwindCSS.classAttributes": [
+    "class",
+    "ui"
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "ui:\\s*{([^)]*)\\s*}",
+      "(?:'|\"|`)([^']*)(?:'|\"|`)"
+    ]
+  ],
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.importModuleSpecifierEnding": "js",

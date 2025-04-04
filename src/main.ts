@@ -1,4 +1,6 @@
 import router from '@/router/index.js'
+// eslint-disable-next-line import/extensions
+import ui from '@nuxt/ui/vue-plugin'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -8,5 +10,7 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+// @ts-expect-error //TODO fix later the wrong typing here
+app.use(ui)
 
 app.mount('#app')
