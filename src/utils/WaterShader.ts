@@ -7,6 +7,17 @@ import type { ColorRepresentation, WebGLProgramParametersWithUniforms } from 'th
  * hash22 function: Copyright (c)2014 David Hoskins; provided under MIT License (https://www.shadertoy.com/view/4djSRW)
  * waveTangetialAmplitude: the amount of movement sideways for each point (to break up the repeating wave patterns)
  * relativeHeightOffset: waves get offset by relativeHeightOffset * waveAmplitude. The default value of -0.75 puts the peaks of the highest waves roughly at the geometry surface
+ *
+ * @param fogActive - whether to be affected by the fog
+ * @param fogCenter - the center of the fog
+ * @param fogDistanceOffset - the distance offset of the fog
+ * @param waterColor - the color of the water
+ * @param waveSpeed - the speed of the waves
+ * @param waveAmplitude - the amplitude of the waves (wave height)
+ * @param waveTangentialAmplitude - the amplitude of the tangential waves (side movement amount)
+ * @param relativeHeightOffset - the offset of the waves (moves the wave plane up and down)
+ * @param waterSwingDirection - the axis to rotate the waves around
+ * @returns {MeshStandardMaterial} - the water material
  */
 export function getWaterMaterial(
   {
@@ -15,6 +26,7 @@ export function getWaterMaterial(
     fogDistanceOffset = 0,
     relativeHeightOffset = -0.75,
     waterColor = 0x0384C4,
+    waterSwingDirection = 'xy',
     waveAmplitude = 1.8,
     waveSpeed = 1.0,
     waveTangentialAmplitude = 1.0,
@@ -28,6 +40,7 @@ export function getWaterMaterial(
     waveAmplitude?: number
     waveTangentialAmplitude?: number
     relativeHeightOffset?: number
+    waterSwingDirection: 'xz' | 'xy'
   },
 ) {
   const waterMaterial = new MeshStandardMaterial({
@@ -127,9 +140,9 @@ export function getWaterMaterial(
     shader.vertexShader = shader.vertexShader.replace(
       `#include <begin_vertex>`,
       `#include <begin_vertex>
-          transformed.x += getWaves(transformed.xz, 2, waveSpeed * 0.3667233576) * waveTangentialAmplitude;
-          transformed.z += getWaves(transformed.xz + vec2(4.0), 2, waveSpeed * 0.72357832) * waveTangentialAmplitude;
-          transformed.y += getWaves(transformed.xz, 12, waveSpeed) * waveAmplitude + relativeHeightOffset * waveAmplitude;
+          transformed.x += getWaves(transformed.${waterSwingDirection}, 2, waveSpeed * 0.3667233576) * waveTangentialAmplitude;
+          transformed.z += getWaves(transformed.${waterSwingDirection} + vec2(4.0), 2, waveSpeed * 0.72357832) * waveTangentialAmplitude;
+          transformed.y += getWaves(transformed.${waterSwingDirection}, 12, waveSpeed) * waveAmplitude + relativeHeightOffset * waveAmplitude;
           #ifdef USE_ALPHAHASH
             vPosition = transformed;
           #endif`,

@@ -108,10 +108,6 @@ watch(showCameraHelper, () => {
       <Ocean />
     </Suspense>
 
-    <!-- <Suspense>
-      <Waterfall />
-    </Suspense> -->
-
     <Suspense>
       <SkyBoxWithOceanFloor />
     </Suspense>
