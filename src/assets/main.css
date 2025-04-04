@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-/* @tailwind utilities; */
+@plugin "@iconify/tailwind4";
 
 html,
 body {
