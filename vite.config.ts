@@ -1,4 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
+import tailwindcss from '@tailwindcss/vite'
 // eslint-disable-next-line import/extensions
 import gltf from '@todde.tv/gltf-type-toolkit/vite'
 import { templateCompilerOptions } from '@tresjs/core'
@@ -13,6 +14,7 @@ export default defineConfig({
       ...templateCompilerOptions,
     }),
     vueDevTools(),
+    tailwindcss(),
     gltf({
       customGltfLoaderModule: '@/utils/gltfLoader.ts',
       verbose: true,

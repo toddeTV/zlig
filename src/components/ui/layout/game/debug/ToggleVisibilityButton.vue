@@ -4,7 +4,7 @@ const model = defineModel<boolean>()
 
 <template>
   <label
-    class="border select-none cursor-pointer border-red-600 bg-red-300 p-2 items-center rounded flex flex-col gap-2"
+    class="border select-none cursor-pointer border-red-600 bg-red-300 p-2 items-center rounded-sm flex flex-col gap-2"
     :class="{ 'opacity-50': !model }"
   >
     <input

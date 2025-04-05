@@ -27,7 +27,7 @@ selectedBuildingArea.$subscribe((_, newId) => {
       class="
         md:hidden
         absolute left-0 top-[7.5%] transition-[left]
-        shadow rounded-r-full pl-1 py-2 pr-3 flex items-center text-xl z-20 bg-white/75
+        shadow-sm rounded-r-full pl-1 py-2 pr-3 flex items-center text-xl z-20 bg-white/75
       "
       :class="{ 'left-[90%]': sidebarOpen }"
       title="Toggle menu"
@@ -41,7 +41,7 @@ selectedBuildingArea.$subscribe((_, newId) => {
         absolute md:relative md:left-0 right-0 top-0 bottom-0
         -left-[100%] transition-[left]
         max-w-[90%] md:max-w-none md:w-[25%] lg:w-[22.5%] xl:w-[20%]
-        overflow-hidden z-30 shadow
+        overflow-hidden z-30 shadow-sm
         flex flex-col
       "
       :class="{ 'left-0': sidebarOpen }"
