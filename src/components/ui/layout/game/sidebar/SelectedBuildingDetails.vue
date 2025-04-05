@@ -97,6 +97,15 @@ function destroyBuilding() {
     </div>
   </div>
 
+  <div class="mb-4 border-4 border-red-600 text-red-950 bg-red-100 p-2 border-dashed">
+    <p class="font-semibold">
+      Internal resource buffer:
+    </p>
+    <div class="flex gap-2 ml-4">
+      <Resources :resources="props.buildingState.internalBuffer" />
+    </div>
+  </div>
+
   <div class="mb-4 flex flex-col">
     <button
       class="flex flex-col gap-2 border border-gray-200 rounded-sm p-2 bg-black/10 text-left"
