@@ -21,6 +21,8 @@ export default defineConfig({
     }),
     ui({ // from `@nuxt/ui`
       colorMode: false,
+      components: { // from `unplugin-vue-components` (is contained in `@nuxt/ui`)
+      },
       ui: {
         colors: {
           // neutral: 'slate',
