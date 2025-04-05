@@ -24,9 +24,9 @@ importers:
       '@rushstack/eslint-patch':
         specifier: ~1.10.4
         version: 1.10.4
-      '@tailwindcss/postcss':
-        specifier: ^4.1.3
-        version: 4.1.3
+      '@tailwindcss/vite':
+        specifier: ~4.1.3
+        version: 4.1.3(vite@5.4.4(@types/node@20.16.5)(lightningcss@1.29.2))
       '@todde.tv/gltf-type-toolkit':
         specifier: ~1.1.0
         version: 1.1.0(draco3d@1.5.7)(esbuild@0.23.1)(rollup@4.21.1)(three@0.168.0)(vite@5.4.4(@types/node@20.16.5)(lightningcss@1.29.2))
@@ -113,10 +113,6 @@ importers:
         version: 2.1.6(typescript@5.5.4)
 
 packages:
-
-  '@alloc/quick-lru@5.2.0':
-    resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
-    engines: {node: '>=10'}
 
   '@alvarosabu/utils@3.2.0':
     resolution: {integrity: sha512-aoGWRfaQjOo9TUwrBA6W0zwTHktgrXy69GIFNILT4gHsqscw6+X8P6uoSlZVQFr887SPm8x3aDin5EBVq8y4pw==}
@@ -998,8 +994,10 @@ packages:
     resolution: {integrity: sha512-t16lpHCU7LBxDe/8dCj9ntyNpXaSTAgxWm1u2XQP5NiIu4KGSyrDJJRlK9hJ4U9yJxx0UKCVI67MJWFNll5mOQ==}
     engines: {node: '>= 10'}
 
-  '@tailwindcss/postcss@4.1.3':
-    resolution: {integrity: sha512-6s5nJODm98F++QT49qn8xJKHQRamhYHfMi3X7/ltxiSQ9dyRsaFSfFkfaMsanWzf+TMYQtbk8mt5f6cCVXJwfg==}
+  '@tailwindcss/vite@4.1.3':
+    resolution: {integrity: sha512-lUI/QaDxLtlV52Lho6pu07CG9pSnRYLOPmKGIQjyHdTBagemc6HmgZxyjGAQ/5HMPrNeWBfTVIpQl0/jLXvWHQ==}
+    peerDependencies:
+      vite: ^5.2.0 || ^6
 
   '@todde.tv/gltf-type-toolkit@1.1.0':
     resolution: {integrity: sha512-ncNWjl9E5UhVu7+Bc+52VQKV5NrL0m+jxn50tbximMySoeaV1iDk4ElxUPhoVPTflOBjj4TKJK7/fO/o7Z5W3g==}
@@ -3157,8 +3155,6 @@ packages:
 
 snapshots:
 
-  '@alloc/quick-lru@5.2.0': {}
-
   '@alvarosabu/utils@3.2.0': {}
 
   '@ampproject/remapping@2.3.0':
@@ -3901,13 +3897,12 @@ snapshots:
       '@tailwindcss/oxide-win32-arm64-msvc': 4.1.3
       '@tailwindcss/oxide-win32-x64-msvc': 4.1.3
 
-  '@tailwindcss/postcss@4.1.3':
+  '@tailwindcss/vite@4.1.3(vite@5.4.4(@types/node@20.16.5)(lightningcss@1.29.2))':
     dependencies:
-      '@alloc/quick-lru': 5.2.0
       '@tailwindcss/node': 4.1.3
       '@tailwindcss/oxide': 4.1.3
-      postcss: 8.4.49
       tailwindcss: 4.1.3
+      vite: 5.4.4(@types/node@20.16.5)(lightningcss@1.29.2)
 
   '@todde.tv/gltf-type-toolkit@1.1.0(draco3d@1.5.7)(esbuild@0.23.1)(rollup@4.21.1)(three@0.168.0)(vite@5.4.4(@types/node@20.16.5)(lightningcss@1.29.2))':
     dependencies:
