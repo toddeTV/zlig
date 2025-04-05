@@ -1,4 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
+import tailwindcss from '@tailwindcss/vite'
 // eslint-disable-next-line import/extensions
 import ui from '@nuxt/ui/vite'
 // eslint-disable-next-line import/extensions

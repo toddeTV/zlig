@@ -1,7 +1,8 @@
 @import 'tailwindcss';
-@import '@nuxt/ui';
 
-@plugin "@iconify/tailwind4";
+@plugin "@iconify/tailwind4" {
+  prefix: 'icon';
+}
 
 html,
 body {
