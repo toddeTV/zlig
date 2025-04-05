@@ -1,7 +1,6 @@
 import { ResourceRecord } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
 
 export const useGameStateStore = defineStore('game-state', () => {

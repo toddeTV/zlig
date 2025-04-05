@@ -2,7 +2,6 @@ import router from '@/router/index.js'
 // eslint-disable-next-line import/extensions
 import ui from '@nuxt/ui/vue-plugin'
 import { createPinia } from 'pinia'
-import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/main.css'
 

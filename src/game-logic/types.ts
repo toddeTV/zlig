@@ -1,7 +1,6 @@
 import type { LevelProgression } from '@/game-logic/level-progression/base.js'
 import type { ResourceRecord } from '@/game-logic/resources.js'
 import type { Duration } from '@/utils/duration.js'
-import type { Component } from 'vue'
 
 export type BuildingType = Readonly<{
   /**

@@ -5,7 +5,6 @@ import { useSunPositionStore } from '@/composables/useSunPositionStore.js'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { AmbientLight, CameraHelper, DirectionalLight } from 'three'
-import { watch, watchEffect } from 'vue'
 
 const { scene } = useTresContext()
 const { showLightHelper } = storeToRefs(useDebugStore())

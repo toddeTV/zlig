@@ -7,7 +7,6 @@ import SelectedEmptyBuildingArea from '@/components/ui/layout/game/sidebar/Selec
 import { useGameStateStore } from '@/composables/useGameStateStore.js'
 import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
 import { storeToRefs } from 'pinia'
-import { computed, ref } from 'vue'
 
 const { buildings } = storeToRefs(useGameStateStore())
 const selectedBuildingArea = useSelectedBuildingAreaStore()

@@ -1,6 +1,5 @@
 import { getNode, IslandScene } from '@/assets/models/Island/Island.gltf.js'
 import { defineStore } from 'pinia'
-import { readonly, ref } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types.js'
 import type { Euler, Vector3 } from 'three'
 

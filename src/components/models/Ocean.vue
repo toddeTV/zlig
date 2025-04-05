@@ -5,7 +5,6 @@ import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
 import { getWaterMaterial } from '@/utils/WaterShader.js'
 import { storeToRefs } from 'pinia'
 import { Mesh, PlaneGeometry } from 'three'
-import { shallowRef, watch } from 'vue'
 
 const { onTick } = useGameTimeStore()
 const { showWaterWireframe } = storeToRefs(useDebugStore())

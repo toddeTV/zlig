@@ -2,7 +2,6 @@
 import { BuildingsScene, getNode } from '@/assets/models/Buildings/Buildings.gltf.js'
 import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
-import { shallowRef, toRef, watch } from 'vue'
 import type { BuildingAreaId, BuildingInstance } from '@/game-logic/types.js'
 import type { Euler, Group, Vector3 } from 'three'
 

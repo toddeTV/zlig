@@ -4,7 +4,6 @@ import { useDebugStore } from '@/composables/useDebugStore.js'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { Fog } from 'three'
-import { watch } from 'vue'
 
 const { scene } = useTresContext()
 const { showFog } = storeToRefs(useDebugStore())

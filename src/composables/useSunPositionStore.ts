@@ -2,7 +2,6 @@ import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { defineStore, storeToRefs } from 'pinia'
 import { Vector3 } from 'three'
 import { mapLinear } from 'three/src/math/MathUtils.js'
-import { computed } from 'vue'
 
 const a = 50 // Semi-major axis along the X-axis
 const b = 25 // Semi-minor axis along the Y-axis

@@ -2,7 +2,6 @@
 import GameEngine from '@/components/GameEngine.vue'
 import { TresCanvas } from '@tresjs/core'
 import { NoToneMapping, SRGBColorSpace, VSMShadowMap } from 'three'
-import { ref } from 'vue'
 import type { TresCanvasProps } from '@tresjs/core/dist/src/components/TresCanvas.vue.js'
 
 const gl = ref<TresCanvasProps>({
