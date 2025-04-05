@@ -99,9 +99,9 @@ function destroyBuilding() {
 
   <div class="mb-4 flex flex-col">
     <button
-      class="flex flex-col gap-2 border rounded p-2 bg-black bg-opacity-10 text-left"
+      class="flex flex-col gap-2 border rounded-sm p-2 bg-black/10 text-left"
       :class="{
-        'hover:bg-opacity-30': canUpgrade === true,
+        'hover:bg-black/30': canUpgrade === true,
         'cursor-pointer': canUpgrade === true,
         'cursor-not-allowed': canUpgrade !== true,
       }"
@@ -144,7 +144,7 @@ function destroyBuilding() {
   </div>
 
   <div>
-    <button class="border p-1 rounded" @click="destroyBuilding">
+    <button class="border p-1 rounded-sm" @click="destroyBuilding">
       destroy building
     </button>
   </div>

@@ -22,8 +22,8 @@ const displayTime = computed(() => {
 </script>
 
 <template>
-  <div class="bg-gray-300 shadow z-20 flex items-center gap-3 p-3">
-    <div class="flex gap-3 items-baseline text-2xl flex-grow justify-center">
+  <div class="bg-gray-300 shadow-sm z-20 flex items-center gap-3 p-3">
+    <div class="flex gap-3 items-baseline text-2xl grow justify-center">
       <Resources :resources="gameState.resources" />
     </div>
 

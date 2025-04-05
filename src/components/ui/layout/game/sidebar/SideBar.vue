@@ -25,7 +25,7 @@ const hasDebug = ref(true)
       </p>
     </div>
 
-    <div v-else class="flex-grow overflow-y-auto p-3">
+    <div v-else class="grow overflow-y-auto p-3">
       <SelectedBuildingInConstruction
         v-if="selectedBuildingInstance?.state === 'in-construction'"
         :building-area-id="selectedBuildingArea.id"
