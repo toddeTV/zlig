@@ -69,7 +69,7 @@ function build() {
 
 <template>
   <button
-    class="flex flex-col gap-2 border rounded-sm p-2 bg-black/10 text-left"
+    class="flex flex-col gap-2 border border-gray-200 rounded-sm p-2 bg-black/10 text-left"
     :class="{
       'hover:bg-black/30': canBuild === true,
       'cursor-pointer': canBuild === true,

@@ -40,7 +40,7 @@ function cancelBuild() {
     />
   </div>
 
-  <button class="border p-1 rounded-sm" @click="cancelBuild">
+  <button class="border border-gray-200 p-1 rounded-sm" @click="cancelBuild">
     cancel build
   </button>
 </template>

@@ -28,7 +28,7 @@ const displayTime = computed(() => {
     </div>
 
     <div class="flex flex-col gap-1 items-center">
-      <p class="border rounded-lg px-1 bg-white flex">
+      <p class="border border-gray-200 rounded-lg px-1 bg-white flex">
         <span class="icon-[ph--clock] mt-1 mr-1 text-xl" />
         <span class="text-lg">{{ displayTime }}</span>
       </p>
