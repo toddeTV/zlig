@@ -52,7 +52,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "run-p \"lint\" \"test:types\" --",
-    "test:types": "vue-tsc --build --force",
+    "test:types": "vue-tsc --project ./tsconfig.app.json",
     "postinstall": "run-s \"generate:gltf-models\"",
     "generate:gltf-models": "gltf-codegen",
     "lint": "eslint .",

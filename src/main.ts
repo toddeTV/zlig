@@ -10,7 +10,6 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
-// @ts-expect-error //TODO fix later the wrong typing here
 app.use(ui)
 
 app.mount('#app')
