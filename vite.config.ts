@@ -19,7 +19,13 @@ export default defineConfig({
       customGltfLoaderModule: '@/utils/gltfLoader.ts',
       verbose: true,
     }),
-    ui({ // from `@nuxt/ui` (including `unplugin-vue-components` & `tailwindcss`)
+    ui({ // from `@nuxt/ui` (including `unplugin-vue-components` & `unplugin-auto-import` & `tailwindcss`)
+      autoImport: { // from `unplugin-auto-import`
+        imports: [ // global imports to register
+          'vue', // preset
+          'vue-router', // preset
+        ],
+      },
       colorMode: false,
       components: { // from `unplugin-vue-components`
       },
