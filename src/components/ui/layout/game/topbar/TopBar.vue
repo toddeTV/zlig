@@ -3,7 +3,6 @@ import GameSpeedButton from '@/components/ui/layout/game/topbar/GameSpeedButton.
 import Resources from '@/components/ui/Resources.vue'
 import { useGameStateStore } from '@/composables/useGameStateStore.js'
 import { GAME_TIME_FACTOR_FAST, GAME_TIME_FACTOR_FASTER, GAME_TIME_FACTOR_REGULAR, useGameTimeStore } from '@/composables/useGameTimeStore.js'
-import { computed } from 'vue'
 
 const gameState = useGameStateStore()
 const gameTime = useGameTimeStore()

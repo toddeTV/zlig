@@ -3,7 +3,6 @@ import { useCalculatedLightsStore } from '@/composables/useCalculatedLightsStore
 import { addToGroup } from '@/utils/threeHelper.js'
 import { storeToRefs } from 'pinia'
 import { BackSide, BoxGeometry, Color, type ColorRepresentation, Mesh, ShaderMaterial, Vector3 } from 'three'
-import { shallowRef, watch } from 'vue'
 
 const { lightColors } = storeToRefs(useCalculatedLightsStore())
 const groupWrapperRef = shallowRef()

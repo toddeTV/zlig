@@ -3,7 +3,6 @@ import { LinearLevelProgression } from '@/game-logic/level-progression/linear-pr
 import { ResourceRecord, resourcesPerHour } from '@/game-logic/resources.js'
 import { Duration } from '@/utils/duration.js'
 import Big from 'big.js'
-import { markRaw } from 'vue'
 import type { BuildingType } from '@/game-logic/types.js'
 
 const building: BuildingType = {

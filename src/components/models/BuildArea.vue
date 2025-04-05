@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { BuildAreaScene, getNode } from '@/assets/models/BuildArea/BuildArea.gltf.js'
 import { addShadowAndAddToGroup } from '@/utils/threeHelper.js'
-import { shallowRef, watch } from 'vue'
 import type { BuildingAreaId } from '@/game-logic/types.js'
 import type { Euler, Group, Vector3 } from 'three'
 

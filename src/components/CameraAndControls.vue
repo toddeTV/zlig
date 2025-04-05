@@ -4,7 +4,6 @@ import { CameraControls } from '@tresjs/cientos'
 import { useTresContext } from '@tresjs/core'
 import { storeToRefs } from 'pinia'
 import { Box3, Box3Helper, CameraHelper, PerspectiveCamera, Vector3 } from 'three'
-import { ref, shallowRef, watch } from 'vue'
 import type { CameraControlsProps } from '@tresjs/cientos/dist/core/controls/CameraControls.vue.js'
 
 // TODO refactor: split in three components: Controller, NormalCamera (emits to Controller), DebugCamera (emits to Controller)

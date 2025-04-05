@@ -17,7 +17,6 @@ import { EffectComposerPmndrs, OutlinePmndrs } from '@tresjs/post-processing'
 import { useTimeoutFn } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { BlendFunction } from 'postprocessing'
-import { computed, ref, watch } from 'vue'
 import type { TresJsClickEvent } from '@/types/TresJsClickEvent.js'
 
 const { scene } = useTresContext()

@@ -4,7 +4,6 @@ import { useGameStateStore } from '@/composables/useGameStateStore.js'
 import { ResourceRecord, ResourcesPerMillisecond } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
 import type { BuildingAreaId, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{

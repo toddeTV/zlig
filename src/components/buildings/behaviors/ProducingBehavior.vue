@@ -4,7 +4,6 @@ import { useGameTimeStore } from '@/composables/useGameTimeStore.js'
 import { ResourceRecord } from '@/game-logic/resources.js'
 import Big from 'big.js'
 import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
 import type { BuildingAreaId, BuildingStateProducing, BuildingType } from '@/game-logic/types.js'
 
 const props = defineProps<{

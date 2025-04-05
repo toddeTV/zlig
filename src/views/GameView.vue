@@ -3,7 +3,6 @@ import GameCanvas from '@/components/ui/layout/game/GameCanvas.vue'
 import SideBar from '@/components/ui/layout/game/sidebar/SideBar.vue'
 import TopBar from '@/components/ui/layout/game/topbar/TopBar.vue'
 import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
-import { ref } from 'vue'
 
 const sidebarOpen = ref(false)
 function toggleSidebar() {
