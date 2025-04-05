@@ -1,6 +1,5 @@
 @import 'tailwindcss';
-
-@config '../../tailwind.config.js';
+@import '@nuxt/ui';
 
 @plugin "@iconify/tailwind4" {
   prefix: 'icon';

@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
-import tailwindcss from '@tailwindcss/vite'
+// eslint-disable-next-line import/extensions
+import ui from '@nuxt/ui/vite'
 // eslint-disable-next-line import/extensions
 import gltf from '@todde.tv/gltf-type-toolkit/vite'
 import { templateCompilerOptions } from '@tresjs/core'
@@ -10,14 +11,24 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue({
+    vue({ // from `vue`
       ...templateCompilerOptions,
     }),
-    vueDevTools(),
-    tailwindcss(),
-    gltf({
+    vueDevTools(), // from `vite-plugin-vue-devtools`
+    gltf({ // from `@todde.tv/gltf-type-toolkit`
       customGltfLoaderModule: '@/utils/gltfLoader.ts',
       verbose: true,
+    }),
+    ui({ // from `@nuxt/ui` (including `unplugin-vue-components` & `tailwindcss`)
+      colorMode: false,
+      components: { // from `unplugin-vue-components`
+      },
+      ui: {
+        colors: {
+          // neutral: 'slate',
+          // primary: 'green',
+        },
+      },
     }),
   ],
   resolve: {
