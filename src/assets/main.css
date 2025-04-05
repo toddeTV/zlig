@@ -3,7 +3,7 @@
 @config '../../tailwind.config.js';
 
 @plugin "@iconify/tailwind4" {
-  prefix: "icon";
+  prefix: 'icon';
 }
 
 html,
