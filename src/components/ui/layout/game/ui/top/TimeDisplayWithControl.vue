@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import dayNightCycleDiskImg from '@/assets/images/day-night-cycle-disk.png'
-import GameSpeedButton from '@/components/ui/layout/game/topbar/GameSpeedButton.vue'
 import {
   GAME_TIME_FACTOR_FAST,
   GAME_TIME_FACTOR_FASTER,
@@ -45,7 +44,7 @@ const dayNightCycleDiskRotation = computed(() => {
         </p>
 
         <div class="flex gap-1 text-md drop-shadow-[0_1px_1px_rgba(255,255,255,1)]">
-          <GameSpeedButton
+          <TimeSpeedControlButton
             class="
             icon-[ph--pause-circle-light]
             hover:icon-[ph--pause-circle]
@@ -54,7 +53,7 @@ const dayNightCycleDiskRotation = computed(() => {
             :target-factor="0"
           />
 
-          <GameSpeedButton
+          <TimeSpeedControlButton
             class="
             icon-[ph--play-circle-light]
             hover:icon-[ph--play-circle]
@@ -63,7 +62,7 @@ const dayNightCycleDiskRotation = computed(() => {
             :target-factor="GAME_TIME_FACTOR_REGULAR"
           />
 
-          <GameSpeedButton
+          <TimeSpeedControlButton
             class="
             icon-[ph--number-circle-two-light]
             hover:icon-[ph--number-circle-two]
@@ -72,7 +71,7 @@ const dayNightCycleDiskRotation = computed(() => {
             :target-factor="GAME_TIME_FACTOR_FAST"
           />
 
-          <GameSpeedButton
+          <TimeSpeedControlButton
             class="
             icon-[ph--number-circle-three-light]
             hover:icon-[ph--number-circle-three]
