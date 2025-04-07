@@ -17,13 +17,28 @@ const availableBuildings = Object.values(buildingTypes)
       Empty building area
     </h3>
 
-    <UCarousel
+    <!-- <UCarousel
       v-slot="{ item }"
       arrows
       :items="availableBuildings"
       :ui="{
         root: 'relative w-full h-full overflow-hidden',
         viewport: 'overflow-hidden w-full h-full px-16',
+        container: 'flex items-start w-full h-full gap-3',
+        item: 'basis-auto shrink-0 h-full aspect-square p-0 m-0',
+        controls: 'absolute top-1/2 inset-x-14',
+        arrows: '',
+        prev: 'absolute rounded-full',
+        next: 'absolute rounded-full',
+      }"
+      wheel-gestures
+    > -->
+    <UCarousel
+      v-slot="{ item }"
+      :items="availableBuildings"
+      :ui="{
+        root: 'relative w-full h-full overflow-hidden',
+        viewport: 'overflow-hidden w-full h-full px-8',
         container: 'flex items-start w-full h-full gap-3',
         item: 'basis-auto shrink-0 h-full aspect-square p-0 m-0',
         controls: 'absolute top-1/2 inset-x-14',

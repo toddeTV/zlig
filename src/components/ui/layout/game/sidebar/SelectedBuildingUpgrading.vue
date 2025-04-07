@@ -47,7 +47,14 @@ function cancelUpgrade() {
     />
   </div>
 
-  <button class="border border-gray-200 p-1 rounded-sm" @click="cancelUpgrade">
+  <!-- <UButton
+    label="cancel upgrading"
+    @click="cancelUpgrade"
+  /> -->
+  <button
+    class="border rounded-md"
+    @click="cancelUpgrade"
+  >
     cancel upgrading
   </button>
 </template>

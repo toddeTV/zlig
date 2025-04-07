@@ -108,11 +108,16 @@ function destroyBuilding() {
       overlay: 'z-3',
     }"
   >
-    <UButton
+    <!-- <UButton
       color="neutral"
       label="Upgrade?"
       variant="subtle"
-    />
+    /> -->
+    <button
+      class="border rounded-md"
+    >
+      Upgrade?
+    </button>
 
     <template #body>
       <div class="mb-4 flex flex-col">
@@ -149,20 +154,34 @@ function destroyBuilding() {
           </p>
         </div>
 
-        <UButton
+        <!-- <UButton
           color="neutral"
           :disabled="canUpgrade !== true"
           label="Build"
           variant="subtle"
           @click="upgradeBuilding"
-        />
+        /> -->
+        <button
+          class="border rounded-md"
+          :disabled="canUpgrade !== true"
+          @click="upgradeBuilding"
+        >
+          Build
+        </button>
       </div>
     </template>
   </UModal>
 
   <div>
-    <button class="border border-gray-200 p-1 rounded-sm" @click="destroyBuilding">
-      destroy building
+    <!-- <UButton
+      label="Destroy Building"
+      @click="destroyBuilding"
+    /> -->
+    <button
+      class="border rounded-md"
+      @click="destroyBuilding"
+    >
+      Destroy Building
     </button>
   </div>
 </template>

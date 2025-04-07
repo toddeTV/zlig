@@ -145,13 +145,20 @@ function build() {
             </p>
           </div>
 
-          <UButton
+          <!-- <UButton
             color="neutral"
             :disabled="canBuild !== true"
             label="Build"
             variant="subtle"
             @click="build()"
-          />
+          /> -->
+          <button
+            class="border rounded-md"
+            :disabled="canBuild !== true"
+            @click="build()"
+          >
+            Build
+          </button>
         </div>
       </template>
     </UModal>
