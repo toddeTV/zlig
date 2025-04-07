@@ -9,9 +9,10 @@ const props = defineProps<{
 </script>
 
 <template>
-  <p>
-    Gold: <ResourceEntry :available="props.available?.gold" :resource="props.resources.gold" />
-  </p>
+  <div class="flex gap-3 items-baseline text-2xl grow justify-center">
+    <span class="icon-[ph--hand-coins-thin] mt-1 mr-1 text-xl" />
+    <ResourceEntry :available="props.available?.gold" :resource="props.resources.gold" />
+  </div>
 </template>
 
 <style scoped>
