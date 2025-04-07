@@ -29,6 +29,11 @@ export type BuildingType = Readonly<{
    */
   maxInstances: number | undefined
 
+  /**
+   * The image for the building preview.
+   */
+  previewImgSrc: string
+
   // TODO: Maybe restrict the available building places by some criteria?
   // availableBuildAreas: 'shore'
 }>

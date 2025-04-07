@@ -1,3 +1,4 @@
+import previewImgSrc from '@/assets/images/Buildings/Lumbermill.png'
 import Lumbermill from '@/components/models/buildings/Lumbermill.vue'
 import { LinearLevelProgression } from '@/game-logic/level-progression/linear-progression.js'
 import { ResourceRecord, resourcesPerHour } from '@/game-logic/resources.js'
@@ -27,6 +28,7 @@ const building: BuildingType = {
   }),
   maxInstances: 3,
   name: 'Lumbermill',
+  previewImgSrc,
 }
 
 export default building

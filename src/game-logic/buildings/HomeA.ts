@@ -1,3 +1,4 @@
+import previewImgSrc from '@/assets/images/Buildings/HomeA.png'
 import HomeA from '@/components/models/buildings/HomeA.vue'
 import { LinearLevelProgression } from '@/game-logic/level-progression/linear-progression.js'
 import { ResourceRecord, resourcesPerHour } from '@/game-logic/resources.js'
@@ -27,6 +28,7 @@ const building: BuildingType = {
   }),
   maxInstances: undefined,
   name: 'Home A',
+  previewImgSrc,
 }
 
 export default building

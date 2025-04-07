@@ -1,3 +1,4 @@
+import previewImgSrc from '@/assets/images/Buildings/Tavern.png'
 import Tavern from '@/components/models/buildings/Tavern.vue'
 import { LinearLevelProgression } from '@/game-logic/level-progression/linear-progression.js'
 import { ResourceRecord, resourcesPerHour } from '@/game-logic/resources.js'
@@ -27,6 +28,7 @@ const building: BuildingType = {
   }),
   maxInstances: 1,
   name: 'Tavern',
+  previewImgSrc,
 }
 
 export default building
