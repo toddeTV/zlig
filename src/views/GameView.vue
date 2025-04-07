@@ -3,13 +3,13 @@
 
 <template>
   <div class="relative flex flex-col w-dvw min-w-dvw max-w-dvw h-dvh min-h-dvh max-h-dvh overflow-hidden">
-    <div class="z-10 absolute flex top-0 place-self-center">
+    <div class="z-1 absolute flex top-0 place-self-center">
       <TimeDisplayWithControl />
     </div>
     <div class="z-0 relative w-full h-full">
       <GameCanvas />
     </div>
-    <div class="z-10 absolute flex flex-row justify-between heightWithBreakpoints bottom-0 w-full bg-white">
+    <div class="z-1 absolute flex flex-row justify-between heightWithBreakpoints bottom-0 w-full bg-white">
       <div class="relative w-full h-full">
         <SelectedBuildingArea />
         <div class="absolute h-[40px] -top-[40px] right-0 bg-white pl-4 pr-2 pt-2 rounded-tl-full">

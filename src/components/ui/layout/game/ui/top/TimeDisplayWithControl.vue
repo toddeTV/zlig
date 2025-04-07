@@ -36,7 +36,7 @@ const dayNightCycleDiskRotation = computed(() => {
 <template>
   <div class="relative flex flex-col w-[200px] h-full">
     <!-- real in-game time digital clock with control buttons -->
-    <div class="z-20 absolute top-0 w-full h-full place-self-center">
+    <div class="z-2 absolute top-0 w-full h-full place-self-center">
       <div class="flex flex-col items-center">
         <p class="px-1 flex drop-shadow-[0_1px_1px_rgba(255,255,255,1)]">
           <!-- <span class="icon-[ph--clock] mt-1 mr-1 text-xl" /> -->
