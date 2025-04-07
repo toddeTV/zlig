@@ -83,7 +83,7 @@ function build() {
       }"
     >
       <div
-        class="flex border border-gray-300 rounded-sm bg-gray-100 h-full aspect-square"
+        class="flex border border-gray-300 rounded-sm bg-gray-100 h-full aspect-square overflow-hidden"
       >
         <img
           :alt="`Preview image of ${props.buildingType.name}`"
