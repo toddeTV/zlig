@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DebugMenu from '@/components/ui/layout/game/debug/DebugMenu.vue'
 import SelectedBuildingDetails from '@/components/ui/layout/game/sidebar/SelectedBuildingDetails.vue'
 import SelectedBuildingInConstruction from '@/components/ui/layout/game/sidebar/SelectedBuildingInConstruction.vue'
 import SelectedBuildingUpgrading from '@/components/ui/layout/game/sidebar/SelectedBuildingUpgrading.vue'
@@ -7,7 +6,7 @@ import SelectedEmptyBuildingArea from '@/components/ui/layout/game/sidebar/Selec
 import { useGameStateStore } from '@/composables/useGameStateStore.js'
 import { useSelectedBuildingAreaStore } from '@/composables/useSelectedBuildingAreaStore.js'
 import { storeToRefs } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 const { buildings } = storeToRefs(useGameStateStore())
 const selectedBuildingArea = useSelectedBuildingAreaStore()
