@@ -31,6 +31,9 @@ const dayNightCycleDiskRotation = computed(() => {
   const rotation = (totalMinutes / (24 * 60)) * 360
   return `rotate(${rotation}deg)`
 })
+
+const dayStartTime = new Date(0)
+dayStartTime.setHours(2)
 </script>
 
 <template>
@@ -44,6 +47,14 @@ const dayNightCycleDiskRotation = computed(() => {
         </p>
 
         <div class="flex gap-1 text-md drop-shadow-[0_1px_1px_rgba(255,255,255,1)]">
+          <TimeSetControlButton
+            class="
+            icon-[ph--skip-back-circle-light]
+            hover:icon-[ph--skip-back-circle]
+          "
+            :target-time="dayStartTime.getTime()"
+          />
+
           <TimeSpeedControlButton
             class="
             icon-[ph--pause-circle-light]

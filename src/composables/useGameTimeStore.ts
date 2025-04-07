@@ -52,6 +52,7 @@ export const useGameTimeStore = defineStore('game-time', () => {
 
   return {
     currentFactor,
+    currentMilliseconds,
     currentTime: readonly(currentTime),
     onTick,
     tick,
