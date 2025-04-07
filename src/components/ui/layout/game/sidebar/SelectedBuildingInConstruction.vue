@@ -24,9 +24,9 @@ function cancelBuild() {
     <span class="text-xl">{{ props.buildingType.name }}</span>
   </h3>
 
-  <p class="ml-4 mb-6">
+  <!-- <p class="ml-4 mb-6">
     {{ props.buildingType.description }}
-  </p>
+  </p> -->
 
   <p>
     This building is currently under construction.
