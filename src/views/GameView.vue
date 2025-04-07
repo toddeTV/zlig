@@ -13,13 +13,16 @@ const hasDebug = ref(true)
     <div class="z-0 relative w-full h-full">
       <GameCanvas />
     </div>
-    <div class="z-1 absolute flex flex-row justify-between heightWithBreakpoints bottom-0 w-full bg-white">
+    <div class="z-1 absolute flex heightWithBreakpoints bottom-[25px] w-full bg-white">
       <div class="relative w-full h-full">
-        <SelectedBuildingArea />
         <div class="absolute h-[40px] -top-[40px] right-0 bg-white pl-4 pr-2 pt-2 rounded-tl-full">
           <CurrentResources />
         </div>
+        <SelectedBuildingArea />
       </div>
+    </div>
+    <div class="z-2 absolute flex h-[25px] pl-2 bottom-0 w-full bg-white">
+      <LegalFooter />
     </div>
     <div class="z-1 absolute top-0 right-0 place-self-center">
       <DebugMenu v-if="hasDebug" />

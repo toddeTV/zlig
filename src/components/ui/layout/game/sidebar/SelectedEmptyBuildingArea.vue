@@ -12,7 +12,7 @@ const availableBuildings = Object.values(buildingTypes)
 </script>
 
 <template>
-  <div class="flex flex-col gap-2 w-full h-full max-h-full pt-1 pb-4">
+  <div class="flex flex-col gap-2 w-full h-full max-h-full pt-1 pb-1">
     <h3 class="text-xl font-semibold pl-2">
       Empty building area
     </h3>
@@ -23,9 +23,9 @@ const availableBuildings = Object.values(buildingTypes)
       :items="availableBuildings"
       :ui="{
         root: 'relative w-full h-full overflow-hidden',
-        viewport: 'overflow-hidden w-full h-full px-12',
+        viewport: 'overflow-hidden w-full h-full px-16',
         container: 'flex items-start w-full h-full gap-3',
-        item: 'basis-auto shrink-0 h-full aspect-square',
+        item: 'basis-auto shrink-0 h-full aspect-square p-0 m-0',
         controls: 'absolute top-1/2 inset-x-14',
         arrows: '',
         prev: 'absolute rounded-full',
