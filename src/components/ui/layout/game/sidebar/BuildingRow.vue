@@ -69,53 +69,14 @@ function build() {
 
 <template>
   <button
-    class="flex flex-col gap-2 border border-gray-200 rounded-sm p-2 bg-black/10 text-left"
-    :class="{
-      'hover:bg-black/30': canBuild === true,
-      'cursor-pointer': canBuild === true,
-      'cursor-not-allowed': canBuild !== true,
-    }"
-    :disabled="canBuild !== true"
+    class="flex border border-gray-300 rounded-sm bg-gray-100 h-full aspect-square"
     @click="build"
   >
-    <p class="font-bold text-lg">
-      {{ props.buildingType.name }}
-    </p>
-
-    <p class="ml-4 mb-2">
-      {{ props.buildingType.description }}
-    </p>
-
-    <div>
-      <p class="font-semibold">
-        Costs to build:
-      </p>
-      <div class="flex gap-2 ml-4">
-        <Resources :available="resources" :resources="costs" />
-      </div>
-    </div>
-
-    <p class="font-semibold">
-      Duration to build: <b>{{ buildingDuration.format() }}</b>
-    </p>
-
-    <div>
-      <p class="font-semibold">
-        Produces per hour:
-      </p>
-      <div class="flex gap-2 ml-4">
-        <Resources :resources="income.perHour()" />
-      </div>
-    </div>
-
-    <div v-if="typeof props.buildingType.maxInstances === 'number'">
-      <p class="italic" :class="{ 'text-red-500': canBuild === 'max-instances' }">
-        You can build
-        <b v-if="canBuild !== 'max-instances'">{{ props.buildingType.maxInstances - existingInstancesCount }}</b>
-        <b v-else>no</b>
-        more (max. <b>{{ props.buildingType.maxInstances }}</b>)
-      </p>
-    </div>
+    <img
+      :alt="`Preview image of ${props.buildingType.name}`"
+      class="scale-250"
+      :src="props.buildingType.previewImgSrc"
+    >
   </button>
 </template>
 

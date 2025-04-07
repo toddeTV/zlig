@@ -12,20 +12,17 @@ import { computed, ref } from 'vue'
 const { buildings } = storeToRefs(useGameStateStore())
 const selectedBuildingArea = useSelectedBuildingAreaStore()
 const selectedBuildingInstance = computed(() => selectedBuildingArea.id ? buildings.value[selectedBuildingArea.id] : undefined)
-
-// TODO bind this so that it is only active for real debug purposes
-const hasDebug = ref(true)
 </script>
 
 <template>
-  <div class="bg-white min-h-0 flex flex-1 flex-col gap-1">
-    <div v-if="!selectedBuildingArea.id" class="flex flex-1 flex-col p-3 items-center justify-center">
+  <div class="flex w-full h-full">
+    <div v-if="!selectedBuildingArea.id" class="flex flex-1 flex-col items-center justify-center">
       <p class="text-gray-400">
         Please select a building or building area...
       </p>
     </div>
 
-    <div v-else class="grow overflow-y-auto p-3">
+    <div v-else class="w-full h-full">
       <SelectedBuildingInConstruction
         v-if="selectedBuildingInstance?.state === 'in-construction'"
         :building-area-id="selectedBuildingArea.id"
@@ -44,21 +41,10 @@ const hasDebug = ref(true)
         :building-state="selectedBuildingInstance"
         :building-type="selectedBuildingInstance.type"
       />
-      <SelectedEmptyBuildingArea v-else :building-area-id="selectedBuildingArea.id" />
-    </div>
-
-    <hr>
-
-    <DebugMenu v-if="hasDebug" />
-
-    <div class="text-gray-600 text-sm p-2 flex justify-between">
-      <RouterLink rel="noopener noreferrer" target="_blank" to="//github.com/toddeTV/zlig/">
-        &copy; 2024 - {{ new Date().getFullYear() }} zlig
-      </RouterLink>
-
-      <!-- TODO Privacy Policy -->
-      <!-- TODO Legal Notice -->
-      <!-- TODO version -->
+      <SelectedEmptyBuildingArea
+        v-else
+        :building-area-id="selectedBuildingArea.id"
+      />
     </div>
   </div>
 </template>

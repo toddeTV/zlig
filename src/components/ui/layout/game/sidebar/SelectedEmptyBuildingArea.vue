@@ -12,20 +12,32 @@ const availableBuildings = Object.values(buildingTypes)
 </script>
 
 <template>
-  <h3 class="text-xl font-semibold mb-4">
-    Empty building area
-  </h3>
-  <p class="mb-4">
-    This building area is still empty. Choose a building here:
-  </p>
+  <div class="flex flex-col gap-2 w-full h-full max-h-full pt-1 pb-4">
+    <h3 class="text-xl font-semibold pl-2">
+      Empty building area
+    </h3>
 
-  <div class="flex flex-col gap-2">
-    <BuildingRow
-      v-for="type of availableBuildings"
-      :key="type.name"
-      :building-area-id="props.buildingAreaId"
-      :building-type="type"
-    />
+    <UCarousel
+      v-slot="{ item }"
+      arrows
+      :items="availableBuildings"
+      :ui="{
+        root: 'relative w-full h-full overflow-hidden',
+        viewport: 'overflow-hidden w-full h-full px-12',
+        container: 'flex items-start w-full h-full gap-3',
+        item: 'basis-auto shrink-0 h-full aspect-square',
+        controls: 'absolute top-1/2 inset-x-14',
+        arrows: '',
+        prev: 'absolute rounded-full',
+        next: 'absolute rounded-full',
+      }"
+      wheel-gestures
+    >
+      <BuildingRow
+        :building-area-id="props.buildingAreaId"
+        :building-type="item"
+      />
+    </UCarousel>
   </div>
 </template>
 
