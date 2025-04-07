@@ -38,13 +38,13 @@ const dayNightCycleDiskRotation = computed(() => {
   <div class="relative flex flex-col w-[200px] h-full">
     <!-- real in-game time digital clock with control buttons -->
     <div class="z-20 absolute top-0 w-full h-full place-self-center">
-      <div class="flex flex-col items-center drop-shadow-[0_1px_1px_rgba(255,255,255,1)]">
-        <p class="px-1 flex">
+      <div class="flex flex-col items-center">
+        <p class="px-1 flex drop-shadow-[0_1px_1px_rgba(255,255,255,1)]">
           <!-- <span class="icon-[ph--clock] mt-1 mr-1 text-xl" /> -->
           <span class="text-xl font-semibold">{{ displayTime }}</span>
         </p>
 
-        <div class="flex gap-1 text-md">
+        <div class="flex gap-1 text-md drop-shadow-[0_1px_1px_rgba(255,255,255,1)]">
           <GameSpeedButton
             class="
             icon-[ph--pause-circle-light]
@@ -81,7 +81,7 @@ const dayNightCycleDiskRotation = computed(() => {
             :target-factor="GAME_TIME_FACTOR_FASTER"
           />
         </div>
-        <div class="text-black font-bold drop-shadow-none -mt-2">
+        <div class="text-black font-bold -mt-2">
           |
         </div>
       </div>
