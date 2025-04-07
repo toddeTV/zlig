@@ -84,64 +84,81 @@ function destroyBuilding() {
     <span> (Level {{ props.buildingState.level }})</span>
   </h3>
 
-  <p class="ml-4 mb-6">
+  <!-- <p class="ml-4 mb-6">
     {{ props.buildingType.description }}
-  </p>
+  </p> -->
 
-  <div class="mb-4">
+  <div class="flex">
     <p class="font-semibold">
       This building produces per hour:
     </p>
-    <div class="flex gap-2 ml-4">
-      <Resources :resources="currentIncome.perHour()" />
-    </div>
+    <Resources :resources="currentIncome.perHour()" />
   </div>
 
-  <div class="mb-4 flex flex-col">
-    <button
-      class="flex flex-col gap-2 border border-gray-200 rounded-sm p-2 bg-black/10 text-left"
-      :class="{
-        'hover:bg-black/30': canUpgrade === true,
-        'cursor-pointer': canUpgrade === true,
-        'cursor-not-allowed': canUpgrade !== true,
-      }"
-      :disabled="canUpgrade !== true"
-      @click="upgradeBuilding"
-    >
-      <template v-if="canUpgrade !== 'max-level'">
-        <p>Upgrade to level <b>{{ props.buildingState.level + 1 }}</b></p>
+  <UModal
+    :close="{
+      color: 'primary',
+      variant: 'outline',
+      class: 'rounded-full',
+    }"
+    overlay
+    :title="props.buildingType.name"
+    :ui="{
+      content: 'z-4',
+      overlay: 'z-3',
+    }"
+  >
+    <UButton
+      color="neutral"
+      label="Upgrade?"
+      variant="subtle"
+    />
 
-        <div>
-          <p class="font-semibold">
-            Costs to upgrade:
-          </p>
-          <div class="flex gap-2 ml-4">
-            <Resources :available="resources" :resources="upgradeCosts" />
+    <template #body>
+      <div class="mb-4 flex flex-col">
+        <template v-if="canUpgrade !== 'max-level'">
+          <p>Upgrade to level <b>{{ props.buildingState.level + 1 }}</b></p>
+
+          <div>
+            <p class="font-semibold">
+              Costs to upgrade:
+            </p>
+            <div class="flex gap-2 ml-4">
+              <Resources :available="resources" :resources="upgradeCosts" />
+            </div>
           </div>
+
+          <p class="font-semibold">
+            Duration to upgrade: <b>{{ upgradeBuildingDuration.format() }}</b>
+          </p>
+
+          <div>
+            <p class="font-semibold">
+              Produces per hour after upgrade:
+            </p>
+            <div class="flex gap-2 ml-4">
+              <Resources :resources="upgradedIncome.perHour()" />
+            </div>
+          </div>
+        </template>
+
+        <div v-if="typeof props.buildingType.levelProgression.maxLevel === 'number'">
+          <p class="italic" :class="{ 'text-red-500': canUpgrade === 'max-level' }">
+            <span v-if="canUpgrade === 'max-level'">This building reached the max level of <b>{{ props.buildingType.levelProgression.maxLevel }}</b></span>
+            <span v-else>This building can be upgraded until level <b>{{ props.buildingType.levelProgression.maxLevel }}</b></span>
+          </p>
         </div>
 
-        <p class="font-semibold">
-          Duration to upgrade: <b>{{ upgradeBuildingDuration.format() }}</b>
-        </p>
-
-        <div>
-          <p class="font-semibold">
-            Produces per hour after upgrade:
-          </p>
-          <div class="flex gap-2 ml-4">
-            <Resources :resources="upgradedIncome.perHour()" />
-          </div>
-        </div>
-      </template>
-
-      <div v-if="typeof props.buildingType.levelProgression.maxLevel === 'number'">
-        <p class="italic" :class="{ 'text-red-500': canUpgrade === 'max-level' }">
-          <span v-if="canUpgrade === 'max-level'">This building reached the max level of <b>{{ props.buildingType.levelProgression.maxLevel }}</b></span>
-          <span v-else>This building can be upgraded until level <b>{{ props.buildingType.levelProgression.maxLevel }}</b></span>
-        </p>
+        <UButton
+          color="neutral"
+          :disabled="canUpgrade !== true"
+          label="Build"
+          variant="subtle"
+          @click="upgradeBuilding"
+        />
       </div>
-    </button>
-  </div>
+    </template>
+  </UModal>
 
   <div>
     <button class="border border-gray-200 p-1 rounded-sm" @click="destroyBuilding">
