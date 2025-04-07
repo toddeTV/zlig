@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
+// TODO bind this so that it is only active for real debug purposes
+const hasDebug = ref(true)
 </script>
 
 <template>
@@ -16,6 +20,9 @@
           <CurrentResources />
         </div>
       </div>
+    </div>
+    <div class="z-1 absolute top-0 right-0 place-self-center">
+      <DebugMenu v-if="hasDebug" />
     </div>
   </div>
 </template>
