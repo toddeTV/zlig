@@ -68,16 +68,94 @@ function build() {
 </script>
 
 <template>
-  <button
-    class="flex border border-gray-300 rounded-sm bg-gray-100 h-full aspect-square"
-    @click="build"
-  >
-    <img
-      :alt="`Preview image of ${props.buildingType.name}`"
-      class="scale-250"
-      :src="props.buildingType.previewImgSrc"
+  <div>
+    <UModal
+      :close="{
+        color: 'primary',
+        variant: 'outline',
+        class: 'rounded-full',
+      }"
+      overlay
+      :title="props.buildingType.name"
+      :ui="{
+        content: 'z-4',
+        overlay: 'z-3',
+      }"
     >
-  </button>
+      <div
+        class="flex border border-gray-300 rounded-sm bg-gray-100 h-full aspect-square"
+      >
+        <img
+          :alt="`Preview image of ${props.buildingType.name}`"
+          class="scale-250"
+          :class="{
+            'saturate-0 brightness-50': canBuild !== true,
+          }"
+          :src="props.buildingType.previewImgSrc"
+        >
+      </div>
+
+      <template #body>
+        <div class="flex flex-col gap-2">
+          <div>
+            <div class="font-semibold">
+              Description:
+            </div>
+            <div class="ml-4">
+              {{ props.buildingType.description }}
+            </div>
+          </div>
+
+          <div>
+            <div class="font-semibold">
+              Costs to build:
+            </div>
+            <Resources
+              :available="resources"
+              class="ml-4"
+              :resources="costs"
+            />
+          </div>
+
+          <div>
+            <div class="font-semibold">
+              Duration to build:
+            </div>
+            <div class="ml-4">
+              {{ buildingDuration.format() }}
+            </div>
+          </div>
+
+          <div>
+            <div class="font-semibold">
+              Produces per hour:
+            </div>
+            <Resources
+              class="ml-4"
+              :resources="income.perHour()"
+            />
+          </div>
+
+          <div v-if="typeof props.buildingType.maxInstances === 'number'">
+            <p class="italic" :class="{ 'text-red-500': canBuild === 'max-instances' }">
+              You can build
+              <b v-if="canBuild !== 'max-instances'">{{ props.buildingType.maxInstances - existingInstancesCount }}</b>
+              <b v-else>no</b>
+              more (max. <b>{{ props.buildingType.maxInstances }}</b>)
+            </p>
+          </div>
+
+          <UButton
+            color="neutral"
+            :disabled="canBuild !== true"
+            label="Build"
+            variant="subtle"
+            @click="build()"
+          />
+        </div>
+      </template>
+    </UModal>
+  </div>
 </template>
 
 <style scoped>
