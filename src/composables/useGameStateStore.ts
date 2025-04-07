@@ -22,7 +22,7 @@ function buildingsState() {
 function availableResources() {
   const availableResourceRecord = ref(new ResourceRecord({
     // TODO: Load from the saved state.
-    gold: new Big('100'),
+    gold: new Big('3000'),
   }))
 
   return availableResourceRecord
