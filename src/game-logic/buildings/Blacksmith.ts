@@ -1,3 +1,4 @@
+import previewImgSrc from '@/assets/images/Buildings/Blacksmith.png'
 import Blacksmith from '@/components/models/buildings/Blacksmith.vue'
 import { LinearLevelProgression } from '@/game-logic/level-progression/linear-progression.js'
 import { ResourceRecord, resourcesPerHour } from '@/game-logic/resources.js'
@@ -27,6 +28,7 @@ const building: BuildingType = {
   }),
   maxInstances: 2,
   name: 'Blacksmith',
+  previewImgSrc,
 }
 
 export default building

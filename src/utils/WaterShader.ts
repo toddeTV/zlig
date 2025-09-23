@@ -8,16 +8,17 @@ import type { ColorRepresentation, WebGLProgramParametersWithUniforms } from 'th
  * waveTangetialAmplitude: the amount of movement sideways for each point (to break up the repeating wave patterns)
  * relativeHeightOffset: waves get offset by relativeHeightOffset * waveAmplitude. The default value of -0.75 puts the peaks of the highest waves roughly at the geometry surface
  *
- * @param fogActive - whether to be affected by the fog
- * @param fogCenter - the center of the fog
- * @param fogDistanceOffset - the distance offset of the fog
- * @param waterColor - the color of the water
- * @param waveSpeed - the speed of the waves
- * @param waveAmplitude - the amplitude of the waves (wave height)
- * @param waveTangentialAmplitude - the amplitude of the tangential waves (side movement amount)
- * @param relativeHeightOffset - the offset of the waves (moves the wave plane up and down)
- * @param waterSwingDirection - the axis to rotate the waves around
- * @returns {MeshStandardMaterial} - the water material
+ * @param options - Configuration object for the water material
+ * @param options.fogActive - Whether to be affected by the fog (optional, default: false)
+ * @param options.fogCenter - The center of the fog (optional, default: Vector3(0, 0, 0))
+ * @param options.fogDistanceOffset - The distance offset of the fog (optional, default: 0)
+ * @param options.relativeHeightOffset - The offset of the waves, moves the wave plane up and down (optional, default: -0.75)
+ * @param options.waterColor - The color of the water (optional, default: 0x0384C4)
+ * @param options.waterSwingDirection - The axis to rotate the waves around ('xz' or 'xy') (required)
+ * @param options.waveAmplitude - The amplitude of the waves (wave height) (optional, default: 1.8)
+ * @param options.waveSpeed - The speed of the waves (optional, default: 1.0)
+ * @param options.waveTangentialAmplitude - The amplitude of the tangential waves (side movement amount) (optional, default: 1.0)
+ * @returns {MeshStandardMaterial} - The water material with attached uniforms
  */
 export function getWaterMaterial(
   {

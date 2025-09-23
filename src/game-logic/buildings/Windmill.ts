@@ -1,3 +1,4 @@
+import previewImgSrc from '@/assets/images/Buildings/Windmill.png'
 import Windmill from '@/components/models/buildings/Windmill.vue'
 import { LinearLevelProgression } from '@/game-logic/level-progression/linear-progression.js'
 import { ResourceRecord, resourcesPerHour } from '@/game-logic/resources.js'
@@ -26,6 +27,7 @@ const building: BuildingType = {
   }),
   maxInstances: 2,
   name: 'Windmill',
+  previewImgSrc,
 }
 
 export default building

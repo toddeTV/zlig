@@ -1,3 +1,4 @@
+import previewImgSrc from '@/assets/images/Buildings/Well.png'
 import Well from '@/components/models/buildings/Well.vue'
 import { LinearLevelProgression } from '@/game-logic/level-progression/linear-progression.js'
 import { ResourceRecord, resourcesPerHour } from '@/game-logic/resources.js'
@@ -27,6 +28,7 @@ const building: BuildingType = {
   }),
   maxInstances: 3,
   name: 'Well',
+  previewImgSrc,
 }
 
 export default building
